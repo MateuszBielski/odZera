@@ -1,9 +1,12 @@
 #ifndef OKNO1_H
 #define OKNO1_H
 #include <gtkmm.h>
-#include <stdlib.h> 
+#include <thread>
+#include <chrono>
+//#include <stdlib.h> 
 using namespace Gtk;
 using P_BuforTekstu = Glib::RefPtr<TextBuffer>;
+
 class Okno1 : public Window
 {
 public:
@@ -14,6 +17,8 @@ public:
     void ustawElementyOkna();
 	void WypelnijBufor();
 	void WypiszRozmiarOkna(int,int);
+    void NowyWatek();
+    void PokazLiczenie();
 protected:
     //
     void NaPrzyciskZmienRozmiar();
@@ -22,7 +27,12 @@ protected:
 	TextView tekst;
     Button b_ZmienRozmiar;
 	Button b_UstawTekst;
+    Button b_UruchomWatek;
 	P_BuforTekstu buforTekstu;
+private:
+    short licznik = 0;
     
 };
+
+void PokazLiczenieObiektu(Okno1*);
 #endif
