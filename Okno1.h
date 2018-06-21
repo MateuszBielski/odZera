@@ -31,8 +31,9 @@ protected:
 	P_BuforTekstu buforTekstu;
 private:
     short licznik = 0;
+    std::thread* watek;
     
 };
 
-void PokazLiczenieObiektu(Okno1*);
+void WatekNaZewnatrz(Okno1* w);
 #endif

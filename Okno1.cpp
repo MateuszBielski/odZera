@@ -17,7 +17,7 @@ int Okno1::PodlaczenieSygnalow()
 {
     b_ZmienRozmiar.signal_clicked().connect(sigc::mem_fun(*this,&Okno1::NaPrzyciskZmienRozmiar));
 	b_UstawTekst.signal_clicked().connect(sigc::mem_fun(*this,&Okno1::WypelnijBufor));
-    b_UruchomWatek.signal_clicked().connect(sigc::mem_fun(*this,&Okno1::PokazLiczenie));
+    b_UruchomWatek.signal_clicked().connect(sigc::mem_fun(*this,&Okno1::NowyWatek));
     return 1;
 }
 void Okno1::ustawElementyOkna()
@@ -66,7 +66,8 @@ void Okno1::WypiszRozmiarOkna(int h, int w)
 void Okno1::NowyWatek()
 {
 //    std::thread([=]{PokazLiczenie();});
-    std::thread(PokazLiczenie);
+    buforTekstu->set_text("rozpoczęcie nowego wątku");
+    watek = new std::thread([=]{PokazLiczenie();});
 }
 void Okno1::PokazLiczenie()
 {
@@ -74,13 +75,13 @@ void Okno1::PokazLiczenie()
 //    using namespace std::literals;
     Glib::ustring sLicznik;
 	char c[10];
-	
-    while(licznik < 10){
+	g_print("funkcja w drugim wątku");
+    while(licznik < 20){
         std::this_thread::sleep_for(std::chrono::seconds(1));
         sprintf(c,"%d",licznik++);
         sLicznik = c;
-        g_print(" %d",licznik);
-//        buforTekstu->set_text(sLicznik);
+//        g_print(" %d",licznik);
+        buforTekstu->set_text(sLicznik);
     }
 }
 void PokazLiczenieObiektu(Okno1* o)
