@@ -6,10 +6,12 @@
     <File Name="main.cpp"/>
     <File Name="Okno1.cpp"/>
     <File Name="OknoGL.cpp"/>
+    <File Name="Komunikat.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="headers">
     <File Name="Okno1.h"/>
     <File Name="OknoGL.h"/>
+    <File Name="Komunikat.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -22,7 +24,7 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="GCC" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-Os;-std=c++14;$(shell pkg-config --cflags gtkglextmm-1.2)" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="-Os;$(shell pkg-config --cflags gtkglextmm-1.2);-std=c++14" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
       </Compiler>
       <Linker Options="-s;-pg;$(shell pkg-config --libs gtkglextmm-1.2);-lpthread" Required="yes"/>

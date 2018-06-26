@@ -5,7 +5,7 @@ Okno1::Okno1()
 }
 bool Okno1::Inicjuj()
 {
-	set_reallocate_redraws(true);
+	
 	this->set_size_request(200,200);
 	PodlaczenieSygnalow();
     ustawElementyOkna();
@@ -18,6 +18,7 @@ int Okno1::PodlaczenieSygnalow()
     b_ZmienRozmiar.signal_clicked().connect(sigc::mem_fun(*this,&Okno1::NaPrzyciskZmienRozmiar));
 	b_UstawTekst.signal_clicked().connect(sigc::mem_fun(*this,&Okno1::WypelnijBufor));
     b_UruchomWatek.signal_clicked().connect(sigc::mem_fun(*this,&Okno1::NowyWatek));
+    b_NoweOknoGL.signal_clicked().connect(sigc::mem_fun(*this,&Okno1::NoweOknoGL));
     return 1;
 }
 void Okno1::ustawElementyOkna()
@@ -25,12 +26,14 @@ void Okno1::ustawElementyOkna()
 	b_ZmienRozmiar.set_label("zmien rozmiar");
 	b_UstawTekst.set_label("ustaw tekst");
     b_UruchomWatek.set_label("nowy wątek");
+    b_NoweOknoGL.set_label("nowe okno GL");
 	
 	add(vBox);
 	vBox.pack_start(tekst, Gtk::PACK_SHRINK);
 	vBox.pack_start(b_UstawTekst, Gtk::PACK_EXPAND_WIDGET);
     vBox.pack_start(b_ZmienRozmiar, Gtk::PACK_EXPAND_WIDGET);
     vBox.pack_start(b_UruchomWatek, Gtk::PACK_SHRINK);
+    vBox.pack_start(b_NoweOknoGL, Gtk::PACK_SHRINK);
     show_all();
 }
 void Okno1::NaPrzyciskZmienRozmiar()
@@ -83,6 +86,11 @@ void Okno1::PokazLiczenie()
 //        g_print(" %d",licznik);
         buforTekstu->set_text(sLicznik);
     }
+}
+void Okno1::NoweOknoGL()
+{
+    oknoGL = std::make_unique<OknoGL>();
+    oknoGL->Inicjuj();
 }
 void PokazLiczenieObiektu(Okno1* o)
 {

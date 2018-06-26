@@ -3,8 +3,11 @@
 #include <gtkmm.h>
 #include <thread>
 #include <chrono>
+#include <OknoGL.h>
 //#include <stdlib.h> 
 using namespace Gtk;
+
+
 using P_BuforTekstu = Glib::RefPtr<TextBuffer>;
 
 class Okno1 : public Window
@@ -22,16 +25,19 @@ public:
 protected:
     //
     void NaPrzyciskZmienRozmiar();
+    void NoweOknoGL();
 	virtual bool on_configure_event(GdkEventConfigure* event);
     VBox vBox;
 	TextView tekst;
     Button b_ZmienRozmiar;
 	Button b_UstawTekst;
     Button b_UruchomWatek;
+    Button b_NoweOknoGL;
 	P_BuforTekstu buforTekstu;
 private:
     short licznik = 0;
     std::thread* watek;
+    std::unique_ptr<OknoGL> oknoGL;
     
 };
 
