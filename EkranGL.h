@@ -15,22 +15,17 @@ class EkranGL : public GL::DrawingArea
     EkranGL();
     virtual ~EkranGL();
     void Inicjuj();
-    void invalidate() {
-      get_window()->invalidate_rect(get_allocation(), false);
-    }
-
-    // Update window synchronously (fast).
-    void update()
-    { get_window()->process_updates(false); }
+    void invalidate(){get_window()->invalidate_rect(get_allocation(), false);}
+    void update(){ get_window()->process_updates(false); }
 protected:
     virtual bool on_configure_event(GdkEventConfigure* event);
     virtual bool on_expose_event(GdkEventExpose* event);
     virtual void on_realize();
+    virtual void UstawienieSceny();
+    virtual void RysujScene();
 private:
     ptrConf glconfig;
     bool KonfiguracjaGL();
-    void UstawienieSceny();
-    void RysujScene();
     
 };
 #endif // EKRANGL_H

@@ -35,42 +35,26 @@ void EkranGL::Inicjuj()
 
 bool EkranGL::on_configure_event(GdkEventConfigure* event)
 {
-    auto gldrawable = get_gl_drawable();
+    Komunikat("EkranGL::on_configure_event");
+	auto gldrawable = get_gl_drawable();
 	if (!gldrawable->gl_begin(get_gl_context()))
     return false;
 	UstawienieSceny();
 	invalidate();
 	//Oswietlenie();
+	//RysujScene();
+	if (gldrawable->is_double_buffered())
+      gldrawable->swap_buffers();
+    else
+      glFlush();
 	gldrawable->gl_end();
     return true;
 }
 
 void EkranGL::UstawienieSceny()
 {
-    Komunikat("ustawienie sceny");
-    int w,h;
-	w = get_width();
-	h = get_height();
-	glViewport(0, 0, w, h);
-    glShadeModel(GL_SMOOTH);//cieniowanie kolorem GK_SMOOTH, GL_FLAT
-    glEnable(GL_DEPTH_TEST);
+    Komunikat("EkranGL::UstawienieSceny");
     
-    glEnable(GL_CULL_FACE);
-    glCullFace(GL_BACK);
-    glEnable(GL_BLEND);
-    
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-
-    if (w > h) {
-      float aspect = static_cast<float>(w) / static_cast<float>(h);
-      glFrustum(-aspect, aspect, -1.0, 1.0, 5.0, 60.0);
-    } else {
-      float aspect = static_cast<float>(h) / static_cast<float>(w);
-      glFrustum(-1.0, 1.0, -aspect, aspect, 5.0, 60.0);
-    }
-
-    glMatrixMode(GL_MODELVIEW);
 }
 bool EkranGL::on_expose_event(GdkEventExpose* event)
 {
@@ -94,6 +78,6 @@ void EkranGL::on_realize()
 }
 void EkranGL::RysujScene()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
+	Komunikat("EkranGL::RysujScene");
+	
 }

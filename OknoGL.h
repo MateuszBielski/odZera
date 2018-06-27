@@ -1,6 +1,6 @@
 #ifndef OKNOGL_H
 #define OKNOGL_H
-#include <EkranGL.h>
+#include <EkranRysujacy.h>
 
 class OknoGL :  public Window//public GL::DrawingArea,
 {

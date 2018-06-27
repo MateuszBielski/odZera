@@ -19,6 +19,8 @@
     <File Name="OknoGL.h"/>
     <File Name="Komunikat.h"/>
     <File Name="EkranGL.h"/>
+    <File Name="EkranRysujacy.h"/>
+    <File Name="EkranRysujacy.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
