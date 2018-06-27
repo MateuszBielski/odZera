@@ -6,6 +6,7 @@ EkranGL::EkranGL()
 
 EkranGL::~EkranGL()
 {
+    Komunikat("destruktor EkranGL");
 }
 bool EkranGL::KonfiguracjaGL()
 {
@@ -45,6 +46,7 @@ bool EkranGL::on_configure_event(GdkEventConfigure* event)
 
 void EkranGL::UstawienieSceny()
 {
+    Komunikat("ustawienie sceny");
     int w,h;
 	w = get_width();
 	h = get_height();
@@ -69,6 +71,31 @@ void EkranGL::UstawienieSceny()
 
     glMatrixMode(GL_MODELVIEW);
 }
+bool EkranGL::on_expose_event(GdkEventExpose* event)
+{
+	auto gldrawable = get_gl_drawable();
+    if (!gldrawable->gl_begin(get_gl_context()))
+      return false;
+
+	RysujScene();
+    
+	if (gldrawable->is_double_buffered())
+      gldrawable->swap_buffers();
+    else
+      glFlush();
+
+	gldrawable->gl_end();
+	return true;
+}
+void EkranGL::on_realize()
+{
+	Gtk::DrawingArea::on_realize();
+}
+void EkranGL::RysujScene()
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+}
 OknoGL::OknoGL()
 {
     set_reallocate_redraws(true);
@@ -76,12 +103,14 @@ OknoGL::OknoGL()
 
 OknoGL::~OknoGL()
 {
+    Komunikat("destruktor OknoGL");
 }
 
 void OknoGL::Inicjuj()
 {
     Komunikat("OknoGL::Inicjuj");
-    Gtk::VBox vBox;
+    
+    add(vBox);
     pEkranGL = std::make_unique<EkranGL>();
     pEkranGL->set_size_request(200,200);
     pEkranGL->Inicjuj();

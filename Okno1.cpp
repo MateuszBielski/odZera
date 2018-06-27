@@ -78,12 +78,12 @@ void Okno1::PokazLiczenie()
 //    using namespace std::literals;
     Glib::ustring sLicznik;
 	char c[10];
-	g_print("funkcja w drugim wątku");
+	Komunikat("funkcja w drugim wątku");
     while(licznik < 20){
         std::this_thread::sleep_for(std::chrono::seconds(1));
         sprintf(c,"%d",licznik++);
         sLicznik = c;
-//        g_print(" %d",licznik);
+//        Komunikat(" %d",licznik);
         buforTekstu->set_text(sLicznik);
     }
 }
