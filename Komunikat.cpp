@@ -15,4 +15,4 @@ Komunikat::Komunikat(const char* k)
 {
 	Wypisz(k);
 }
-bool Komunikat::czyWypisac = true;
+bool Komunikat::czyWypisac = false;
