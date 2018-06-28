@@ -10,17 +10,17 @@
   <VirtualDirectory Name="src">
     <File Name="main.cpp"/>
     <File Name="Okno1.cpp"/>
-    <File Name="OknoGL.cpp"/>
     <File Name="Komunikat.cpp"/>
     <File Name="EkranGL.cpp"/>
+    <File Name="EkranRysujacy.cpp"/>
+    <File Name="OknoProby.cpp"/>
+    <File Name="OknoGL.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="headers">
     <File Name="Okno1.h"/>
-    <File Name="OknoGL.h"/>
     <File Name="Komunikat.h"/>
     <File Name="EkranGL.h"/>
     <File Name="EkranRysujacy.h"/>
-    <File Name="EkranRysujacy.cpp"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>

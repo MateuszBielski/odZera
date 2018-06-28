@@ -17,7 +17,7 @@ void OknoGL::Inicjuj()
     
     add(vBox);
     pEkranGL = std::make_unique<EkranRysujacy>();
-    pEkranGL->set_size_request(200,200);
+//    pEkranGL->set_size_request(200,200);
     pEkranGL->Inicjuj();
     vBox.pack_start(*pEkranGL);
     show_all();
