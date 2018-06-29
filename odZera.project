@@ -9,18 +9,28 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="main.cpp"/>
-    <File Name="Okno1.cpp"/>
     <File Name="Komunikat.cpp"/>
-    <File Name="EkranGL.cpp"/>
-    <File Name="EkranRysujacy.cpp"/>
-    <File Name="OknoProby.cpp"/>
-    <File Name="OknoGL.cpp"/>
+    <VirtualDirectory Name="Okno">
+      <File Name="Okno1.cpp"/>
+      <File Name="OknoGL.cpp"/>
+      <File Name="OknoProby.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Ekran">
+      <File Name="EkranGL.cpp"/>
+      <File Name="EkranRysujacy.cpp"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <VirtualDirectory Name="headers">
-    <File Name="Okno1.h"/>
     <File Name="Komunikat.h"/>
-    <File Name="EkranGL.h"/>
-    <File Name="EkranRysujacy.h"/>
+    <VirtualDirectory Name="Ekran">
+      <File Name="EkranGL.h"/>
+      <File Name="EkranRysujacy.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Okno">
+      <File Name="Okno1.h"/>
+      <File Name="OknoGL.h"/>
+      <File Name="OknoProby.h"/>
+    </VirtualDirectory>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
