@@ -39,6 +39,7 @@ void OknoGL::Inicjuj()
         signal_button_press_event().connect(sigc::mem_fun(*this,&ScenaGL::on_button_press_event));
         signal_motion_notify_event().connect(sigc::mem_fun(*this,&ScenaGL::on_motion_notify_event));
         //sprawdzić skąd pochodzą te sygnały - wydaje się, że z okna, które ma być obsługiwane
+		//można użyć czegoś takiego jak kontener zawierający funkcje i je wywoływać wszystkie.
     }
     ===================
     vBox.pack_start(*pEkranGL);

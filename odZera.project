@@ -19,6 +19,10 @@
       <File Name="EkranGL.cpp"/>
       <File Name="EkranRysujacy.cpp"/>
     </VirtualDirectory>
+    <File Name="Sterowanie.h"/>
+    <File Name="Sterowanie.cpp"/>
+    <File Name="SterowanieMysza.h"/>
+    <File Name="SterowanieMysza.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="headers">
     <File Name="Komunikat.h"/>
