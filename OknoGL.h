@@ -10,6 +10,11 @@ public:
     void Inicjuj();
 private:
     std::unique_ptr<EkranGL> pEkranGL;
+    
+    /*należy sprawdzić  możliwość łatwego umieszczania obiektu sterowanie w różnych klasach okna/ekranu
+     *- wypróbować, w której sprawdzi się najlepiej*/
+    std::unique_ptr<Sterowanie> sterowanie;
+    
     Gtk::VBox vBox;
 };
 #endif
