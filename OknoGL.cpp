@@ -1,5 +1,5 @@
 #include <OknoGL.h>
-#include <SterowanieMysza>
+#include <SterowanieMysza.h>
 
 
 OknoGL::OknoGL()

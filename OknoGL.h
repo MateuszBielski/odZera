@@ -1,6 +1,7 @@
 #ifndef OKNOGL_H
 #define OKNOGL_H
 #include <EkranRysujacy.h>
+#include <SterowanieMysza.h>
 
 class OknoGL :  public Window//public GL::DrawingArea,
 {

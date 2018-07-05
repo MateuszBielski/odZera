@@ -1,15 +1,17 @@
 #ifndef STEROWANIE_H
 #define STEROWANIE_H
+#include <gtkmm/widget.h>
+#include <Komunikat.h>
 
 class Sterowanie
 {
 public:
 	Sterowanie();
 	~Sterowanie();
-	virtual int PodlaczanieSygnalow(Widget& okno) = 0;
+	virtual int PodlaczanieSygnalow(Gtk::Widget& okno) = 0;
 protected:
-	 void UstawOkno(Widget* o);
-	 Widget* oknoSterowane;
+	 void UstawOkno(Gtk::Widget* o);
+	 Gtk::Widget* oknoSterowane;
 	 
 };
 

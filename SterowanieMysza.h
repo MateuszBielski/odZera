@@ -1,6 +1,7 @@
 #ifndef STEROWANIEMYSZA_H
 #define STEROWANIEMYSZA_H
 #include <gtkmm.h>
+#include <Sterowanie.h>
 /*klasa sterowanieMysza ma przechowywać:
  * pozycję myszy
  * wskaźnik na obsługiwane okno
@@ -12,7 +13,7 @@ class SterowanieMysza : public Sterowanie
 public:
 	SterowanieMysza();
 	~SterowanieMysza();
-    virtual int PodlaczanieSygnalow(Widget& okno);
+    virtual int PodlaczanieSygnalow(Gtk::Widget& okno);
 private:
     bool on_button_press_event(GdkEventButton* event);
     bool on_motion_notify_event(GdkEventMotion* event);
