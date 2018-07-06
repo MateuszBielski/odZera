@@ -1,7 +1,8 @@
 #ifndef OKNOGL_H
 #define OKNOGL_H
 #include <EkranRysujacy.h>
-#include <SterowanieMysza.h>
+
+using namespace Gtk;
 
 class OknoGL :  public Window//public GL::DrawingArea,
 {
@@ -9,13 +10,11 @@ public:
    OknoGL();
     virtual ~OknoGL();
     void Inicjuj();
+    void UstawIzainstalujPrzyciskW(VBox&);
 private:
     std::unique_ptr<EkranGL> pEkranGL;
-    
-    /*należy sprawdzić  możliwość łatwego umieszczania obiektu sterowanie w różnych klasach okna/ekranu
-     *- wypróbować, w której sprawdzi się najlepiej*/
-    std::unique_ptr<Sterowanie> sterowanie;
-    
-    Gtk::VBox vBox;
+    VBox vBox;
+    Button b_NoweOknoGL;
 };
+using upOknoGL = std::unique_ptr<OknoGL>;
 #endif

@@ -14,6 +14,7 @@ public:
 	SterowanieMysza();
 	~SterowanieMysza();
     virtual int PodlaczanieSygnalow(Gtk::Widget& okno);
+    virtual int PodlaczanieSygnalow(upOknoGL& okno);
 private:
     bool on_button_press_event(GdkEventButton* event);
     bool on_motion_notify_event(GdkEventMotion* event);

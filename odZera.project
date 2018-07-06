@@ -4,32 +4,49 @@
     <Plugin Name="qmake">
       <![CDATA[00010001N0005Debug000000000000]]>
     </Plugin>
+    <Plugin Name="CMakePlugin">
+      <![CDATA[[{
+  "name": "Debug",
+  "enabled": false,
+  "buildDirectory": "build",
+  "sourceDirectory": "$(ProjectPath)",
+  "generator": "",
+  "buildType": "",
+  "arguments": [],
+  "parentProject": ""
+ }]]]>
+    </Plugin>
   </Plugins>
   <Description/>
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="main.cpp"/>
-    <File Name="Okno1.cpp"/>
     <File Name="Komunikat.cpp"/>
     <VirtualDirectory Name="Okno">
       <File Name="Okno1.cpp"/>
       <File Name="OknoGL.cpp"/>
       <File Name="OknoProby.cpp"/>
+      <File Name="OknoProba2.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Ekran">
       <File Name="EkranGL.cpp"/>
       <File Name="EkranRysujacy.cpp"/>
     </VirtualDirectory>
-    <File Name="Sterowanie.h"/>
-    <File Name="Sterowanie.cpp"/>
-    <File Name="SterowanieMysza.h"/>
-    <File Name="SterowanieMysza.cpp"/>
+    <File Name="Moduly.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="headers">
-    <File Name="Okno1.h"/>
     <File Name="Komunikat.h"/>
-    <File Name="EkranGL.h"/>
-    <File Name="EkranRysujacy.h"/>
+    <VirtualDirectory Name="Ekran">
+      <File Name="EkranGL.h"/>
+      <File Name="EkranRysujacy.h"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Okno">
+      <File Name="Okno1.h"/>
+      <File Name="OknoGL.h"/>
+      <File Name="OknoProby.h"/>
+      <File Name="OknoProba2.h"/>
+    </VirtualDirectory>
+    <File Name="Moduly.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
@@ -41,14 +58,13 @@
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
-    <Configuration Name="Debug" CompilerType="MinGW ( gcc.exe (Rev2, Built by MSYS2 project) 6.2.0 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+    <Configuration Name="Debug" CompilerType="G++5" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="-Os;$(shell pkg-config --cflags gtkglextmm-1.2);-std=c++14" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
       </Compiler>
       <Linker Options="-s;-pg;$(shell pkg-config --libs gtkglextmm-1.2);-lpthread" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
-      <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -88,7 +104,6 @@
       <Linker Options="" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
-      <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -121,4 +136,10 @@
       </Completion>
     </Configuration>
   </Settings>
+  <VirtualDirectory Name="Sterowanie">
+    <File Name="Sterowanie.cpp"/>
+    <File Name="SterowanieMysza.cpp"/>
+    <File Name="SterowanieMysza.h"/>
+    <File Name="Sterowanie.h"/>
+  </VirtualDirectory>
 </CodeLite_Project>
