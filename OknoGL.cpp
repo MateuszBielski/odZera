@@ -1,4 +1,5 @@
 #include <OknoGL.h>
+#include <SterowanieMysza.h>
 
 
 OknoGL::OknoGL()
@@ -19,6 +20,17 @@ void OknoGL::Inicjuj()
     pEkranGL = std::make_unique<EkranRysujacy>();
 //    pEkranGL->set_size_request(200,200);
     pEkranGL->Inicjuj();
+//    ====================
+    //zadeklarować jako pole klasy tego okna:
+    sterowanie = std::make_unique<SterowanieMysza>();
+    
+    
+  
+    /
+    sterowanie->PodlaczenieSygnalow(this);
+    //albo
+    //sterowanie->PodlaczenieSygnalow(pEkranGL);
+//    ===================
     vBox.pack_start(*pEkranGL);
     show_all();
 }
