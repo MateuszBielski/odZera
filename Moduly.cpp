@@ -17,6 +17,5 @@ bool Moduly::DolaczDo(spOkno1 okno)
 int Moduly::Uruchom()
 {
     oknoGL = std::make_unique<OknoGL>();
-    oknoGL->Inicjuj();
     oknoGL->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
 }

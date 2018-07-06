@@ -2,17 +2,17 @@
 #define OKNOGL_H
 #include <EkranRysujacy.h>
 
+using namespace Gtk;
 class OknoGL :  public Window//public GL::DrawingArea,
 {
 public: 
    OknoGL();
     virtual ~OknoGL();
     void Inicjuj();
-    //Button& ButtonNoweOkno(){return b_NoweOknoGL;};
-    void UstawIzainstalujPrzyciskW(Gtk::VBox&);
+    void UstawIzainstalujPrzyciskW(VBox&);
 private:
     std::unique_ptr<EkranGL> pEkranGL;
-    Gtk::VBox vBox;
-    Gtk::Button b_NoweOknoGL;
+    VBox vBox;
+    Button b_NoweOknoGL;
 };
 #endif
