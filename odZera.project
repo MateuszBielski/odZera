@@ -9,6 +9,7 @@
   <Dependencies/>
   <VirtualDirectory Name="src">
     <File Name="main.cpp"/>
+    <File Name="Okno1.cpp"/>
     <File Name="Komunikat.cpp"/>
     <VirtualDirectory Name="Okno">
       <File Name="Okno1.cpp"/>
@@ -25,16 +26,10 @@
     <File Name="SterowanieMysza.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="headers">
+    <File Name="Okno1.h"/>
     <File Name="Komunikat.h"/>
-    <VirtualDirectory Name="Ekran">
-      <File Name="EkranGL.h"/>
-      <File Name="EkranRysujacy.h"/>
-    </VirtualDirectory>
-    <VirtualDirectory Name="Okno">
-      <File Name="Okno1.h"/>
-      <File Name="OknoGL.h"/>
-      <File Name="OknoProby.h"/>
-    </VirtualDirectory>
+    <File Name="EkranGL.h"/>
+    <File Name="EkranRysujacy.h"/>
   </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
