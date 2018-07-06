@@ -22,3 +22,9 @@ void OknoGL::Inicjuj()
     vBox.pack_start(*pEkranGL);
     show_all();
 }
+void OknoGL::UstawIzainstalujPrzyciskW(Gtk::VBox& vbox)
+{
+    b_NoweOknoGL.set_label("nowe okno GL");
+    vbox.pack_start(b_NoweOknoGL,Gtk::PACK_SHRINK);
+    vbox.show_all();
+}
