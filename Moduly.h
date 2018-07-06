@@ -11,10 +11,11 @@ public:
     ~Moduly();
     bool DolaczDo(spOkno1);
     int Uruchom();
+    
 private:
     spOkno1 oknoGlowne;
     
-    std::unique_ptr<OknoGL> oknoGL;
+    upOknoGL oknoGL;
     
     /*należy sprawdzić  możliwość łatwego umieszczania obiektu sterowanie w różnych klasach okna/ekranu
      *- wypróbować, w której sprawdzi się najlepiej*/

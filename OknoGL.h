@@ -3,6 +3,7 @@
 #include <EkranRysujacy.h>
 
 using namespace Gtk;
+
 class OknoGL :  public Window//public GL::DrawingArea,
 {
 public: 
@@ -15,4 +16,5 @@ private:
     VBox vBox;
     Button b_NoweOknoGL;
 };
+using upOknoGL = std::unique_ptr<OknoGL>;
 #endif
