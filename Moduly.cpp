@@ -18,13 +18,9 @@ int Moduly::Uruchom()
 {
     oknoGL = std::make_unique<OknoGL>();
     oknoGL->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
-    //    ====================
-    //zadeklarować jako pole klasy tego okna:
     sterowanie = std::make_unique<SterowanieMysza>();
-    sterowanie->PodlaczanieSygnalow(oknoGL);
-    //albo
-    //sterowanie->PodlaczenieSygnalow(pEkranGL);
-//    ===================
+    sterowanie->PodlaczanieSygnalow(*oknoGL);
+//    sterowanie->PodlaczanieSygnalow(*(oknoGL->pEkranGL)); - w tej wersji powoduje naruszenie ochrony pamięci
     /*Wykonać  tablicę wskaźników do funkcji u uruchomic je w pętli
      * */
 }

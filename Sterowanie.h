@@ -10,7 +10,6 @@ public:
 	Sterowanie();
 	~Sterowanie();
 	virtual int PodlaczanieSygnalow(Gtk::Widget& okno) = 0;
-    virtual int PodlaczanieSygnalow(upOknoGL& okno) = 0;
 protected:
 	 void UstawOkno(Gtk::Widget* o);
 	 Gtk::Widget* oknoSterowane;

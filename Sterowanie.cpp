@@ -12,11 +12,7 @@ int Sterowanie::PodlaczanieSygnalow(Gtk::Widget& okno)
 	int ileSygnalow = 0;
 	return ileSygnalow;
 }
-int Sterowanie::PodlaczanieSygnalow(upOknoGL& okno)
-{
-	int ileSygnalow = 0;
-	return ileSygnalow;
-}
+
 void Sterowanie::UstawOkno(Gtk::Widget* o)
 {
 	oknoSterowane = o;
