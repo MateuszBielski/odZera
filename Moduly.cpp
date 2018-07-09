@@ -24,6 +24,8 @@ int Moduly::Uruchom()
     /*Wykonać  tablicę wskaźników do funkcji u uruchomic je w pętli
      * */
 	renderowanie = std::make_shared<Renderowanie>();
-	oknoGL->WskEkranGL()->sRysuj.connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));
+	renderowanie->PodlaczSygnalZ(oknoGL->WskEkranGL());
+	//oknoGL->WskEkranGL()->sRysuj.connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));// ta linia powoduje błąd przy uruchomieniu
+	
 	 
 }
