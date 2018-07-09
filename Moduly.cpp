@@ -23,4 +23,7 @@ int Moduly::Uruchom()
 //    sterowanie->PodlaczanieSygnalow(*(oknoGL->pEkranGL)); - w tej wersji powoduje naruszenie ochrony pamięci
     /*Wykonać  tablicę wskaźników do funkcji u uruchomic je w pętli
      * */
+	renderowanie = std::make_shared<Renderowanie>();
+	oknoGL->WskEkranGL()->sRysuj.connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));
+	 
 }

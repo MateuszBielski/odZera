@@ -48,6 +48,16 @@
     </VirtualDirectory>
     <File Name="Moduly.h"/>
   </VirtualDirectory>
+  <VirtualDirectory Name="Sterowanie">
+    <File Name="Sterowanie.cpp"/>
+    <File Name="SterowanieMysza.cpp"/>
+    <File Name="SterowanieMysza.h"/>
+    <File Name="Sterowanie.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Renderowanie">
+    <File Name="Renderowanie.h"/>
+    <File Name="Renderowanie.cpp"/>
+  </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -65,6 +75,7 @@
       <Linker Options="-s;-pg;$(shell pkg-config --libs gtkglextmm-1.2);-lpthread" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -104,6 +115,7 @@
       <Linker Options="" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -136,10 +148,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="Sterowanie">
-    <File Name="Sterowanie.cpp"/>
-    <File Name="SterowanieMysza.cpp"/>
-    <File Name="SterowanieMysza.h"/>
-    <File Name="Sterowanie.h"/>
-  </VirtualDirectory>
 </CodeLite_Project>

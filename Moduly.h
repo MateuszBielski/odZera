@@ -3,7 +3,7 @@
 #include <Okno1.h>
 #include <OknoGL.h>
 #include <SterowanieMysza.h>
-
+#include <Renderowanie.h>
 class Moduly
 {
 public:
@@ -20,6 +20,7 @@ private:
     /*należy sprawdzić  możliwość łatwego umieszczania obiektu sterowanie w różnych klasach okna/ekranu
      *- wypróbować, w której sprawdzi się najlepiej*/
     std::unique_ptr<Sterowanie> sterowanie;
+	std::shared_ptr<Renderowanie> renderowanie;
     
 };
 #endif

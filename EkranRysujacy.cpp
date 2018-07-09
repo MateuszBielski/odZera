@@ -40,4 +40,6 @@ void EkranRysujacy::RysujScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
+	Komunikat("EkranRysujacy::RysujScene przed sRysuj.emit()");
+	sRysuj.emit();
 }

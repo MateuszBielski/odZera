@@ -8,6 +8,7 @@
 using namespace Gtk;
 
 using ptrConf = Glib::RefPtr<Gdk::GL::Config>;
+using SygnalRysuj = sigc::signal<void>;
 
 class EkranGL : public GL::DrawingArea
 {
@@ -17,6 +18,7 @@ class EkranGL : public GL::DrawingArea
     void Inicjuj();
     void invalidate(){get_window()->invalidate_rect(get_allocation(), false);}
     void update(){ get_window()->process_updates(false); }
+	SygnalRysuj sRysuj;
 protected:
     virtual bool on_configure_event(GdkEventConfigure* event);
     virtual bool on_expose_event(GdkEventExpose* event);
