@@ -2,13 +2,14 @@
 #define RENDEROWANIE_H
 #include <Komunikat.h>
 #include <EkranGL.h>
+#include <sigc++/sigc++.h>
 
-class Renderowanie
+class Renderowanie : public sigc::trackable
 {
 public:
 	Renderowanie();
 	~Renderowanie();
-	void Renderuj();
+	void Renderuj(int i, bool b);
 	void PodlaczSygnalZ(std::shared_ptr<EkranGL>);
 	
 };

@@ -4,11 +4,12 @@
 #include <gtkglmm.h>
 #include <iostream>
 #include <Komunikat.h>
+#include <sigc++/sigc++.h>
 
 using namespace Gtk;
 
 using ptrConf = Glib::RefPtr<Gdk::GL::Config>;
-using SygnalRysuj = sigc::signal<void>;
+using SygnalRysuj = sigc::signal<void, int, bool>;
 
 class EkranGL : public GL::DrawingArea
 {

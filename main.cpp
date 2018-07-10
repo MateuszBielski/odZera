@@ -13,7 +13,7 @@ int main(int argc, char **argv)
     spOkno1 okno = std::make_shared<OknoProba2>();
 	okno->Inicjuj();
     
-    auto moduly = std::make_unique<Moduly>();
+    auto moduly = make_unique<Moduly>();
     moduly->DolaczDo(okno);
     moduly->Uruchom();
     app.run(*okno);
