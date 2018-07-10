@@ -4,6 +4,8 @@
 #include <OknoGL.h>
 #include <SterowanieMysza.h>
 #include <Renderowanie.h>
+#include <client.h>
+#include <server.h>
 class Moduly
 {
 public:

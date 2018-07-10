@@ -9,7 +9,8 @@ class Renderowanie : public sigc::trackable
 public:
 	Renderowanie();
 	~Renderowanie();
-	void Renderuj(int i, bool b);
+	void Renderuj( bool b, int i);
+    void on_server_something(bool a, int b);
 	void PodlaczSygnalZ(std::shared_ptr<EkranGL>);
     void PodlaczSygnalZ(EkranGL&);
 	

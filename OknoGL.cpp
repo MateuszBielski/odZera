@@ -33,3 +33,7 @@ std::shared_ptr<EkranGL> OknoGL::WskEkranGL()
 {
 	return pEkranGL;
 }
+EkranGL& OknoGL::RefEkranGL()
+{
+	return *pEkranGL;
+}

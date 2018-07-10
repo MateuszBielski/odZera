@@ -14,6 +14,7 @@ public:
     void Inicjuj();
     void UstawIzainstalujPrzyciskW(VBox&);
 	std::shared_ptr<EkranGL> WskEkranGL();
+    EkranGL& RefEkranGL();
 private:
     std::shared_ptr<EkranGL> pEkranGL;
     VBox vBox;
