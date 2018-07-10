@@ -11,6 +11,7 @@ public:
 	~Renderowanie();
 	void Renderuj(int i, bool b);
 	void PodlaczSygnalZ(std::shared_ptr<EkranGL>);
+    void PodlaczSygnalZ(EkranGL&);
 	
 };
 

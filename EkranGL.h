@@ -9,8 +9,8 @@
 using namespace Gtk;
 
 using ptrConf = Glib::RefPtr<Gdk::GL::Config>;
-using SygnalRysuj = sigc::signal<void, int, bool>;
-
+//using SygnalRysuj = sigc::signal<void, int, bool>;
+typedef sigc::signal<void,int, bool> SygnalRysuj;
 class EkranGL : public GL::DrawingArea
 {
   public:

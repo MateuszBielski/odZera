@@ -16,3 +16,8 @@ void Renderowanie::PodlaczSygnalZ(std::shared_ptr<EkranGL> ekran)
 {
 	ekran->sRysuj.connect(sigc::mem_fun(*this,&Renderowanie::Renderuj));
 }
+void Renderowanie::PodlaczSygnalZ(EkranGL& ekran)
+{
+    auto sygnal = ekran.sRysuj;
+    sygnal.connect(sigc::mem_fun(*this,&Renderowanie::Renderuj));
+}
