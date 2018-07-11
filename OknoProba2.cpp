@@ -20,7 +20,6 @@ int OknoProba2::PodlaczenieSygnalow()
 	b_ZmienRozmiar.signal_clicked().connect(sigc::mem_fun(*this,&OknoProba2::NaPrzyciskZmienRozmiar));
 	b_UstawTekst.signal_clicked().connect(sigc::mem_fun(*this,&OknoProba2::WypelnijBufor));
     b_UruchomWatek.signal_clicked().connect(sigc::mem_fun(*this,&OknoProba2::NowyWatek));
-//    b_NoweOknoGL.signal_clicked().connect(sigc::mem_fun(*this,&OknoProba2::NoweOknoGL));
     return 1;
 }
 
@@ -30,7 +29,6 @@ void OknoProba2::ustawElementyOkna()
     b_ZmienRozmiar.set_label("zmien rozmiar");
 	b_UstawTekst.set_label("ustaw tekst");
     b_UruchomWatek.set_label("nowy wątek");
-//    b_NoweOknoGL.set_label("nowe okno GL");
 	
 	add(vBox);
 	vBox.pack_start(tekst, Gtk::PACK_SHRINK);
@@ -38,7 +36,6 @@ void OknoProba2::ustawElementyOkna()
     vBox.pack_start(b_ZmienRozmiar, Gtk::PACK_EXPAND_WIDGET);
     refVBox().pack_start(b_UruchomWatek, Gtk::PACK_SHRINK);
     refVBox().show_all();
-//    show_all();
 }
 
 void OknoProba2::NaPrzyciskZmienRozmiar()

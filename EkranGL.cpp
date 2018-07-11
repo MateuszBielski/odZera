@@ -81,17 +81,7 @@ void EkranGL::RysujScene()
 	Komunikat("EkranGL::RysujScene");
 	
 }
-
-EkranGL::type_signal_something EkranGL::signal_something()
-{
-  return m_signal_something;
-}
-
-void EkranGL::do_something()
-{
-    m_signal_something.emit(false, 5);
-}
-EkranGL::SygnalRysuj EkranGL::EmitujSygnalRysuj()
+SygnalRysuj EkranGL::EmitujSygnalRysuj() //EkranGL::
 {
 	return sRysuj;
 }

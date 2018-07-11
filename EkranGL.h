@@ -9,7 +9,7 @@
 using namespace Gtk;
 
 using ptrConf = Glib::RefPtr<Gdk::GL::Config>;
-//using SygnalRysuj = sigc::signal<void, int, bool>;
+using SygnalRysuj = sigc::signal<void, bool, int>;
 class EkranGL : public GL::DrawingArea
 {
   public:
@@ -21,10 +21,6 @@ class EkranGL : public GL::DrawingArea
     void update(){ get_window()->process_updates(false); }
     
     void do_something();
-  //signal accessor:
-    typedef sigc::signal<void, bool, int> type_signal_something;
-    type_signal_something signal_something();
-    typedef sigc::signal<void, bool, int> SygnalRysuj;
     SygnalRysuj EmitujSygnalRysuj();
 protected:
     virtual bool on_configure_event(GdkEventConfigure* event);
@@ -33,7 +29,6 @@ protected:
     virtual void UstawienieSceny();
     virtual void RysujScene();
     
-    type_signal_something m_signal_something;
     SygnalRysuj sRysuj;
 private:
     ptrConf glconfig;
