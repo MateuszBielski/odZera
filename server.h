@@ -1,9 +1,9 @@
 #ifndef GTKMM_EXAMPLE_SERVER_H
 #define GTKMM_EXAMPLE_SERVER_H
-
+#include <gtkglmm.h>
 #include <sigc++/sigc++.h>
 
-class Server
+class Server : public Gtk::GL::DrawingArea
 {
 public:
   Server();

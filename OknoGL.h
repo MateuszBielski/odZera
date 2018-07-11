@@ -6,17 +6,16 @@
 
 using namespace Gtk;
 
-class OknoGL :  public Window//public GL::DrawingArea,
+class OknoGL :  public Window
 {
 public: 
    OknoGL();
     virtual ~OknoGL();
     void Inicjuj();
     void UstawIzainstalujPrzyciskW(VBox&);
-	std::shared_ptr<EkranGL> WskEkranGL();
-    EkranGL& RefEkranGL();
+    VBox& refVBox(){return vBox;};
 private:
-    std::shared_ptr<EkranGL> pEkranGL;
+    
     VBox vBox;
     Button b_NoweOknoGL;
 };

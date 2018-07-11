@@ -23,6 +23,7 @@ private:
      *- wypróbować, w której sprawdzi się najlepiej*/
     std::unique_ptr<Sterowanie> sterowanie;
 	std::shared_ptr<Renderowanie> renderowanie;
+    std::shared_ptr<EkranGL> pEkranGL;
     
 };
 #endif

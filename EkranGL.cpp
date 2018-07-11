@@ -89,5 +89,10 @@ EkranGL::type_signal_something EkranGL::signal_something()
 
 void EkranGL::do_something()
 {
-  m_signal_something.emit(false, 5);
+    m_signal_something.emit(false, 5);
+}
+void EkranGL::ZainstalujSieW(VBox& vbox)
+{
+	vbox.pack_start(*this);
+    vbox.show_all();
 }

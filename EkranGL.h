@@ -17,6 +17,7 @@ class EkranGL : public GL::DrawingArea
     EkranGL();
     virtual ~EkranGL();
     void Inicjuj();
+    void ZainstalujSieW(VBox&);
     void invalidate(){get_window()->invalidate_rect(get_allocation(), false);}
     void update(){ get_window()->process_updates(false); }
 	SygnalRysuj sRysuj;
