@@ -6,6 +6,7 @@
 
 using namespace Gtk;
 
+
 class OknoGL :  public Window
 {
 public: 
@@ -14,11 +15,16 @@ public:
     void Inicjuj();
     void UstawIzainstalujPrzyciskW(VBox&);
 	virtual bool on_my_delete_event(GdkEventAny* any_event);
+	void Pokaz();
+	void Ukryj();
+	
     VBox& refVBox(){return vBox;};
 private:
-    
+	using pfVoid = void (OknoGL::*)();
+    void PrzestawDzialanieButtObsluga(const char * etykieta, pfVoid func );
     VBox vBox;
-    Button b_NoweOknoGL;
+    Button bObslugaTegoOkna;
+	sigc::connection connectionButton;
 };
 using upOknoGL = std::unique_ptr<OknoGL>;
 #endif
