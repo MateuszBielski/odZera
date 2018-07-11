@@ -10,7 +10,7 @@ public:
 	Renderowanie();
 	~Renderowanie();
 	void Renderuj( bool b, int i);
-    void on_server_something(bool a, int b);
+//    void on_server_something(bool a, int b);
 	
 };
 

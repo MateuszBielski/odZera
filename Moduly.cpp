@@ -31,6 +31,7 @@ int Moduly::Uruchom()
 	renderowanie = std::make_shared<Renderowanie>();
     
     pEkranGL->signal_something().connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));
+    pEkranGL->EmitujSygnalRysuj().connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));
     std::cout << "Before EkranGL::do_something()" << std::endl;
     pEkranGL->do_something();
 	std::cout << "After EkranGL::do_something()" << std::endl;

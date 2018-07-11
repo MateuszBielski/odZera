@@ -91,6 +91,10 @@ void EkranGL::do_something()
 {
     m_signal_something.emit(false, 5);
 }
+EkranGL::SygnalRysuj EkranGL::EmitujSygnalRysuj()
+{
+	return sRysuj;
+}
 void EkranGL::ZainstalujSieW(VBox& vbox)
 {
 	vbox.pack_start(*this);
