@@ -24,12 +24,19 @@ int Moduly::Uruchom()
     pEkranGL->ZainstalujSieW(oknoGL->refVBox());
     
     sterowanie = std::make_unique<SterowanieMysza>();
-    sterowanie->PodlaczanieSygnalow(*oknoGL);
-//    sterowanie->PodlaczanieSygnalow(*(oknoGL->pEkranGL)); - w tej wersji powoduje naruszenie ochrony pamięci
+	sterowanie->PodlaczanieSygnalow(*pEkranGL);
     /*Wykonać  tablicę wskaźników do funkcji u uruchomic je w pętli
      * */
 	renderowanie = std::make_shared<Renderowanie>();
     
     pEkranGL->EmitujSygnalRysuj().connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));
-	 
+	 //signal_delete_event()  on_my_delete_event(GdkEventAny* any_event)
+	oknoGL->signal_delete_event().connect(sigc::mem_fun(*this,&Moduly::on_my_delete_event));
+}
+bool Moduly::on_my_delete_event(GdkEventAny* any_event)
+{
+//	delete oknoGL;
+	oknoGL = nullptr;
+	Komunikat("Moduly::on_my_delete_event");
+	return true;
 }

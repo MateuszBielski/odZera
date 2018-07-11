@@ -26,3 +26,7 @@ void OknoGL::UstawIzainstalujPrzyciskW(Gtk::VBox& vbox)
     vbox.show_all();
     b_NoweOknoGL.signal_clicked().connect(sigc::mem_fun(*this,&OknoGL::Inicjuj));
 }
+bool OknoGL::on_my_delete_event(GdkEventAny* any_event)
+{
+	Komunikat("OknoGL::on_my_delete_event");
+}

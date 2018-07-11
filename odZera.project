@@ -25,7 +25,6 @@
     <VirtualDirectory Name="Okno">
       <File Name="Okno1.cpp"/>
       <File Name="OknoGL.cpp"/>
-      <File Name="OknoProby.cpp"/>
       <File Name="OknoProba2.cpp"/>
     </VirtualDirectory>
     <VirtualDirectory Name="Ekran">
@@ -43,7 +42,6 @@
     <VirtualDirectory Name="Okno">
       <File Name="Okno1.h"/>
       <File Name="OknoGL.h"/>
-      <File Name="OknoProby.h"/>
       <File Name="OknoProba2.h"/>
     </VirtualDirectory>
     <File Name="Moduly.h"/>
@@ -75,6 +73,7 @@
       <Linker Options="-s;;$(shell pkg-config --libs gtkglextmm-1.2);-lpthread" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -114,6 +113,7 @@
       <Linker Options="" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -146,10 +146,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="sygn">
-    <File Name="client.cpp"/>
-    <File Name="client.h"/>
-    <File Name="server.cpp"/>
-    <File Name="server.h"/>
-  </VirtualDirectory>
 </CodeLite_Project>

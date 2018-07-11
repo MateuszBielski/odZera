@@ -11,6 +11,7 @@ public:
     ~Moduly();
     bool DolaczDo(spOkno1);
     int Uruchom();
+	bool on_my_delete_event(GdkEventAny* any_event);
     
 private:
     spOkno1 oknoGlowne;

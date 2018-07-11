@@ -13,6 +13,7 @@ public:
     virtual ~OknoGL();
     void Inicjuj();
     void UstawIzainstalujPrzyciskW(VBox&);
+	virtual bool on_my_delete_event(GdkEventAny* any_event);
     VBox& refVBox(){return vBox;};
 private:
     
