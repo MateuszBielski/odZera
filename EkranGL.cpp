@@ -85,8 +85,17 @@ SygnalRysuj EkranGL::EmitujSygnalRysuj() //EkranGL::
 {
 	return sRysuj;
 }
+SygnalRysuj EkranGL::EmitujSygnalTransformacja()
+{
+	return sTransformacja;
+}
 void EkranGL::ZainstalujSieW(VBox& vbox)
 {
 	vbox.pack_start(*this);
     vbox.show_all();
 }
+void EkranGL::Oswietlenie()
+{
+	Komunikat("EkranGL::Oswietlenie");
+}
+

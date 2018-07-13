@@ -14,7 +14,10 @@ public:
 	SterowanieMysza();
 	~SterowanieMysza();
     virtual int PodlaczanieSygnalow(Gtk::Widget& okno);
+	virtual void PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& );
+	virtual void PrzeksztalcenieWidoku( bool b, int i);
 private:
+//	void WyswietlMacierz();
     bool on_button_press_event(GdkEventButton* event);
     bool on_motion_notify_event(GdkEventMotion* event);
     float m_QuatDiff[4];

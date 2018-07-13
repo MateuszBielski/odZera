@@ -20,8 +20,9 @@ class EkranGL : public GL::DrawingArea
     void invalidate(){get_window()->invalidate_rect(get_allocation(), false);}
     void update(){ get_window()->process_updates(false); }
     
-    void do_something();
+//    void do_something();
     SygnalRysuj EmitujSygnalRysuj();
+	SygnalRysuj EmitujSygnalTransformacja();
 protected:
     virtual bool on_configure_event(GdkEventConfigure* event);
     virtual bool on_expose_event(GdkEventExpose* event);
@@ -30,6 +31,7 @@ protected:
     virtual void RysujScene();
     virtual void Oswietlenie();
     
+	SygnalRysuj sTransformacja;
     SygnalRysuj sRysuj;
 private:
     ptrConf glconfig;

@@ -40,6 +40,7 @@ void EkranRysujacy::RysujScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
+	sTransformacja.emit(true,21);
 	sRysuj.emit(true, 14);
 }
 void EkranRysujacy::Oswietlenie()

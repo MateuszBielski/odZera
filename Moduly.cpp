@@ -25,10 +25,11 @@ int Moduly::Uruchom()
     
     sterowanie = std::make_unique<SterowanieMysza>();
 	sterowanie->PodlaczanieSygnalow(*pEkranGL);
+	sterowanie->PodlaczSygnalPrzeksztalcenieWidoku(*pEkranGL);
     /*Wykonać  tablicę wskaźników do funkcji u uruchomic je w pętli
      * */
 	renderowanie = std::make_shared<Renderowanie>();
-    
     pEkranGL->EmitujSygnalRysuj().connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));
+
 }
 
