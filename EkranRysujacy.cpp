@@ -42,3 +42,18 @@ void EkranRysujacy::RysujScene()
     glLoadIdentity();
 	sRysuj.emit(true, 14);
 }
+void EkranRysujacy::Oswietlenie()
+{
+    glEnable(GL_LIGHTING);
+    
+    //kolormateriału (glColor uwzględniany)
+    glEnable(GL_COLOR_MATERIAL);
+    glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
+    //światło punktowe
+    float kolorZrodla[] = {0.8,0.8,0.8,1.0};
+    float pozycjaZrodla[] = {0.0,1.0,5.0,0.0};
+    glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodla); 
+    glLightfv(GL_LIGHT1,GL_DIFFUSE,kolorZrodla);
+    
+    glEnable(GL_LIGHT1);
+}

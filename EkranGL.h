@@ -28,6 +28,7 @@ protected:
     virtual void on_realize();
     virtual void UstawienieSceny();
     virtual void RysujScene();
+    virtual void Oswietlenie();
     
     SygnalRysuj sRysuj;
 private:

@@ -9,6 +9,7 @@ public:
 private:
 	virtual void UstawienieSceny();
 	virtual void RysujScene();
+    virtual void Oswietlenie();
 };
 
 #endif // EKRANRYSUJACY_H

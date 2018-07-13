@@ -30,12 +30,5 @@ int Moduly::Uruchom()
 	renderowanie = std::make_shared<Renderowanie>();
     
     pEkranGL->EmitujSygnalRysuj().connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));
-//	oknoGL->signal_delete_event().connect(sigc::mem_fun(*this,&Moduly::on_my_delete_event));
 }
-bool Moduly::on_my_delete_event(GdkEventAny* any_event)
-{
-//	delete oknoGL;
-	oknoGL = nullptr;//w tym momencie znika przycisk który należy do tego okna a jest widoczny oknie oknoGlowne
-	Komunikat("Moduly::on_my_delete_event");
-	return true;
-}
+

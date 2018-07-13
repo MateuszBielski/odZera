@@ -17,6 +17,13 @@ public:
 private:
     bool on_button_press_event(GdkEventButton* event);
     bool on_motion_notify_event(GdkEventMotion* event);
+    float m_QuatDiff[4];
+    float m_BeginX;
+    float m_BeginY;
+    float m_Pos[3];
+    float m_Quat[4];
+    float m_DX;
+    float m_DY;
 
 };
 

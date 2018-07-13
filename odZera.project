@@ -51,6 +51,8 @@
     <File Name="SterowanieMysza.cpp"/>
     <File Name="SterowanieMysza.h"/>
     <File Name="Sterowanie.h"/>
+    <File Name="trackball.cpp"/>
+    <File Name="trackball.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Renderowanie">
     <File Name="Renderowanie.h"/>

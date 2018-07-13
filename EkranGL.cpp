@@ -41,7 +41,7 @@ bool EkranGL::on_configure_event(GdkEventConfigure* event)
     return false;
 	UstawienieSceny();
 	invalidate();
-	//Oswietlenie();
+	Oswietlenie();
 	//RysujScene();
 	if (gldrawable->is_double_buffered())
       gldrawable->swap_buffers();
