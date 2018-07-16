@@ -31,7 +31,6 @@
       <File Name="EkranGL.cpp"/>
       <File Name="EkranRysujacy.cpp"/>
     </VirtualDirectory>
-    <File Name="Moduly.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="headers">
     <File Name="Komunikat.h"/>
@@ -44,7 +43,6 @@
       <File Name="OknoGL.h"/>
       <File Name="OknoProba2.h"/>
     </VirtualDirectory>
-    <File Name="Moduly.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Sterowanie">
     <File Name="Sterowanie.cpp"/>
@@ -70,14 +68,13 @@
       </Linker>
       <ResourceCompiler Options=""/>
     </GlobalSettings>
-    <Configuration Name="Debug" CompilerType="MinGW ( gcc.exe (Rev2, Built by MSYS2 project) 6.2.0 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+    <Configuration Name="Debug" CompilerType="G++5" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
       <Compiler Options="$(shell pkg-config --cflags gtkglextmm-1.2);-std=c++14;-g;-O0;" C_Options="-g;-O0;-Wall" Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="."/>
       </Compiler>
       <Linker Options="-s;;$(shell pkg-config --libs gtkglextmm-1.2);-lpthread" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
-      <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -117,7 +114,6 @@
       <Linker Options="" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
-      <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -150,4 +146,10 @@
       </Completion>
     </Configuration>
   </Settings>
+  <VirtualDirectory Name="Moduly">
+    <File Name="Moduly.cpp"/>
+    <File Name="Moduly.h"/>
+    <File Name="Modul.h"/>
+    <File Name="Modul.cpp"/>
+  </VirtualDirectory>
 </CodeLite_Project>

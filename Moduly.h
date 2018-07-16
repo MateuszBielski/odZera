@@ -4,6 +4,10 @@
 #include <OknoGL.h>
 #include <SterowanieMysza.h>
 #include <Renderowanie.h>
+#include <Modul.h>
+using spModul = std::shared_ptr<Modul>;
+using MapaStringModul = std::map<std::string,spModul>;
+using MapaStringRefModul = std::map<std::string,Modul>;
 class Moduly
 {
 public:
@@ -11,7 +15,8 @@ public:
     ~Moduly();
     bool DolaczDo(spOkno1);
     int Uruchom();
-    
+    bool DodajModul(spModul );
+    bool DodajRefModul(Modul&& );
 private:
     spOkno1 oknoGlowne;
     
@@ -22,6 +27,9 @@ private:
     std::unique_ptr<Sterowanie> sterowanie;
 	std::shared_ptr<Renderowanie> renderowanie;
     std::shared_ptr<EkranGL> pEkranGL;
+    
+    MapaStringModul modulyMoje;
+    MapaStringRefModul modulyRefMoje;
     
 };
 #endif

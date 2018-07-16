@@ -32,4 +32,12 @@ int Moduly::Uruchom()
     pEkranGL->EmitujSygnalRysuj().connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));
 
 }
-
+bool Moduly::DodajModul(spModul m)
+{
+	modulyMoje[m->Nazwa()] = m;
+    m->JestemDodanyDo(this);
+}
+bool Moduly::DodajRefModul(Modul&& m){
+    modulyRefMoje.emplace(m->Nazwa(),m);
+    m->JestemDodanyDo(this);
+}
