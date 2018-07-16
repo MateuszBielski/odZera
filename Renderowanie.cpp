@@ -9,7 +9,6 @@ Renderowanie::~Renderowanie()
 }
 void Renderowanie::Renderuj( bool b, int i)
 {
-//	Komunikat("Renderowanie::Renderuj()");
-//    g_print(", %d, %d",i,b);
+	Komunikat("Renderowanie::Renderuj()");
 	ostroslup.RysujOstroslup();
 }
