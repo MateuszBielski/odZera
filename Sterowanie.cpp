@@ -2,6 +2,7 @@
 
 Sterowanie::Sterowanie()
 {
+	nazwa = "sterowanie";
 }
 
 Sterowanie::~Sterowanie()

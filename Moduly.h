@@ -15,6 +15,7 @@ public:
     ~Moduly();
     bool DolaczDo(spOkno1);
     int Uruchom();
+	int WszystkieDodaj();
     bool DodajModul(spModul );
     bool DodajRefModul(Modul&& );
 private:

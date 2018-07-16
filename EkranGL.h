@@ -5,12 +5,13 @@
 #include <iostream>
 #include <Komunikat.h>
 #include <sigc++/sigc++.h>
+#include <Modul.h>
 
 using namespace Gtk;
 
 using ptrConf = Glib::RefPtr<Gdk::GL::Config>;
 using SygnalRysuj = sigc::signal<void, bool, int>;
-class EkranGL : public GL::DrawingArea
+class EkranGL : public GL::DrawingArea, public Modul
 {
   public:
     EkranGL();

@@ -1,13 +1,14 @@
 #ifndef OKNOGL_H
 #define OKNOGL_H
 #include <EkranRysujacy.h>
+#include <Modul.h>
 
 
 
 using namespace Gtk;
 
 
-class OknoGL :  public Window
+class OknoGL :  public Window, public Modul
 {
 public: 
    OknoGL();

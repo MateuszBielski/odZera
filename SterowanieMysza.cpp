@@ -5,7 +5,8 @@
 
 SterowanieMysza::SterowanieMysza()
 {
-	 m_Pos[0] = 0.0;
+	Komunikat("SterowanieMysza");
+	m_Pos[0] = 0.0;
     m_Pos[1] = 0.0;
     m_Pos[2] = -10.0;
 
@@ -22,6 +23,7 @@ SterowanieMysza::SterowanieMysza()
 
 SterowanieMysza::~SterowanieMysza()
 {
+	Komunikat("~SterowanieMysza");
 }
 
 int SterowanieMysza::PodlaczanieSygnalow(Gtk::Widget& okno)

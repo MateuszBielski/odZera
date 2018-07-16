@@ -5,14 +5,18 @@ class Moduly;
 class Modul
 {
 public:
+	using MapaStrModul = std::map<std::string,Modul>;
+	
     Modul();
     ~Modul();
     std::string Nazwa(){return nazwa;};
-    void JestemDodanyDo(Modul * m){tuJestemDodany = m;};
-    
+    void JestemDodanyDo(Moduly * m){tuJestemDodanyModuly = m;};
+    void JestemDodanyDo(MapaStrModul* );
 protected:
     std::string nazwa;
-    Moduly* tuJestemDodany;
+    Moduly* tuJestemDodanyModuly;
+	
+	MapaStrModul* mapaZmodulami;
     
 };
 #endif

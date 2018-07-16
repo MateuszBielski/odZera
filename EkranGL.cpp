@@ -2,6 +2,7 @@
 
 EkranGL::EkranGL()
 {
+	nazwa = "ekranGL";
 }
 
 EkranGL::~EkranGL()

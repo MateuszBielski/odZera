@@ -2,6 +2,7 @@
 
 Renderowanie::Renderowanie()
 {
+	nazwa = "renderowanie";
 }
 
 Renderowanie::~Renderowanie()

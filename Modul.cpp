@@ -7,3 +7,7 @@ Modul::~Modul()
 {
 	Komunikat("Moduł destruktor");
 }
+void Modul::JestemDodanyDo(MapaStrModul* mapa)
+{
+	mapaZmodulami = mapa;
+}

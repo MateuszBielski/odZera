@@ -2,9 +2,10 @@
 #define STEROWANIE_H
 #include <gtkmm/widget.h>
 #include <Komunikat.h>
-#include <OknoGL.h>
+#include <OknoGL.h> //potrzebne?
+#include <Modul.h>
 
-class Sterowanie
+class Sterowanie : public Modul
 {
 public:
 	Sterowanie();

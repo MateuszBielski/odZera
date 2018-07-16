@@ -36,8 +36,20 @@ bool Moduly::DodajModul(spModul m)
 {
 	modulyMoje[m->Nazwa()] = m;
     m->JestemDodanyDo(this);
+	return true;
 }
 bool Moduly::DodajRefModul(Modul&& m){
-    modulyRefMoje.emplace(m->Nazwa(),m);
-    m->JestemDodanyDo(this);
+    modulyRefMoje.emplace(m.Nazwa(),m);
+    m.JestemDodanyDo(&modulyRefMoje);
+	return true;
+}
+int Moduly::WszystkieDodaj()
+{
+	int ileModulowDodano = 0;
+	//może lista inicjalizacyjna ? --{OknoGL,EkranRysujacy...}
+	DodajRefModul(OknoGL());
+	DodajRefModul(EkranRysujacy());
+	DodajRefModul(SterowanieMysza());
+	DodajRefModul(Renderowanie());
+	return ileModulowDodano;//do uzupełnienia
 }
