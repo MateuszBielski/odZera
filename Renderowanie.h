@@ -12,7 +12,7 @@ public:
 	Renderowanie();
 	~Renderowanie();
 	void Renderuj( bool b, int i);
-    virtual int PolaczZkimPorzebujeNaPoczatek();
+    virtual int PolaczZkimPorzebujeNaPoczatek(){};// do zrobienia
 private:
 	Model ostroslup;
 	

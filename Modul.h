@@ -12,13 +12,13 @@ public:
     std::string Nazwa(){return nazwa;};
 //    void JestemDodanyDo(Moduly * m){tuJestemDodanyModuly = m;};
     void JestemDodanyDo(MapaStrModul* );
-    virtual int PolaczZkimPorzebujeNaPoczatek();
+    virtual int PolaczZkimPorzebujeNaPoczatek(){};
 protected:
     std::string nazwa;
 //    Moduly* tuJestemDodanyModuly;
 	
 	MapaStrModul* mapaZmodulami;
-    Modul& WyszukajWDodanychModulach(std::string);
+    Modul* WyszukajWDodanychModulach(std::string);
     
 };
 #endif

@@ -11,7 +11,8 @@ void Modul::JestemDodanyDo(MapaStrModul* mapa)
 {
 	mapaZmodulami = mapa;
 }
-Modul& Modul::WyszukajWDodanychModulach(std::string rodzajModulu)
+Modul* Modul::WyszukajWDodanychModulach(std::string rodzajModulu)
 {
-	return (*mapaZmodulami)[rodzajModulu];
+	auto modul = (*mapaZmodulami)[rodzajModulu];
+    return &modul;
 }
