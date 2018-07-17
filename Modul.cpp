@@ -1,11 +1,11 @@
 #include <Modul.h>
 Modul::Modul()
 {
-	Komunikat("Modul konstruktor");
+//	Komunikat("Modul konstruktor");
 }
 Modul::~Modul()
 {
-	Komunikat("Moduł destruktor");
+//	Komunikat("Moduł destruktor");
 }
 void Modul::JestemDodanyDo(MapaStrModul* mapa)
 {

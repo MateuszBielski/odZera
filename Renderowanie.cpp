@@ -3,10 +3,12 @@
 Renderowanie::Renderowanie()
 {
 	nazwa = "renderowanie";
+    Komunikat("Renderowanie");
 }
 
 Renderowanie::~Renderowanie()
 {
+    Komunikat("~Renderowanie");
 }
 void Renderowanie::Renderuj( bool b, int i)
 {

@@ -15,8 +15,9 @@ int main(int argc, char **argv)
     
     auto moduly = std::make_unique<Moduly>();
     moduly->DolaczDo(okno);
-    moduly->Uruchom();
+//    moduly->Uruchom();
     moduly->WszystkieDodaj();
+    moduly->WszystkieWyswietlNazwyMap();
     app.run(*okno);
     
     return 0;

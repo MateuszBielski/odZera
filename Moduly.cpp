@@ -39,8 +39,15 @@ bool Moduly::DodajModul(spModul m)
 	return true;
 }
 bool Moduly::DodajRefModul(Modul&& m){
-    modulyRefMoje.emplace(m.Nazwa(),m);
+//    Komunikat("początek Moduly::DodajRefModul");
     m.JestemDodanyDo(&modulyRefMoje);
+    modulyRefMoje.emplace(m.Nazwa(),std::move(m));
+//    modulyRefMoje.emplace(std::make_pair(m.Nazwa(),m));
+//    modulyRefMoje[m.Nazwa()] = m;
+//    modulyRefMoje.insert({m.Nazwa(),std::move(m)});
+//    modulyRefMojeVec.push_back(std::move(m));
+//    modulyRefMojeVec.emplace_back(m);
+//    Komunikat("koniec Moduly::DodajRefModul");
 	return true;
 }
 int Moduly::WszystkieDodaj()
@@ -51,5 +58,25 @@ int Moduly::WszystkieDodaj()
 	DodajRefModul(EkranRysujacy());
 	DodajRefModul(SterowanieMysza());
 	DodajRefModul(Renderowanie());
+    Komunikat("koniec WszystkieDodaj");
 	return ileModulowDodano;//do uzupełnienia
+}
+int Moduly::WszystkieWyswietlNazwy()
+{
+    int ile = modulyRefMojeVec.size();
+	g_print("\nrozmiar modulyRefMojeVec %d",ile);
+    std::string nazwa;
+    for(int i = 0; i < ile ; i++){
+        nazwa = modulyRefMojeVec.at(i).Nazwa();
+        g_print("\n%s",nazwa.c_str());
+    }
+}
+int Moduly::WszystkieWyswietlNazwyMap()
+{
+    int ile = modulyRefMoje.size();
+	g_print("\nrozmiar modulyRefMoje %d",ile);
+//    std::string nazwa;
+    for (auto& kv : modulyRefMoje) {
+        std::cout << kv.first << " has value " << kv.second.Nazwa() <<  std::endl;
+    }
 }

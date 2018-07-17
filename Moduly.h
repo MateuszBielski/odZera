@@ -8,6 +8,7 @@
 using spModul = std::shared_ptr<Modul>;
 using MapaStringModul = std::map<std::string,spModul>;
 using MapaStringRefModul = std::map<std::string,Modul>;
+using VecRefModul = std::vector<Modul>;
 class Moduly
 {
 public:
@@ -16,6 +17,8 @@ public:
     bool DolaczDo(spOkno1);
     int Uruchom();
 	int WszystkieDodaj();
+    int WszystkieWyswietlNazwy();
+    int WszystkieWyswietlNazwyMap();
     bool DodajModul(spModul );
     bool DodajRefModul(Modul&& );
 private:
@@ -31,6 +34,7 @@ private:
     
     MapaStringModul modulyMoje;
     MapaStringRefModul modulyRefMoje;
+    VecRefModul        modulyRefMojeVec;
     
 };
 #endif
