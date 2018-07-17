@@ -16,10 +16,11 @@ public:
     ~Moduly();
     bool DolaczDo(spOkno1);
     int Uruchom();
-	int WszystkieDodaj();
+    int WszystkieDodaj();
+    int WszystkiePolaczJakPotrzebuja();
     int WszystkieWyswietlNazwy();
     int WszystkieWyswietlNazwyMap();
-    bool DodajModul(spModul );
+//    bool DodajModul(spModul );
     bool DodajRefModul(Modul&& );
 private:
     spOkno1 oknoGlowne;

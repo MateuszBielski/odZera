@@ -17,7 +17,7 @@ int main(int argc, char **argv)
     moduly->DolaczDo(okno);
 //    moduly->Uruchom();
     moduly->WszystkieDodaj();
-    moduly->WszystkieWyswietlNazwyMap();
+    moduly->WszystkiePolaczJakPotrzebuja();
     app.run(*okno);
     
     return 0;

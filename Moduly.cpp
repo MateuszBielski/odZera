@@ -32,12 +32,12 @@ int Moduly::Uruchom()
     pEkranGL->EmitujSygnalRysuj().connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));
 
 }
-bool Moduly::DodajModul(spModul m)
+/*bool Moduly::DodajModul(spModul m)
 {
 	modulyMoje[m->Nazwa()] = m;
     m->JestemDodanyDo(this);
 	return true;
-}
+}*/
 bool Moduly::DodajRefModul(Modul&& m){
 //    Komunikat("początek Moduly::DodajRefModul");
     m.JestemDodanyDo(&modulyRefMoje);
@@ -79,4 +79,16 @@ int Moduly::WszystkieWyswietlNazwyMap()
     for (auto& kv : modulyRefMoje) {
         std::cout << kv.first << " has value " << kv.second.Nazwa() <<  std::endl;
     }
+}
+int Moduly::WszystkiePolaczJakPotrzebuja()
+{
+	int ilePolaczen = 0;
+// modulyRefMoje.size();
+
+    //należy wykonać polecenie: 
+//    oknoGL->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
+    for(auto& m : modulyRefMoje){
+        ilePolaczen += m.second.PolaczZkimPorzebujeNaPoczatek();
+    }
+    return ilePolaczen;
 }

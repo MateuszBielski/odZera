@@ -10,13 +10,15 @@ public:
     Modul();
     ~Modul();
     std::string Nazwa(){return nazwa;};
-    void JestemDodanyDo(Moduly * m){tuJestemDodanyModuly = m;};
+//    void JestemDodanyDo(Moduly * m){tuJestemDodanyModuly = m;};
     void JestemDodanyDo(MapaStrModul* );
+    virtual int PolaczZkimPorzebujeNaPoczatek();
 protected:
     std::string nazwa;
-    Moduly* tuJestemDodanyModuly;
+//    Moduly* tuJestemDodanyModuly;
 	
 	MapaStrModul* mapaZmodulami;
+    Modul& WyszukajWDodanychModulach(std::string);
     
 };
 #endif
