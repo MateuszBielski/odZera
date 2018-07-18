@@ -36,6 +36,7 @@ bool Moduly::DodajModul(spModul m)
 {
 	modulyMoje[m->Nazwa()] = m;
     m->JestemDodanyDo(this);
+//    g_print("dodano %s",m->Nazwa().c_str());
 	return true;
 }
 bool Moduly::DodajRefModul(Modul&& m){
@@ -47,9 +48,16 @@ int Moduly::WszystkieDodaj()
 {
 	int ileModulowDodano = 0;
 	//może lista inicjalizacyjna ? --{OknoGL,EkranRysujacy...}
-	DodajRefModul(OknoGL());
-	DodajRefModul(EkranRysujacy());
-	DodajRefModul(SterowanieMysza());
-	DodajRefModul(Renderowanie());
+//	DodajRefModul(OknoGL());
+//	DodajRefModul(EkranRysujacy());
+//	DodajRefModul(SterowanieMysza());
+//	DodajRefModul(Renderowanie());
+    typename obiekt[] = ({OknoGL,EkranRysujacy});
+    DodajModul(UtworzModulTypu<OknoGL>());
 	return ileModulowDodano;//do uzupełnienia
+}
+template <typename T>
+spModul Moduly::UtworzModulTypu()
+{
+	return std::make_shared<T>();
 }

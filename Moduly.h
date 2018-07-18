@@ -7,7 +7,7 @@
 #include <Modul.h>
 using spModul = std::shared_ptr<Modul>;
 using MapaStringModul = std::map<std::string,spModul>;
-using MapaStringRefModul = std::map<std::string,Modul>;
+using MapaStringRefModul = std::map<std::string,Modul>;//--
 class Moduly
 {
 public:
@@ -17,7 +17,9 @@ public:
     int Uruchom();
 	int WszystkieDodaj();
     bool DodajModul(spModul );
-    bool DodajRefModul(Modul&& );
+    bool DodajRefModul(Modul&& );//--
+    template<typename T>
+    spModul UtworzModulTypu();
 private:
     spOkno1 oknoGlowne;
     
@@ -29,8 +31,9 @@ private:
 	std::shared_ptr<Renderowanie> renderowanie;
     std::shared_ptr<EkranGL> pEkranGL;
     
+    
     MapaStringModul modulyMoje;
-    MapaStringRefModul modulyRefMoje;
+    MapaStringRefModul modulyRefMoje;//--
     
 };
 #endif
