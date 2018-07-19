@@ -15,7 +15,8 @@ int main(int argc, char **argv)
     
     auto moduly = std::make_unique<Moduly>();
     moduly->DolaczDo(okno);
-    moduly->Uruchom();
+    moduly->WszystkieDodaj();
+    moduly->WszystkiePolaczJakPotrzebuja();
     app.run(*okno);
     
     return 0;

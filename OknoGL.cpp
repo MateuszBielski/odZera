@@ -4,12 +4,14 @@
 
 OknoGL::OknoGL()
 {
-    set_reallocate_redraws(true);
+    Komunikat("OknoGL");
+	set_reallocate_redraws(true);//czy potrzebne?
+	nazwa = "oknoGL";
 }
 
 OknoGL::~OknoGL()
 {
-    Komunikat("destruktor OknoGL");
+    Komunikat("~OknoGL");
 }
 
 void OknoGL::Inicjuj()

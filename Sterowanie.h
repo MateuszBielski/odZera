@@ -2,14 +2,16 @@
 #define STEROWANIE_H
 #include <gtkmm/widget.h>
 #include <Komunikat.h>
-#include <OknoGL.h>
+#include <Modul.h>
+#include <EkranGL.h> 
 
-class Sterowanie
+class Sterowanie : public Modul
 {
 public:
 	Sterowanie();
 	~Sterowanie();
 	virtual int PodlaczanieSygnalow(Gtk::Widget& okno) = 0;
+    virtual int PolaczZkimPorzebujeNaPoczatek();
 	virtual void PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& ) = 0;
 	virtual void PrzeksztalcenieWidoku( bool b, int i) = 0;
 protected:

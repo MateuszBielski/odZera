@@ -5,20 +5,24 @@
 #include <iostream>
 #include <Komunikat.h>
 #include <sigc++/sigc++.h>
+#include <Modul.h>
+#include <OknoGL.h>
+#include <Renderowanie.h>
 
 using namespace Gtk;
 
 using ptrConf = Glib::RefPtr<Gdk::GL::Config>;
 using SygnalRysuj = sigc::signal<void, bool, int>;
-class EkranGL : public GL::DrawingArea
+class EkranGL : public GL::DrawingArea, public Modul
 {
   public:
     EkranGL();
     virtual ~EkranGL();
     void Inicjuj();
     void ZainstalujSieW(VBox&);
-//    void invalidate(){get_window()->invalidate_rect(get_allocation(), false);}
-//    void update(){ get_window()->process_updates(false); }
+    void invalidate(){get_window()->invalidate_rect(get_allocation(), false);}
+    void update(){ get_window()->process_updates(false); }
+    virtual int PolaczZkimPorzebujeNaPoczatek();
     
     SygnalRysuj EmitujSygnalRysuj();
 	SygnalRysuj EmitujSygnalTransformacja();

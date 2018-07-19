@@ -14,22 +14,45 @@ bool Moduly::DolaczDo(spOkno1 okno)
     oknoGlowne = okno;
     return true;
 }
-int Moduly::Uruchom()
-{
-    oknoGL = std::make_unique<OknoGL>();
-    oknoGL->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
-    
-    pEkranGL = std::make_shared<EkranRysujacy>();
-    pEkranGL->Inicjuj();
-    pEkranGL->ZainstalujSieW(oknoGL->refVBox());
-    
-    sterowanie = std::make_unique<SterowanieMysza>();
-	sterowanie->PodlaczanieSygnalow(*pEkranGL);
-	sterowanie->PodlaczSygnalPrzeksztalcenieWidoku(*pEkranGL);
-    /*Wykonać  tablicę wskaźników do funkcji u uruchomic je w pętli
-     * */
-	renderowanie = std::make_shared<Renderowanie>();
-    pEkranGL->EmitujSygnalRysuj().connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));
 
+bool Moduly::DodajModul(spModul m)
+{
+	modulyMoje[m->Nazwa()] = m;
+    m->JestemDodanyDo(&modulyMoje);
+	return true;
 }
 
+int Moduly::WszystkieDodaj()
+{
+	int ileModulowDodano = 0;
+	//może lista inicjalizacyjna ? --{OknoGL,EkranRysujacy...}
+    DodajModul(UtworzModulTypu<OknoGL>());
+    DodajModul(UtworzModulTypu<EkranRysujacy>());
+    DodajModul(UtworzModulTypu<SterowanieMysza>());
+    DodajModul(UtworzModulTypu<Renderowanie>());
+	return ileModulowDodano;//do uzupełnienia
+}
+int Moduly::WszystkiePolaczJakPotrzebuja()
+{
+	int ilePolaczen = 0;
+
+    auto oknoGL = std::dynamic_pointer_cast<OknoGL>(modulyMoje["oknoGL"]);
+    oknoGL->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
+    for(auto& m : modulyMoje){
+        ilePolaczen += m.second->PolaczZkimPorzebujeNaPoczatek();
+    }
+    return ilePolaczen;
+}
+template <typename T>
+spModul Moduly::UtworzModulTypu()
+{
+	return std::make_shared<T>();
+}
+int Moduly::WszystkieNazwyWyswietl()
+{
+    int ile = modulyMoje.size();
+	g_print("\nrozmiar modulyRefMoje %d",ile);
+    for (auto& kv : modulyMoje) {
+        std::cout << kv.first << " has value " << kv.second->Nazwa() <<  std::endl;
+    }
+}

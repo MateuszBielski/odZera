@@ -2,11 +2,12 @@
 
 EkranRysujacy::EkranRysujacy()
 {
-	Komunikat("konstruktor EkranRysujacy");
+	Komunikat("EkranRysujacy");
 }
 
 EkranRysujacy::~EkranRysujacy()
 {
+	Komunikat("~EkranRysujacy");
 }
 void EkranRysujacy::UstawienieSceny()
 {

@@ -4,13 +4,15 @@
 #include <EkranGL.h>
 #include <Model.h>
 #include <sigc++/sigc++.h>
+#include <Modul.h>
 
-class Renderowanie : public sigc::trackable
+class Renderowanie : public Modul, public sigc::trackable  
 {
 public:
 	Renderowanie();
 	~Renderowanie();
 	void Renderuj( bool b, int i);
+    virtual int PolaczZkimPorzebujeNaPoczatek();
 private:
 	Model ostroslup;
 	
