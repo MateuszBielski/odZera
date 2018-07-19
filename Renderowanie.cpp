@@ -16,3 +16,7 @@ void Renderowanie::Renderuj( bool b, int i)
 //    g_print(", %d, %d",i,b);
 	ostroslup.RysujOstroslup();
 }
+int Renderowanie::PolaczZkimPorzebujeNaPoczatek()
+{
+    return 0;
+}

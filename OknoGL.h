@@ -1,7 +1,8 @@
 #ifndef OKNOGL_H
 #define OKNOGL_H
-#include <EkranRysujacy.h>
+//#include <EkranRysujacy.h>
 #include <Modul.h>
+
 
 
 

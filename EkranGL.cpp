@@ -82,7 +82,7 @@ void EkranGL::RysujScene()
 	Komunikat("EkranGL::RysujScene");
 	
 }
-SygnalRysuj EkranGL::EmitujSygnalRysuj() //EkranGL::
+SygnalRysuj EkranGL::EmitujSygnalRysuj() 
 {
 	return sRysuj;
 }
@@ -99,4 +99,13 @@ void EkranGL::Oswietlenie()
 {
 	Komunikat("EkranGL::Oswietlenie");
 }
-
+int EkranGL::PolaczZkimPorzebujeNaPoczatek()
+{
+	auto oknoGL =std::dynamic_pointer_cast<OknoGL>(WyszukajWDodanychModulach("oknoGL"));
+    Inicjuj();
+    ZainstalujSieW(oknoGL->refVBox());
+    
+    auto renderowanie =std::dynamic_pointer_cast<Renderowanie>(WyszukajWDodanychModulach("renderowanie"));
+    EmitujSygnalRysuj().connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));
+    return 2;
+}
