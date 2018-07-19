@@ -20,8 +20,8 @@ void Sterowanie::UstawOkno(Gtk::Widget* o)
 }
 int Sterowanie::PolaczZkimPorzebujeNaPoczatek()
 {
-//    EkranGL* rEkranGL = dynamic_cast<EkranGL*>(WyszukajWDodanychModulach("ekranGL"));
-//    this->PodlaczanieSygnalow(*rEkranGL);
-//	this->PodlaczSygnalPrzeksztalcenieWidoku(*rEkranGL);
+    auto pEkran =std::dynamic_pointer_cast<EkranGL>(WyszukajWDodanychModulach("ekranGL"));
+    PodlaczanieSygnalow(*pEkran);
+	PodlaczSygnalPrzeksztalcenieWidoku(*pEkran);
     return 2;
 }

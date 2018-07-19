@@ -32,14 +32,14 @@ int Moduly::Uruchom()
     pEkranGL->EmitujSygnalRysuj().connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));
 
 }
-/*bool Moduly::DodajModul(spModul m)
+bool Moduly::DodajModul(spModul m)
 {
 	modulyMoje[m->Nazwa()] = m;
-    m->JestemDodanyDo(this);
+    m->JestemDodanyDo(&modulyMoje);
 //    g_print("dodano %s",m->Nazwa().c_str());
 	return true;
-}*/
-bool Moduly::DodajRefModul(Modul&& m){
+}
+/*bool Moduly::DodajRefModul(Modul&& m){
 //    Komunikat("początek Moduly::DodajRefModul");
     m.JestemDodanyDo(&modulyRefMoje);
     modulyRefMoje.emplace(m.Nazwa(),std::move(m));
@@ -50,29 +50,21 @@ bool Moduly::DodajRefModul(Modul&& m){
 //    modulyRefMojeVec.emplace_back(m);
 //    Komunikat("koniec Moduly::DodajRefModul");
 	return true;
-}
+}*/
 int Moduly::WszystkieDodaj()
 {
 	int ileModulowDodano = 0;
 	//może lista inicjalizacyjna ? --{OknoGL,EkranRysujacy...}
-<<<<<<< HEAD
-	DodajRefModul(OknoGL());
-	DodajRefModul(EkranRysujacy());
-	DodajRefModul(SterowanieMysza());
-	DodajRefModul(Renderowanie());
-    Komunikat("koniec WszystkieDodaj");
+//	DodajRefModul(OknoGL());
+//	DodajRefModul(EkranRysujacy());
+//	DodajRefModul(SterowanieMysza());
+//	DodajRefModul(Renderowanie());
+//  typename obiekt[] = ({OknoGL,EkranRysujacy});
+    DodajModul(UtworzModulTypu<OknoGL>());
+    DodajModul(UtworzModulTypu<EkranRysujacy>());
 	return ileModulowDodano;//do uzupełnienia
 }
-int Moduly::WszystkieWyswietlNazwy()
-{
-    int ile = modulyRefMojeVec.size();
-	g_print("\nrozmiar modulyRefMojeVec %d",ile);
-    std::string nazwa;
-    for(int i = 0; i < ile ; i++){
-        nazwa = modulyRefMojeVec.at(i).Nazwa();
-        g_print("\n%s",nazwa.c_str());
-    }
-}
+
 int Moduly::WszystkieWyswietlNazwyMap()
 {
     int ile = modulyRefMoje.size();
@@ -93,18 +85,9 @@ int Moduly::WszystkiePolaczJakPotrzebuja()
         ilePolaczen += m.second.PolaczZkimPorzebujeNaPoczatek();
     }
     return ilePolaczen;
-=======
-//	DodajRefModul(OknoGL());
-//	DodajRefModul(EkranRysujacy());
-//	DodajRefModul(SterowanieMysza());
-//	DodajRefModul(Renderowanie());
-    typename obiekt[] = ({OknoGL,EkranRysujacy});
-    DodajModul(UtworzModulTypu<OknoGL>());
-	return ileModulowDodano;//do uzupełnienia
 }
 template <typename T>
 spModul Moduly::UtworzModulTypu()
 {
 	return std::make_shared<T>();
->>>>>>> wskazModWmapie
 }
