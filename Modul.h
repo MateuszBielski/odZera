@@ -17,8 +17,9 @@ protected:
 	
 	MapaStringModul* mapaZmodulami;
     spModul WyszukajWDodanychModulach(std::string);
-    /*template<typename T>
-    T& WyszkajWmodulachIzwrocWlasciwyTyp(std::string rodzajModulu);//--nie działa chociaż się kompiluje*/
+    template<typename T>
+    auto& WyszkajWmodulachIzwrocWlasciwyTyp(std::string rodzajModulu);//--nie działa chociaż się kompiluje
     
 };
+
 #endif

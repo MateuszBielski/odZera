@@ -15,10 +15,8 @@ Modul::spModul Modul::WyszukajWDodanychModulach(std::string rodzajModulu)
 {
     return (*mapaZmodulami)[rodzajModulu];
 }
-/*template<typename T>
-T& Modul::WyszkajWmodulachIzwrocWlasciwyTyp(std::string rodzajModulu)
+template<typename T>
+auto& Modul::WyszkajWmodulachIzwrocWlasciwyTyp(std::string rodzajModulu)
 {
-    auto wskTyp = std::dynamic_pointer_cast<T>(WyszukajWDodanychModulach(rodzajModulu));
-    return *wskTyp;
-}*/
-
+    return *(std::dynamic_pointer_cast<T>(WyszukajWDodanychModulach(rodzajModulu)));
+}

@@ -30,6 +30,7 @@ int Moduly::WszystkieDodaj()
     DodajModul(UtworzModulTypu<EkranRysujacy>());
     DodajModul(UtworzModulTypu<SterowanieMysza>());
     DodajModul(UtworzModulTypu<Renderowanie>());
+    auto znalezionyModul = WyszukajWModulach<Renderowanie>("renderowanie");
 	return ileModulowDodano;//do uzupełnienia
 }
 int Moduly::WszystkiePolaczJakPotrzebuja()
@@ -47,6 +48,13 @@ template <typename T>
 spModul Moduly::UtworzModulTypu()
 {
 	return std::make_shared<T>();
+}
+template<typename T>
+T& Moduly::WyszukajWModulach(std::string rodzajModulu)
+{
+//    std::shared_ptr<T> wsk = std::dynamic_pointer_cast<T>(modulyMoje[rodzajModulu]);
+
+    return *(std::dynamic_pointer_cast<T>(modulyMoje[rodzajModulu]));
 }
 int Moduly::WszystkieNazwyWyswietl()
 {
