@@ -101,7 +101,9 @@ void EkranGL::Oswietlenie()
 }
 int EkranGL::PolaczZkimPorzebujeNaPoczatek()
 {
-	auto oknoGL =std::dynamic_pointer_cast<OknoGL>(WyszukajWDodanychModulach("oknoGL"));
+	auto znalezionyModul = WyszukajWModulach_Ref<Renderowanie>("renderowanie",*mapaZmodulami);
+    
+    auto oknoGL =std::dynamic_pointer_cast<OknoGL>(WyszukajWDodanychModulach("oknoGL"));
     Inicjuj();
     ZainstalujSieW(oknoGL->refVBox());
     

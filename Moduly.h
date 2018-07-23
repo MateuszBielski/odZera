@@ -8,7 +8,7 @@
 #include <Renderowanie.h>
 using spModul = std::shared_ptr<Modul>;
 using MapaStringModul = std::map<std::string,spModul>;
-//using MapaStringRefModul = std::map<std::string,Modul>;//--
+
 class Moduly
 {
 public:
@@ -26,8 +26,5 @@ public:
 private:
     spOkno1 oknoGlowne;
     MapaStringModul modulyMoje;
-    
-    
-    
 };
 #endif

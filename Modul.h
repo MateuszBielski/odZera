@@ -4,7 +4,7 @@
 class Modul
 {
 public:
-	using spModul = std::shared_ptr<Modul>;
+    using spModul = std::shared_ptr<Modul>;
     using MapaStringModul = std::map<std::string,spModul>;
 	
     Modul();
@@ -22,4 +22,8 @@ protected:
     
 };
 
+template<typename T>
+std::shared_ptr<T> WyszukajWModulach_Ptr(std::string rodzajModulu, Modul::MapaStringModul& moduly);
+template<typename T>
+T& WyszukajWModulach_Ref(std::string, Modul::MapaStringModul& );
 #endif

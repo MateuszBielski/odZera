@@ -1,4 +1,14 @@
 #include <Modul.h>
+template<typename T>
+std::shared_ptr<T> WyszukajWModulach_Ptr(std::string rodzajModulu, Modul::MapaStringModul& moduly)
+{
+    return std::dynamic_pointer_cast<T>(moduly[rodzajModulu]);
+}
+template<typename T>
+T& WyszukajWModulach_Ref(std::string rodzajModulu, Modul::MapaStringModul& moduly)
+{
+    return *(WyszukajWModulach_Ptr<T>(rodzajModulu,moduly));
+}
 Modul::Modul()
 {
 //	Komunikat("Modul konstruktor");
