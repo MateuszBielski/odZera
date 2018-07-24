@@ -16,14 +16,16 @@ protected:
     std::string nazwa;
 	
 	MapaStringModul* mapaZmodulami;
-    spModul WyszukajWDodanychModulach(std::string);
     template<typename T>
-    auto& WyszkajWmodulachIzwrocWlasciwyTyp(std::string rodzajModulu);//--nie działa chociaż się kompiluje
+    std::shared_ptr<T> Ptr_WyszukajWModulach(std::string rodzajModulu)
+    {
+        return std::dynamic_pointer_cast<T>((*mapaZmodulami)[rodzajModulu]);
+    }
+    template<typename T>
+    T& Ref_WyszukajWModulach(std::string rodzajModulu)
+    {
+        return *(Ptr_WyszukajWModulach<T>(rodzajModulu));
+    }
     
 };
-
-template<typename T>
-std::shared_ptr<T> WyszukajWModulach_Ptr(std::string rodzajModulu, Modul::MapaStringModul& moduly);
-template<typename T>
-T& WyszukajWModulach_Ref(std::string, Modul::MapaStringModul& );
 #endif

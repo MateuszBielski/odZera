@@ -101,13 +101,9 @@ void EkranGL::Oswietlenie()
 }
 int EkranGL::PolaczZkimPorzebujeNaPoczatek()
 {
-	auto znalezionyModul = WyszukajWModulach_Ref<Renderowanie>("renderowanie",*mapaZmodulami);
-    
-    auto oknoGL =std::dynamic_pointer_cast<OknoGL>(WyszukajWDodanychModulach("oknoGL"));
     Inicjuj();
-    ZainstalujSieW(oknoGL->refVBox());
+    ZainstalujSieW(Ref_WyszukajWModulach<OknoGL>("oknoGL").refVBox());
     
-    auto renderowanie =std::dynamic_pointer_cast<Renderowanie>(WyszukajWDodanychModulach("renderowanie"));
-    EmitujSygnalRysuj().connect(sigc::mem_fun(*renderowanie,&Renderowanie::Renderuj));
+    EmitujSygnalRysuj().connect(sigc::mem_fun(Ref_WyszukajWModulach<Renderowanie>("renderowanie"),&Renderowanie::Renderuj));
     return 2;
 }

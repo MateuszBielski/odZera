@@ -21,10 +21,9 @@ public:
     bool DodajModul(spModul );
     template<typename T>
     spModul UtworzModulTypu();
-    template<typename T>
-    T& WyszukajWModulach(std::string); //-- tylko na próbę  std::string rodzajModulu
 private:
     spOkno1 oknoGlowne;
     MapaStringModul modulyMoje;
 };
+
 #endif

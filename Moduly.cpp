@@ -30,8 +30,7 @@ int Moduly::WszystkieDodaj()
     DodajModul(UtworzModulTypu<EkranRysujacy>());
     DodajModul(UtworzModulTypu<SterowanieMysza>());
     DodajModul(UtworzModulTypu<Renderowanie>());
-    auto znalezionyModul = WyszukajWModulach_Ref<Renderowanie>("renderowanie",modulyMoje);
-	return ileModulowDodano;//do uzupełnienia
+    return ileModulowDodano;//do uzupełnienia
 }
 int Moduly::WszystkiePolaczJakPotrzebuja()
 {
@@ -49,11 +48,6 @@ spModul Moduly::UtworzModulTypu()
 {
 	return std::make_shared<T>();
 }
-template<typename T>
-T& Moduly::WyszukajWModulach(std::string rodzajModulu)
-{
-    return *(std::dynamic_pointer_cast<T>(modulyMoje[rodzajModulu]));
-}
 int Moduly::WszystkieNazwyWyswietl()
 {
     int ile = modulyMoje.size();
@@ -62,3 +56,4 @@ int Moduly::WszystkieNazwyWyswietl()
         std::cout << kv.first << " has value " << kv.second->Nazwa() <<  std::endl;
     }
 }
+
