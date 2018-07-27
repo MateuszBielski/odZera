@@ -51,6 +51,10 @@
     <File Name="Sterowanie.h"/>
     <File Name="trackball.cpp"/>
     <File Name="trackball.h"/>
+    <File Name="PrzekierowanieSygnalow.h"/>
+    <File Name="PrzekierowanieSygnalow.cpp"/>
+    <File Name="PrzesuwanieWidoku.h"/>
+    <File Name="PrzesuwanieWidoku.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Renderowanie">
     <File Name="Renderowanie.h"/>

@@ -20,8 +20,11 @@ void Sterowanie::UstawOkno(Gtk::Widget* o)
 }
 int Sterowanie::PolaczZkimPorzebujeNaPoczatek()
 {
-    auto& ekran = Ref_WyszukajWModulach<EkranGL>("ekranGL");
-    PodlaczanieSygnalow(ekran);
+    std::string nazwaModulu = ("ekranGL");
+	DodajCoUzywam((*mapaZmodulami)[nazwaModulu]);
+	
+	auto& ekran = Ref_WyszukajWModulach<EkranGL>(nazwaModulu);
+	PodlaczanieSygnalow(ekran);
 	PodlaczSygnalPrzeksztalcenieWidoku(ekran);
     return 2;
 }

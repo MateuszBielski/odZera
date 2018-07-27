@@ -6,6 +6,7 @@ class Modul
 public:
     using spModul = std::shared_ptr<Modul>;
     using MapaStringModul = std::map<std::string,spModul>;
+	using ListaSpModul = std::list<spModul>;
 	
     Modul();
     ~Modul();
@@ -14,7 +15,6 @@ public:
     virtual int PolaczZkimPorzebujeNaPoczatek(){};
 protected:
     std::string nazwa;
-	
 	MapaStringModul* mapaZmodulami;
     template<typename T>
     std::shared_ptr<T> Ptr_WyszukajWModulach(std::string rodzajModulu)
@@ -27,5 +27,9 @@ protected:
         return *(Ptr_WyszukajWModulach<T>(rodzajModulu));
     }
     
+	DodajCoUzywam(spModul m);
+	ListaSpModul coUzywam;
+	ListaSpModul coMnieUzywa;
+	AktualizujPolaczeniaModulowZaleznych();
 };
 #endif
