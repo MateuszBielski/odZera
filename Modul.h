@@ -1,13 +1,14 @@
 #ifndef MODUL_H 
 #define MODUL_H
 #include <Komunikat.h>
+#include <set>
 class Modul
 {
 public:
     using spModul = std::shared_ptr<Modul>;
     using MapaStringModul = std::map<std::string,spModul>;
-	using ListaSpModul = std::list<spModul>;
-	
+//	using ListaSpModul = std::list<spModul>;
+	using ZbiorSpModul = std::set<spModul>;
     Modul();
     ~Modul();
     std::string Nazwa(){return nazwa;};
@@ -28,8 +29,8 @@ protected:
     }
     
 	DodajCoUzywam(spModul m);
-	ListaSpModul coUzywam;
-	ListaSpModul coMnieUzywa;
+	ZbiorSpModul coUzywam;
+	ZbiorSpModul coMnieUzywa;
 	AktualizujPolaczeniaModulowZaleznych();
 };
 #endif

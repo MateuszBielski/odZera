@@ -1,4 +1,5 @@
-//#include <gtkmm.h>
+//ścieżka do Msys2: cd E:/programowanie/GtkWs/odZera
+
 #include <gtkglmm.h>
 #include <GL/gl.h>
 #include <GL/glu.h>

@@ -14,8 +14,10 @@ void Modul::JestemDodanyDo(MapaStringModul* mapa)
 }
 Modul::DodajCoUzywam(spModul m)
 {
-	coUzywam.push_back(m);
-	m->coMnieUzywa.push_back(spModul(this));
+	auto dodanoCoUzywam = coUzywam.emplace(m);
+	auto dodanoCoMnieUzywa = m->coMnieUzywa.emplace(spModul(this));
+	if (dodanoCoUzywam.second) g_print("\ndodano %s używam: %s",this->Nazwa().c_str(),m->Nazwa().c_str());
+	if (dodanoCoMnieUzywa.second) g_print("\ndodano %s co mnie używa: %s",m->Nazwa().c_str(),this->Nazwa().c_str());
 }
 Modul::AktualizujPolaczeniaModulowZaleznych()
 {

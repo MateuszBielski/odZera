@@ -104,6 +104,8 @@ int EkranGL::PolaczZkimPorzebujeNaPoczatek()
     Inicjuj();
     ZainstalujSieW(Ref_WyszukajWModulach<OknoGL>("oknoGL").refVBox());
     
-    EmitujSygnalRysuj().connect(sigc::mem_fun(Ref_WyszukajWModulach<Renderowanie>("renderowanie"),&Renderowanie::Renderuj));
+	std::string nazwaModulu = ("renderowanie");
+	DodajCoUzywam((*mapaZmodulami)[nazwaModulu]);
+    EmitujSygnalRysuj().connect(sigc::mem_fun(Ref_WyszukajWModulach<Renderowanie>(nazwaModulu),&Renderowanie::Renderuj));
     return 2;
 }
