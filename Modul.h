@@ -28,9 +28,9 @@ protected:
         return *(Ptr_WyszukajWModulach<T>(rodzajModulu));
     }
     
-	DodajCoUzywam(spModul m);
+	void DodajCoUzywam(spModul m);
 	ZbiorSpModul coUzywam;
 	ZbiorSpModul coMnieUzywa;
-	AktualizujPolaczeniaModulowZaleznych();
+	void AktualizujPolaczeniaModulowZaleznych();
 };
 #endif
