@@ -2,7 +2,7 @@
 #define MODUL_H
 #include <Komunikat.h>
 #include <set>
-class Modul
+class Modul : public std::enable_shared_from_this<Modul>
 {
 public:
     using spModul = std::shared_ptr<Modul>;
