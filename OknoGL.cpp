@@ -23,10 +23,10 @@ void OknoGL::Inicjuj()
 }
 void OknoGL::UstawIzainstalujPrzyciskW(Gtk::VBox& vbox)
 {
-    bObslugaTegoOkna.set_label("nowe okno GL");
-    vbox.pack_start(bObslugaTegoOkna,Gtk::PACK_SHRINK);
+    bObslugaTegoModulu.set_label("nowe okno GL");
+    vbox.pack_start(bObslugaTegoModulu,Gtk::PACK_SHRINK);
     vbox.show_all();
-    connectionButton = bObslugaTegoOkna.signal_clicked().connect(sigc::mem_fun(*this,&OknoGL::Inicjuj));
+    connectionButton = bObslugaTegoModulu.signal_clicked().connect(sigc::mem_fun(*this,&OknoGL::Inicjuj));
 	this->signal_delete_event().connect(sigc::mem_fun(*this,&OknoGL::on_my_delete_event));
 }
 bool OknoGL::on_my_delete_event(GdkEventAny* any_event)
@@ -47,7 +47,7 @@ void OknoGL::Ukryj()
 }
 void OknoGL::PrzestawDzialanieButtObsluga(const char * etykieta, pfVoid func )
 {
-	bObslugaTegoOkna.set_label(etykieta);
+	bObslugaTegoModulu.set_label(etykieta);
 	connectionButton.disconnect();
-	connectionButton = bObslugaTegoOkna.signal_clicked().connect(sigc::mem_fun(*this,func));
+	connectionButton = bObslugaTegoModulu.signal_clicked().connect(sigc::mem_fun(*this,func));
 }

@@ -15,7 +15,7 @@ public:
    OknoGL();
     virtual ~OknoGL();
     void Inicjuj();
-    void UstawIzainstalujPrzyciskW(VBox&);
+    virtual void UstawIzainstalujPrzyciskW(VBox&);
 	virtual bool on_my_delete_event(GdkEventAny* any_event);
 	void Pokaz();
 	void Ukryj();
@@ -24,8 +24,7 @@ public:
 private:
 	using pfVoid = void (OknoGL::*)();
     void PrzestawDzialanieButtObsluga(const char * etykieta, pfVoid func );
-    VBox vBox;
-    Button bObslugaTegoOkna;
+    VBox vBox; //tu zainstaluje się np EkranGL
 	sigc::connection connectionButton;
 };
 using upOknoGL = std::unique_ptr<OknoGL>;

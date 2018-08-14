@@ -30,14 +30,15 @@ int Moduly::WszystkieDodaj()
     DodajModul(UtworzModulTypu<EkranRysujacy>());
     DodajModul(UtworzModulTypu<SterowanieMysza>());
     DodajModul(UtworzModulTypu<Renderowanie>());
+    DodajModul(UtworzModulTypu<PrzekierowanieSygnalow>());
     return ileModulowDodano;//do uzupełnienia
 }
 int Moduly::WszystkiePolaczJakPotrzebuja()
 {
 	int ilePolaczen = 0;
 
-    auto oknoGL = std::dynamic_pointer_cast<OknoGL>(modulyMoje["oknoGL"]);
-    oknoGL->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
+    modulyMoje["oknoGL"]->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
+    modulyMoje["przekierowanieSygnalow"]->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
     for(auto& m : modulyMoje){
         ilePolaczen += m.second->PolaczZkimPorzebujeNaPoczatek();
     }

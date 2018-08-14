@@ -28,3 +28,7 @@ void Modul::AktualizujPolaczeniaModulowZaleznych()
 	 * PolaczZkimPotrzeba (różni się od PolaczZkimPotrzebaNaPoczatek - nie dodaje coUzywam i coMnieUzywa
 	 * */
 }
+bool Modul::CzyJestModul(std::string rodzaj)
+{
+    return mapaZmodulami->count(rodzaj);
+}
