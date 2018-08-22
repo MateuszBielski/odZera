@@ -15,7 +15,7 @@ void Renderowanie::Renderuj( bool b, int i)
 	Komunikat("Renderowanie::Renderuj()");
 	ostroslup.RysujOstroslup();
 }
-int Renderowanie::PolaczZkimPorzebujeNaPoczatek()
+int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 {
     return 0;
 }

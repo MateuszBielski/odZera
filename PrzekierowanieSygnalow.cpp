@@ -11,7 +11,7 @@ PrzekierowanieSygnalow::PrzekierowanieSygnalow()
 PrzekierowanieSygnalow::~PrzekierowanieSygnalow()
 {
 }
-int PrzekierowanieSygnalow::PolaczZkimPorzebujeNaPoczatek()
+int PrzekierowanieSygnalow::PolaczZkimPotrzebujeNaPoczatek()
 {
 	/******************
 	 * emisja sygnału : gdzieś wybrany (np przycisk) połączyć trzeba z funkcją 
@@ -41,20 +41,16 @@ void PrzekierowanieSygnalow::PrzelaczSterowanie()
 void PrzekierowanieSygnalow::UstawSterowanie(short jakie)
 {
     g_print("\nustawiono sterowanie %d",jakie);
-    
+    auto przesuwanie = (*mapaZmodulami)["przesuwanieWidoku"];
+    auto obroty = (*mapaZmodulami)["sterowanie"];
     switch(jakie){
         case OBROTY_ARCBALL:
-            (*mapaZmodulami)["sterowanie"]->OdblokujPolaczenia();
+            przesuwanie->ZablokujPolaczenia();
+            obroty->OdblokujPolaczenia();
         break;
         case PRZESUWANIE_PO_EKRANIE:
-            (*mapaZmodulami)["sterowanie"]->ZablokujPolaczenia();
-            
-            if(!mapaZmodulami->count("przesuwanieWidoku")){
-                (*mapaZmodulami)["przesuwanieWidoku"] = std::make_shared<PrzesuwanieWidoku>();
-                Komunikat("dodano moduł przesuwanie widoku");
-            }
-            
-            
+            przesuwanie->OdblokujPolaczenia();
+            obroty->ZablokujPolaczenia();
         break;
     }
 }

@@ -11,7 +11,7 @@ public:
 	Sterowanie();
 	~Sterowanie();
 	virtual int PodlaczanieSygnalow(Gtk::Widget& okno) = 0;
-    virtual int PolaczZkimPorzebujeNaPoczatek();
+    virtual int PolaczZkimPotrzebujeNaPoczatek();
 	virtual void PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& ) = 0;
 	virtual void PrzeksztalcenieWidoku( bool b, int i) = 0;
 protected:

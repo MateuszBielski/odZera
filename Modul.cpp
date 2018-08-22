@@ -32,35 +32,39 @@ bool Modul::CzyJestModul(std::string rodzaj)
 {
     return mapaZmodulami->count(rodzaj);
 }
-void Modul::DodajDoListyWskaznikPolaczenia(spCon polaczenie)
+void Modul::DodajDoListyWskaznikPolaczenia(spConnection polaczenie)
 {
     mojePolaczenia.push_back(polaczenie);
 }
 void Modul::ZablokujPolaczenia()
 {
+    if(!mojePolaczenia.size())return;
     auto iter = mojePolaczenia.begin();
     auto koniec = mojePolaczenia.end();
+    auto polaczenie = *iter;
     int ile = 0;
     while(iter != koniec){
-        (*iter)->block();
-        iter++;
+        polaczenie = *iter++;
+        if(!polaczenie->blocked())polaczenie->block();
         ile++;
     }
     g_print("\nzablokowano %d połączeń w %s",ile,Nazwa().c_str());
 }
 void Modul::OdblokujPolaczenia()
 {
+    if(!mojePolaczenia.size())return;
     auto iter = mojePolaczenia.begin();
     auto koniec = mojePolaczenia.end();
+    auto polaczenie = *iter;
     int ile = 0;
     while(iter != koniec){
-        (*iter)->unblock();
-        iter++;
+        polaczenie = *iter++;
+        if(polaczenie->blocked())polaczenie->unblock();
         ile++;
     }
     g_print("\nodblokowano %d połączeń w %s",ile,Nazwa().c_str());
 }
-Modul::spCon Modul::UtrwalPolaczenie(sigc::connection&& polaczenie)
+Modul::spConnection Modul::UtrwalPolaczenie(sigc::connection&& polaczenie)
 {
 	auto wskaznik = std::make_shared<sigc::connection>();
     *wskaznik = polaczenie;

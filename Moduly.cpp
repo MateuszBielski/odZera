@@ -31,6 +31,7 @@ int Moduly::WszystkieDodaj()
     DodajModul(UtworzModulTypu<SterowanieMysza>());
     DodajModul(UtworzModulTypu<Renderowanie>());
     DodajModul(UtworzModulTypu<PrzekierowanieSygnalow>());
+    DodajModul(UtworzModulTypu<PrzesuwanieWidoku>());
     return ileModulowDodano;//do uzupełnienia
 }
 int Moduly::WszystkiePolaczJakPotrzebuja()
@@ -40,7 +41,7 @@ int Moduly::WszystkiePolaczJakPotrzebuja()
     modulyMoje["oknoGL"]->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
     modulyMoje["przekierowanieSygnalow"]->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
     for(auto& m : modulyMoje){
-        ilePolaczen += m.second->PolaczZkimPorzebujeNaPoczatek();
+        ilePolaczen += m.second->PolaczZkimPotrzebujeNaPoczatek();
     }
     return ilePolaczen;
 }

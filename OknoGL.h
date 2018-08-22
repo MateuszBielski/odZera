@@ -19,13 +19,13 @@ public:
 	virtual bool on_my_delete_event(GdkEventAny* any_event);
 	void Pokaz();
 	void Ukryj();
-	virtual int PolaczZkimPorzebujeNaPoczatek(){};
+	virtual int PolaczZkimPotrzebujeNaPoczatek(){};
     VBox& refVBox(){return vBox;};
 private:
 	using pfVoid = void (OknoGL::*)();
     void PrzestawDzialanieButtObsluga(const char * etykieta, pfVoid func );
     VBox vBox; //tu zainstaluje się np EkranGL
-	spCon connectionButton;
+	spConnection connectionButton;
 };
 using upOknoGL = std::unique_ptr<OknoGL>;
 #endif

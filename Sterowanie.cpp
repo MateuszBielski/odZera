@@ -18,7 +18,7 @@ void Sterowanie::UstawOkno(Gtk::Widget* o)
 {
 	oknoSterowane = o;
 }
-int Sterowanie::PolaczZkimPorzebujeNaPoczatek()
+int Sterowanie::PolaczZkimPotrzebujeNaPoczatek()
 {
     std::string nazwaModulu = ("ekranGL");
 	DodajCoUzywam((*mapaZmodulami)[nazwaModulu]);
@@ -26,5 +26,6 @@ int Sterowanie::PolaczZkimPorzebujeNaPoczatek()
 	auto& ekran = Ref_WyszukajWModulach<EkranGL>(nazwaModulu);
 	PodlaczanieSygnalow(ekran);
 	PodlaczSygnalPrzeksztalcenieWidoku(ekran);
+    if(zablokujPolaczeniaPrzyStarcie)ZablokujPolaczenia();
     return 2;
 }

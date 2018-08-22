@@ -99,7 +99,7 @@ void EkranGL::Oswietlenie()
 {
 	Komunikat("EkranGL::Oswietlenie");
 }
-int EkranGL::PolaczZkimPorzebujeNaPoczatek()
+int EkranGL::PolaczZkimPotrzebujeNaPoczatek()
 {
     Inicjuj();
     ZainstalujSieW(Ref_WyszukajWModulach<OknoGL>("oknoGL").refVBox());

@@ -22,7 +22,7 @@ class EkranGL : public GL::DrawingArea, public Modul
     void ZainstalujSieW(VBox&);
     void invalidate(){get_window()->invalidate_rect(get_allocation(), false);}
     void update(){ get_window()->process_updates(false); }
-    virtual int PolaczZkimPorzebujeNaPoczatek();
+    virtual int PolaczZkimPotrzebujeNaPoczatek();
     
     SygnalRysuj EmitujSygnalRysuj();
 	SygnalRysuj EmitujSygnalTransformacja();
