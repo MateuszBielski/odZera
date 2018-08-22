@@ -25,7 +25,7 @@ private:
 	using pfVoid = void (OknoGL::*)();
     void PrzestawDzialanieButtObsluga(const char * etykieta, pfVoid func );
     VBox vBox; //tu zainstaluje się np EkranGL
-	sigc::connection connectionButton;
+	spCon connectionButton;
 };
 using upOknoGL = std::unique_ptr<OknoGL>;
 #endif

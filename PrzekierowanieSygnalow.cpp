@@ -1,5 +1,5 @@
 #include "PrzekierowanieSygnalow.h"
-#include "PrzesuwanieWidoku.h";
+#include "PrzesuwanieWidoku.h"
 
 PrzekierowanieSygnalow::PrzekierowanieSygnalow()
 {
@@ -19,7 +19,8 @@ int PrzekierowanieSygnalow::PolaczZkimPorzebujeNaPoczatek()
 	 * w którymś miejscu należy wywołać funkcję, która doda do modułów przesuwanie widoku lub też od razu podmieni:
 	 * sterowanie = przesuwanie widoku , przechowalnia obiektu = Sterowanie myszą
 	 * następnie przeprowadzić aktualizację połączeń modułów zależnych od podmienianego, czyli tych, których on używa, lub które uzywają jego*/
-	 connZmianaTrybu = bObslugaTegoModulu.signal_clicked().connect(sigc::mem_fun(*this,&PrzekierowanieSygnalow::PrzelaczSterowanie));
+	 connZmianaTrybu = UtrwalPolaczenie(bObslugaTegoModulu.signal_clicked().connect(sigc::mem_fun(*this,&PrzekierowanieSygnalow::PrzelaczSterowanie)));
+     DodajDoListyWskaznikPolaczenia(connZmianaTrybu);
 	 
 }
 void PrzekierowanieSygnalow::UstawIzainstalujPrzyciskW(VBox& vbox)
@@ -43,15 +44,16 @@ void PrzekierowanieSygnalow::UstawSterowanie(short jakie)
     
     switch(jakie){
         case OBROTY_ARCBALL:
+            (*mapaZmodulami)["sterowanie"]->OdblokujPolaczenia();
         break;
         case PRZESUWANIE_PO_EKRANIE:
-            spModul& aktualneSterowanie = (*mapaZmodulami)["sterowanie"];
-            (*mapaZmodulami)["przechowalniaSterowania"] = aktualneSterowanie;
+            (*mapaZmodulami)["sterowanie"]->ZablokujPolaczenia();
+            
             if(!mapaZmodulami->count("przesuwanieWidoku")){
                 (*mapaZmodulami)["przesuwanieWidoku"] = std::make_shared<PrzesuwanieWidoku>();
                 Komunikat("dodano moduł przesuwanie widoku");
             }
-            aktualneSterowanie =  (*mapaZmodulami)["przesuwanieWidoku"]; 
+            
             
         break;
     }

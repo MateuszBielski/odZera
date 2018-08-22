@@ -30,13 +30,16 @@ int SterowanieMysza::PodlaczanieSygnalow(Gtk::Widget& okno)
 {
     UstawOkno(&okno);
 	okno.add_events(Gdk::BUTTON1_MOTION_MASK|Gdk::BUTTON_PRESS_MASK);
-    okno.signal_button_press_event().connect(sigc::mem_fun(*this,&SterowanieMysza::on_button_press_event));
-    okno.signal_motion_notify_event().connect(sigc::mem_fun(*this,&SterowanieMysza::on_motion_notify_event));
+    DodajDoListyWskaznikPolaczenia(
+        UtrwalPolaczenie(okno.signal_button_press_event().connect(sigc::mem_fun(*this,&SterowanieMysza::on_button_press_event))));
+    DodajDoListyWskaznikPolaczenia(
+        UtrwalPolaczenie(okno.signal_motion_notify_event().connect(sigc::mem_fun(*this,&SterowanieMysza::on_motion_notify_event))));
     return 3;
 }
 void SterowanieMysza::PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& ekran)
 {
-	ekran.EmitujSygnalTransformacja().connect(sigc::mem_fun(*this,&SterowanieMysza::PrzeksztalcenieWidoku));
+	DodajDoListyWskaznikPolaczenia(
+        UtrwalPolaczenie(ekran.EmitujSygnalTransformacja().connect(sigc::mem_fun(*this,&SterowanieMysza::PrzeksztalcenieWidoku))));
 }
 
 

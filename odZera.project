@@ -156,4 +156,6 @@
     <File Name="Modul.h"/>
     <File Name="Modul.cpp"/>
   </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
 </CodeLite_Project>

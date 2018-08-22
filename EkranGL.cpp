@@ -106,6 +106,8 @@ int EkranGL::PolaczZkimPorzebujeNaPoczatek()
     
 	std::string nazwaModulu = ("renderowanie");
 	DodajCoUzywam((*mapaZmodulami)[nazwaModulu]);
-    EmitujSygnalRysuj().connect(sigc::mem_fun(Ref_WyszukajWModulach<Renderowanie>(nazwaModulu),&Renderowanie::Renderuj));
+    DodajDoListyWskaznikPolaczenia(
+        UtrwalPolaczenie(EmitujSygnalRysuj().connect(sigc::mem_fun(Ref_WyszukajWModulach<Renderowanie>(nazwaModulu),&Renderowanie::Renderuj)))
+        );
     return 2;
 }

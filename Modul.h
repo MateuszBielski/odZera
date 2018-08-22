@@ -16,6 +16,8 @@ public:
     void JestemDodanyDo(MapaStringModul* );
     virtual int PolaczZkimPorzebujeNaPoczatek(){};
     virtual void UstawIzainstalujPrzyciskW(VBox&){};
+    void ZablokujPolaczenia();
+    void OdblokujPolaczenia();
 protected:
     Button bObslugaTegoModulu;
     std::string nazwa;
@@ -36,5 +38,12 @@ protected:
 	ZbiorSpModul coUzywam;
 	ZbiorSpModul coMnieUzywa;
 	void AktualizujPolaczeniaModulowZaleznych();
+    
+    //połączenia
+    using spCon = std::shared_ptr<sigc::connection>;
+    void DodajDoListyWskaznikPolaczenia(spCon );
+    spCon UtrwalPolaczenie(sigc::connection&& );
+    std::list<spCon> mojePolaczenia;
+    
 };
 #endif

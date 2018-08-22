@@ -15,7 +15,7 @@ public:
     void PrzelaczSterowanie();
     void UstawSterowanie(short);
 private:
-    sigc::connection connZmianaTrybu;
+    spCon connZmianaTrybu;
     bool czyPrzesuwaj;
 
 };
