@@ -29,11 +29,13 @@ SterowanieMysza::~SterowanieMysza()
 int SterowanieMysza::PodlaczanieSygnalow(Gtk::Widget& okno)
 {
     UstawOkno(&okno);
-	okno.add_events(Gdk::BUTTON1_MOTION_MASK|Gdk::BUTTON_PRESS_MASK);
+	okno.add_events(Gdk::BUTTON1_MOTION_MASK|Gdk::BUTTON_PRESS_MASK|Gdk::SCROLL_MASK);
     DodajDoListyWskaznikPolaczenia(
         UtrwalPolaczenie(okno.signal_button_press_event().connect(sigc::mem_fun(*this,&SterowanieMysza::on_button_press_event))));
     DodajDoListyWskaznikPolaczenia(
         UtrwalPolaczenie(okno.signal_motion_notify_event().connect(sigc::mem_fun(*this,&SterowanieMysza::on_motion_notify_event))));
+    DodajDoListyWskaznikPolaczenia(
+        UtrwalPolaczenie(okno.signal_scroll_event().connect(sigc::mem_fun(*this,&SterowanieMysza::on_my_scroll_event))));
     return 3;
 }
 void SterowanieMysza::PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& ekran)
@@ -58,7 +60,6 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 
 bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
 {
-    Komunikat("on_motion_notify_event");
     float w = oknoSterowane->get_width();
     float h = oknoSterowane->get_height();
     float x = event->x;
@@ -83,11 +84,24 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
 }
 void SterowanieMysza::PrzeksztalcenieWidoku(bool b, int i)
 {
-	Komunikat("SterowanieMysza::przekształcenie widoku");
 	glTranslatef(m_Pos[0], m_Pos[1], m_Pos[2]);
-	float m[4][4];
+	
 	
 	Trackball::add_quats(m_QuatDiff, m_Quat, m_Quat);
-    Trackball::build_rotmatrix(m, m_Quat);
-    glMultMatrixf(&m[0][0]);
+    Trackball::build_rotmatrix(macierzObrotu, m_Quat);
+    glMultMatrixf(&macierzObrotu[0][0]);
+}
+bool SterowanieMysza::on_my_scroll_event(GdkEventScroll* scroll_event)
+{
+//    short obrot = 0;
+//    obrot = static_cast<short>(scroll_event->direction);
+//    g_print("\n%d",obrot);
+    if (!scroll_event->direction){//GDK_SCROLL_UP
+        m_Pos[2] *=0.9;
+    }
+    if (scroll_event->direction){//GDK_SCROLL_DOWN
+        m_Pos[2] /=0.9;
+    }
+    oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
+    return true;
 }

@@ -19,6 +19,7 @@ public:
 private:
     bool on_button_press_event(GdkEventButton* event);
     bool on_motion_notify_event(GdkEventMotion* event);
+    bool on_my_scroll_event(GdkEventScroll* scroll_event);
     float m_QuatDiff[4];
     
     float m_Quat[4];

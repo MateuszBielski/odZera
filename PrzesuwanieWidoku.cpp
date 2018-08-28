@@ -36,7 +36,7 @@ void PrzesuwanieWidoku::PrzeksztalcenieWidoku(bool b, int i)
 {
     glTranslatef(m_Pos[0], m_Pos[1], m_Pos[2]);
 //    g_print("\nPrzesuwanieWidoku::PrzeksztalcenieWidoku x: %2.2f, y: %2.2f",przemieszczenieX,przemieszczenieY);
-    
+    glMultMatrixf(&macierzObrotu[0][0]);
 }
 bool PrzesuwanieWidoku::on_motion_notify_event(GdkEventMotion* event)
 {
@@ -48,9 +48,10 @@ bool PrzesuwanieWidoku::on_motion_notify_event(GdkEventMotion* event)
     m_DY = nowaPozycjaY - m_BeginY;
     m_BeginX = nowaPozycjaX;
     m_BeginY = nowaPozycjaY;
-    
-    m_Pos[0] += m_DX;
-    m_Pos[1] += m_DY;
+    float w = oknoSterowane->get_width();
+    float h = oknoSterowane->get_height();
+    m_Pos[0] += 2*m_DX/w;
+    m_Pos[1] -= 2*m_DY/h;
     
 	oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     return true;

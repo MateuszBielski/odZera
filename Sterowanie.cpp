@@ -41,6 +41,12 @@ void Sterowanie::KopiujParametrySterowania(Sterowanie& doSkopiowania)
     m_DX = doSkopiowania.m_DX;
     m_DY = doSkopiowania.m_DY;
     for(short i =0 ; i < 3; i++)m_Pos[i] = doSkopiowania.m_Pos[i];
+    for(short i =0 ; i < 4; i++){
+        for(short j =0 ; j < 4; j++){
+            macierzObrotu[i][j] = doSkopiowania.macierzObrotu[i][j];
+        }
+    }
+        
     g_print("\nSterowanie::KopiujParametrySterowania");
 }
 

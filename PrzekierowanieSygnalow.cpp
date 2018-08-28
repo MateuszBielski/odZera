@@ -46,7 +46,7 @@ void PrzekierowanieSygnalow::UstawSterowanie(short jakie)
     switch(jakie){
         case OBROTY_ARCBALL:
             przesuwanie->ZablokujPolaczenia();
-        
+            obroty->KopiujZinnegoModulu(przesuwanie);
             obroty->OdblokujPolaczenia();
         break;
         case PRZESUWANIE_PO_EKRANIE:
