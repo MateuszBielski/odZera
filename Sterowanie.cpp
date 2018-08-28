@@ -29,3 +29,18 @@ int Sterowanie::PolaczZkimPotrzebujeNaPoczatek()
     if(zablokujPolaczeniaPrzyStarcie)ZablokujPolaczenia();
     return 2;
 }
+void Sterowanie::KopiujZinnegoModulu(spModul zDanymi)
+{
+	auto wskaznikNaWlasciwyTyp = std::dynamic_pointer_cast<Sterowanie>(zDanymi);
+    KopiujParametrySterowania(*wskaznikNaWlasciwyTyp);
+}
+void Sterowanie::KopiujParametrySterowania(Sterowanie& doSkopiowania)
+{
+    m_BeginX = doSkopiowania.m_BeginX;
+    m_BeginY = doSkopiowania.m_BeginY;
+    m_DX = doSkopiowania.m_DX;
+    m_DY = doSkopiowania.m_DY;
+    for(short i =0 ; i < 3; i++)m_Pos[i] = doSkopiowania.m_Pos[i];
+    g_print("\nSterowanie::KopiujParametrySterowania");
+}
+

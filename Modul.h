@@ -17,6 +17,7 @@ public:
     virtual void UstawIzainstalujPrzyciskW(VBox&){};
     void ZablokujPolaczenia();
     void OdblokujPolaczenia();
+    virtual void KopiujZinnegoModulu(spModul){};
 protected:
     Button bObslugaTegoModulu;
     std::string nazwa;

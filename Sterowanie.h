@@ -14,9 +14,17 @@ public:
     virtual int PolaczZkimPotrzebujeNaPoczatek();
 	virtual void PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& ) = 0;
 	virtual void PrzeksztalcenieWidoku( bool b, int i) = 0;
+    virtual void KopiujZinnegoModulu(spModul) override;
 protected:
-	 void UstawOkno(Gtk::Widget* o);
-	 Gtk::Widget* oknoSterowane;
+	void UstawOkno(Gtk::Widget* o);
+	Gtk::Widget* oknoSterowane;
+    void KopiujParametrySterowania(Sterowanie& );
+    float m_BeginX;
+    float m_BeginY;
+    float m_DX;
+    float m_DY;
+    float m_Pos[3];
+    
 	 
 };
 

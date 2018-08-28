@@ -13,7 +13,6 @@ public:
 private:
     bool on_button_press_event(GdkEventButton* event);
     bool on_motion_notify_event(GdkEventMotion* event);
-
 };
 
 #endif // PRZESUWANIEWIDOKU_H

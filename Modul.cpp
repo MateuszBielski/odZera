@@ -70,3 +70,4 @@ Modul::spConnection Modul::UtrwalPolaczenie(sigc::connection&& polaczenie)
     *wskaznik = polaczenie;
     return wskaznik;
 }
+

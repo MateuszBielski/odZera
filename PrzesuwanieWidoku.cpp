@@ -27,13 +27,31 @@ void PrzesuwanieWidoku::PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& ekran)
 }
 bool PrzesuwanieWidoku::on_button_press_event(GdkEventButton* event)
 {
-
+    m_BeginX = event->x;
+    m_BeginY = event->y;
+//    g_print("\nx = %2.3f, y = %2.3f",m_BeginX,m_BeginY);
+    return false;
 }
 void PrzesuwanieWidoku::PrzeksztalcenieWidoku(bool b, int i)
 {
+    glTranslatef(m_Pos[0], m_Pos[1], m_Pos[2]);
+//    g_print("\nPrzesuwanieWidoku::PrzeksztalcenieWidoku x: %2.2f, y: %2.2f",przemieszczenieX,przemieszczenieY);
     
 }
 bool PrzesuwanieWidoku::on_motion_notify_event(GdkEventMotion* event)
 {
-    Komunikat("PrzesuwanieWidoku::on_motion_notify_event");
+    float nowaPozycjaX,nowaPozycjaY;
+    
+    nowaPozycjaX = event->x;
+    nowaPozycjaY = event->y;
+    m_DX = nowaPozycjaX - m_BeginX;
+    m_DY = nowaPozycjaY - m_BeginY;
+    m_BeginX = nowaPozycjaX;
+    m_BeginY = nowaPozycjaY;
+    
+    m_Pos[0] += m_DX;
+    m_Pos[1] += m_DY;
+    
+	oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
+    return true;
 }
