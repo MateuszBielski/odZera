@@ -36,20 +36,21 @@ void EkranGL::Inicjuj()
 
 bool EkranGL::on_configure_event(GdkEventConfigure* event)
 {
-    Komunikat("EkranGL::on_configure_event");
+//    Komunikat("EkranGL::on_configure_event");
+    oknoPodstawowe->Wypisz_AxB_nadPrzyciskami(event->height,event->width);
 	auto gldrawable = get_gl_drawable();
 	if (!gldrawable->gl_begin(get_gl_context()))
     return false;
 	UstawienieSceny();
-	invalidate();
-	Oswietlenie();
+//	invalidate();
+	OswietlenieUstaw();
 	//RysujScene();
 	if (gldrawable->is_double_buffered())
       gldrawable->swap_buffers();
     else
       glFlush();
 	gldrawable->gl_end();
-    return true;
+    return false;
 }
 
 void EkranGL::UstawienieSceny()
@@ -95,7 +96,7 @@ void EkranGL::ZainstalujSieW(VBox& vbox)
 	vbox.pack_start(*this);
     vbox.show_all();
 }
-void EkranGL::Oswietlenie()
+void EkranGL::OswietlenieUstaw()
 {
 	Komunikat("EkranGL::Oswietlenie");
 }
@@ -109,5 +110,6 @@ int EkranGL::PolaczZkimPotrzebujeNaPoczatek()
     DodajDoListyWskaznikPolaczenia(
         UtrwalPolaczenie(EmitujSygnalRysuj().connect(sigc::mem_fun(Ref_WyszukajWModulach<Renderowanie>(nazwaModulu),&Renderowanie::Renderuj)))
         );
+    WyszukujeIustawiamWskaznikiDoInnychModulow();    
     return 2;
 }

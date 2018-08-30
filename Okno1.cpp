@@ -28,24 +28,5 @@ void Okno1::NowyWatek()
 {
 
 }
-/*void Okno1::NaPrzyciskZmienRozmiar()
-{
-	
-}
-void Okno1::WypelnijBufor()
-{
-	
-}
-void Okno1::WypiszRozmiarOkna(int h, int w)
-{
-	
-}
-void Okno1::PokazLiczenie()
-{
-	
-}
-void Okno1::NoweOknoGL()
-{
-   
-}*/
+
 

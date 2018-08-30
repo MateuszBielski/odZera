@@ -7,6 +7,7 @@ class OknoProba2 : public Okno1
 public:
 	OknoProba2();
 	~OknoProba2();
+    virtual void Wypisz_AxB_nadPrzyciskami(int,int) override;
 protected:
 	virtual bool on_configure_event(GdkEventConfigure* event);
 	virtual void NowyWatek();
@@ -16,7 +17,6 @@ protected:
 private:
     void NaPrzyciskZmienRozmiar();
     void PokazLiczenie();
-	void WypiszRozmiarOkna(int,int);
 	void WypelnijBufor();
     
     TextView tekst;

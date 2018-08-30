@@ -1,7 +1,9 @@
 #ifndef MODUL_H 
 #define MODUL_H
 #include <Komunikat.h>
+#include <Okno1.h>
 #include <set> //musi być
+#include <bitset>
 using namespace Gtk;
 class Modul : public std::enable_shared_from_this<Modul>
 {
@@ -18,8 +20,11 @@ public:
     void ZablokujPolaczenia();
     void OdblokujPolaczenia();
     virtual void KopiujZinnegoModulu(spModul){};
+    void BioreWskaznikDo(spOkno1);
+    virtual void WyszukujeIustawiamWskaznikiDoInnychModulow(){};
 protected:
     Button bObslugaTegoModulu;
+    spOkno1 oknoPodstawowe;
     std::string nazwa;
 	MapaStringModul* mapaZmodulami;
     bool CzyJestModul(std::string);

@@ -60,7 +60,7 @@ void OknoProba2::PokazLiczenie()
     }
 }
 
-void OknoProba2::WypiszRozmiarOkna(int h, int w)
+void OknoProba2::Wypisz_AxB_nadPrzyciskami(int h, int w)
 {
 	Glib::ustring wymiary;
 	char c[10];
@@ -82,7 +82,7 @@ void OknoProba2::WypelnijBufor()
 }
 bool OknoProba2::on_configure_event(GdkEventConfigure* event)
 {
-	WypiszRozmiarOkna(event->height,event->width);
+	Wypisz_AxB_nadPrzyciskami(event->height,event->width);
 	return false;
 }
 void OknoProba2::UstawieniaKlasyDziedziczacej()

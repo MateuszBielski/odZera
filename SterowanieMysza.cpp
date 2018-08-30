@@ -29,7 +29,7 @@ SterowanieMysza::~SterowanieMysza()
 int SterowanieMysza::PodlaczanieSygnalow(Gtk::Widget& okno)
 {
     UstawOkno(&okno);
-	okno.add_events(Gdk::BUTTON1_MOTION_MASK|Gdk::BUTTON_PRESS_MASK|Gdk::SCROLL_MASK);
+	okno.set_events(Gdk::BUTTON1_MOTION_MASK|Gdk::BUTTON_PRESS_MASK|Gdk::SCROLL_MASK|Gdk::BUTTON2_MOTION_MASK|Gdk::BUTTON3_MOTION_MASK);
     DodajDoListyWskaznikPolaczenia(
         UtrwalPolaczenie(okno.signal_button_press_event().connect(sigc::mem_fun(*this,&SterowanieMysza::on_button_press_event))));
     DodajDoListyWskaznikPolaczenia(
@@ -43,11 +43,12 @@ void SterowanieMysza::PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& ekran)
 	DodajDoListyWskaznikPolaczenia(
         UtrwalPolaczenie(ekran.EmitujSygnalTransformacja().connect(sigc::mem_fun(*this,&SterowanieMysza::PrzeksztalcenieWidoku))));
 }
-
-
+void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
+    ekran = Ptr_WyszukajWModulach<EkranRysujacy>("ekranGL");
+    
+}
 bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 {
-    Komunikat("SterowanieMysza::on_button_press_event");
     m_QuatDiff[0] = 0.0;
     m_QuatDiff[1] = 0.0;
     m_QuatDiff[2] = 0.0;
@@ -64,6 +65,8 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
     float h = oknoSterowane->get_height();
     float x = event->x;
     float y = event->y;
+    m_DX = x - m_BeginX;
+    m_DY = y - m_BeginY;
     if (event->state & GDK_BUTTON1_MASK) {
       Trackball::trackball(m_QuatDiff,
                            (2.0 * m_BeginX - w) / w,
@@ -71,13 +74,23 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
                            (2.0 * x - w) / w,
                            (h - 2.0 * y) / h);
 
-      m_DX = x - m_BeginX;
-      m_DY = y - m_BeginY;
-
+    }
+    if (event->state & GDK_BUTTON2_MASK){
+        m_Pos[0] += 2*m_DX/w;
+        m_Pos[1] -= 2*m_DY/h;
+        
+    }
+    if (event->state & GDK_BUTTON3_MASK){
+        float pozycja[4];
+        ekran->PodajPozycjeZrodlaSwiatla(pozycja);
+        pozycja[0]+=2*m_DX/w;
+        pozycja[1]-=2*m_DY/h;
+        g_print("\npoz św %2.2f, %2.2f, %2.2f, %2.2f",pozycja[0],pozycja[1],pozycja[2],pozycja[3]);
+        ekran->UstawPozycjeZrodlaSwiatla(pozycja);
     }
 	m_BeginX = x;
     m_BeginY = y;
-
+//        std::cout << std::bitset<24>(oknoSterowane->get_events())<<std::endl;
 	oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     //nie może być false bo przekazuje jakby jeszcze kilka razy do obsługi i nie pozwala przeliczyć sie macierzom
     return true;
@@ -93,9 +106,6 @@ void SterowanieMysza::PrzeksztalcenieWidoku(bool b, int i)
 }
 bool SterowanieMysza::on_my_scroll_event(GdkEventScroll* scroll_event)
 {
-//    short obrot = 0;
-//    obrot = static_cast<short>(scroll_event->direction);
-//    g_print("\n%d",obrot);
     if (!scroll_event->direction){//GDK_SCROLL_UP
         m_Pos[2] *=0.9;
     }

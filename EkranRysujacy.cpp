@@ -3,6 +3,7 @@
 EkranRysujacy::EkranRysujacy()
 {
 	Komunikat("EkranRysujacy");
+
 }
 
 EkranRysujacy::~EkranRysujacy()
@@ -11,7 +12,7 @@ EkranRysujacy::~EkranRysujacy()
 }
 void EkranRysujacy::UstawienieSceny()
 {
-	Komunikat("EkranRysujacy::UstawienieSceny");
+//	Komunikat("EkranRysujacy::UstawienieSceny");
 	int w,h;
 	w = get_width();
 	h = get_height();
@@ -41,10 +42,10 @@ void EkranRysujacy::RysujScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-	sTransformacja.emit(true,21);
+	sTransformacja.emit(true,21);//argumenty całkowicie przypadkowe - zastosowane na potrzeby sprawdzenia działania
 	sRysuj.emit(true, 14);
 }
-void EkranRysujacy::Oswietlenie()
+void EkranRysujacy::OswietlenieUstaw()//rozdzielić ustawienie światła od zmiany jego parametrów
 {
     glEnable(GL_LIGHTING);
     
@@ -53,9 +54,20 @@ void EkranRysujacy::Oswietlenie()
     glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
     //światło punktowe
     float kolorZrodla[] = {0.8,0.8,0.8,1.0};
-    float pozycjaZrodla[] = {0.0,1.0,5.0,0.0};
-    glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodla); 
+    float temp[] = {0.0,1.0,5.0,0.0};
+    memcpy(pozycjaZrodlaSwiatla,temp,4);
+    glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodlaSwiatla); 
     glLightfv(GL_LIGHT1,GL_DIFFUSE,kolorZrodla);
-    
+    g_print("\npoz św %2.2f, %2.2f, %2.2f, %2.2f",pozycjaZrodlaSwiatla,pozycjaZrodlaSwiatla[1],pozycjaZrodlaSwiatla[2],pozycjaZrodlaSwiatla[3]);
     glEnable(GL_LIGHT1);
+}
+void EkranRysujacy::PodajPozycjeZrodlaSwiatla(float * tutaj){
+    memcpy(tutaj,pozycjaZrodlaSwiatla,4);
+}
+void EkranRysujacy::UstawPozycjeZrodlaSwiatla(float * wedlugParametrow){
+    memcpy(pozycjaZrodlaSwiatla,wedlugParametrow,4);
+    glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodlaSwiatla);
+}
+void EkranRysujacy::WyszukujeIustawiamWskaznikiDoInnychModulow(){
+    
 }

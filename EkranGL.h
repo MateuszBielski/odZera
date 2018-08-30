@@ -32,7 +32,8 @@ protected:
     virtual void on_realize();
     virtual void UstawienieSceny();
     virtual void RysujScene();
-    virtual void Oswietlenie();
+    virtual void OswietlenieUstaw();
+//    virtual void UstawPozycjeZrodlaSwiatla(float *){};
     
 	SygnalRysuj sTransformacja;
     SygnalRysuj sRysuj;

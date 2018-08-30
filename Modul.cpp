@@ -70,4 +70,7 @@ Modul::spConnection Modul::UtrwalPolaczenie(sigc::connection&& polaczenie)
     *wskaznik = polaczenie;
     return wskaznik;
 }
-
+void Modul::BioreWskaznikDo(spOkno1 jakiegosOkna)
+{
+	oknoPodstawowe = jakiegosOkna;
+}

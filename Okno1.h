@@ -17,6 +17,7 @@ public:
     virtual ~Okno1(){};
     bool Inicjuj();//virtual?
     VBox& refVBox() {return vBox;};
+    virtual void Wypisz_AxB_nadPrzyciskami(int,int){};
 protected:
     virtual void NowyWatek();
     virtual int PodlaczenieSygnalow();

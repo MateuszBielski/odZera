@@ -2,6 +2,7 @@
 #define STEROWANIEMYSZA_H
 #include <gtkmm.h>
 #include <Sterowanie.h>
+#include <EkranRysujacy.h>
 /*klasa sterowanieMysza ma przechowywać:
  * pozycję myszy
  * wskaźnik na obsługiwane okno
@@ -16,6 +17,7 @@ public:
     virtual int PodlaczanieSygnalow(Gtk::Widget& okno);
 	virtual void PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& );
 	virtual void PrzeksztalcenieWidoku( bool b, int i);
+    virtual void WyszukujeIustawiamWskaznikiDoInnychModulow() override;
 private:
     bool on_button_press_event(GdkEventButton* event);
     bool on_motion_notify_event(GdkEventMotion* event);
@@ -23,7 +25,9 @@ private:
     float m_QuatDiff[4];
     
     float m_Quat[4];
-
+//    float* pozycjaZrodlaSwiatla4f;
+    using spEkranRysujacy = std::shared_ptr<EkranRysujacy>;
+    spEkranRysujacy ekran;
 };
 
 #endif // STEROWANIEMYSZA_H

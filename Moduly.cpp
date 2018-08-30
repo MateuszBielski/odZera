@@ -19,6 +19,7 @@ bool Moduly::DodajModul(spModul m)
 {
 	modulyMoje[m->Nazwa()] = m;
     m->JestemDodanyDo(&modulyMoje);
+    m->BioreWskaznikDo(oknoGlowne);
 	return true;
 }
 

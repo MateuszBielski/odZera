@@ -26,6 +26,7 @@ int Sterowanie::PolaczZkimPotrzebujeNaPoczatek()
 	auto& ekran = Ref_WyszukajWModulach<EkranGL>(nazwaModulu);
 	PodlaczanieSygnalow(ekran);
 	PodlaczSygnalPrzeksztalcenieWidoku(ekran);
+    WyszukujeIustawiamWskaznikiDoInnychModulow();
     if(zablokujPolaczeniaPrzyStarcie)ZablokujPolaczenia();
     return 2;
 }
