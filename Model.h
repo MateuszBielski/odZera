@@ -21,4 +21,10 @@ protected:
     int ileIndeksow = 0;
 };
 
+class Ostroslup : public Model{
+  public:
+    Ostroslup(){};
+    virtual ~Ostroslup(){};
+    virtual void Rysuj() override;
+};
 #endif

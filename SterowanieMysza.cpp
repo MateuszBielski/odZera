@@ -94,7 +94,11 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
         
     }
     if (event->state & GDK_BUTTON3_MASK){
-        
+        float pozycja[4];
+        ekran->PodajPozycjeZrodlaSwiatla(pozycja);
+        pozycja[0]+=8*m_DX/w;
+        pozycja[1]+=8*m_DY/h;
+        ekran->UstawPozycjeZrodlaSwiatla(pozycja);
     }
 	m_BeginX = x;
     m_BeginY = y;
