@@ -55,17 +55,17 @@ void EkranRysujacy::OswietlenieUstaw()//rozdzielić ustawienie światła od zmia
     //światło punktowe
     float kolorZrodla[] = {0.8,0.8,0.8,1.0};
     float temp[] = {0.0,1.0,5.0,0.0};
-    memcpy(pozycjaZrodlaSwiatla,temp,4);
+    memcpy(pozycjaZrodlaSwiatla,temp,4*sizeof(float));
     glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodlaSwiatla); 
     glLightfv(GL_LIGHT1,GL_DIFFUSE,kolorZrodla);
-    g_print("\npoz św %2.2f, %2.2f, %2.2f, %2.2f",pozycjaZrodlaSwiatla,pozycjaZrodlaSwiatla[1],pozycjaZrodlaSwiatla[2],pozycjaZrodlaSwiatla[3]);
-    glEnable(GL_LIGHT1);
+glEnable(GL_LIGHT1);
 }
 void EkranRysujacy::PodajPozycjeZrodlaSwiatla(float * tutaj){
-    memcpy(tutaj,pozycjaZrodlaSwiatla,4);
+    memcpy(tutaj,pozycjaZrodlaSwiatla,4*sizeof(float));
 }
 void EkranRysujacy::UstawPozycjeZrodlaSwiatla(float * wedlugParametrow){
-    memcpy(pozycjaZrodlaSwiatla,wedlugParametrow,4);
+    memcpy(pozycjaZrodlaSwiatla,wedlugParametrow,4*sizeof(float));
+    g_print("\npoz św %2.2f, %2.2f, %2.2f, %2.2f",pozycjaZrodlaSwiatla[0],pozycjaZrodlaSwiatla[1],pozycjaZrodlaSwiatla[2],pozycjaZrodlaSwiatla[3]);
     glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodlaSwiatla);
 }
 void EkranRysujacy::WyszukujeIustawiamWskaznikiDoInnychModulow(){

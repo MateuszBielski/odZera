@@ -56,7 +56,20 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
     
     m_BeginX = event->x;
     m_BeginY = event->y;
-    return false;
+    //prawy przycisk
+    if (event->button == 3){
+        float pozycja[4];
+        ekran->PodajPozycjeZrodlaSwiatla(pozycja);
+       
+        float w = oknoSterowane->get_width();
+        float h = oknoSterowane->get_height();
+        pozycja[0]=8*(2.0 * m_BeginX - w) / w;
+        pozycja[1]=8*(h - 2.0 * m_BeginY) / h;
+        ekran->UstawPozycjeZrodlaSwiatla(pozycja);
+//        Komunikat("przycisk prawy");
+    }
+    oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
+    return true;
 }
 
 bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
@@ -81,12 +94,7 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
         
     }
     if (event->state & GDK_BUTTON3_MASK){
-        float pozycja[4];
-        ekran->PodajPozycjeZrodlaSwiatla(pozycja);
-        pozycja[0]+=2*m_DX/w;
-        pozycja[1]-=2*m_DY/h;
-        g_print("\npoz św %2.2f, %2.2f, %2.2f, %2.2f",pozycja[0],pozycja[1],pozycja[2],pozycja[3]);
-        ekran->UstawPozycjeZrodlaSwiatla(pozycja);
+        
     }
 	m_BeginX = x;
     m_BeginY = y;
