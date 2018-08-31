@@ -2,6 +2,9 @@
 
 Model::Model()
 {
+    polozenie3f[0] = 0.0f;
+    polozenie3f[1] = 0.0f;
+    polozenie3f[2] = 0.0f;
 }
 Model::~Model()
 {
@@ -47,12 +50,18 @@ void Model::Rysuj()
     glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
 }
+void Model::UstalPolozenie3f(float* zTablicy)
+{
+	for(short i= 0 ; i < 3 ; i++)polozenie3f[i] = zTablicy[i];
+}
 void Ostroslup::Rysuj(){
+    glTranslatef(polozenie3f[0],polozenie3f[1],polozenie3f[2]);
     float x=1.0;
 	float y=1.0;
-    
+    glPushMatrix();
+    glRotatef(90,1,0,0);
     for(int i =0; i < 3; i++){
-        glColor3f(0.4*i,0.3,0.0);
+        glColor3f(0.4*i,0.9,0.0);
         glTranslatef(0,0,0.5);
         glRotatef(-30,1,0,0);
         glBegin(GL_TRIANGLES);
@@ -64,4 +73,58 @@ void Ostroslup::Rysuj(){
         glTranslatef(0,0,-1);
         glRotatef(120,0,1,0);
     }
+    glPopMatrix();
+}
+void Kostka::Rysuj()
+{
+	glPushMatrix();
+    glTranslatef(polozenie3f[0],polozenie3f[1],polozenie3f[2]);
+    float x=1.0f, y = x, z = x;
+    glShadeModel(GL_FLAT);//cieniowanie kolorem GK_SMOOTH, GL_FLAT
+    
+    glBegin(GL_QUADS);
+    //przód
+    glColor3f(0.8,0.3,0.0);
+    glVertex3f(0,0,0);
+    glVertex3f(x,0,0);
+    glVertex3f(x,y,0);
+    glVertex3f(0,y,0);
+    
+    //tył
+    glColor3f(0.8,0.3,0.0);
+    
+    glVertex3f(0,0,-z);
+    glVertex3f(0,y,-z);
+    glVertex3f(x,y,-z);
+    glVertex3f(x,0,-z);
+    
+    //prawy
+    glColor3f(0.2,0.7,0.0);
+    glVertex3f(x,0,-z);
+    glVertex3f(x,y,-z);
+    glVertex3f(x,y,0);
+    glVertex3f(x,0,0);
+    
+    //lewy
+    glColor3f(0.2,0.7,0.0);
+    glVertex3f(0,0,-z);
+    glVertex3f(0,0,0);
+    glVertex3f(0,y,0);
+    glVertex3f(0,y,-z);
+    
+    //góra
+    glColor3f(0.2,0.0,0.8);
+    glVertex3f(0,y,0);
+    glVertex3f(x,y,0);
+    glVertex3f(x,y,-z);
+    glVertex3f(0,y,-z);
+    
+    //dół
+    glColor3f(0.2,0.0,0.8);
+    glVertex3f(0,0,0);
+    glVertex3f(0,0,-z);
+    glVertex3f(x,0,-z);
+    glVertex3f(x,0,0);
+    glEnd();
+    glPopMatrix();
 }

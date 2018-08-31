@@ -15,12 +15,15 @@ public:
     virtual int PolaczZkimPotrzebujeNaPoczatek(); 
     using spModel = std::shared_ptr<Model>;
     void Zaladuj(spModel);
+    //światło
+    spModel DajModelSwiatla();
+    void UstawPolozenieSwiatla(float *);
 private:
     using vec_spModel = std::vector<spModel>;
     vec_spModel mojeModele;
     
 	Model ostroslup;
-    
+    short modelSwiatla = 0;
 	
 };
 

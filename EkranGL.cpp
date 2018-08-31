@@ -91,6 +91,10 @@ SygnalRysuj EkranGL::EmitujSygnalTransformacja()
 {
 	return sTransformacja;
 }
+SygnalUstaw3f EkranGL::EmitujSygnalPolozenieSwiatla()
+{
+	return sPolozenieSwiatla;
+}
 void EkranGL::ZainstalujSieW(VBox& vbox)
 {
 	vbox.pack_start(*this);
@@ -110,6 +114,10 @@ int EkranGL::PolaczZkimPotrzebujeNaPoczatek()
     DodajDoListyWskaznikPolaczenia(
         UtrwalPolaczenie(EmitujSygnalRysuj().connect(sigc::mem_fun(Ref_WyszukajWModulach<Renderowanie>(nazwaModulu),&Renderowanie::Renderuj)))
         );
+        //światło
+    DodajDoListyWskaznikPolaczenia(
+        UtrwalPolaczenie(EmitujSygnalPolozenieSwiatla().connect(sigc::mem_fun(Ref_WyszukajWModulach<Renderowanie>(nazwaModulu),&Renderowanie::UstawPolozenieSwiatla)))
+        );    
     WyszukujeIustawiamWskaznikiDoInnychModulow();    
     return 2;
 }

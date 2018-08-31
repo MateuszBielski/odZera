@@ -36,12 +36,18 @@ int SterowanieMysza::PodlaczanieSygnalow(Gtk::Widget& okno)
         UtrwalPolaczenie(okno.signal_motion_notify_event().connect(sigc::mem_fun(*this,&SterowanieMysza::on_motion_notify_event))));
     DodajDoListyWskaznikPolaczenia(
         UtrwalPolaczenie(okno.signal_scroll_event().connect(sigc::mem_fun(*this,&SterowanieMysza::on_my_scroll_event))));
+    //światło
+    auto renderowanie = Ptr_WyszukajWModulach<Renderowanie>("renderowanie");
+    DodajCoUzywam(renderowanie);
+//    DodajDoListyWskaznikPolaczenia(
+//        UtrwalPolaczenie(this->EmitujSygnalPolozenieSwiatla().connect(sigc::mem_fun(renderowanie.get(),&Renderowanie::UstawPolozenieSwiatla))));
     return 3;
 }
 void SterowanieMysza::PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& ekran)
 {
 	DodajDoListyWskaznikPolaczenia(
         UtrwalPolaczenie(ekran.EmitujSygnalTransformacja().connect(sigc::mem_fun(*this,&SterowanieMysza::PrzeksztalcenieWidoku))));
+    
 }
 void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
     ekran = Ptr_WyszukajWModulach<EkranRysujacy>("ekranGL");
@@ -63,10 +69,9 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
        
         float w = oknoSterowane->get_width();
         float h = oknoSterowane->get_height();
-        pozycja[0]=8*(2.0 * m_BeginX - w) / w;
-        pozycja[1]=8*(h - 2.0 * m_BeginY) / h;
+        pozycja[0]=2*(2.0 * m_BeginX - w) / w;
+        pozycja[1]=2*(h - 2.0 * m_BeginY) / h;
         ekran->UstawPozycjeZrodlaSwiatla(pozycja);
-//        Komunikat("przycisk prawy");
     }
     oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     return true;
@@ -96,8 +101,8 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
     if (event->state & GDK_BUTTON3_MASK){
         float pozycja[4];
         ekran->PodajPozycjeZrodlaSwiatla(pozycja);
-        pozycja[0]+=8*m_DX/w;
-        pozycja[1]+=8*m_DY/h;
+        pozycja[0]+=4*m_DX/w;
+        pozycja[1]-=4*m_DY/h;
         ekran->UstawPozycjeZrodlaSwiatla(pozycja);
     }
 	m_BeginX = x;
@@ -127,3 +132,4 @@ bool SterowanieMysza::on_my_scroll_event(GdkEventScroll* scroll_event)
     oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     return true;
 }
+

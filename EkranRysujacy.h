@@ -11,6 +11,7 @@ public:
     virtual void WyszukujeIustawiamWskaznikiDoInnychModulow() override;
 protected:
     float pozycjaZrodlaSwiatla[4];
+    
 private:
 	virtual void UstawienieSceny();
 	virtual void RysujScene();

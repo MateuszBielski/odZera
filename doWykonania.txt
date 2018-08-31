@@ -1,0 +1,3 @@
+Przełączenie na tryb obrotu i przesuwania wybranego modelu
+Wybór modelu prawym, po włączeniu trybu wyboru
+przesuwanie elementów w płaszczyźnie ekranu.

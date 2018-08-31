@@ -13,6 +13,7 @@ using namespace Gtk;
 
 using ptrConf = Glib::RefPtr<Gdk::GL::Config>;
 using SygnalRysuj = sigc::signal<void, bool, int>;
+using SygnalUstaw3f = sigc::signal<void, float *>;
 class EkranGL : public GL::DrawingArea, public Modul
 {
   public:
@@ -26,6 +27,7 @@ class EkranGL : public GL::DrawingArea, public Modul
     
     SygnalRysuj EmitujSygnalRysuj();
 	SygnalRysuj EmitujSygnalTransformacja();
+    SygnalUstaw3f EmitujSygnalPolozenieSwiatla();
 protected:
     virtual bool on_configure_event(GdkEventConfigure* event);
     virtual bool on_expose_event(GdkEventExpose* event);
@@ -33,10 +35,10 @@ protected:
     virtual void UstawienieSceny();
     virtual void RysujScene();
     virtual void OswietlenieUstaw();
-//    virtual void UstawPozycjeZrodlaSwiatla(float *){};
-    
-	SygnalRysuj sTransformacja;
+	
+    SygnalRysuj sTransformacja;
     SygnalRysuj sRysuj;
+    SygnalUstaw3f sPolozenieSwiatla;
 private:
     ptrConf glconfig;
     bool KonfiguracjaGL();
