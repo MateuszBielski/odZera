@@ -16,6 +16,7 @@ public:
     using spModel = std::shared_ptr<Model>;
     void Zaladuj(spModel);
     //światło
+	void WskazModelSwiatla(short );
     spModel DajModelSwiatla();
     void UstawPolozenieSwiatla(float *);
 private:

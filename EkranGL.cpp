@@ -29,6 +29,7 @@ bool EkranGL::KonfiguracjaGL()
 }
 void EkranGL::Inicjuj()
 {
+	this->set_size_request(600,600);
 	if(!KonfiguracjaGL()) return;
     set_gl_capability(glconfig);
     add_events(Gdk::BUTTON1_MOTION_MASK|Gdk::BUTTON_PRESS_MASK); 
@@ -42,9 +43,7 @@ bool EkranGL::on_configure_event(GdkEventConfigure* event)
 	if (!gldrawable->gl_begin(get_gl_context()))
     return false;
 	UstawienieSceny();
-//	invalidate();
 	OswietlenieUstaw();
-	//RysujScene();
 	if (gldrawable->is_double_buffered())
       gldrawable->swap_buffers();
     else

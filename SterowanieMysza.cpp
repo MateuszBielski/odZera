@@ -36,12 +36,7 @@ int SterowanieMysza::PodlaczanieSygnalow(Gtk::Widget& okno)
         UtrwalPolaczenie(okno.signal_motion_notify_event().connect(sigc::mem_fun(*this,&SterowanieMysza::on_motion_notify_event))));
     DodajDoListyWskaznikPolaczenia(
         UtrwalPolaczenie(okno.signal_scroll_event().connect(sigc::mem_fun(*this,&SterowanieMysza::on_my_scroll_event))));
-    //światło
-    auto renderowanie = Ptr_WyszukajWModulach<Renderowanie>("renderowanie");
-    DodajCoUzywam(renderowanie);
-//    DodajDoListyWskaznikPolaczenia(
-//        UtrwalPolaczenie(this->EmitujSygnalPolozenieSwiatla().connect(sigc::mem_fun(renderowanie.get(),&Renderowanie::UstawPolozenieSwiatla))));
-    return 3;
+   return 3;
 }
 void SterowanieMysza::PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& ekran)
 {

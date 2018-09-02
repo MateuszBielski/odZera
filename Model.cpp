@@ -13,6 +13,10 @@ Model::~Model()
     if(kolory) delete [] kolory;
     if(normalne) delete [] normalne;
 }
+void Model::UzywajPushMatrix(bool jak)
+{
+	czyPushMatrix = jak;
+}
 void Model::RysujOstroslup()
 {
 	float x=1.0;
@@ -33,32 +37,26 @@ void Model::RysujOstroslup()
     }
     
 }
-
 void Model::Rysuj()
 {
-    g_print("\nModel::Rysuj");
-    glEnableClientState( GL_VERTEX_ARRAY );
-    glVertexPointer( 3, GL_FLOAT, 0, vertexy );
-    
-    glEnableClientState(GL_COLOR_ARRAY);
-    glColorPointer(3, GL_FLOAT, 0, kolory);
-	
-	glEnableClientState(GL_NORMAL_ARRAY);
-	glNormalPointer( GL_FLOAT, 0, normalne );
-    glDrawElements( GL_TRIANGLE_STRIP, ileIndeksow, GL_UNSIGNED_INT,indeksy);
-    glDisableClientState( GL_VERTEX_ARRAY );
-    glDisableClientState(GL_COLOR_ARRAY);
-	glDisableClientState(GL_NORMAL_ARRAY);
+	if(czyPushMatrix)glPushMatrix();
+    glTranslatef(polozenie3f[0],polozenie3f[1],polozenie3f[2]);
+	if(mnozeniePrzezMacierz != nullptr)glMultMatrixf(mnozeniePrzezMacierz);
+	RysujGeometrie();
+	if(czyPushMatrix)glPopMatrix();
 }
+
+
 void Model::UstalPolozenie3f(float* zTablicy)
 {
 	for(short i= 0 ; i < 3 ; i++)polozenie3f[i] = zTablicy[i];
 }
-void Ostroslup::Rysuj(){
-    glTranslatef(polozenie3f[0],polozenie3f[1],polozenie3f[2]);
+
+
+void Ostroslup::RysujGeometrie(){
     float x=1.0;
 	float y=1.0;
-    glPushMatrix();
+    
     glRotatef(90,1,0,0);
     for(int i =0; i < 3; i++){
         glColor3f(0.4*i,0.9,0.0);
@@ -73,12 +71,10 @@ void Ostroslup::Rysuj(){
         glTranslatef(0,0,-1);
         glRotatef(120,0,1,0);
     }
-    glPopMatrix();
+    
 }
-void Kostka::Rysuj()
+void Kostka::RysujGeometrie()
 {
-	glPushMatrix();
-    glTranslatef(polozenie3f[0],polozenie3f[1],polozenie3f[2]);
     float x=1.0f, y = x, z = x;
     glShadeModel(GL_FLAT);//cieniowanie kolorem GK_SMOOTH, GL_FLAT
     
@@ -126,5 +122,17 @@ void Kostka::Rysuj()
     glVertex3f(x,0,-z);
     glVertex3f(x,0,0);
     glEnd();
-    glPopMatrix();
 }
+//poniższe to pozostałość po użyciu tablicy wierzchołków w starszym innym projekcie
+	/*glEnableClientState( GL_VERTEX_ARRAY );
+    glVertexPointer( 3, GL_FLOAT, 0, vertexy );
+    
+    glEnableClientState(GL_COLOR_ARRAY);
+    glColorPointer(3, GL_FLOAT, 0, kolory);
+	
+	glEnableClientState(GL_NORMAL_ARRAY);
+	glNormalPointer( GL_FLOAT, 0, normalne );
+    glDrawElements( GL_TRIANGLE_STRIP, ileIndeksow, GL_UNSIGNED_INT,indeksy);
+    glDisableClientState( GL_VERTEX_ARRAY );
+    glDisableClientState(GL_COLOR_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);*/
