@@ -18,6 +18,7 @@ void Renderowanie::RysujModele()
 int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 {
     Zaladuj(std::make_shared<Kostka>());
+	Zaladuj(std::make_shared<Kostka>());
     Zaladuj(std::make_shared<Ostroslup>());
     
     WskazModelSwiatla(0);

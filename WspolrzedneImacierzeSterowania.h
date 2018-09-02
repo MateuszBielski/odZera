@@ -1,6 +1,6 @@
 #ifndef WSPOLRZEDNEIMACIERZESTEROWANIA_H
 #define WSPOLRZEDNEIMACIERZESTEROWANIA_H
-
+#include <gtkmm.h>
 class WspolrzedneImacierzeSterowania
 {
 public:

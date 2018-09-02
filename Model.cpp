@@ -40,8 +40,9 @@ void Model::RysujOstroslup()
 void Model::Rysuj()
 {
 	if(czyPushMatrix)glPushMatrix();
-    glTranslatef(polozenie3f[0],polozenie3f[1],polozenie3f[2]);
 	if(mnozeniePrzezMacierz != nullptr)glMultMatrixf(mnozeniePrzezMacierz);
+	if(wskWektoraPolozeniaWyliczanyWsterowaniu != nullptr)memcpy(polozenie3f,wskWektoraPolozeniaWyliczanyWsterowaniu,3*sizeof(float));
+	glTranslatef(polozenie3f[0],polozenie3f[1],polozenie3f[2]);
 	RysujGeometrie();
 	if(czyPushMatrix)glPopMatrix();
 }
@@ -51,9 +52,10 @@ void Model::UstalPolozenie3f(float* zTablicy)
 {
 	for(short i= 0 ; i < 3 ; i++)polozenie3f[i] = zTablicy[i];
 }
-void Model::PobierzWskaznikNaMacierzObrotu(float* zAdresu)
+void Model::WezWskaznikiMacierzyObrotuIpolozenia(float* adrMacierzy,float* adrPolozenia)
 {
-	mnozeniePrzezMacierz = zAdresu;
+	mnozeniePrzezMacierz = adrMacierzy;
+	wskWektoraPolozeniaWyliczanyWsterowaniu = adrPolozenia;
 }
 
 

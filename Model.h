@@ -13,11 +13,12 @@ public :
     virtual void Wygladzanie(bool){};//do zastanowienia się czy warto przy każdym obiekcie to ustalać
     void UstalPolozenie3f(float*);
 	void UzywajPushMatrix(bool);
-	void PobierzWskaznikNaMacierzObrotu(float *);
+	void WezWskaznikiMacierzyObrotuIpolozenia(float *,float *);
 protected:
     float polozenie3f[3];
     bool czyPushMatrix = false;
 	float* mnozeniePrzezMacierz = nullptr;
+	float* wskWektoraPolozeniaWyliczanyWsterowaniu = nullptr; 
 	
 	//funkcje i kontener funkcji - nie chce działać zgodnie z założeniem
 	using wsk_ProstaFunkcja = void(*)();

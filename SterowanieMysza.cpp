@@ -1,24 +1,11 @@
 #include "SterowanieMysza.h"
 #include <trackball.h>
-#define DIG_2_RAD (G_PI / 180.0)
-#define RAD_2_DIG (180.0 / G_PI)
+
 
 SterowanieMysza::SterowanieMysza()
 {
 	Komunikat("SterowanieMysza");
-	aktualneSterowanie->m_Pos[0] = 0.0;
-    aktualneSterowanie->m_Pos[1] = 0.0;
-    aktualneSterowanie->m_Pos[2] = -10.0;
-
-    float sine = sin(0.5 * 0.0 * DIG_2_RAD);
-    aktualneSterowanie->m_Quat[0] = sine;
-    aktualneSterowanie->m_Quat[1] = 0;
-    aktualneSterowanie->m_Quat[2] = 0;
-    aktualneSterowanie->m_Quat[3] = cos(0.5 * 0.0 * DIG_2_RAD);
-	aktualneSterowanie->m_QuatDiff[0] = 0.0;
-    aktualneSterowanie->m_QuatDiff[1] = 0.0;
-    aktualneSterowanie->m_QuatDiff[2] = 0.0;
-    aktualneSterowanie->m_QuatDiff[3] = 1.0;
+	calegoWidoku.m_Pos[2] = -10.0;
 }
 
 SterowanieMysza::~SterowanieMysza()
@@ -44,7 +31,7 @@ void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
 	renderowanie =  Ptr_WyszukajWModulach<Renderowanie>("renderowanie");
 	renderowanie->PobierzWskaznikNaWektorPrzesuniecia(&calegoWidoku.m_Pos[0]);
 	renderowanie->PobierzWskaznikNaMacierzObrotu(&calegoWidoku.macierzObrotu[0][0]);
-	renderowanie->DajWybranyModel()->PobierzWskaznikNaMacierzObrotu(&wybranegoObiektu.macierzObrotu[0][0]);
+	renderowanie->DajWybranyModel()->WezWskaznikiMacierzyObrotuIpolozenia(&wybranegoObiektu.macierzObrotu[0][0],&wybranegoObiektu.m_Pos[0]);
 }
 bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 {
