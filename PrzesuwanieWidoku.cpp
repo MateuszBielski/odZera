@@ -21,8 +21,6 @@ int PrzesuwanieWidoku::PodlaczanieSygnalow(Gtk::Widget& okno)
 }
 void PrzesuwanieWidoku::PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& ekran)
 {
-	DodajDoListyWskaznikPolaczenia(
-        UtrwalPolaczenie(ekran.EmitujSygnalTransformacja().connect(sigc::mem_fun(*this,&PrzesuwanieWidoku::PrzeksztalcenieWidoku))));
 }
 bool PrzesuwanieWidoku::on_button_press_event(GdkEventButton* event)
 {

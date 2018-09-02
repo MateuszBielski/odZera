@@ -55,6 +55,8 @@
     <File Name="PrzekierowanieSygnalow.cpp"/>
     <File Name="PrzesuwanieWidoku.h"/>
     <File Name="PrzesuwanieWidoku.cpp"/>
+    <File Name="WspolrzedneImacierzeSterowania.h"/>
+    <File Name="WspolrzedneImacierzeSterowania.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Renderowanie">
     <File Name="Renderowanie.h"/>

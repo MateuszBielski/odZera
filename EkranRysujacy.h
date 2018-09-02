@@ -8,7 +8,6 @@ public:
 	~EkranRysujacy();
     void UstawPozycjeZrodlaSwiatla(float *) ;
     void PodajPozycjeZrodlaSwiatla(float *);
-    virtual void WyszukujeIustawiamWskaznikiDoInnychModulow() override;
 protected:
     float pozycjaZrodlaSwiatla[4];
     

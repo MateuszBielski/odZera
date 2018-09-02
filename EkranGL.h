@@ -12,7 +12,6 @@
 using namespace Gtk;
 
 using ptrConf = Glib::RefPtr<Gdk::GL::Config>;
-using SygnalRysuj = sigc::signal<void, bool, int>;
 using SygnalUstaw3f = sigc::signal<void, float *>;
 class EkranGL : public GL::DrawingArea, public Modul
 {
@@ -24,9 +23,8 @@ class EkranGL : public GL::DrawingArea, public Modul
     void invalidate(){get_window()->invalidate_rect(get_allocation(), false);}
     void update(){ get_window()->process_updates(false); }
     virtual int PolaczZkimPotrzebujeNaPoczatek();
-    
-    SygnalRysuj EmitujSygnalRysuj();
-	SygnalRysuj EmitujSygnalTransformacja();
+    virtual void WyszukujeIustawiamWskaznikiDoInnychModulow() override;
+	
     SygnalUstaw3f EmitujSygnalPolozenieSwiatla();
 protected:
     virtual bool on_configure_event(GdkEventConfigure* event);
@@ -35,9 +33,9 @@ protected:
     virtual void UstawienieSceny();
     virtual void RysujScene();
     virtual void OswietlenieUstaw();
+	using spRenderowanie = std::shared_ptr<Renderowanie>;
+	spRenderowanie renderowanie;
 	
-    SygnalRysuj sTransformacja;
-    SygnalRysuj sRysuj;
     SygnalUstaw3f sPolozenieSwiatla;
 private:
     ptrConf glconfig;

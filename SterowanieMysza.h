@@ -11,10 +11,7 @@ public:
 	SterowanieMysza();
 	~SterowanieMysza();
     virtual int PodlaczanieSygnalow(Gtk::Widget& okno);
-	virtual void PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& );
-	virtual void PrzeksztalcenieWidoku( bool b, int i);
     virtual void WyszukujeIustawiamWskaznikiDoInnychModulow() override;
-    //światło
     
     
 private:
@@ -27,7 +24,8 @@ private:
 
     using spEkranRysujacy = std::shared_ptr<EkranRysujacy>;
     spEkranRysujacy ekran;
-    //światło
+	using spRenderowanie = std::shared_ptr<Renderowanie>;
+	spRenderowanie renderowanie;
     
 };
 

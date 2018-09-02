@@ -25,7 +25,6 @@ int Sterowanie::PolaczZkimPotrzebujeNaPoczatek()
 	
 	auto& ekran = Ref_WyszukajWModulach<EkranGL>(nazwaModulu);
 	PodlaczanieSygnalow(ekran);
-	PodlaczSygnalPrzeksztalcenieWidoku(ekran);
     WyszukujeIustawiamWskaznikiDoInnychModulow();
     if(zablokujPolaczeniaPrzyStarcie)ZablokujPolaczenia();
     return 2;
@@ -37,14 +36,14 @@ void Sterowanie::KopiujZinnegoModulu(spModul zDanymi)
 }
 void Sterowanie::KopiujParametrySterowania(Sterowanie& doSkopiowania)
 {
-    m_BeginX = doSkopiowania.m_BeginX;
-    m_BeginY = doSkopiowania.m_BeginY;
-    m_DX = doSkopiowania.m_DX;
-    m_DY = doSkopiowania.m_DY;
-    for(short i =0 ; i < 3; i++)m_Pos[i] = doSkopiowania.m_Pos[i];
+    aktualneSterowanie->m_BeginX = doSkopiowania.aktualneSterowanie->m_BeginX;
+    aktualneSterowanie->m_BeginY = doSkopiowania.aktualneSterowanie->m_BeginY;
+    aktualneSterowanie->m_DX = doSkopiowania.aktualneSterowanie->m_DX;
+    aktualneSterowanie->m_DY = doSkopiowania.aktualneSterowanie->m_DY;
+    for(short i =0 ; i < 3; i++)aktualneSterowanie->m_Pos[i] = doSkopiowania.aktualneSterowanie->m_Pos[i];
     for(short i =0 ; i < 4; i++){
         for(short j =0 ; j < 4; j++){
-            macierzObrotu[i][j] = doSkopiowania.macierzObrotu[i][j];
+            aktualneSterowanie->macierzObrotu[i][j] = doSkopiowania.aktualneSterowanie->macierzObrotu[i][j];
         }
     }
         

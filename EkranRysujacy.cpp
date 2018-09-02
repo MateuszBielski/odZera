@@ -57,9 +57,9 @@ void EkranRysujacy::RysujScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-	sTransformacja.emit(true,21);//argumenty całkowicie przypadkowe - zastosowane na potrzeby sprawdzenia działania
+	renderowanie->TransformacjaCalegoWidoku(); 
 	glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodlaSwiatla);
-    sRysuj.emit(true,23);
+	renderowanie->RysujModele();
 }
 
 void EkranRysujacy::PodajPozycjeZrodlaSwiatla(float * tutaj){
@@ -67,10 +67,6 @@ void EkranRysujacy::PodajPozycjeZrodlaSwiatla(float * tutaj){
 }
 void EkranRysujacy::UstawPozycjeZrodlaSwiatla(float * wedlugParametrow){
     memcpy(pozycjaZrodlaSwiatla,wedlugParametrow,4*sizeof(float));
-//    g_print("\npoz św %2.2f, %2.2f, %2.2f, %2.2f",pozycjaZrodlaSwiatla[0],pozycjaZrodlaSwiatla[1],pozycjaZrodlaSwiatla[2],pozycjaZrodlaSwiatla[3]);
    
     sPolozenieSwiatla.emit(wedlugParametrow);//odbiera renderowanie dla modelu symbolizującego światło .
-}
-void EkranRysujacy::WyszukujeIustawiamWskaznikiDoInnychModulow(){
-    
 }

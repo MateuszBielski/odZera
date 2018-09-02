@@ -1,7 +1,6 @@
 #ifndef RENDEROWANIE_H
 #define RENDEROWANIE_H
 #include <Komunikat.h>
-#include <EkranGL.h>
 #include <Model.h>
 #include <sigc++/sigc++.h>
 #include <Modul.h>
@@ -11,7 +10,10 @@ class Renderowanie : public Modul, public sigc::trackable
 public:
 	Renderowanie();
 	~Renderowanie();
-	void Renderuj( bool b, int i);
+	void TransformacjaCalegoWidoku();
+	void PobierzWskaznikNaWektorPrzesuniecia(float * );
+	void PobierzWskaznikNaMacierzObrotu(float *);
+	void RysujModele();
     virtual int PolaczZkimPotrzebujeNaPoczatek(); 
     using spModel = std::shared_ptr<Model>;
     void Zaladuj(spModel);
@@ -25,6 +27,8 @@ private:
     
 	Model ostroslup;
     short modelSwiatla = 0;
+	float* przesunieciePoczatkowe;
+	float* macierzObrotu;
 	
 };
 

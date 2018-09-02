@@ -82,14 +82,7 @@ void EkranGL::RysujScene()
 	Komunikat("EkranGL::RysujScene");
 	
 }
-SygnalRysuj EkranGL::EmitujSygnalRysuj() 
-{
-	return sRysuj;
-}
-SygnalRysuj EkranGL::EmitujSygnalTransformacja()
-{
-	return sTransformacja;
-}
+
 SygnalUstaw3f EkranGL::EmitujSygnalPolozenieSwiatla()
 {
 	return sPolozenieSwiatla;
@@ -110,13 +103,14 @@ int EkranGL::PolaczZkimPotrzebujeNaPoczatek()
     
 	std::string nazwaModulu = ("renderowanie");
 	DodajCoUzywam((*mapaZmodulami)[nazwaModulu]);
-    DodajDoListyWskaznikPolaczenia(
-        UtrwalPolaczenie(EmitujSygnalRysuj().connect(sigc::mem_fun(Ref_WyszukajWModulach<Renderowanie>(nazwaModulu),&Renderowanie::Renderuj)))
-        );
+
         //światło
     DodajDoListyWskaznikPolaczenia(
         UtrwalPolaczenie(EmitujSygnalPolozenieSwiatla().connect(sigc::mem_fun(Ref_WyszukajWModulach<Renderowanie>(nazwaModulu),&Renderowanie::UstawPolozenieSwiatla)))
         );    
     WyszukujeIustawiamWskaznikiDoInnychModulow();    
     return 2;
+}
+void EkranGL::WyszukujeIustawiamWskaznikiDoInnychModulow(){
+    renderowanie = Ptr_WyszukajWModulach<Renderowanie>("renderowanie");
 }

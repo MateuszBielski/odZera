@@ -10,7 +10,6 @@ public :
     void RysujOstroslup();
 	virtual void Rysuj();
 	virtual void RysujGeometrie(){};
-	void UstawMojeFunkcjeRysujace(){};
     virtual void Wygladzanie(bool){};//do zastanowienia się czy warto przy każdym obiekcie to ustalać
     void UstalPolozenie3f(float*);
 	void UzywajPushMatrix(bool);//do usunięcia
