@@ -21,6 +21,7 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
     Zaladuj(std::make_shared<Ostroslup>());
     
     WskazModelSwiatla(0);
+	WybierzModelOnumerze(1);
     return 0;
 }
 void Renderowanie::Zaladuj(spModel wskaznikNaModel)
@@ -29,18 +30,26 @@ void Renderowanie::Zaladuj(spModel wskaznikNaModel)
     mojeModele.push_back(wskaznikNaModel);
 }
 void Renderowanie::WskazModelSwiatla(short numerModelu){
-	modelSwiatla = numerModelu;
-	mojeModele.at(modelSwiatla)->UzywajPushMatrix(true);
+	modelSwiatlaMaNumer = numerModelu;
+	mojeModele.at(modelSwiatlaMaNumer)->UzywajPushMatrix(true);
 }
 void Renderowanie::UstawPolozenieSwiatla(float* zeWskaznika)
 {
-    mojeModele.at(modelSwiatla)->UstalPolozenie3f(zeWskaznika);
+    mojeModele.at(modelSwiatlaMaNumer)->UstalPolozenie3f(zeWskaznika);
 }
 Renderowanie::spModel Renderowanie::DajModelSwiatla()
 {
-	return mojeModele.at(modelSwiatla);
+	return mojeModele.at(modelSwiatlaMaNumer);
+}
+void Renderowanie::WybierzModelOnumerze(short tym){
+	numerModeluWybranego = tym;
+	mojeModele.at(numerModeluWybranego)->UzywajPushMatrix(true);
 }
 
+Renderowanie::spModel Renderowanie::DajWybranyModel()
+{
+	return mojeModele.at(numerModeluWybranego);
+}
 void Renderowanie::TransformacjaCalegoWidoku()
 {
 	glTranslatef(przesunieciePoczatkowe[0], przesunieciePoczatkowe[1], przesunieciePoczatkowe[2]);

@@ -7,6 +7,9 @@ public:
 	WspolrzedneImacierzeSterowania();
 	~WspolrzedneImacierzeSterowania();
 
+	float m_QuatDiff[4];
+    float m_Quat[4];
+	
 	float m_BeginX;
     float m_BeginY;
     float m_DX;

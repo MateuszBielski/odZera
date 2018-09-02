@@ -42,8 +42,9 @@ int SterowanieMysza::PodlaczanieSygnalow(Gtk::Widget& okno)
 void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
 	ekran = Ptr_WyszukajWModulach<EkranRysujacy>("ekranGL");
 	renderowanie =  Ptr_WyszukajWModulach<Renderowanie>("renderowanie");
-	renderowanie->PobierzWskaznikNaWektorPrzesuniecia(&calegoWidoku->m_Pos[0]);
-	renderowanie->PobierzWskaznikNaMacierzObrotu(&calegoWidoku->macierzObrotu[0][0]);
+	renderowanie->PobierzWskaznikNaWektorPrzesuniecia(&calegoWidoku.m_Pos[0]);
+	renderowanie->PobierzWskaznikNaMacierzObrotu(&calegoWidoku.macierzObrotu[0][0]);
+	renderowanie->DajWybranyModel()->PobierzWskaznikNaMacierzObrotu(&wybranegoObiektu.macierzObrotu[0][0]);
 }
 bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 {

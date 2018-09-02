@@ -1,11 +1,11 @@
 #include "PrzekierowanieSygnalow.h"
-#include "PrzesuwanieWidoku.h"
+#include "Sterowanie.h"
 
 PrzekierowanieSygnalow::PrzekierowanieSygnalow()
 {
     nazwa = "przekierowanieSygnalow";
     Komunikat("Przekierowanie sygnałów");
-    czyPrzesuwaj = false;
+    czyWybranyObiekt = false;
 }
 
 PrzekierowanieSygnalow::~PrzekierowanieSygnalow()
@@ -27,26 +27,11 @@ void PrzekierowanieSygnalow::UstawIzainstalujPrzyciskW(VBox& vbox)
 }
 void PrzekierowanieSygnalow::PrzelaczSterowanie()
 {
-	czyPrzesuwaj = !czyPrzesuwaj;
-    short sterowanie;
-    sterowanie = czyPrzesuwaj?PRZESUWANIE_PO_EKRANIE:OBROTY_ARCBALL;
-    UstawSterowanie(sterowanie);
+	czyWybranyObiekt = !czyWybranyObiekt;
+	UstawSterowanie(czyWybranyObiekt?WYBRANYM_OBIEKTEM:CALYM_WIDOKIEM);
 }
-void PrzekierowanieSygnalow::UstawSterowanie(short jakie)
+void PrzekierowanieSygnalow::UstawSterowanie(short czym)
 {
-    g_print("\nustawiono sterowanie %d",jakie);
-    auto przesuwanie = (*mapaZmodulami)["przesuwanieWidoku"];
-    auto obroty = (*mapaZmodulami)["sterowanie"];
-    switch(jakie){
-        case OBROTY_ARCBALL:
-            przesuwanie->ZablokujPolaczenia();
-            obroty->KopiujZinnegoModulu(przesuwanie);
-            obroty->OdblokujPolaczenia();
-        break;
-        case PRZESUWANIE_PO_EKRANIE:
-            obroty->ZablokujPolaczenia();
-            przesuwanie->KopiujZinnegoModulu(obroty);
-            przesuwanie->OdblokujPolaczenia();
-        break;
-    }
+	auto sterowanie = Ptr_WyszukajWModulach<Sterowanie>("sterowanie");
+    sterowanie->Steruj(czym);
 }

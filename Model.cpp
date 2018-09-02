@@ -51,6 +51,10 @@ void Model::UstalPolozenie3f(float* zTablicy)
 {
 	for(short i= 0 ; i < 3 ; i++)polozenie3f[i] = zTablicy[i];
 }
+void Model::PobierzWskaznikNaMacierzObrotu(float* zAdresu)
+{
+	mnozeniePrzezMacierz = zAdresu;
+}
 
 
 void Ostroslup::RysujGeometrie(){

@@ -12,10 +12,11 @@ public :
 	virtual void RysujGeometrie(){};
     virtual void Wygladzanie(bool){};//do zastanowienia się czy warto przy każdym obiekcie to ustalać
     void UstalPolozenie3f(float*);
-	void UzywajPushMatrix(bool);//do usunięcia
+	void UzywajPushMatrix(bool);
+	void PobierzWskaznikNaMacierzObrotu(float *);
 protected:
     float polozenie3f[3];
-    bool czyPushMatrix = false;//do usunięcia
+    bool czyPushMatrix = false;
 	float* mnozeniePrzezMacierz = nullptr;
 	
 	//funkcje i kontener funkcji - nie chce działać zgodnie z założeniem

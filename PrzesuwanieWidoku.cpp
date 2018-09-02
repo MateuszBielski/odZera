@@ -24,14 +24,14 @@ void PrzesuwanieWidoku::PodlaczSygnalPrzeksztalcenieWidoku(EkranGL& ekran)
 }
 bool PrzesuwanieWidoku::on_button_press_event(GdkEventButton* event)
 {
-    m_BeginX = event->x;
-    m_BeginY = event->y;
+    aktualneSterowanie->m_BeginX = event->x;
+    aktualneSterowanie->m_BeginY = event->y;
     return false;
 }
 void PrzesuwanieWidoku::PrzeksztalcenieWidoku(bool b, int i)
 {
-    glTranslatef(m_Pos[0], m_Pos[1], m_Pos[2]);
-    glMultMatrixf(&macierzObrotu[0][0]);
+    glTranslatef(aktualneSterowanie->m_Pos[0],aktualneSterowanie->m_Pos[1],aktualneSterowanie->m_Pos[2]);
+    glMultMatrixf(&aktualneSterowanie->macierzObrotu[0][0]);
 }
 bool PrzesuwanieWidoku::on_motion_notify_event(GdkEventMotion* event)
 {
@@ -39,14 +39,14 @@ bool PrzesuwanieWidoku::on_motion_notify_event(GdkEventMotion* event)
     
     nowaPozycjaX = event->x;
     nowaPozycjaY = event->y;
-    m_DX = nowaPozycjaX - m_BeginX;
-    m_DY = nowaPozycjaY - m_BeginY;
-    m_BeginX = nowaPozycjaX;
-    m_BeginY = nowaPozycjaY;
+    aktualneSterowanie->m_DX = nowaPozycjaX - aktualneSterowanie->m_BeginX;
+    aktualneSterowanie->m_DY = nowaPozycjaY - aktualneSterowanie->m_BeginY;
+    aktualneSterowanie->m_BeginX = nowaPozycjaX;
+    aktualneSterowanie->m_BeginY = nowaPozycjaY;
     float w = oknoSterowane->get_width();
     float h = oknoSterowane->get_height();
-    m_Pos[0] += 2*m_DX/w;
-    m_Pos[1] -= 2*m_DY/h;
+    aktualneSterowanie->m_Pos[0] += 2*aktualneSterowanie->m_DX/w;
+    aktualneSterowanie->m_Pos[1] -= 2*aktualneSterowanie->m_DY/h;
 //        std::cout << std::bitset<24>(oknoSterowane->get_events())<<std::endl;
 	oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     return true;

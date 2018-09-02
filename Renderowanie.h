@@ -17,6 +17,9 @@ public:
     virtual int PolaczZkimPotrzebujeNaPoczatek(); 
     using spModel = std::shared_ptr<Model>;
     void Zaladuj(spModel);
+	void WybierzModelOnumerze(short);
+	spModel DajWybranyModel();
+	
     //światło
 	void WskazModelSwiatla(short );
     spModel DajModelSwiatla();
@@ -26,7 +29,8 @@ private:
     vec_spModel mojeModele;
     
 	Model ostroslup;
-    short modelSwiatla = 0;
+    short modelSwiatlaMaNumer = 0;
+	short numerModeluWybranego = 1;
 	float* przesunieciePoczatkowe;
 	float* macierzObrotu;
 	

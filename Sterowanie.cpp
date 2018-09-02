@@ -3,6 +3,7 @@
 Sterowanie::Sterowanie()
 {
 	nazwa = "sterowanie";
+	Steruj(CALYM_WIDOKIEM);
 }
 
 Sterowanie::~Sterowanie()
@@ -49,4 +50,14 @@ void Sterowanie::KopiujParametrySterowania(Sterowanie& doSkopiowania)
         
     g_print("\nSterowanie::KopiujParametrySterowania");
 }
-
+void Sterowanie::Steruj(int czym)
+{
+	switch (czym){
+		case CALYM_WIDOKIEM : 
+			aktualneSterowanie = &calegoWidoku;
+			break;
+		case WYBRANYM_OBIEKTEM : 
+			aktualneSterowanie = &wybranegoObiektu;
+			break;
+	}
+}
