@@ -44,7 +44,9 @@ Renderowanie::spModel Renderowanie::DajModelSwiatla()
 }
 void Renderowanie::WybierzModelOnumerze(short tym){
 	numerModeluWybranego = tym;
-	mojeModele.at(numerModeluWybranego)->UzywajPushMatrix(true);
+    auto wybranyModel = mojeModele.at(numerModeluWybranego);
+	wybranyModel->UzywajPushMatrix(true);
+//    wybranyModel->PokazujWartosci(true);
 }
 
 Renderowanie::spModel Renderowanie::DajWybranyModel()

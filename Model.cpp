@@ -1,5 +1,15 @@
 #include <Model.h>
 
+void WyswietlWartosciMacierzy4x4(float * macierz16){
+   float m[4][4];
+   memcpy(m,macierz16,16*sizeof(float));
+   g_print("\nModel::Rysuj macierz modelview");
+   for (int i = 0 ; i < 4 ; i++){
+       g_print("\n");
+       for (int j = 0 ; j < 4 ; j++)
+        g_print("  %2.3f",m[j][i]);
+   } 
+}
 Model::Model()
 {
     polozenie3f[0] = 0.0f;
@@ -40,9 +50,14 @@ void Model::RysujOstroslup()
 void Model::Rysuj()
 {
 	if(czyPushMatrix)glPushMatrix();
-	if(mnozeniePrzezMacierz != nullptr)glMultMatrixf(mnozeniePrzezMacierz);
 	if(wskWektoraPolozeniaWyliczanyWsterowaniu != nullptr)memcpy(polozenie3f,wskWektoraPolozeniaWyliczanyWsterowaniu,3*sizeof(float));
 	glTranslatef(polozenie3f[0],polozenie3f[1],polozenie3f[2]);
+    if(mnozeniePrzezMacierz != nullptr)glMultMatrixf(mnozeniePrzezMacierz);
+    if(pokazujWartosci){
+        float macierzModelWidok[16];
+        glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
+        WyswietlWartosciMacierzy4x4(macierzModelWidok);
+    }
 	RysujGeometrie();
 	if(czyPushMatrix)glPopMatrix();
 }
@@ -68,13 +83,14 @@ void Ostroslup::RysujGeometrie(){
         glColor3f(0.4*i,0.9,0.0);
         glTranslatef(0,0,0.5);
         glRotatef(-30,1,0,0);
+        glNormal3f(0,0,1.0);
         glBegin(GL_TRIANGLES);
         glVertex3f(-x,-y,0);
         glVertex3f(x,-y,0);
         glVertex3f(0,y,0);
         glEnd();
         glRotatef(30,1,0,0);
-        glTranslatef(0,0,-1);
+        glTranslatef(0,0,-0.5);
         glRotatef(120,0,1,0);
     }
     
@@ -82,47 +98,52 @@ void Ostroslup::RysujGeometrie(){
 void Kostka::RysujGeometrie()
 {
     float x=1.0f, y = x, z = x;
-    glShadeModel(GL_FLAT);//cieniowanie kolorem GK_SMOOTH, GL_FLAT
-    
+    //glShadeModel(GL_FLAT);//cieniowanie kolorem GK_SMOOTH, GL_FLAT
+    glTranslatef(-0.5,-0.5,0.5);
     glBegin(GL_QUADS);
     //przód
-    glColor3f(0.8,0.3,0.0);
+    glNormal3f(0,0,1.0);
+    glColor3f(0.8,0.8,0.8);
     glVertex3f(0,0,0);
     glVertex3f(x,0,0);
     glVertex3f(x,y,0);
     glVertex3f(0,y,0);
     
     //tył
-    glColor3f(0.8,0.3,0.0);
-    
+    glNormal3f(0,0,-1.0);
+    //glColor3f(0.8,0.3,0.0);
     glVertex3f(0,0,-z);
     glVertex3f(0,y,-z);
     glVertex3f(x,y,-z);
     glVertex3f(x,0,-z);
     
     //prawy
-    glColor3f(0.2,0.7,0.0);
+    glNormal3f(1.0,0,0);
+    //glColor3f(0.2,0.7,0.0);
     glVertex3f(x,0,-z);
     glVertex3f(x,y,-z);
     glVertex3f(x,y,0);
     glVertex3f(x,0,0);
     
     //lewy
-    glColor3f(0.2,0.7,0.0);
+    glNormal3f(-1.0,0,0);
+    //glColor3f(0.2,0.7,0.0);
     glVertex3f(0,0,-z);
     glVertex3f(0,0,0);
     glVertex3f(0,y,0);
     glVertex3f(0,y,-z);
     
     //góra
-    glColor3f(0.2,0.0,0.8);
+    glNormal3f(0,1.0,0);
+    //glColor3f(0.2,0.0,0.8);
     glVertex3f(0,y,0);
     glVertex3f(x,y,0);
     glVertex3f(x,y,-z);
     glVertex3f(0,y,-z);
     
     //dół
-    glColor3f(0.2,0.0,0.8);
+    glNormal3f(0,-1.0,0);
+    //glColor3f(0.2,0.0,0.8);
     glVertex3f(0,0,0);
     glVertex3f(0,0,-z);
     glVertex3f(x,0,-z);
