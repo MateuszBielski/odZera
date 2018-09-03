@@ -1,15 +1,6 @@
 #include <Model.h>
+#include <FunkcjeIstruktury.h>
 
-void WyswietlWartosciMacierzy4x4(float * macierz16){
-   float m[4][4];
-   memcpy(m,macierz16,16*sizeof(float));
-   g_print("\nModel::Rysuj macierz modelview");
-   for (int i = 0 ; i < 4 ; i++){
-       g_print("\n");
-       for (int j = 0 ; j < 4 ; j++)
-        g_print("  %2.3f",m[j][i]);
-   } 
-}
 Model::Model()
 {
     polozenie3f[0] = 0.0f;

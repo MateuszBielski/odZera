@@ -2,6 +2,7 @@
 #include <trackball.h>
 
 
+
 SterowanieMysza::SterowanieMysza()
 {
 	Komunikat("SterowanieMysza");
@@ -42,15 +43,18 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
     
     aktualneSterowanie->m_BeginX = event->x;
     aktualneSterowanie->m_BeginY = event->y;
+    POINT mysz2D(aktualneSterowanie->m_BeginX,aktualneSterowanie->m_BeginY);
+    TransformujPikselDoPrzestrzeniSceny(mysz2D,5.0,aktualneSterowanie->poprzedniaPozycjaKursoraMyszy3D);
     //prawy przycisk
     if (event->button == 3){
         float pozycja[4];
         ekran->PodajPozycjeZrodlaSwiatla(pozycja);
-       
+        //for(int i = 0 ; i<3 ; i++)pozycja[i] = aktualneSterowanie->biezacaPozycjaKursoraMyszy3D[i];
         float w = oknoSterowane->get_width();
         float h = oknoSterowane->get_height();
         pozycja[0]=2*(2.0 * aktualneSterowanie->m_BeginX - w) / w;
         pozycja[1]=2*(h - 2.0 * aktualneSterowanie->m_BeginY) / h;
+        
         ekran->UstawPozycjeZrodlaSwiatla(pozycja);
     }
     oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
@@ -65,6 +69,8 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
     float y = event->y;
     aktualneSterowanie->m_DX = x - aktualneSterowanie->m_BeginX;
     aktualneSterowanie->m_DY = y - aktualneSterowanie->m_BeginY;
+    POINT mysz2D(x,y);
+    TransformujPikselDoPrzestrzeniSceny(mysz2D,5.0,aktualneSterowanie->biezacaPozycjaKursoraMyszy3D);
     if (event->state & GDK_BUTTON1_MASK) {
       Trackball::trackball(aktualneSterowanie->m_QuatDiff,
                            (2.0 * aktualneSterowanie->m_BeginX - w) / w,
@@ -76,8 +82,9 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
 
     }
     if (event->state & GDK_BUTTON2_MASK){
-        aktualneSterowanie->m_Pos[0] += 2*aktualneSterowanie->m_DX/w;
-        aktualneSterowanie->m_Pos[1] -= 2*aktualneSterowanie->m_DY/h;
+        aktualneSterowanie->ZmienM_Pos_zgodnieZruchemKursora3D();
+        /*aktualneSterowanie->m_Pos[0] += 2*aktualneSterowanie->m_DX/w;
+        aktualneSterowanie->m_Pos[1] -= 2*aktualneSterowanie->m_DY/h;*/
         
     }
     if (event->state & GDK_BUTTON3_MASK){
@@ -89,6 +96,7 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
     }
 	aktualneSterowanie->m_BeginX = x;
     aktualneSterowanie->m_BeginY = y;
+    aktualneSterowanie->BiezaceUstawJakoPoprzednie_PozycjaKursoraMyszy3D();
 //        std::cout << std::bitset<24>(oknoSterowane->get_events())<<std::endl;
 	oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     //nie może być false bo przekazuje jakby jeszcze kilka razy do obsługi i nie pozwala przeliczyć sie macierzom

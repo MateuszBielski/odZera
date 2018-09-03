@@ -1,9 +1,10 @@
 #ifndef STEROWANIEMYSZA_H
 #define STEROWANIEMYSZA_H
 #include <gtkmm.h>
+
 #include <Sterowanie.h>
 #include <EkranRysujacy.h>
-
+#include <FunkcjeIstruktury.h>
 
 class SterowanieMysza : public Sterowanie
 {

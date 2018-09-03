@@ -31,6 +31,7 @@
       <File Name="EkranGL.cpp"/>
       <File Name="EkranRysujacy.cpp"/>
     </VirtualDirectory>
+    <File Name="FunkcjeIstruktury.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="headers">
     <File Name="Komunikat.h"/>
@@ -43,6 +44,7 @@
       <File Name="OknoGL.h"/>
       <File Name="OknoProba2.h"/>
     </VirtualDirectory>
+    <File Name="FunkcjeIstruktury.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Sterowanie">
     <File Name="Sterowanie.cpp"/>
