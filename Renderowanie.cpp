@@ -22,7 +22,7 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
     Zaladuj(std::make_shared<Ostroslup>());
     
     WskazModelSwiatla(0);
-	WybierzModelOnumerze(1);
+	WybierzModelOnumerze(2);
     return 0;
 }
 void Renderowanie::Zaladuj(spModel wskaznikNaModel)
@@ -55,8 +55,8 @@ Renderowanie::spModel Renderowanie::DajWybranyModel()
 }
 void Renderowanie::TransformacjaCalegoWidoku()
 {
-	glTranslatef(przesunieciePoczatkowe[0], przesunieciePoczatkowe[1], przesunieciePoczatkowe[2]);
     glMultMatrixf(macierzObrotu);//lub &macierzObrotu[0]
+	glTranslatef(przesunieciePoczatkowe[0], przesunieciePoczatkowe[1], przesunieciePoczatkowe[2]);
 }
 void Renderowanie::PobierzWskaznikNaWektorPrzesuniecia(float* adres)
 {

@@ -1,5 +1,5 @@
 #include "EkranRysujacy.h"
-
+#include "FunkcjeIstruktury.h"
 EkranRysujacy::EkranRysujacy()
 {
 	Komunikat("EkranRysujacy");
@@ -57,9 +57,16 @@ void EkranRysujacy::RysujScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
-	renderowanie->TransformacjaCalegoWidoku(); 
+	
+    renderowanie->TransformacjaCalegoWidoku(); 
 	glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodlaSwiatla);
-	renderowanie->RysujModele();
+    renderowanie->RysujModele();
+    
+    /*float macierzModelWidok[16];
+    glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
+    WyswietlWartosciMacierzy4x4(macierzModelWidok);
+    float punkt3D[3];
+    TransformujPikselDoPrzestrzeniSceny(300,300,punkt3D);*/
 }
 
 void EkranRysujacy::PodajPozycjeZrodlaSwiatla(float * tutaj){

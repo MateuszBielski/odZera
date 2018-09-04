@@ -17,7 +17,7 @@ public :
 	void WezWskaznikiMacierzyObrotuIpolozenia(float *,float *);
 protected:
     float polozenie3f[3];
-    bool czyPushMatrix = false;
+    bool czyPushMatrix = true;
     bool pokazujWartosci = false;
 	float* mnozeniePrzezMacierz = nullptr;
 	float* wskWektoraPolozeniaWyliczanyWsterowaniu = nullptr; 

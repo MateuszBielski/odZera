@@ -31,7 +31,7 @@ WspolrzedneImacierzeSterowania::~WspolrzedneImacierzeSterowania()
 }
 void WspolrzedneImacierzeSterowania::ZmienM_Pos_zgodnieZruchemKursora3D()
 {
-	g_print("\nZmienM_Pos %2.3f %2.3f %2.3f ",m_Pos[0],m_Pos[1],m_Pos[2]);
+//	g_print("\nZmienM_Pos %2.3f %2.3f %2.3f ",m_Pos[0],m_Pos[1],m_Pos[2]);
     for(int i = 0 ; i < 3 ; i++)m_Pos[i] += biezacaPozycjaKursoraMyszy3D[i] - poprzedniaPozycjaKursoraMyszy3D[i];
 }
 

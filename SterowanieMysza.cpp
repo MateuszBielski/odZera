@@ -43,19 +43,28 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
     
     aktualneSterowanie->m_BeginX = event->x;
     aktualneSterowanie->m_BeginY = event->y;
-    POINT mysz2D(aktualneSterowanie->m_BeginX,aktualneSterowanie->m_BeginY);
-    TransformujPikselDoPrzestrzeniSceny(mysz2D,5.0,aktualneSterowanie->poprzedniaPozycjaKursoraMyszy3D);
+    int ix = static_cast<int>(event->x);
+    int iy = static_cast<int>(event->y);
+    if (event->button == 2){
+//        TransformujPikselDoPrzestrzeniSceny(ix,iy,aktualneSterowanie->poprzedniaPozycjaKursoraMyszy3D);
+//    g_print("\nSterowanieMysza::on_button_press_event 3D %2.3f  %2.3f  %2.3f  \n",aktualneSterowanie->biezacaPozycjaKursoraMyszy3D[0],aktualneSterowanie->biezacaPozycjaKursoraMyszy3D[1],aktualneSterowanie->biezacaPozycjaKursoraMyszy3D[2]);
+        
+    }
     //prawy przycisk
     if (event->button == 3){
-        float pozycja[4];
-        ekran->PodajPozycjeZrodlaSwiatla(pozycja);
+        float pozycja4f[4];
+        float pozycja3f[3];
+        ekran->PodajPozycjeZrodlaSwiatla(pozycja4f);
+        
+        TransformujPikselDoPrzestrzeniSceny(ix,iy,pozycja3f);
+        for(int i = 0 ; i < 3 ; i++)pozycja4f[i] = pozycja3f[i];
         //for(int i = 0 ; i<3 ; i++)pozycja[i] = aktualneSterowanie->biezacaPozycjaKursoraMyszy3D[i];
-        float w = oknoSterowane->get_width();
+       /* float w = oknoSterowane->get_width();
         float h = oknoSterowane->get_height();
         pozycja[0]=2*(2.0 * aktualneSterowanie->m_BeginX - w) / w;
-        pozycja[1]=2*(h - 2.0 * aktualneSterowanie->m_BeginY) / h;
+        pozycja[1]=2*(h - 2.0 * aktualneSterowanie->m_BeginY) / h;*/
         
-        ekran->UstawPozycjeZrodlaSwiatla(pozycja);
+        ekran->UstawPozycjeZrodlaSwiatla(pozycja4f);
     }
     oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     return true;
@@ -67,10 +76,11 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
     float h = oknoSterowane->get_height();
     float x = event->x;
     float y = event->y;
+    int ix = static_cast<int>(event->x);
+    int iy = static_cast<int>(event->y);
     aktualneSterowanie->m_DX = x - aktualneSterowanie->m_BeginX;
     aktualneSterowanie->m_DY = y - aktualneSterowanie->m_BeginY;
-    POINT mysz2D(x,y);
-    TransformujPikselDoPrzestrzeniSceny(mysz2D,5.0,aktualneSterowanie->biezacaPozycjaKursoraMyszy3D);
+    if(aktualneSterowanie->m_DX == 0 && aktualneSterowanie->m_DY)return true;
     if (event->state & GDK_BUTTON1_MASK) {
       Trackball::trackball(aktualneSterowanie->m_QuatDiff,
                            (2.0 * aktualneSterowanie->m_BeginX - w) / w,
@@ -82,17 +92,20 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
 
     }
     if (event->state & GDK_BUTTON2_MASK){
+        TransformujPikselDoPrzestrzeniSceny(aktualneSterowanie->m_BeginX,aktualneSterowanie->m_BeginY,aktualneSterowanie->poprzedniaPozycjaKursoraMyszy3D);
+        TransformujPikselDoPrzestrzeniSceny(ix,iy,aktualneSterowanie->biezacaPozycjaKursoraMyszy3D);
         aktualneSterowanie->ZmienM_Pos_zgodnieZruchemKursora3D();
         /*aktualneSterowanie->m_Pos[0] += 2*aktualneSterowanie->m_DX/w;
         aktualneSterowanie->m_Pos[1] -= 2*aktualneSterowanie->m_DY/h;*/
         
     }
     if (event->state & GDK_BUTTON3_MASK){
-        float pozycja[4];
-        ekran->PodajPozycjeZrodlaSwiatla(pozycja);
-        pozycja[0]+=4*aktualneSterowanie->m_DX/w;
-        pozycja[1]-=4*aktualneSterowanie->m_DY/h;
-        ekran->UstawPozycjeZrodlaSwiatla(pozycja);
+        float pozycjaWczesniejsza[4];
+        float pozycjaBiezaca[3];
+        ekran->PodajPozycjeZrodlaSwiatla(pozycjaWczesniejsza);
+        TransformujPikselDoPrzestrzeniSceny(ix,iy,pozycjaBiezaca);
+        for(int i = 0 ; i < 3 ; i++) pozycjaWczesniejsza[i] += pozycjaBiezaca[i];
+        ekran->UstawPozycjeZrodlaSwiatla(pozycjaWczesniejsza);
     }
 	aktualneSterowanie->m_BeginX = x;
     aktualneSterowanie->m_BeginY = y;
