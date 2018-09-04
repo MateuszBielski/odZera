@@ -55,12 +55,13 @@ Renderowanie::spModel Renderowanie::DajWybranyModel()
 }
 void Renderowanie::TransformacjaCalegoWidoku()
 {
+    glTranslatef(0,0,-15);
     glMultMatrixf(macierzObrotu);//lub &macierzObrotu[0]
-	glTranslatef(przesunieciePoczatkowe[0], przesunieciePoczatkowe[1], przesunieciePoczatkowe[2]);
+	glTranslatef(przesuniecie[0], przesuniecie[1], przesuniecie[2]);
 }
 void Renderowanie::PobierzWskaznikNaWektorPrzesuniecia(float* adres)
 {
-	przesunieciePoczatkowe = adres;
+	przesuniecie = adres;
 }
 
 void Renderowanie::PobierzWskaznikNaMacierzObrotu(float* adres)

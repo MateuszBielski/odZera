@@ -6,7 +6,7 @@
 SterowanieMysza::SterowanieMysza()
 {
 	Komunikat("SterowanieMysza");
-	calegoWidoku.m_Pos[2] = -10.0;
+//	calegoWidoku.m_Pos[2] = -10.0;
 }
 
 SterowanieMysza::~SterowanieMysza()

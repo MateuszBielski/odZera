@@ -31,7 +31,7 @@ private:
 	Model ostroslup;
     short modelSwiatlaMaNumer = 0;
 	short numerModeluWybranego = 1;
-	float* przesunieciePoczatkowe;
+	float* przesuniecie;
 	float* macierzObrotu;
 	
 };
