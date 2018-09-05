@@ -16,7 +16,9 @@ public:
     float m_BeginY;
     float m_DX;
     float m_DY;
+    float wspolrzednaZpodKursorem = 0.7;
     float m_Pos[3];
+    float przesunieciePierwotne[3];
     float macierzObrotu[4][4];
     float biezacaPozycjaKursoraMyszy3D[3];
     float poprzedniaPozycjaKursoraMyszy3D[3];

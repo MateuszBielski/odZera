@@ -8,6 +8,6 @@ struct POINT{
     float x,y;
 };
 void WyswietlWartosciMacierzy4x4(float * macierz16);
-void TransformujPikselDoPrzestrzeniSceny(POINT pozycjaPiksela,float glebokosc,float*  pozycjaPunktu3D);
+void TransformujPikselDoPrzestrzeniSceny(int x, int y,float glebokosc,float*  pozycjaPunktu3D);
 void TransformujPikselDoPrzestrzeniSceny(int x, int y,float*  pozycjaPunktu3D);
 #endif

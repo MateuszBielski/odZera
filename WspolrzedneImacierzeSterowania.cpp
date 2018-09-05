@@ -6,6 +6,7 @@ WspolrzedneImacierzeSterowania::WspolrzedneImacierzeSterowania()
 {
 	for(int i = 0; i < 3 ; i++){
         m_Pos[i] = 0.0;
+        przesunieciePierwotne[i] = 0.0;
         biezacaPozycjaKursoraMyszy3D[i] = 0.0;
         poprzedniaPozycjaKursoraMyszy3D[i] = 0.0;
     }

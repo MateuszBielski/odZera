@@ -6,7 +6,7 @@
 SterowanieMysza::SterowanieMysza()
 {
 	Komunikat("SterowanieMysza");
-//	calegoWidoku.m_Pos[2] = -10.0;
+	calegoWidoku.przesunieciePierwotne[2] = -15.0;
 }
 
 SterowanieMysza::~SterowanieMysza()
@@ -30,6 +30,7 @@ int SterowanieMysza::PodlaczanieSygnalow(Gtk::Widget& okno)
 void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
 	ekran = Ptr_WyszukajWModulach<EkranRysujacy>("ekranGL");
 	renderowanie =  Ptr_WyszukajWModulach<Renderowanie>("renderowanie");
+    renderowanie->PobierzWskaznikNaWektorPrzesunieciaPierwotnego(&calegoWidoku.przesunieciePierwotne[0]);
 	renderowanie->PobierzWskaznikNaWektorPrzesuniecia(&calegoWidoku.m_Pos[0]);
 	renderowanie->PobierzWskaznikNaMacierzObrotu(&calegoWidoku.macierzObrotu[0][0]);
 	renderowanie->DajWybranyModel()->WezWskaznikiMacierzyObrotuIpolozenia(&wybranegoObiektu.macierzObrotu[0][0],&wybranegoObiektu.m_Pos[0]);
@@ -46,9 +47,11 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
     int ix = static_cast<int>(event->x);
     int iy = static_cast<int>(event->y);
     if (event->button == 2){
-//        TransformujPikselDoPrzestrzeniSceny(ix,iy,aktualneSterowanie->poprzedniaPozycjaKursoraMyszy3D);
-//    g_print("\nSterowanieMysza::on_button_press_event 3D %2.3f  %2.3f  %2.3f  \n",aktualneSterowanie->biezacaPozycjaKursoraMyszy3D[0],aktualneSterowanie->biezacaPozycjaKursoraMyszy3D[1],aktualneSterowanie->biezacaPozycjaKursoraMyszy3D[2]);
-        
+       float temp;
+       glReadPixels( ix, iy, 1, 1,GL_DEPTH_COMPONENT, GL_FLOAT, &temp );
+       if(temp < 1.0)aktualneSterowanie->wspolrzednaZpodKursorem = temp;
+//       g_print("\nwspolrzednaZpodKursorem %2.3f",aktualneSterowanie->wspolrzednaZpodKursorem);
+        TransformujPikselDoPrzestrzeniSceny(ix,iy,aktualneSterowanie->wspolrzednaZpodKursorem,aktualneSterowanie->poprzedniaPozycjaKursoraMyszy3D);
     }
     //prawy przycisk
     if (event->button == 3){
@@ -56,13 +59,8 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
         float pozycja3f[3];
         ekran->PodajPozycjeZrodlaSwiatla(pozycja4f);
         
-        TransformujPikselDoPrzestrzeniSceny(ix,iy,pozycja3f);
+        TransformujPikselDoPrzestrzeniSceny(ix,iy,0.8,pozycja3f);
         for(int i = 0 ; i < 3 ; i++)pozycja4f[i] = pozycja3f[i];
-        //for(int i = 0 ; i<3 ; i++)pozycja[i] = aktualneSterowanie->biezacaPozycjaKursoraMyszy3D[i];
-       /* float w = oknoSterowane->get_width();
-        float h = oknoSterowane->get_height();
-        pozycja[0]=2*(2.0 * aktualneSterowanie->m_BeginX - w) / w;
-        pozycja[1]=2*(h - 2.0 * aktualneSterowanie->m_BeginY) / h;*/
         
         ekran->UstawPozycjeZrodlaSwiatla(pozycja4f);
     }
@@ -92,8 +90,9 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
 
     }
     if (event->state & GDK_BUTTON2_MASK){
-        TransformujPikselDoPrzestrzeniSceny(aktualneSterowanie->m_BeginX,aktualneSterowanie->m_BeginY,aktualneSterowanie->poprzedniaPozycjaKursoraMyszy3D);
-        TransformujPikselDoPrzestrzeniSceny(ix,iy,aktualneSterowanie->biezacaPozycjaKursoraMyszy3D);
+        TransformujPikselDoPrzestrzeniSceny(aktualneSterowanie->m_BeginX,aktualneSterowanie->m_BeginY,aktualneSterowanie->wspolrzednaZpodKursorem,
+                                            aktualneSterowanie->poprzedniaPozycjaKursoraMyszy3D);
+        TransformujPikselDoPrzestrzeniSceny(ix,iy,aktualneSterowanie->wspolrzednaZpodKursorem,aktualneSterowanie->biezacaPozycjaKursoraMyszy3D);
         aktualneSterowanie->ZmienM_Pos_zgodnieZruchemKursora3D();
         /*aktualneSterowanie->m_Pos[0] += 2*aktualneSterowanie->m_DX/w;
         aktualneSterowanie->m_Pos[1] -= 2*aktualneSterowanie->m_DY/h;*/
@@ -103,7 +102,7 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
         float pozycjaWczesniejsza[4];
         float pozycjaBiezaca[3];
         ekran->PodajPozycjeZrodlaSwiatla(pozycjaWczesniejsza);
-        TransformujPikselDoPrzestrzeniSceny(ix,iy,pozycjaBiezaca);
+        TransformujPikselDoPrzestrzeniSceny(ix,iy,pozycjaBiezaca);//,0.8
         for(int i = 0 ; i < 3 ; i++) pozycjaWczesniejsza[i] += pozycjaBiezaca[i];
         ekran->UstawPozycjeZrodlaSwiatla(pozycjaWczesniejsza);
     }
@@ -119,10 +118,10 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
 bool SterowanieMysza::on_my_scroll_event(GdkEventScroll* scroll_event)
 {
     if (!scroll_event->direction){//GDK_SCROLL_UP
-        aktualneSterowanie->m_Pos[2] *=0.9;
+        calegoWidoku.przesunieciePierwotne[2] *=0.9;
     }
     if (scroll_event->direction){//GDK_SCROLL_DOWN
-        aktualneSterowanie->m_Pos[2] /=0.9;
+        calegoWidoku.przesunieciePierwotne[2] /=0.9;
     }
     oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     return true;

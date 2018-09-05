@@ -11,6 +11,7 @@ public:
 	Renderowanie();
 	~Renderowanie();
 	void TransformacjaCalegoWidoku();
+    void PobierzWskaznikNaWektorPrzesunieciaPierwotnego(float * );
 	void PobierzWskaznikNaWektorPrzesuniecia(float * );
 	void PobierzWskaznikNaMacierzObrotu(float *);
 	void RysujModele();
@@ -31,8 +32,9 @@ private:
 	Model ostroslup;
     short modelSwiatlaMaNumer = 0;
 	short numerModeluWybranego = 1;
-	float* przesuniecie;
-	float* macierzObrotu;
+	float* przesuniecie = nullptr;
+    float* przesunieciePierwotne = nullptr;
+	float* macierzObrotu = nullptr;
 	
 };
 

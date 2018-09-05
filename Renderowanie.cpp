@@ -55,9 +55,17 @@ Renderowanie::spModel Renderowanie::DajWybranyModel()
 }
 void Renderowanie::TransformacjaCalegoWidoku()
 {
-    glTranslatef(0,0,-15);
+    if(przesunieciePierwotne == nullptr || przesuniecie == nullptr || przesuniecie == nullptr){
+        g_print("\n nie ustawione wskaźniki na przemieszcznia i obroty całego widoku");
+        return;
+    }
+    glTranslatef(przesunieciePierwotne[0],przesunieciePierwotne[1],przesunieciePierwotne[2]);
     glMultMatrixf(macierzObrotu);//lub &macierzObrotu[0]
 	glTranslatef(przesuniecie[0], przesuniecie[1], przesuniecie[2]);
+}
+void Renderowanie::PobierzWskaznikNaWektorPrzesunieciaPierwotnego(float* adres)
+{
+	przesunieciePierwotne = adres;
 }
 void Renderowanie::PobierzWskaznikNaWektorPrzesuniecia(float* adres)
 {
