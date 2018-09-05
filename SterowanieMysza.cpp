@@ -58,8 +58,8 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
         float pozycja4f[4];
         float pozycja3f[3];
         ekran->PodajPozycjeZrodlaSwiatla(pozycja4f);
-        
-        TransformujPikselDoPrzestrzeniSceny(ix,iy,0.8,pozycja3f);
+//        g_print("\non_press przed transform %2.3f  %2.3f   %2.3f",pozycja4f[0],pozycja4f[1],pozycja4f[2]);
+        TransformujPikselDoPrzestrzeniSceny(ix,iy,0.7,pozycja3f);
         for(int i = 0 ; i < 3 ; i++)pozycja4f[i] = pozycja3f[i];
         
         ekran->UstawPozycjeZrodlaSwiatla(pozycja4f);
@@ -94,16 +94,19 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
                                             aktualneSterowanie->poprzedniaPozycjaKursoraMyszy3D);
         TransformujPikselDoPrzestrzeniSceny(ix,iy,aktualneSterowanie->wspolrzednaZpodKursorem,aktualneSterowanie->biezacaPozycjaKursoraMyszy3D);
         aktualneSterowanie->ZmienM_Pos_zgodnieZruchemKursora3D();
-        /*aktualneSterowanie->m_Pos[0] += 2*aktualneSterowanie->m_DX/w;
-        aktualneSterowanie->m_Pos[1] -= 2*aktualneSterowanie->m_DY/h;*/
         
     }
     if (event->state & GDK_BUTTON3_MASK){
         float pozycjaWczesniejsza[4];
         float pozycjaBiezaca[3];
         ekran->PodajPozycjeZrodlaSwiatla(pozycjaWczesniejsza);
-        TransformujPikselDoPrzestrzeniSceny(ix,iy,pozycjaBiezaca);//,0.8
-        for(int i = 0 ; i < 3 ; i++) pozycjaWczesniejsza[i] += pozycjaBiezaca[i];
+        TransformujPikselDoPrzestrzeniSceny(ix,iy,0.7,pozycjaBiezaca);//,0.8
+        
+        for(int i = 0 ; i < 3 ; i++){
+//            g_print("\n %2.3f  %2.3f",pozycjaWczesniejsza[i],pozycjaBiezaca[i]);
+            pozycjaWczesniejsza[i] += pozycjaBiezaca[i] - pozycjaWczesniejsza[i];
+        }
+//        g_print("\n");
         ekran->UstawPozycjeZrodlaSwiatla(pozycjaWczesniejsza);
     }
 	aktualneSterowanie->m_BeginX = x;
