@@ -61,7 +61,7 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 //        g_print("\non_press przed transform %2.3f  %2.3f   %2.3f",pozycja4f[0],pozycja4f[1],pozycja4f[2]);
         TransformujPikselDoPrzestrzeniSceny(ix,iy,0.7,pozycja3f);
         for(int i = 0 ; i < 3 ; i++)pozycja4f[i] = pozycja3f[i];
-        
+//        g_print("\npozycja4f on_button po transformacja %2.3f  %2.3f %2.3f  %2.3f",pozycja4f[0],pozycja4f[1],pozycja4f[2],pozycja4f[3]);
         ekran->UstawPozycjeZrodlaSwiatla(pozycja4f);
     }
     oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
@@ -78,16 +78,18 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
     int iy = static_cast<int>(event->y);
     aktualneSterowanie->m_DX = x - aktualneSterowanie->m_BeginX;
     aktualneSterowanie->m_DY = y - aktualneSterowanie->m_BeginY;
-    if(aktualneSterowanie->m_DX == 0 && aktualneSterowanie->m_DY)return true;
+    if(aktualneSterowanie->m_DX == 0 && aktualneSterowanie->m_DY == 0)return true;
     if (event->state & GDK_BUTTON1_MASK) {
-      Trackball::trackball(aktualneSterowanie->m_QuatDiff,
+//      glPushMatrix();
+//      glLoadIdentity();
+        Trackball::trackball(aktualneSterowanie->m_QuatDiff,
                            (2.0 * aktualneSterowanie->m_BeginX - w) / w,
                            (h - 2.0 * aktualneSterowanie->m_BeginY) / h,
                            (2.0 * x - w) / w,
                            (h - 2.0 * y) / h);
 		Trackball::add_quats(aktualneSterowanie->m_QuatDiff, aktualneSterowanie->m_Quat, aktualneSterowanie->m_Quat);
 		Trackball::build_rotmatrix(aktualneSterowanie->macierzObrotu, aktualneSterowanie->m_Quat);
-
+//        glPopMatrix();
     }
     if (event->state & GDK_BUTTON2_MASK){
         TransformujPikselDoPrzestrzeniSceny(aktualneSterowanie->m_BeginX,aktualneSterowanie->m_BeginY,aktualneSterowanie->wspolrzednaZpodKursorem,
@@ -101,12 +103,12 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
         float pozycjaBiezaca[3];
         ekran->PodajPozycjeZrodlaSwiatla(pozycjaWczesniejsza);
         TransformujPikselDoPrzestrzeniSceny(ix,iy,0.7,pozycjaBiezaca);//,0.8
-        
         for(int i = 0 ; i < 3 ; i++){
 //            g_print("\n %2.3f  %2.3f",pozycjaWczesniejsza[i],pozycjaBiezaca[i]);
             pozycjaWczesniejsza[i] += pozycjaBiezaca[i] - pozycjaWczesniejsza[i];
         }
 //        g_print("\n");
+//        g_print("\npozycja4f on_motion %2.3f  %2.3f %2.3f  %2.3f",pozycjaWczesniejsza[0],pozycjaWczesniejsza[1],pozycjaWczesniejsza[2],pozycjaWczesniejsza[3]);
         ekran->UstawPozycjeZrodlaSwiatla(pozycjaWczesniejsza);
     }
 	aktualneSterowanie->m_BeginX = x;

@@ -59,6 +59,7 @@ void EkranRysujacy::RysujScene()
     glLoadIdentity();
 	
     renderowanie->TransformacjaCalegoWidoku(); 
+//    g_print("\npozycja4f RysujScene %2.3f  %2.3f %2.3f  %2.3f",pozycjaZrodlaSwiatla[0],pozycjaZrodlaSwiatla[1],pozycjaZrodlaSwiatla[2],pozycjaZrodlaSwiatla[3]);
 	glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodlaSwiatla);
     renderowanie->RysujModele();
     
