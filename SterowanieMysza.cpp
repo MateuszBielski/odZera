@@ -37,10 +37,10 @@ void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
 }
 bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 {
-    aktualneSterowanie->m_QuatDiff[0] = 0.0;
+    /*aktualneSterowanie->m_QuatDiff[0] = 0.0;
     aktualneSterowanie->m_QuatDiff[1] = 0.0;
     aktualneSterowanie->m_QuatDiff[2] = 0.0;
-    aktualneSterowanie->m_QuatDiff[3] = 1.0;
+    aktualneSterowanie->m_QuatDiff[3] = 1.0;*/
     
     aktualneSterowanie->m_BeginX = event->x;
     aktualneSterowanie->m_BeginY = event->y;
@@ -58,7 +58,7 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
         float pozycja4f[4];
         float pozycja3f[3];
         ekran->PodajPozycjeZrodlaSwiatla(pozycja4f);
-//        g_print("\non_press przed transform %2.3f  %2.3f   %2.3f",pozycja4f[0],pozycja4f[1],pozycja4f[2]);
+
         TransformujPikselDoPrzestrzeniSceny(ix,iy,0.7,pozycja3f);
         for(int i = 0 ; i < 3 ; i++)pozycja4f[i] = pozycja3f[i];
 //        g_print("\npozycja4f on_button po transformacja %2.3f  %2.3f %2.3f  %2.3f",pozycja4f[0],pozycja4f[1],pozycja4f[2],pozycja4f[3]);
@@ -87,7 +87,12 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
                            (h - 2.0 * aktualneSterowanie->m_BeginY) / h,
                            (2.0 * x - w) / w,
                            (h - 2.0 * y) / h);
-		Trackball::add_quats(aktualneSterowanie->m_QuatDiff, aktualneSterowanie->m_Quat, aktualneSterowanie->m_Quat);
+        //aktualneSterowanie->m_QuatDiff w tym kwaternione należy oś obrotu dodatkowo obócić
+        float kat;
+        float os[3];
+        Quat_to_Phi_a(aktualneSterowanie->m_Quat,&kat,os);
+        g_print("\non_motion kąt oś %2.3f  %2.3f   %2.3f    %2.3f",kat,os[0],os[1],os[2]);
+        Trackball::add_quats(aktualneSterowanie->m_QuatDiff, aktualneSterowanie->m_Quat, aktualneSterowanie->m_Quat);
 		Trackball::build_rotmatrix(aktualneSterowanie->macierzObrotu, aktualneSterowanie->m_Quat);
 //        glPopMatrix();
     }

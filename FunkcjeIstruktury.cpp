@@ -58,3 +58,13 @@ void TransformujPikselDoPrzestrzeniSceny(int x, int y,float*  pozycjaPunktu3D)
 //       g_print("%2.3f  ",pozycjaPunktu3D[i]);
    }
 }
+void Quat_to_Phi_a(float * q,float* phi,float* a){
+    register int i = 0;
+    float phi_przez_dwa = acos(q[3]);
+    float sin_phi_przez_dwa = sin(phi_przez_dwa);
+    for(i ; i < 3 ; i++){
+        a[i] = (q[i])/sin_phi_przez_dwa;
+    }
+    *phi = 2 * phi_przez_dwa;
+    
+}

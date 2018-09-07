@@ -42,8 +42,10 @@ void Model::Rysuj()
 {
 	if(czyPushMatrix)glPushMatrix();
 	if(wskWektoraPolozeniaWyliczanyWsterowaniu != nullptr)memcpy(polozenie3f,wskWektoraPolozeniaWyliczanyWsterowaniu,3*sizeof(float));
-	glTranslatef(polozenie3f[0],polozenie3f[1],polozenie3f[2]);
-    if(mnozeniePrzezMacierz != nullptr)glMultMatrixf(mnozeniePrzezMacierz);
+    glTranslatef(polozenie3f[0],polozenie3f[1],polozenie3f[2]);
+    if(obrotIndywidualny != nullptr){
+        glMultMatrixf(obrotIndywidualny);
+    }
     if(pokazujWartosci){
         float macierzModelWidok[16];
         glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
@@ -60,7 +62,7 @@ void Model::UstalPolozenie3f(float* zTablicy)
 }
 void Model::WezWskaznikiMacierzyObrotuIpolozenia(float* adrMacierzy,float* adrPolozenia)
 {
-	mnozeniePrzezMacierz = adrMacierzy;
+	obrotIndywidualny = adrMacierzy;
 	wskWektoraPolozeniaWyliczanyWsterowaniu = adrPolozenia;
 }
 

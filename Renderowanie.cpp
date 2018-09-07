@@ -46,7 +46,7 @@ void Renderowanie::WybierzModelOnumerze(short tym){
 	numerModeluWybranego = tym;
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
 	wybranyModel->UzywajPushMatrix(true);
-//    wybranyModel->PokazujWartosci(true);
+    wybranyModel->PokazujWartosci(false);
 }
 
 Renderowanie::spModel Renderowanie::DajWybranyModel()
@@ -60,7 +60,7 @@ void Renderowanie::TransformacjaCalegoWidoku()
         return;
     }
     glTranslatef(przesunieciePierwotne[0],przesunieciePierwotne[1],przesunieciePierwotne[2]);
-    glMultMatrixf(macierzObrotu);//lub &macierzObrotu[0]
+    glMultMatrixf(macierzObrotu);
 	glTranslatef(przesuniecie[0], przesuniecie[1], przesuniecie[2]);
 }
 void Renderowanie::PobierzWskaznikNaWektorPrzesunieciaPierwotnego(float* adres)

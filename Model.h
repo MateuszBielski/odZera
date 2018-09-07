@@ -19,7 +19,7 @@ protected:
     float polozenie3f[3];
     bool czyPushMatrix = true;
     bool pokazujWartosci = false;
-	float* mnozeniePrzezMacierz = nullptr;
+	float* obrotIndywidualny = nullptr;
 	float* wskWektoraPolozeniaWyliczanyWsterowaniu = nullptr; 
 	
 	//funkcje i kontener funkcji - nie chce działać zgodnie z założeniem
