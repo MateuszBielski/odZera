@@ -68,3 +68,9 @@ void Quat_to_Phi_a(float * q,float* phi,float* a){
     *phi = 2 * phi_przez_dwa;
     
 }
+void IloczynMacierzyIwektora(float * m, float * v, float * vDest){
+    register int i = 0, j = 0;
+    for(i ; i < 4 ; i++){
+        vDest[i] = m[i*4+0] * v[0] + m[i*4+1] * v[1] + m[i*4+2] * v[2] + m[i*4+3] * v[3];//możliwe że macierz przetransponować
+    }
+}

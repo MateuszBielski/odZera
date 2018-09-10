@@ -80,21 +80,18 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
     aktualneSterowanie->m_DY = y - aktualneSterowanie->m_BeginY;
     if(aktualneSterowanie->m_DX == 0 && aktualneSterowanie->m_DY == 0)return true;
     if (event->state & GDK_BUTTON1_MASK) {
-//      glPushMatrix();
-//      glLoadIdentity();
         Trackball::trackball(aktualneSterowanie->m_QuatDiff,
                            (2.0 * aktualneSterowanie->m_BeginX - w) / w,
                            (h - 2.0 * aktualneSterowanie->m_BeginY) / h,
                            (2.0 * x - w) / w,
                            (h - 2.0 * y) / h);
-        //aktualneSterowanie->m_QuatDiff w tym kwaternione należy oś obrotu dodatkowo obócić
-        float kat;
-        float os[3];
-        Quat_to_Phi_a(aktualneSterowanie->m_Quat,&kat,os);
-        g_print("\non_motion kąt oś %2.3f  %2.3f   %2.3f    %2.3f",kat,os[0],os[1],os[2]);
         Trackball::add_quats(aktualneSterowanie->m_QuatDiff, aktualneSterowanie->m_Quat, aktualneSterowanie->m_Quat);
+        
+        //aktualneSterowanie->m_QuatDiff w tym kwaternione należy oś obrotu dodatkowo obócić
+        if(aktualneSterowanie == &wybranegoObiektu){
+            KorekcjaOsiObrotuWybranegoModelu();
+        }
 		Trackball::build_rotmatrix(aktualneSterowanie->macierzObrotu, aktualneSterowanie->m_Quat);
-//        glPopMatrix();
     }
     if (event->state & GDK_BUTTON2_MASK){
         TransformujPikselDoPrzestrzeniSceny(aktualneSterowanie->m_BeginX,aktualneSterowanie->m_BeginY,aktualneSterowanie->wspolrzednaZpodKursorem,
@@ -109,11 +106,8 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
         ekran->PodajPozycjeZrodlaSwiatla(pozycjaWczesniejsza);
         TransformujPikselDoPrzestrzeniSceny(ix,iy,0.7,pozycjaBiezaca);//,0.8
         for(int i = 0 ; i < 3 ; i++){
-//            g_print("\n %2.3f  %2.3f",pozycjaWczesniejsza[i],pozycjaBiezaca[i]);
             pozycjaWczesniejsza[i] += pozycjaBiezaca[i] - pozycjaWczesniejsza[i];
         }
-//        g_print("\n");
-//        g_print("\npozycja4f on_motion %2.3f  %2.3f %2.3f  %2.3f",pozycjaWczesniejsza[0],pozycjaWczesniejsza[1],pozycjaWczesniejsza[2],pozycjaWczesniejsza[3]);
         ekran->UstawPozycjeZrodlaSwiatla(pozycjaWczesniejsza);
     }
 	aktualneSterowanie->m_BeginX = x;
@@ -136,4 +130,20 @@ bool SterowanieMysza::on_my_scroll_event(GdkEventScroll* scroll_event)
     oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     return true;
 }
-
+void SterowanieMysza::KorekcjaOsiObrotuWybranegoModelu()
+{
+	/*
+     * algorytm:
+     * obrócić oś wokół której następuje obrót.  */
+     float katWybranegoModelu;
+     float osWybranyModel[4];
+     float osObroconaWybranegoModelu[4];
+     osWybranyModel[3] = 0;
+     
+     Quat_to_Phi_a(wybranegoObiektu.m_Quat,&katWybranegoModelu,osWybranyModel);
+     IloczynMacierzyIwektora(&calegoWidoku.macierzObrotu[0][0],osWybranyModel,osObroconaWybranegoModelu);
+     Trackball::axis_to_quat(osObroconaWybranegoModelu,katWybranegoModelu,wybranegoObiektu.m_Quat);
+//     g_print("\n%2.3f %2.3f %2.3f %2.3f %2.3f %2.3f %2.3f %2.3f",
+//     osWybranyModel[0],osWybranyModel[1],osWybranyModel[2],osWybranyModel[3],osObroconaWybranegoModelu[0],osObroconaWybranegoModelu[1],osObroconaWybranegoModelu[2],
+//     osObroconaWybranegoModelu[3]);
+}
