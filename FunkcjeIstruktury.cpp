@@ -69,8 +69,12 @@ void Quat_to_Phi_a(float * q,float* phi,float* a){
     
 }
 void IloczynMacierzyIwektora(float * m, float * v, float * vDest){
-    register int i = 0, j = 0;
+    register int i = 0, j;
+    
+    //macierz zapisana rzędami - jest właściwa dla korekty obrotów
     for(i ; i < 4 ; i++){
-        vDest[i] = m[i*4+0] * v[0] + m[i*4+1] * v[1] + m[i*4+2] * v[2] + m[i*4+3] * v[3];//możliwe że macierz przetransponować
+        j = 0;vDest[i] = 0;
+        for(j ; j < 4 ; j++)vDest[i] += m[i*4+j] * v[j];
+//        vDest[i] = m[i] * v[0] + m[4+i] * v[1] + m[8+i] * v[2] + m[12+i] * v[3];//wersja macierzy zapisanej kolumnami
     }
 }

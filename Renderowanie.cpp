@@ -22,7 +22,7 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
     Zaladuj(std::make_shared<Ostroslup>());
     
     WskazModelSwiatla(0);
-	WybierzModelOnumerze(1);
+	WybierzModelOnumerze(2);
     return 0;
 }
 void Renderowanie::Zaladuj(spModel wskaznikNaModel)

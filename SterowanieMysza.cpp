@@ -85,12 +85,8 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
                            (h - 2.0 * aktualneSterowanie->m_BeginY) / h,
                            (2.0 * x - w) / w,
                            (h - 2.0 * y) / h);
+        if(aktualneSterowanie == &wybranegoObiektu)KorekcjaOsiObrotuWybranegoModelu();
         Trackball::add_quats(aktualneSterowanie->m_QuatDiff, aktualneSterowanie->m_Quat, aktualneSterowanie->m_Quat);
-        
-        //aktualneSterowanie->m_QuatDiff w tym kwaternione należy oś obrotu dodatkowo obócić
-        if(aktualneSterowanie == &wybranegoObiektu){
-            KorekcjaOsiObrotuWybranegoModelu();
-        }
 		Trackball::build_rotmatrix(aktualneSterowanie->macierzObrotu, aktualneSterowanie->m_Quat);
     }
     if (event->state & GDK_BUTTON2_MASK){
@@ -140,10 +136,7 @@ void SterowanieMysza::KorekcjaOsiObrotuWybranegoModelu()
      float osObroconaWybranegoModelu[4];
      osWybranyModel[3] = 0;
      
-     Quat_to_Phi_a(wybranegoObiektu.m_Quat,&katWybranegoModelu,osWybranyModel);
+     Quat_to_Phi_a(wybranegoObiektu.m_QuatDiff,&katWybranegoModelu,osWybranyModel);
      IloczynMacierzyIwektora(&calegoWidoku.macierzObrotu[0][0],osWybranyModel,osObroconaWybranegoModelu);
-     Trackball::axis_to_quat(osObroconaWybranegoModelu,katWybranegoModelu,wybranegoObiektu.m_Quat);
-//     g_print("\n%2.3f %2.3f %2.3f %2.3f %2.3f %2.3f %2.3f %2.3f",
-//     osWybranyModel[0],osWybranyModel[1],osWybranyModel[2],osWybranyModel[3],osObroconaWybranegoModelu[0],osObroconaWybranegoModelu[1],osObroconaWybranegoModelu[2],
-//     osObroconaWybranegoModelu[3]);
+     Trackball::axis_to_quat(osObroconaWybranegoModelu,katWybranegoModelu,wybranegoObiektu.m_QuatDiff);
 }
