@@ -37,11 +37,6 @@ void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
 }
 bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 {
-    /*aktualneSterowanie->m_QuatDiff[0] = 0.0;
-    aktualneSterowanie->m_QuatDiff[1] = 0.0;
-    aktualneSterowanie->m_QuatDiff[2] = 0.0;
-    aktualneSterowanie->m_QuatDiff[3] = 1.0;*/
-    
     aktualneSterowanie->m_BeginX = event->x;
     aktualneSterowanie->m_BeginY = event->y;
     int ix = static_cast<int>(event->x);
@@ -50,7 +45,6 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
        float temp;
        glReadPixels( ix, iy, 1, 1,GL_DEPTH_COMPONENT, GL_FLOAT, &temp );
        if(temp < 1.0)aktualneSterowanie->wspolrzednaZpodKursorem = temp;
-//       g_print("\nwspolrzednaZpodKursorem %2.3f",aktualneSterowanie->wspolrzednaZpodKursorem);
         TransformujPikselDoPrzestrzeniSceny(ix,iy,aktualneSterowanie->wspolrzednaZpodKursorem,aktualneSterowanie->poprzedniaPozycjaKursoraMyszy3D);
     }
     //prawy przycisk
@@ -61,8 +55,11 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 
         TransformujPikselDoPrzestrzeniSceny(ix,iy,0.7,pozycja3f);
         for(int i = 0 ; i < 3 ; i++)pozycja4f[i] = pozycja3f[i];
-//        g_print("\npozycja4f on_button po transformacja %2.3f  %2.3f %2.3f  %2.3f",pozycja4f[0],pozycja4f[1],pozycja4f[2],pozycja4f[3]);
         ekran->UstawPozycjeZrodlaSwiatla(pozycja4f);
+    }
+    //podwójne kliknięcie
+    if(event->type == GDK_2BUTTON_PRESS && event->button == 1){
+        ekran->WyznaczIndeksObiektuWpunkcie(ix,iy);
     }
     oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     return true;

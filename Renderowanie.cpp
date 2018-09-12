@@ -76,3 +76,4 @@ void Renderowanie::PobierzWskaznikNaMacierzObrotu(float* adres)
 {
 	macierzObrotu = adres;
 }
+

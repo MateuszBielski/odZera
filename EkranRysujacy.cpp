@@ -3,7 +3,8 @@
 EkranRysujacy::EkranRysujacy()
 {
 	Komunikat("EkranRysujacy");
-
+    planBliski = 5.0;
+    planDaleki = 60.0;
 }
 
 EkranRysujacy::~EkranRysujacy()
@@ -13,10 +14,10 @@ EkranRysujacy::~EkranRysujacy()
 void EkranRysujacy::UstawienieSceny()
 {
 //	Komunikat("EkranRysujacy::UstawienieSceny");
-	int w,h;
-	w = get_width();
-	h = get_height();
-	glViewport(0, 0, w, h);
+	
+	szerokosc = get_width();
+	wysokosc = get_height();
+	glViewport(0, 0, szerokosc, wysokosc);
     glShadeModel(GL_SMOOTH);//cieniowanie kolorem GK_SMOOTH, GL_FLAT
     glEnable(GL_DEPTH_TEST);
     
@@ -27,12 +28,13 @@ void EkranRysujacy::UstawienieSceny()
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    if (w > h) {
-      float aspect = static_cast<float>(w) / static_cast<float>(h);
-      glFrustum(-aspect, aspect, -1.0, 1.0, 5.0, 60.0);
+    if (szerokosc > wysokosc) {
+      float aspect = static_cast<float>(szerokosc) / static_cast<float>(wysokosc);
+      glFrustum(-aspect, aspect, -1.0, 1.0, planBliski, planDaleki);
+//      glFrustum(-0.1, 0.1, wsp*-0.1, wsp * 0.1, nearDoKorektySceny, 400.0);
     } else {
-      float aspect = static_cast<float>(h) / static_cast<float>(w);
-      glFrustum(-1.0, 1.0, -aspect, aspect, 5.0, 60.0);
+      float aspect = static_cast<float>(wysokosc) / static_cast<float>(szerokosc);
+      glFrustum(-1.0, 1.0, -aspect, aspect, planBliski, planDaleki);
     }
 
     glMatrixMode(GL_MODELVIEW);
@@ -59,15 +61,9 @@ void EkranRysujacy::RysujScene()
     glLoadIdentity();
 	
     renderowanie->TransformacjaCalegoWidoku(); 
-//    g_print("\npozycja4f RysujScene %2.3f  %2.3f %2.3f  %2.3f",pozycjaZrodlaSwiatla[0],pozycjaZrodlaSwiatla[1],pozycjaZrodlaSwiatla[2],pozycjaZrodlaSwiatla[3]);
 	glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodlaSwiatla);
     renderowanie->RysujModele();
     
-    /*float macierzModelWidok[16];
-    glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
-    WyswietlWartosciMacierzy4x4(macierzModelWidok);
-    float punkt3D[3];
-    TransformujPikselDoPrzestrzeniSceny(300,300,punkt3D);*/
 }
 
 void EkranRysujacy::PodajPozycjeZrodlaSwiatla(float * tutaj){
@@ -77,4 +73,79 @@ void EkranRysujacy::UstawPozycjeZrodlaSwiatla(float * wedlugParametrow){
     memcpy(pozycjaZrodlaSwiatla,wedlugParametrow,4*sizeof(float));
    
     sPolozenieSwiatla.emit(wedlugParametrow);//odbiera renderowanie dla modelu symbolizującego światło .
+}
+int EkranRysujacy::WyznaczIndeksObiektuWpunkcie(int x, int y)
+{
+	
+    
+    //implementacja z arcball gwiazdy:
+//    clock_t czas[5];
+//    czas[0] = clock();
+    
+    //przygotowanie bufora zaznaczenia
+    const int rozmiarBuforaZaznaczenia = 1024;
+    unsigned buforZaznaczenia[rozmiarBuforaZaznaczenia];
+    std::fill_n (buforZaznaczenia,rozmiarBuforaZaznaczenia,0);
+    glSelectBuffer(rozmiarBuforaZaznaczenia, buforZaznaczenia);
+
+    //przygotowanie promienia pod myszką 
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
+    glLoadIdentity();
+    int viewport[4];
+    glGetIntegerv(GL_VIEWPORT, viewport);
+    gluPickMatrix(x, wysokosc - y, 8, 8, viewport);
+    //czas[1]=clock();
+    float wsp = wysokosc/ (float) szerokosc;
+        glFrustum(-0.1, 0.1, wsp*-0.1, wsp * 0.1, planBliski, planDaleki);
+    glMatrixMode(GL_MODELVIEW);
+    //przełączanie w tryb selekcji i renderowanie sceny
+    glRenderMode(GL_SELECT); //umieść znak komemtarza przed tym poleceniem, żeby zobaczyć co widzi myszka
+    RysujScene();//BEZ_SWAPBUFFERS
+//    czas[2]=clock();
+    //powrót do norlamlnego trybu renderowania
+    int ileTrafien = glRenderMode(GL_RENDER);
+//    czas[3]=clock();
+    g_print("\nWyoborPunktu ileTrafien= %d, zawartosc bufora: \n ", ileTrafien);
+    for (int j = 0; j < 5 * ileTrafien + 10; j++)g_print(" %d,", buforZaznaczenia[j]);
+    //przywracanie oryginalnej macierzy rzutowania
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+    glMatrixMode(GL_MODELVIEW);
+    CoZaznaczono(ileTrafien,buforZaznaczenia);
+    
+}
+void EkranRysujacy::CoZaznaczono(int ileTrafien,unsigned int * buforZaznaczenia)
+{
+    //interpretacja zawartosci bufora zaznaczenia
+    int wynik=-1;
+    if (ileTrafien > 0) {
+        //zwracam obiekt najbliższy kamery
+        unsigned indeksNajblizszegoPunktu = buforZaznaczenia[4];
+        unsigned odlegloscNajblizszegoPunktu = buforZaznaczenia[1];
+        int biezacyIndeks = 0;
+        for (int i = 0; i < ileTrafien; i++) {
+            if (buforZaznaczenia[biezacyIndeks + 1] > odlegloscNajblizszegoPunktu) {
+                odlegloscNajblizszegoPunktu = buforZaznaczenia[biezacyIndeks + 1];
+                if (buforZaznaczenia[biezacyIndeks] > 0)
+                    indeksNajblizszegoPunktu = buforZaznaczenia[biezacyIndeks + 4];
+            }
+            biezacyIndeks += 5;
+        }
+        wynik=indeksNajblizszegoPunktu;
+
+    }
+    g_print("  indeks najbliższegoPunktu %d",wynik);
+    /*
+    czas[4] = clock();
+    long delta[5]; //= (long) (koniec - start);
+    printf("\n czasy:");
+    for(int i=0;i<4;i++){
+        delta[i]=(long)(czas[i+1]-czas[i]);
+        printf("\n%d. %d ms",i,delta[i]);
+    }
+    delta[4]=(long)(czas[4]-czas[0]);
+    printf("\ncalosc %d ms",delta[4]);
+    return wynik;*/
 }

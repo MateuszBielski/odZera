@@ -8,6 +8,8 @@ public:
 	~EkranRysujacy();
     void UstawPozycjeZrodlaSwiatla(float *) ;
     void PodajPozycjeZrodlaSwiatla(float *);
+    int WyznaczIndeksObiektuWpunkcie(int , int);
+    void CoZaznaczono(int,unsigned  int *);
 protected:
     float pozycjaZrodlaSwiatla[4];
     

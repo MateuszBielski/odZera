@@ -19,6 +19,7 @@ public:
     using spModel = std::shared_ptr<Model>;
     void Zaladuj(spModel);
 	void WybierzModelOnumerze(short);
+    void ZaznaczModelWedlugIndeksu(int i){};
 	spModel DajWybranyModel();
 	
     //światło

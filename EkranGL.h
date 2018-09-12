@@ -35,7 +35,8 @@ protected:
     virtual void OswietlenieUstaw();
 	using spRenderowanie = std::shared_ptr<Renderowanie>;
 	spRenderowanie renderowanie;
-	
+	int szerokosc,wysokosc;
+    float planBliski, planDaleki;
     SygnalUstaw3f sPolozenieSwiatla;
 private:
     ptrConf glconfig;
