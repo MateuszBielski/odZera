@@ -107,18 +107,17 @@ int EkranRysujacy::WyznaczIndeksObiektuWpunkcie(int x, int y)
     //powrót do norlamlnego trybu renderowania
     int ileTrafien = glRenderMode(GL_RENDER);
 //    czas[3]=clock();
-    g_print("\nWyoborPunktu ileTrafien= %d, zawartosc bufora: \n ", ileTrafien);
-    for (int j = 0; j < 5 * ileTrafien + 10; j++)g_print(" %d,", buforZaznaczenia[j]);
+//    g_print("\nWyoborPunktu ileTrafien= %d, zawartosc bufora: \n ", ileTrafien);
+//    for (int j = 0; j < 5 * ileTrafien + 10; j++)g_print(" %d,", buforZaznaczenia[j]);
     //przywracanie oryginalnej macierzy rzutowania
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
-    CoZaznaczono(ileTrafien,buforZaznaczenia);
+    return CoZaznaczono(ileTrafien,buforZaznaczenia);
     
 }
-void EkranRysujacy::CoZaznaczono(int ileTrafien,unsigned int * dane)
+int EkranRysujacy::CoZaznaczono(int ileTrafien,unsigned int * dane)
 {
-    //interpretacja zawartosci bufora zaznaczenia
     int wynik=-1;
     if (ileTrafien > 0) {
         unsigned poczatekRekordu = 0;
@@ -131,24 +130,22 @@ void EkranRysujacy::CoZaznaczono(int ileTrafien,unsigned int * dane)
         for (int i = 0; i < ileTrafien; i++) {
             wysokoscStosuNazw = dane[poczatekRekordu];
             dlugoscRekordu = 3 + wysokoscStosuNazw;
-            indeksNajblizszegoPunktu = dane[poczatekRekordu+2+wysokoscStosuNazw];
+//			g_print("\nindeks najblizszego punktu %d",indeksNajblizszegoPunktu);
             biezacaOdlegloscPunktu = dane[poczatekRekordu+2];
-            if(biezacaOdlegloscPunktu > odlegloscNajblizszegoPunktu){
+//			g_print(" bieżąca odległość punktu %d",biezacaOdlegloscPunktu);
+            if(biezacaOdlegloscPunktu < odlegloscNajblizszegoPunktu ){
                 odlegloscNajblizszegoPunktu = biezacaOdlegloscPunktu;
                 indeksNajblizszegoPunktu = dane[poczatekRekordu+2+wysokoscStosuNazw];
             }
+//			g_print("\nkoniec pętli\nindeks najblizszego punktu %d odleglosc najblizszego %d",indeksNajblizszegoPunktu, odlegloscNajblizszegoPunktu);
             poczatekRekordu += dlugoscRekordu;
-            /*if (dane[biezacyIndeks + 1] > odlegloscNajblizszegoPunktu) {
-                odlegloscNajblizszegoPunktu = dane[biezacyIndeks + 1];
-                if (dane[biezacyIndeks] > 0)
-                indeksNajblizszegoPunktu = dane[biezacyIndeks + 4];
-            }
-            biezacyIndeks += 5;*/
+//			g_print(" bieżąca odległość punktu %d\n",biezacaOdlegloscPunktu);
         }
         wynik=indeksNajblizszegoPunktu;
 
     }
-    g_print("  indeks najbliższegoPunktu %d",wynik);
+//    g_print("  indeks najbliższegoPunktu %d",wynik);
+	return wynik;
     /*
     czas[4] = clock();
     long delta[5]; //= (long) (koniec - start);

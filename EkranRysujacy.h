@@ -9,7 +9,7 @@ public:
     void UstawPozycjeZrodlaSwiatla(float *) ;
     void PodajPozycjeZrodlaSwiatla(float *);
     int WyznaczIndeksObiektuWpunkcie(int , int);
-    void CoZaznaczono(int,unsigned  int *);
+    int CoZaznaczono(int,unsigned  int *);
 protected:
     float pozycjaZrodlaSwiatla[4];
     

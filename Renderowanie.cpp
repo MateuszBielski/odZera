@@ -30,15 +30,15 @@ void Renderowanie::JednorazowoRysujModeleZnazwami()
     glPushName(321);
     glPushName(429);
     glPushName(557);//ta nazwa jest podmieniana przez funkcję glLoadName
-    g_print("\n narysowano modele z nazwami: ");
+//    g_print("\n narysowano modele z nazwami: ");
     for(auto iter : mojeModele){
-        glLoadName(127+numeracja++);
+        glLoadName(numeracja++);
         iter->Rysuj();
-        g_print("  %d ",numeracja-1);
+//        g_print("  %d ",numeracja-1);
     }
     glPopName();   
     RysujModeleOdpowiednio = &Renderowanie::RysujModeleBezNazw;
-    g_print("\n przywrócono RysujModeleBezNazw");
+//    g_print("\n przywrócono RysujModeleBezNazw");
 }
 
 int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
@@ -70,8 +70,11 @@ Renderowanie::spModel Renderowanie::DajModelSwiatla()
 	return mojeModele.at(modelSwiatlaMaNumer);
 }
 void Renderowanie::WybierzModelOnumerze(short tym){
+	if(tym < 0)return;
+	auto poprzednioWybranyModel = mojeModele.at(numerModeluWybranego);
 	numerModeluWybranego = tym;
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
+	poprzednioWybranyModel->OddajWskaznikiNaTransformacjeIswojeWyzeruj(wybranyModel);
 	wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);
 }

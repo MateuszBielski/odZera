@@ -16,6 +16,7 @@ public :
     void PokazujWartosci(bool b){pokazujWartosci = b;};
 	void WezWskaznikiMacierzyObrotuIpolozenia(float *,float *);
     void JestemZaladowanyPodNumerem(int n){jestemZaladowanyPodNumerem = n;};
+	void OddajWskaznikiNaTransformacjeIswojeWyzeruj(std::shared_ptr<Model> );
 protected:
     int jestemZaladowanyPodNumerem = -1;
     float polozenie3f[3];

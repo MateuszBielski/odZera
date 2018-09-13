@@ -65,6 +65,12 @@ void Model::WezWskaznikiMacierzyObrotuIpolozenia(float* adrMacierzy,float* adrPo
 	obrotIndywidualny = adrMacierzy;
 	wskWektoraPolozeniaWyliczanyWsterowaniu = adrPolozenia;
 }
+void Model::OddajWskaznikiNaTransformacjeIswojeWyzeruj(std::shared_ptr<Model> nowoWybrany)
+{
+	nowoWybrany->WezWskaznikiMacierzyObrotuIpolozenia(obrotIndywidualny,wskWektoraPolozeniaWyliczanyWsterowaniu);
+	obrotIndywidualny = nullptr;
+	wskWektoraPolozeniaWyliczanyWsterowaniu = nullptr;
+}
 
 
 void Ostroslup::RysujGeometrie(){
