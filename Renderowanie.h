@@ -20,6 +20,7 @@ public:
     void Zaladuj(spModel);
 	void WybierzModelOnumerze(short);
     void ZaznaczModelWedlugIndeksu(int i){};
+    void UstawRysowanieZnazwami();
 	spModel DajWybranyModel();
 	
     //światło
@@ -29,7 +30,12 @@ public:
 private:
     using vec_spModel = std::vector<spModel>;
     vec_spModel mojeModele;
+    unsigned ileZaladowanychModeli  = 0;
     
+    void RysujModeleBezNazw();
+    void JednorazowoRysujModeleZnazwami();
+    using Ptr_F_void_void = void(Renderowanie::*)();
+    Ptr_F_void_void RysujModeleOdpowiednio = &Renderowanie::RysujModeleBezNazw;
 	Model ostroslup;
     short modelSwiatlaMaNumer = 0;
 	short numerModeluWybranego = 1;

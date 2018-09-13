@@ -97,8 +97,8 @@ int EkranRysujacy::WyznaczIndeksObiektuWpunkcie(int x, int y)
     glGetIntegerv(GL_VIEWPORT, viewport);
     gluPickMatrix(x, wysokosc - y, 8, 8, viewport);
     //czas[1]=clock();
-    float wsp = wysokosc/ (float) szerokosc;
-        glFrustum(-0.1, 0.1, wsp*-0.1, wsp * 0.1, planBliski, planDaleki);
+        float aspect = static_cast<float>(szerokosc) / static_cast<float>(wysokosc);
+        glFrustum(-aspect, aspect, -1.0, 1.0, planBliski, planDaleki);
     glMatrixMode(GL_MODELVIEW);
     //przełączanie w tryb selekcji i renderowanie sceny
     glRenderMode(GL_SELECT); //umieść znak komemtarza przed tym poleceniem, żeby zobaczyć co widzi myszka
@@ -116,22 +116,34 @@ int EkranRysujacy::WyznaczIndeksObiektuWpunkcie(int x, int y)
     CoZaznaczono(ileTrafien,buforZaznaczenia);
     
 }
-void EkranRysujacy::CoZaznaczono(int ileTrafien,unsigned int * buforZaznaczenia)
+void EkranRysujacy::CoZaznaczono(int ileTrafien,unsigned int * dane)
 {
     //interpretacja zawartosci bufora zaznaczenia
     int wynik=-1;
     if (ileTrafien > 0) {
-        //zwracam obiekt najbliższy kamery
-        unsigned indeksNajblizszegoPunktu = buforZaznaczenia[4];
-        unsigned odlegloscNajblizszegoPunktu = buforZaznaczenia[1];
+        unsigned poczatekRekordu = 0;
+        unsigned wysokoscStosuNazw = dane[poczatekRekordu];
+        unsigned dlugoscRekordu = 3 + wysokoscStosuNazw;
+        unsigned indeksNajblizszegoPunktu = dane[poczatekRekordu+2+wysokoscStosuNazw];
+        unsigned odlegloscNajblizszegoPunktu = dane[poczatekRekordu+2];
+        unsigned biezacaOdlegloscPunktu = odlegloscNajblizszegoPunktu;
         int biezacyIndeks = 0;
         for (int i = 0; i < ileTrafien; i++) {
-            if (buforZaznaczenia[biezacyIndeks + 1] > odlegloscNajblizszegoPunktu) {
-                odlegloscNajblizszegoPunktu = buforZaznaczenia[biezacyIndeks + 1];
-                if (buforZaznaczenia[biezacyIndeks] > 0)
-                    indeksNajblizszegoPunktu = buforZaznaczenia[biezacyIndeks + 4];
+            wysokoscStosuNazw = dane[poczatekRekordu];
+            dlugoscRekordu = 3 + wysokoscStosuNazw;
+            indeksNajblizszegoPunktu = dane[poczatekRekordu+2+wysokoscStosuNazw];
+            biezacaOdlegloscPunktu = dane[poczatekRekordu+2];
+            if(biezacaOdlegloscPunktu > odlegloscNajblizszegoPunktu){
+                odlegloscNajblizszegoPunktu = biezacaOdlegloscPunktu;
+                indeksNajblizszegoPunktu = dane[poczatekRekordu+2+wysokoscStosuNazw];
             }
-            biezacyIndeks += 5;
+            poczatekRekordu += dlugoscRekordu;
+            /*if (dane[biezacyIndeks + 1] > odlegloscNajblizszegoPunktu) {
+                odlegloscNajblizszegoPunktu = dane[biezacyIndeks + 1];
+                if (dane[biezacyIndeks] > 0)
+                indeksNajblizszegoPunktu = dane[biezacyIndeks + 4];
+            }
+            biezacyIndeks += 5;*/
         }
         wynik=indeksNajblizszegoPunktu;
 

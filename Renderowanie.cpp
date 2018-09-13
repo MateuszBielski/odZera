@@ -12,9 +12,35 @@ Renderowanie::~Renderowanie()
 }
 void Renderowanie::RysujModele()
 {
-//    g_print("\nRenderowanie::Renderuj ile modeli %d",mojeModele.size());
+    (this->*RysujModeleOdpowiednio)();
+}
+void Renderowanie::UstawRysowanieZnazwami()
+{
+    RysujModeleOdpowiednio = &Renderowanie::JednorazowoRysujModeleZnazwami;
+}
+
+void Renderowanie::RysujModeleBezNazw()
+{
     for(auto iter : mojeModele)iter->Rysuj();
 }
+
+void Renderowanie::JednorazowoRysujModeleZnazwami()
+{
+    int numeracja = 0;
+    glPushName(321);
+    glPushName(429);
+    glPushName(557);//ta nazwa jest podmieniana przez funkcję glLoadName
+    g_print("\n narysowano modele z nazwami: ");
+    for(auto iter : mojeModele){
+        glLoadName(127+numeracja++);
+        iter->Rysuj();
+        g_print("  %d ",numeracja-1);
+    }
+    glPopName();   
+    RysujModeleOdpowiednio = &Renderowanie::RysujModeleBezNazw;
+    g_print("\n przywrócono RysujModeleBezNazw");
+}
+
 int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 {
     Zaladuj(std::make_shared<Kostka>());
@@ -29,6 +55,7 @@ void Renderowanie::Zaladuj(spModel wskaznikNaModel)
 {
 	//jakieś rzeczy, które mają ustawić cechy i parametry rysowanej rzeczy np. nazwy w openGL, może położenie w przestrzeni
     mojeModele.push_back(wskaznikNaModel);
+    wskaznikNaModel->JestemZaladowanyPodNumerem(ileZaladowanychModeli++);
 }
 void Renderowanie::WskazModelSwiatla(short numerModelu){
 	modelSwiatlaMaNumer = numerModelu;

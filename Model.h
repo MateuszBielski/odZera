@@ -15,7 +15,9 @@ public :
 	void UzywajPushMatrix(bool);
     void PokazujWartosci(bool b){pokazujWartosci = b;};
 	void WezWskaznikiMacierzyObrotuIpolozenia(float *,float *);
+    void JestemZaladowanyPodNumerem(int n){jestemZaladowanyPodNumerem = n;};
 protected:
+    int jestemZaladowanyPodNumerem = -1;
     float polozenie3f[3];
     bool czyPushMatrix = true;
     bool pokazujWartosci = false;
