@@ -23,8 +23,9 @@ protected:
 	Gtk::Widget* oknoSterowane;
     void KopiujParametrySterowania(Sterowanie& );
     
-	WspolrzedneImacierzeSterowania calegoWidoku, wybranegoObiektu;
-	WspolrzedneImacierzeSterowania * aktualneSterowanie;
+	WspolrzedneImacierzeSterowania calegoWidoku;//, wybranegoObiektu;
+	WspolrzedneImacierzeSterowania * wybranegoObiektu;
+    WspolrzedneImacierzeSterowania * aktualneSterowanie;
 };
 
 #endif // STEROWANIE_H

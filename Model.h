@@ -1,6 +1,7 @@
 #ifndef MODEL_H
 #define MODEL_H
 #include <gtkglmm.h>
+#include <WspolrzedneImacierzeSterowania.h>
 
 
 class Model{
@@ -14,16 +15,21 @@ public :
     void UstalPolozenie3f(float*);
 	void UzywajPushMatrix(bool);
     void PokazujWartosci(bool b){pokazujWartosci = b;};
-	void WezWskaznikiMacierzyObrotuIpolozenia(float *,float *);
+	void WezWskaznikiMacierzyObrotuIpolozenia(float *,float *);//-- do usunięcia
     void JestemZaladowanyPodNumerem(int n){jestemZaladowanyPodNumerem = n;};
 	void OddajWskaznikiNaTransformacjeIswojeWyzeruj(std::shared_ptr<Model> );
+    void PowiazMojeWskaznikiNaTransformacje();
+    void WyzerujMojeWskaznikiNaTransformacje();//zapewne przywraca do położenia pierwotnego
+    
+    std::shared_ptr<WspolrzedneImacierzeSterowania> mojeWspolrzedneImacierzeSterowania;
 protected:
     int jestemZaladowanyPodNumerem = -1;
     float polozenie3f[3];
     bool czyPushMatrix = true;
     bool pokazujWartosci = false;
 	float* obrotIndywidualny = nullptr;
-	float* wskWektoraPolozeniaWyliczanyWsterowaniu = nullptr; 
+	float* wskWektoraPolozeniaWyliczanyWsterowaniu = nullptr;
+     
 	
 	//funkcje i kontener funkcji - nie chce działać zgodnie z założeniem
 	using wsk_ProstaFunkcja = void(*)();

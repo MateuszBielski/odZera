@@ -33,7 +33,9 @@ void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
     renderowanie->PobierzWskaznikNaWektorPrzesunieciaPierwotnego(&calegoWidoku.przesunieciePierwotne[0]);
 	renderowanie->PobierzWskaznikNaWektorPrzesuniecia(&calegoWidoku.m_Pos[0]);
 	renderowanie->PobierzWskaznikNaMacierzObrotu(&calegoWidoku.macierzObrotu[0][0]);
-	renderowanie->DajWybranyModel()->WezWskaznikiMacierzyObrotuIpolozenia(&wybranegoObiektu.macierzObrotu[0][0],&wybranegoObiektu.m_Pos[0]);
+	wybranegoObiektu = renderowanie->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
+    //renderowanie->DajWybranyModel()->WezWskaznikiMacierzyObrotuIpolozenia(&wybranegoObiektu.macierzObrotu[0][0],&wybranegoObiektu.m_Pos[0]);
+    renderowanie->DajWybranyModel()->PowiazMojeWskaznikiNaTransformacje();
 }
 bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 {
@@ -61,6 +63,7 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
     if(event->type == GDK_2BUTTON_PRESS && event->button == 1){
         renderowanie->UstawRysowanieZnazwami();
 		renderowanie->WybierzModelOnumerze(static_cast<short>(ekran->WyznaczIndeksObiektuWpunkcie(ix,iy)));
+        wybranegoObiektu = renderowanie->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
     }
     oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     return true;
@@ -83,7 +86,7 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
                            (h - 2.0 * aktualneSterowanie->m_BeginY) / h,
                            (2.0 * x - w) / w,
                            (h - 2.0 * y) / h);
-        if(aktualneSterowanie == &wybranegoObiektu)KorekcjaOsiObrotuWybranegoModelu();
+        if(aktualneSterowanie == wybranegoObiektu)KorekcjaOsiObrotuWybranegoModelu();
         Trackball::add_quats(aktualneSterowanie->m_QuatDiff, aktualneSterowanie->m_Quat, aktualneSterowanie->m_Quat);
 		Trackball::build_rotmatrix(aktualneSterowanie->macierzObrotu, aktualneSterowanie->m_Quat);
     }
@@ -134,7 +137,7 @@ void SterowanieMysza::KorekcjaOsiObrotuWybranegoModelu()
      float osObroconaWybranegoModelu[4];
      osWybranyModel[3] = 0;
      
-     Quat_to_Phi_a(wybranegoObiektu.m_QuatDiff,&katWybranegoModelu,osWybranyModel);
+     Quat_to_Phi_a(wybranegoObiektu->m_QuatDiff,&katWybranegoModelu,osWybranyModel);
      IloczynMacierzyIwektora(&calegoWidoku.macierzObrotu[0][0],osWybranyModel,osObroconaWybranegoModelu);
-     Trackball::axis_to_quat(osObroconaWybranegoModelu,katWybranegoModelu,wybranegoObiektu.m_QuatDiff);
+     Trackball::axis_to_quat(osObroconaWybranegoModelu,katWybranegoModelu,wybranegoObiektu->m_QuatDiff);
 }

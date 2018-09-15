@@ -71,11 +71,12 @@ Renderowanie::spModel Renderowanie::DajModelSwiatla()
 }
 void Renderowanie::WybierzModelOnumerze(short tym){
 	if(tym < 0)return;
-	auto poprzednioWybranyModel = mojeModele.at(numerModeluWybranego);
+	//auto poprzednioWybranyModel = mojeModele.at(numerModeluWybranego);
 	numerModeluWybranego = tym;
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
-	poprzednioWybranyModel->OddajWskaznikiNaTransformacjeIswojeWyzeruj(wybranyModel);
-	wybranyModel->UzywajPushMatrix(true);
+//	poprzednioWybranyModel->OddajWskaznikiNaTransformacjeIswojeWyzeruj(wybranyModel);
+	wybranyModel->PowiazMojeWskaznikiNaTransformacje();
+    wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);
 }
 

@@ -6,6 +6,7 @@ Model::Model()
     polozenie3f[0] = 0.0f;
     polozenie3f[1] = 0.0f;
     polozenie3f[2] = 0.0f;
+    mojeWspolrzedneImacierzeSterowania = std::make_shared<WspolrzedneImacierzeSterowania>();
 }
 Model::~Model()
 {
@@ -69,6 +70,18 @@ void Model::OddajWskaznikiNaTransformacjeIswojeWyzeruj(std::shared_ptr<Model> no
 {
 	nowoWybrany->WezWskaznikiMacierzyObrotuIpolozenia(obrotIndywidualny,wskWektoraPolozeniaWyliczanyWsterowaniu);
 	obrotIndywidualny = nullptr;
+	wskWektoraPolozeniaWyliczanyWsterowaniu = nullptr;
+}
+
+void Model::PowiazMojeWskaznikiNaTransformacje()
+{
+    obrotIndywidualny = &mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0];
+	wskWektoraPolozeniaWyliczanyWsterowaniu = &mojeWspolrzedneImacierzeSterowania->m_Pos[0];
+}
+
+void Model::WyzerujMojeWskaznikiNaTransformacje()
+{
+    obrotIndywidualny = nullptr;
 	wskWektoraPolozeniaWyliczanyWsterowaniu = nullptr;
 }
 

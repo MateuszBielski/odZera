@@ -57,7 +57,9 @@ void Sterowanie::Steruj(int czym)
 			aktualneSterowanie = &calegoWidoku;
 			break;
 		case WYBRANYM_OBIEKTEM : 
-			aktualneSterowanie = &wybranegoObiektu;
+			//aktualneSterowanie = &wybranegoObiektu; 
+            // po przeniesieniu współrzędnych do klasy model powyższe zmienia się na:
+            aktualneSterowanie = wybranegoObiektu; 
 			break;
 	}
 }
