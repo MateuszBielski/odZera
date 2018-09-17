@@ -15,9 +15,7 @@ public :
     void UstalPolozenie3f(float*);
 	void UzywajPushMatrix(bool);
     void PokazujWartosci(bool b){pokazujWartosci = b;};
-	void WezWskaznikiMacierzyObrotuIpolozenia(float *,float *);//-- do usunięcia
     void JestemZaladowanyPodNumerem(int n){jestemZaladowanyPodNumerem = n;};
-	void OddajWskaznikiNaTransformacjeIswojeWyzeruj(std::shared_ptr<Model> );
     void PowiazMojeWskaznikiNaTransformacje();
     void WyzerujMojeWskaznikiNaTransformacje();//zapewne przywraca do położenia pierwotnego
     
@@ -29,16 +27,7 @@ protected:
     bool pokazujWartosci = false;
 	float* obrotIndywidualny = nullptr;
 	float* wskWektoraPolozeniaWyliczanyWsterowaniu = nullptr;
-     
-	
-	//funkcje i kontener funkcji - nie chce działać zgodnie z założeniem
-	using wsk_ProstaFunkcja = void(*)();
-	using kontener_Funkcji = std::vector<wsk_ProstaFunkcja>;
-	using iterator_do_Funkcji = kontener_Funkcji::iterator;
-	kontener_Funkcji potrzebneDoNarysowania;
-	//potrzebne są kolejno pola typu iterator kontenera z nazwą funkcji np. iterator_do_Funkcji mnozPrzezMatryce 
-	//- żeby znaleźć miejsce do wstawienia kolejnej funkcji we właściwej kolejności, we właściwym miejscu
-	
+    
 	float * vertexy = 0;
     int * indeksy = 0;
     float * kolory = 0;

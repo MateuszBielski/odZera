@@ -61,17 +61,6 @@ void Model::UstalPolozenie3f(float* zTablicy)
 {
 	for(short i= 0 ; i < 3 ; i++)polozenie3f[i] = zTablicy[i];
 }
-void Model::WezWskaznikiMacierzyObrotuIpolozenia(float* adrMacierzy,float* adrPolozenia)
-{
-	obrotIndywidualny = adrMacierzy;
-	wskWektoraPolozeniaWyliczanyWsterowaniu = adrPolozenia;
-}
-void Model::OddajWskaznikiNaTransformacjeIswojeWyzeruj(std::shared_ptr<Model> nowoWybrany)
-{
-	nowoWybrany->WezWskaznikiMacierzyObrotuIpolozenia(obrotIndywidualny,wskWektoraPolozeniaWyliczanyWsterowaniu);
-	obrotIndywidualny = nullptr;
-	wskWektoraPolozeniaWyliczanyWsterowaniu = nullptr;
-}
 
 void Model::PowiazMojeWskaznikiNaTransformacje()
 {

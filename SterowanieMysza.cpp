@@ -34,8 +34,6 @@ void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
 	renderowanie->PobierzWskaznikNaWektorPrzesuniecia(&calegoWidoku.m_Pos[0]);
 	renderowanie->PobierzWskaznikNaMacierzObrotu(&calegoWidoku.macierzObrotu[0][0]);
 	wybranegoObiektu = renderowanie->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
-    //renderowanie->DajWybranyModel()->WezWskaznikiMacierzyObrotuIpolozenia(&wybranegoObiektu.macierzObrotu[0][0],&wybranegoObiektu.m_Pos[0]);
-    renderowanie->DajWybranyModel()->PowiazMojeWskaznikiNaTransformacje();
 }
 bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 {
@@ -63,7 +61,9 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
     if(event->type == GDK_2BUTTON_PRESS && event->button == 1){
         renderowanie->UstawRysowanieZnazwami();
 		renderowanie->WybierzModelOnumerze(static_cast<short>(ekran->WyznaczIndeksObiektuWpunkcie(ix,iy)));
+        bool czyUaktualnicAdresAktualneSterowanie = (aktualneSterowanie == wybranegoObiektu);
         wybranegoObiektu = renderowanie->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
+        if(czyUaktualnicAdresAktualneSterowanie) aktualneSterowanie = wybranegoObiektu;
     }
     oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     return true;
