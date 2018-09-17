@@ -10,16 +10,15 @@ class Renderowanie : public Modul, public sigc::trackable
 public:
 	Renderowanie();
 	~Renderowanie();
+    virtual int PolaczZkimPotrzebujeNaPoczatek(); 
 	void TransformacjaCalegoWidoku();
     void PobierzWskaznikNaWektorPrzesunieciaPierwotnego(float * );
 	void PobierzWskaznikNaWektorPrzesuniecia(float * );
 	void PobierzWskaznikNaMacierzObrotu(float *);
 	void RysujModele();
-    virtual int PolaczZkimPotrzebujeNaPoczatek(); 
     using spModel = std::shared_ptr<Model>;
     void Zaladuj(spModel);
 	void WybierzModelOnumerze(short);
-    void ZaznaczModelWedlugIndeksu(int i){};
     void UstawRysowanieZnazwami();
 	spModel DajWybranyModel();
 	

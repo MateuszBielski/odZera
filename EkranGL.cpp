@@ -82,11 +82,6 @@ void EkranGL::RysujScene()
 	Komunikat("EkranGL::RysujScene");
 	
 }
-
-SygnalUstaw3f EkranGL::EmitujSygnalPolozenieSwiatla()
-{
-	return sPolozenieSwiatla;
-}
 void EkranGL::ZainstalujSieW(VBox& vbox)
 {
 	vbox.pack_start(*this);
@@ -103,11 +98,6 @@ int EkranGL::PolaczZkimPotrzebujeNaPoczatek()
     
 	std::string nazwaModulu = ("renderowanie");
 	DodajCoUzywam((*mapaZmodulami)[nazwaModulu]);
-
-        //światło
-    DodajDoListyWskaznikPolaczenia(
-        UtrwalPolaczenie(EmitujSygnalPolozenieSwiatla().connect(sigc::mem_fun(Ref_WyszukajWModulach<Renderowanie>(nazwaModulu),&Renderowanie::UstawPolozenieSwiatla)))
-        );    
     WyszukujeIustawiamWskaznikiDoInnychModulow();    
     return 2;
 }

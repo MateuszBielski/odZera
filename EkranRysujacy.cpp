@@ -71,8 +71,7 @@ void EkranRysujacy::PodajPozycjeZrodlaSwiatla(float * tutaj){
 }
 void EkranRysujacy::UstawPozycjeZrodlaSwiatla(float * wedlugParametrow){
     memcpy(pozycjaZrodlaSwiatla,wedlugParametrow,4*sizeof(float));
-   
-    sPolozenieSwiatla.emit(wedlugParametrow);//odbiera renderowanie dla modelu symbolizującego światło .
+    renderowanie->UstawPolozenieSwiatla(wedlugParametrow);
 }
 int EkranRysujacy::WyznaczIndeksObiektuWpunkcie(int x, int y)
 {

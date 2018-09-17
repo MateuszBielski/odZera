@@ -73,7 +73,6 @@ void Renderowanie::WybierzModelOnumerze(short tym){
 	if(tym < 0)return;
 	numerModeluWybranego = tym;
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
-//	poprzednioWybranyModel->OddajWskaznikiNaTransformacjeIswojeWyzeruj(wybranyModel);
 	wybranyModel->PowiazMojeWskaznikiNaTransformacje();
     wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);

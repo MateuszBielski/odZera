@@ -12,7 +12,6 @@
 using namespace Gtk;
 
 using ptrConf = Glib::RefPtr<Gdk::GL::Config>;
-using SygnalUstaw3f = sigc::signal<void, float *>;
 class EkranGL : public GL::DrawingArea, public Modul
 {
   public:
@@ -25,7 +24,6 @@ class EkranGL : public GL::DrawingArea, public Modul
     virtual int PolaczZkimPotrzebujeNaPoczatek();
     virtual void WyszukujeIustawiamWskaznikiDoInnychModulow() override;
 	
-    SygnalUstaw3f EmitujSygnalPolozenieSwiatla();
 protected:
     virtual bool on_configure_event(GdkEventConfigure* event);
     virtual bool on_expose_event(GdkEventExpose* event);
@@ -37,7 +35,6 @@ protected:
 	spRenderowanie renderowanie;
 	int szerokosc,wysokosc;
     float planBliski, planDaleki;
-    SygnalUstaw3f sPolozenieSwiatla;
 private:
     ptrConf glconfig;
     bool KonfiguracjaGL();
