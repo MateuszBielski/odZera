@@ -35,6 +35,8 @@ private:
     void JednorazowoRysujModeleZnazwami();
     using Ptr_F_void_void = void(Renderowanie::*)();
     Ptr_F_void_void RysujModeleOdpowiednio = &Renderowanie::RysujModeleBezNazw;
+    
+    void UtworzTyleKostek(int);
 	Model ostroslup;
     short modelSwiatlaMaNumer = 0;
 	short numerModeluWybranego = 1;

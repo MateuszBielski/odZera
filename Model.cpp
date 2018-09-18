@@ -3,9 +3,6 @@
 
 Model::Model()
 {
-    polozenie3f[0] = 0.0f;
-    polozenie3f[1] = 0.0f;
-    polozenie3f[2] = 0.0f;
     mojeWspolrzedneImacierzeSterowania = std::make_shared<WspolrzedneImacierzeSterowania>();
 }
 Model::~Model()
@@ -42,11 +39,8 @@ void Model::RysujOstroslup()
 void Model::Rysuj()
 {
 	if(czyPushMatrix)glPushMatrix();
-	if(wskWektoraPolozeniaWyliczanyWsterowaniu != nullptr)memcpy(polozenie3f,wskWektoraPolozeniaWyliczanyWsterowaniu,3*sizeof(float));
-    glTranslatef(polozenie3f[0],polozenie3f[1],polozenie3f[2]);
-    if(obrotIndywidualny != nullptr){
-        glMultMatrixf(obrotIndywidualny);
-    }
+    glTranslatef(mojeWspolrzedneImacierzeSterowania->m_Pos[0],mojeWspolrzedneImacierzeSterowania->m_Pos[1],mojeWspolrzedneImacierzeSterowania->m_Pos[2]);
+    glMultMatrixf(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0]);
     if(pokazujWartosci){
         float macierzModelWidok[16];
         glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
@@ -57,23 +51,10 @@ void Model::Rysuj()
 }
 
 
-void Model::UstalPolozenie3f(float* zTablicy)
+void Model::UstalM_Pos(float* zTablicy)
 {
-	for(short i= 0 ; i < 3 ; i++)polozenie3f[i] = zTablicy[i];
+	for(short i= 0 ; i < 3 ; i++)mojeWspolrzedneImacierzeSterowania->m_Pos[i] = zTablicy[i];
 }
-
-void Model::PowiazMojeWskaznikiNaTransformacje()
-{
-    obrotIndywidualny = &mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0];
-	wskWektoraPolozeniaWyliczanyWsterowaniu = &mojeWspolrzedneImacierzeSterowania->m_Pos[0];
-}
-
-void Model::WyzerujMojeWskaznikiNaTransformacje()
-{
-    obrotIndywidualny = nullptr;
-	wskWektoraPolozeniaWyliczanyWsterowaniu = nullptr;
-}
-
 
 void Ostroslup::RysujGeometrie(){
     float x=1.0;

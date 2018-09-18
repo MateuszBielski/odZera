@@ -12,21 +12,17 @@ public :
 	virtual void Rysuj();
 	virtual void RysujGeometrie(){};
     virtual void Wygladzanie(bool){};//do zastanowienia się czy warto przy każdym obiekcie to ustalać
-    void UstalPolozenie3f(float*);
-	void UzywajPushMatrix(bool);
+    void UstalM_Pos(float*);
+	void UzywajPushMatrix(bool);//--
     void PokazujWartosci(bool b){pokazujWartosci = b;};
     void JestemZaladowanyPodNumerem(int n){jestemZaladowanyPodNumerem = n;};
-    void PowiazMojeWskaznikiNaTransformacje();
-    void WyzerujMojeWskaznikiNaTransformacje();//zapewne przywraca do położenia pierwotnego
     
     std::shared_ptr<WspolrzedneImacierzeSterowania> mojeWspolrzedneImacierzeSterowania;
 protected:
     int jestemZaladowanyPodNumerem = -1;
-    float polozenie3f[3];
     bool czyPushMatrix = true;
     bool pokazujWartosci = false;
 	float* obrotIndywidualny = nullptr;
-	float* wskWektoraPolozeniaWyliczanyWsterowaniu = nullptr;
     
 	float * vertexy = 0;
     int * indeksy = 0;

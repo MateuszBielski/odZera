@@ -61,8 +61,8 @@ void EkranRysujacy::RysujScene()
     glLoadIdentity();
 	
     renderowanie->TransformacjaCalegoWidoku(); 
-	glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodlaSwiatla);
     renderowanie->RysujModele();
+	glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodlaSwiatla);
     
 }
 

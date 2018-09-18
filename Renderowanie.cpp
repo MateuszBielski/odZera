@@ -1,4 +1,5 @@
 #include "Renderowanie.h"
+#include <random>
 
 Renderowanie::Renderowanie()
 {
@@ -46,7 +47,7 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
     Zaladuj(std::make_shared<Kostka>());
 	Zaladuj(std::make_shared<Kostka>());
     Zaladuj(std::make_shared<Ostroslup>());
-    
+    UtworzTyleKostek(10);
     WskazModelSwiatla(0);
 	WybierzModelOnumerze(2);
     return 0;
@@ -63,7 +64,7 @@ void Renderowanie::WskazModelSwiatla(short numerModelu){
 }
 void Renderowanie::UstawPolozenieSwiatla(float* zeWskaznika)
 {
-    mojeModele.at(modelSwiatlaMaNumer)->UstalPolozenie3f(zeWskaznika);
+    mojeModele.at(modelSwiatlaMaNumer)->UstalM_Pos(zeWskaznika);
 }
 Renderowanie::spModel Renderowanie::DajModelSwiatla()
 {
@@ -73,7 +74,6 @@ void Renderowanie::WybierzModelOnumerze(short tym){
 	if(tym < 0)return;
 	numerModeluWybranego = tym;
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
-	wybranyModel->PowiazMojeWskaznikiNaTransformacje();
     wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);
 }
@@ -105,4 +105,23 @@ void Renderowanie::PobierzWskaznikNaMacierzObrotu(float* adres)
 {
 	macierzObrotu = adres;
 }
+void Renderowanie::UtworzTyleKostek(int ile)
+{
+    int i = 0;
+    float losowo[3];
+    float przedzial[2];
+    przedzial[0] = -5;
+    przedzial[1] = 5;
+    
+    std::random_device rd;
+    std::mt19937 mt(rd());
+    std::uniform_real_distribution<float> dist(przedzial[0],przedzial[1]);
 
+//        std::cout << dist(mt) << "\n";
+    for(i ; i < ile ; i++){
+        for(int j = 0; j < 3 ; j++)losowo[j] = dist(mt);
+        std::shared_ptr<Model> kostka = std::make_shared<Kostka>();
+        kostka->UstalM_Pos(losowo);
+        Zaladuj(kostka);
+    }
+}
