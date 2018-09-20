@@ -82,10 +82,10 @@ void Ostroslup::RysujGeometrie(){
     }
     
 }
-void Kostka::RysujGeometrieNowe()
+void Kostka::RysujGeometrie()
 {
     float d = 0.5;//połowa długości boku
-    glColor3f(0.8,0.8,0.8);
+    glColor3f(0.6,0.8,0.7);
     float cX=srodekModelu[0], cY=srodekModelu[1], cZ=srodekModelu[2];
     glBegin(GL_QUADS);
     //przód
@@ -136,7 +136,7 @@ void Kostka::RysujGeometrieNowe()
     glVertex3f(cX+d,cY-d,cZ+d);//x,0,0
     glEnd();
 }
-void Kostka::RysujGeometrie()
+void Kostka::RysujGeometrieStare()
 {
     float x=1.0f, y = x, z = x;
     glTranslatef(-0.5,-0.5,0.5);

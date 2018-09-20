@@ -29,17 +29,13 @@ void Renderowanie::JednorazowoRysujModeleZnazwami()
 {
     int numeracja = 0;
     glPushName(321);
-    glPushName(429);
     glPushName(557);//ta nazwa jest podmieniana przez funkcję glLoadName
-//    g_print("\n narysowano modele z nazwami: ");
     for(auto iter : mojeModele){
         glLoadName(numeracja++);
         iter->Rysuj();
-//        g_print("  %d ",numeracja-1);
     }
     glPopName();   
     RysujModeleOdpowiednio = &Renderowanie::RysujModeleBezNazw;
-//    g_print("\n przywrócono RysujModeleBezNazw");
 }
 
 int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
@@ -48,8 +44,8 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 	Zaladuj(std::make_shared<Kostka>());
     Zaladuj(std::make_shared<Ostroslup>());
     UtworzTyleKostek(10);
-    WskazModelSwiatla(0);
-	WybierzModelOnumerze(2);
+    WskazModelSwiatla(2);
+	WybierzModelOnumerze(1);
     return 0;
 }
 void Renderowanie::Zaladuj(spModel wskaznikNaModel)
@@ -121,7 +117,7 @@ void Renderowanie::UtworzTyleKostek(int ile)
     for(i ; i < ile ; i++){
         for(int j = 0; j < 3 ; j++)losowo[j] = dist(mt);
         std::shared_ptr<Model> kostka = std::make_shared<Kostka>();
-        kostka->UstalM_Pos(losowo);
+        kostka->UstawPolozenieSrodkaModelu(losowo);
         Zaladuj(kostka);
     }
 }

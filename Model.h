@@ -46,7 +46,7 @@ class Kostka : public Model{
     virtual ~Kostka(){};
     virtual void RysujGeometrie() override;
     void RysujGeometrieNieUdane();
-    void RysujGeometrieNowe();
+    void RysujGeometrieStare();
 };
 
 
