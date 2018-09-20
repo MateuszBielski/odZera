@@ -13,6 +13,7 @@ public :
 	virtual void RysujGeometrie(){};
     virtual void Wygladzanie(bool){};//do zastanowienia się czy warto przy każdym obiekcie to ustalać
     void UstalM_Pos(float*);
+    void UstawPolozenieSrodkaModelu(float* zeWskaznika);
 	void UzywajPushMatrix(bool);//--
     void PokazujWartosci(bool b){pokazujWartosci = b;};
     void JestemZaladowanyPodNumerem(int n){jestemZaladowanyPodNumerem = n;};
@@ -23,6 +24,7 @@ protected:
     bool czyPushMatrix = true;
     bool pokazujWartosci = false;
 	float* obrotIndywidualny = nullptr;
+    float srodekModelu[3];
     
 	float * vertexy = 0;
     int * indeksy = 0;
@@ -43,6 +45,8 @@ class Kostka : public Model{
     Kostka(){};
     virtual ~Kostka(){};
     virtual void RysujGeometrie() override;
+    void RysujGeometrieNieUdane();
+    void RysujGeometrieNowe();
 };
 
 
