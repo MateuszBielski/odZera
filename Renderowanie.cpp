@@ -41,10 +41,11 @@ void Renderowanie::JednorazowoRysujModeleZnazwami()
 int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 {
     Zaladuj(std::make_shared<Kostka>());
-	Zaladuj(std::make_shared<Kostka>());
+//	Zaladuj(std::make_shared<Kostka>());
     Zaladuj(std::make_shared<Ostroslup>());
+//    Zaladuj(std::make_shared<TrzyKwadraty>());
     UtworzTyleKostek(10);
-    WskazModelSwiatla(2);
+    WskazModelSwiatla(0);
 	WybierzModelOnumerze(1);
     return 0;
 }
@@ -117,7 +118,7 @@ void Renderowanie::UtworzTyleKostek(int ile)
     for(i ; i < ile ; i++){
         for(int j = 0; j < 3 ; j++)losowo[j] = dist(mt);
         std::shared_ptr<Model> kostka = std::make_shared<Kostka>();
-        kostka->UstawPolozenieSrodkaModelu(losowo);
+        kostka->UstalM_Pos(losowo);
         Zaladuj(kostka);
     }
 }

@@ -82,7 +82,7 @@ void Ostroslup::RysujGeometrie(){
     }
     
 }
-void Kostka::RysujGeometrie()
+void Kostka::RysujGeometrieNowe()
 {
     float d = 0.5;//połowa długości boku
     glColor3f(0.6,0.8,0.7);
@@ -136,7 +136,7 @@ void Kostka::RysujGeometrie()
     glVertex3f(cX+d,cY-d,cZ+d);//x,0,0
     glEnd();
 }
-void Kostka::RysujGeometrieStare()
+void Kostka::RysujGeometrie()
 {
     float x=1.0f, y = x, z = x;
     glTranslatef(-0.5,-0.5,0.5);
@@ -223,6 +223,32 @@ void Kostka::RysujGeometrieNieUdane(){
     
     
 }
+void TrzyKwadraty::RysujGeometrie()
+{
+    glBegin(GL_QUADS);
+    glNormal3f(0,1.0,0);
+    glColor3f(0.8,0.8,0.8);
+    glVertex3f(0,0,0);
+    glNormal3f(0,1.0,0);
+    glVertex3f(1,0,0);
+    glNormal3f(0,1.0,0);
+    glVertex3f(1,0,-1);
+    glNormal3f(0,1.0,0);
+    glVertex3f(0,0,-1);
+    glEnd();
+    
+    glBegin(GL_QUADS);
+    glColor3f(0.8,0.8,0.8);
+    glNormal3f(0,1.0,0);
+    glVertex3f(0,-1,2);
+    glNormal3f(0,1.0,0);
+    glVertex3f(1,-1,2);
+    glNormal3f(0,1.0,0);
+    glVertex3f(1,-1,1);
+    glNormal3f(0,1.0,0);
+    glVertex3f(0,-1,1);
+    glEnd();
+}
 //poniższe to pozostałość po użyciu tablicy wierzchołków w starszym innym projekcie
 	/*glEnableClientState( GL_VERTEX_ARRAY );
     glVertexPointer( 3, GL_FLOAT, 0, vertexy );
@@ -236,3 +262,4 @@ void Kostka::RysujGeometrieNieUdane(){
     glDisableClientState( GL_VERTEX_ARRAY );
     glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);*/
+

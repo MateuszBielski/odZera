@@ -46,8 +46,13 @@ class Kostka : public Model{
     virtual ~Kostka(){};
     virtual void RysujGeometrie() override;
     void RysujGeometrieNieUdane();
-    void RysujGeometrieStare();
+    void RysujGeometrieNowe();
 };
-
+class TrzyKwadraty : public Model{
+  public:
+    TrzyKwadraty(){};
+    ~TrzyKwadraty(){};
+    virtual void RysujGeometrie() override;
+};
 
 #endif

@@ -48,12 +48,18 @@ void EkranRysujacy::OswietlenieUstaw()
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT_AND_BACK,GL_AMBIENT_AND_DIFFUSE);
     //światło punktowe
-    float kolorZrodla[] = {0.8,0.8,0.8,1.0};
-    float temp[] = {0.0,1.0,3.0,0.0};
+    float kolorZrodla[] = {0.7,0.7,0.9,1.0};
+    float temp[] = {0.0,1.0,3.0,1.0};//obowiązkowo 1 na końcu
     memcpy(pozycjaZrodlaSwiatla,temp,4*sizeof(float));
     glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodlaSwiatla); 
     glLightfv(GL_LIGHT1,GL_DIFFUSE,kolorZrodla);
     glEnable(GL_LIGHT1);
+    
+    float kolorZrodla2[] = {0.1,0.3,0.1,1.0};
+    float temp2[] = {-1.5,1.0,3.0,1.0};
+    glLightfv(GL_LIGHT2,GL_POSITION,temp2); 
+    glLightfv(GL_LIGHT2,GL_DIFFUSE,kolorZrodla2);
+    glEnable(GL_LIGHT2);
 }
 void EkranRysujacy::RysujScene()
 {
@@ -61,8 +67,8 @@ void EkranRysujacy::RysujScene()
     glLoadIdentity();
 	
     renderowanie->TransformacjaCalegoWidoku(); 
-    renderowanie->RysujModele();
 	glLightfv(GL_LIGHT1,GL_POSITION,pozycjaZrodlaSwiatla);
+    renderowanie->RysujModele();
     
 }
 
