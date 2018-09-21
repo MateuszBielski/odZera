@@ -44,7 +44,7 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 //	Zaladuj(std::make_shared<Kostka>());
     Zaladuj(std::make_shared<Ostroslup>());
 //    Zaladuj(std::make_shared<TrzyKwadraty>());
-    UtworzTyleKostek(10);
+    UtworzTyleKostek(30);
     WskazModelSwiatla(0);
 	WybierzModelOnumerze(1);
     return 0;

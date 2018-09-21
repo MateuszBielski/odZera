@@ -36,6 +36,11 @@ void EkranRysujacy::UstawienieSceny()
       float aspect = static_cast<float>(wysokosc) / static_cast<float>(szerokosc);
       glFrustum(-1.0, 1.0, -aspect, aspect, planBliski, planDaleki);
     }
+	
+	glEnable(GL_POLYGON_SMOOTH);
+    glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+	// równanie mieszania kolorów
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glMatrixMode(GL_MODELVIEW);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
