@@ -65,6 +65,8 @@
     <File Name="Renderowanie.cpp"/>
     <File Name="Model.cpp"/>
     <File Name="Model.h"/>
+    <File Name="GrupaModeli.h"/>
+    <File Name="GrupaModeli.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Moduly">
     <File Name="Moduly.cpp"/>

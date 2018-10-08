@@ -1,4 +1,5 @@
 #include "Renderowanie.h"
+#include <GrupaModeli.h>
 #include <random>
 
 Renderowanie::Renderowanie()
@@ -45,6 +46,7 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
     Zaladuj(std::make_shared<Ostroslup>());
 //    Zaladuj(std::make_shared<TrzyKwadraty>());
     UtworzTyleKostek(30);
+	Zaladuj(std::make_shared<GrupaModeli>());
     WskazModelSwiatla(0);
 	WybierzModelOnumerze(1);
     return 0;

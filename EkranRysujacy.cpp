@@ -38,9 +38,9 @@ void EkranRysujacy::UstawienieSceny()
     }
 	
 	glEnable(GL_POLYGON_SMOOTH);
-    glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
-	// równanie mieszania kolorów
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	/***antyaliasing***/
+//    glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
+//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glMatrixMode(GL_MODELVIEW);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
