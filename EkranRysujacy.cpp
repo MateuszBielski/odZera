@@ -37,8 +37,8 @@ void EkranRysujacy::UstawienieSceny()
       glFrustum(-1.0, 1.0, -aspect, aspect, planBliski, planDaleki);
     }
 	
-	glEnable(GL_POLYGON_SMOOTH);
 	/***antyaliasing***/
+//	glEnable(GL_POLYGON_SMOOTH);
 //    glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
 //    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 

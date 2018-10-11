@@ -124,3 +124,8 @@ void Renderowanie::UtworzTyleKostek(int ile)
         Zaladuj(kostka);
     }
 }
+void Renderowanie::WybranyModelPrzeniesDoGrupy()
+{
+    auto wybranyModel = mojeModele.at(numerModeluWybranego);
+    mojeModele.at(numerModeluWybranego) = std::make_shared<ModelPusty>();
+}

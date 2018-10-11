@@ -190,7 +190,7 @@ void Kostka::RysujGeometrie()
     glVertex3f(x,0,0);
     glEnd();
 }
-void Kostka::RysujGeometrieNieUdane(){
+/*void Kostka::RysujGeometrieNieUdane(){
     float w[24]; //wierzchołki (x,y,z) dolna powierzchnia od lewego z przodu w prawo, góra tak samo
     float d = 0.5;//połowa długości boku
 
@@ -222,7 +222,7 @@ void Kostka::RysujGeometrieNieUdane(){
     glEnd();
     
     
-}
+}*/
 void TrzyKwadraty::RysujGeometrie()
 {
     glBegin(GL_QUADS);

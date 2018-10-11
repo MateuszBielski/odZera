@@ -31,7 +31,7 @@ int Moduly::WszystkieDodaj()
     DodajModul(UtworzModulTypu<EkranRysujacy>());
     DodajModul(UtworzModulTypu<SterowanieMysza>());
     DodajModul(UtworzModulTypu<Renderowanie>());
-    DodajModul(UtworzModulTypu<PrzekierowanieSygnalow>());
+    DodajModul(UtworzModulTypu<PrzekierowanieSygnalow>());//faktycznie ustawia przycisk zmień tryb sterowania i obsługuje to przełączenie
     DodajModul(UtworzModulTypu<PrzesuwanieWidoku>());
     return ileModulowDodano;//do uzupełnienia
 }

@@ -33,7 +33,9 @@ protected:
     int ileVertexow = 0;
     int ileIndeksow = 0;
 };
-
+class ModelPusty : public Model{
+    
+};
 class Ostroslup : public Model{
   public:
     Ostroslup(){};
@@ -45,7 +47,7 @@ class Kostka : public Model{
     Kostka(){};
     virtual ~Kostka(){};
     virtual void RysujGeometrie() override;
-    void RysujGeometrieNieUdane();
+//    void RysujGeometrieNieUdane();
     void RysujGeometrieNowe();
 };
 class TrzyKwadraty : public Model{

@@ -21,6 +21,7 @@ public:
 	void WybierzModelOnumerze(short);
     void UstawRysowanieZnazwami();
 	spModel DajWybranyModel();
+    void WybranyModelPrzeniesDoGrupy();
 	
     //światło
 	void WskazModelSwiatla(short );
