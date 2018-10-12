@@ -64,6 +64,9 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
         if(event->state & GDK_SHIFT_MASK){
            renderowanie->WybranyModelPrzeniesDoGrupy();
         }
+        if(event->state & GDK_CONTROL_MASK){
+//           renderowanie->UsunZGrupy(numer_lub_stosZnumerami) ;
+        }
         bool czyUaktualnicAdresAktualneSterowanie = (aktualneSterowanie == wybranegoObiektu);
         wybranegoObiektu = renderowanie->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
         if(czyUaktualnicAdresAktualneSterowanie) aktualneSterowanie = wybranegoObiektu;
