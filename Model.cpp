@@ -136,6 +136,11 @@ void Kostka::RysujGeometrieNowe()
     glVertex3f(cX+d,cY-d,cZ+d);//x,0,0
     glEnd();
 }
+void Model::RysujZnazwami()
+{
+    glLoadName(jestemZaladowanyPodNumerem);
+    Rysuj();
+}
 void Kostka::RysujGeometrie()
 {
     float x=1.0f, y = x, z = x;
@@ -262,4 +267,3 @@ void TrzyKwadraty::RysujGeometrie()
     glDisableClientState( GL_VERTEX_ARRAY );
     glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);*/
-

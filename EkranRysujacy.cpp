@@ -86,20 +86,19 @@ void EkranRysujacy::UstawPozycjeZrodlaSwiatla(float * wedlugParametrow){
 }
 int EkranRysujacy::WyznaczIndeksObiektuWpunkcie(int x, int y)
 {
-	
-    
-    //implementacja z arcball gwiazdy:
-//    clock_t czas[5];
-//    czas[0] = clock();
-    
-    //przygotowanie bufora zaznaczenia
+	const int rozmiarBuforaZaznaczenia = 1024;
+    unsigned buforZaznaczenia[rozmiarBuforaZaznaczenia];
+    WypelnijBuforZaznaczeniaWPunkcie(x,y,buforZaznaczenia);
+    return CoZaznaczono(ileTrafien,buforZaznaczenia).top();
+}
+stos_int EkranRysujacy::StosNazwObiektuWpunkcie(int x, int y)
+{
     const int rozmiarBuforaZaznaczenia = 1024;
     unsigned buforZaznaczenia[rozmiarBuforaZaznaczenia];
-    WypelnijBuforZaznaczeniaWPunkcie(x,y, unsigned buforZaznaczenia)
+    WypelnijBuforZaznaczeniaWPunkcie(x,y,buforZaznaczenia);
     return CoZaznaczono(ileTrafien,buforZaznaczenia);
-    
 }
-int EkranRysujacy::CoZaznaczono(int ileTrafien,unsigned int * dane)
+/*int EkranRysujacy::CoZaznaczono(int ileTrafien,unsigned int * dane)
 {
     int wynik = -1;
     if (ileTrafien > 0) {
@@ -129,22 +128,14 @@ int EkranRysujacy::CoZaznaczono(int ileTrafien,unsigned int * dane)
     }
 //    g_print("  indeks najbliższegoPunktu %d",wynik);
 	return wynik;
-    /*
-    czas[4] = clock();
-    long delta[5]; //= (long) (koniec - start);
-    printf("\n czasy:");
-    for(int i=0;i<4;i++){
-        delta[i]=(long)(czas[i+1]-czas[i]);
-        printf("\n%d. %d ms",i,delta[i]);
-    }
-    delta[4]=(long)(czas[4]-czas[0]);
-    printf("\ncalosc %d ms",delta[4]);
-    return wynik;*/
-}
-stos_int EkranRysujacy::CoZaznaczono(int ileTrafien, unsigned int*)
+}*/
+stos_int EkranRysujacy::CoZaznaczono(int ileTrafien, unsigned int* dane)
 {
     stos_int wynik;
     wynik.push(-1);
+    auto stosNazwLamba = [](unsigned poczRek,unsigned wysStosu,unsigned *d,stos_int& stosNazw){
+        for(short i = poczRek+2 ; i < poczRek+2+wysStosu ; i++)stosNazw = d[i];
+    }
     if (ileTrafien > 0) {
         unsigned poczatekRekordu = 0;
         unsigned wysokoscStosuNazw = dane[poczatekRekordu];
@@ -153,14 +144,14 @@ stos_int EkranRysujacy::CoZaznaczono(int ileTrafien, unsigned int*)
         unsigned odlegloscNajblizszegoPunktu = dane[poczatekRekordu+2];
         unsigned biezacaOdlegloscPunktu = odlegloscNajblizszegoPunktu;
         int biezacyIndeks = 0;
-        for(short i = poczatekRekordu+2 ; i < poczatekRekordu+2+wysokoscStosuNazw ; i++)indeksNajblizszegoPunktu = dane[i];
+        stosNazwLamba(poczatekRekordu,wysokoscStosuNazw,dane,indeksNajblizszegoPunktu);
         for (int i = 0; i < ileTrafien; i++) {
             wysokoscStosuNazw = dane[poczatekRekordu];
             dlugoscRekordu = 3 + wysokoscStosuNazw;
             biezacaOdlegloscPunktu = dane[poczatekRekordu+2];
             if(biezacaOdlegloscPunktu < odlegloscNajblizszegoPunktu ){
                 odlegloscNajblizszegoPunktu = biezacaOdlegloscPunktu;
-                indeksNajblizszegoPunktu = dane[poczatekRekordu+2+wysokoscStosuNazw];
+                stosNazwLamba(poczatekRekordu,wysokoscStosuNazw,dane,indeksNajblizszegoPunktu);
             }
             poczatekRekordu += dlugoscRekordu;
         }
@@ -195,3 +186,4 @@ void EkranRysujacy::WypelnijBuforZaznaczeniaWPunkcie(int x, int y, unsigned bufo
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
 }
+

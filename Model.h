@@ -10,6 +10,7 @@ public :
     virtual ~Model(); 
     void RysujOstroslup();
 	virtual void Rysuj();
+    virtual void RysujZnazwami();
 	virtual void RysujGeometrie(){};
     virtual void Wygladzanie(bool){};//do zastanowienia się czy warto przy każdym obiekcie to ustalać
     void UstalM_Pos(float*);

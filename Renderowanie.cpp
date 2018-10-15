@@ -28,12 +28,10 @@ void Renderowanie::RysujModeleBezNazw()
 
 void Renderowanie::JednorazowoRysujModeleZnazwami()
 {
-    int numeracja = 0;
     glPushName(321);
     glPushName(557);//ta nazwa jest podmieniana przez funkcję glLoadName
     for(auto iter : mojeModele){
-        glLoadName(numeracja++);
-        iter->Rysuj();
+        iter->RysujZnazwami();
     }
     glPopName();   
     RysujModeleOdpowiednio = &Renderowanie::RysujModeleBezNazw;
