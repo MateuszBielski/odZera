@@ -17,8 +17,9 @@ public:
 	void PobierzWskaznikNaMacierzObrotu(float *);
 	void RysujModele();
     using spModel = std::shared_ptr<Model>;
-    void Zaladuj(spModel);
-	void WybierzModelOnumerze(short);
+    spModel Zaladuj(spModel);//wrócić do void
+	void WybierzModelOnumerze(short int);
+    void WybierzModelOnumerze(std::stack<int> &&);
     void UstawRysowanieZnazwami();
 	spModel DajWybranyModel();
     void WybranyModelPrzeniesDoGrupy();

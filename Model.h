@@ -20,6 +20,7 @@ public :
     void JestemZaladowanyPodNumerem(int n){jestemZaladowanyPodNumerem = n;};
     
     std::shared_ptr<WspolrzedneImacierzeSterowania> mojeWspolrzedneImacierzeSterowania;
+    bool czyJestemGrupa = false;
 protected:
     int jestemZaladowanyPodNumerem = -1;
     bool czyPushMatrix = true;

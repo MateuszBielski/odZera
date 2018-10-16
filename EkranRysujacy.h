@@ -9,10 +9,10 @@ public:
     void UstawPozycjeZrodlaSwiatla(float *) ;
     void PodajPozycjeZrodlaSwiatla(float *);
     //czy któreś z poniższych funkcji mogą wyjść poza zakres klasy?
-    int WyznaczIndeksObiektuWpunkcie(int , int);
+//    int WyznaczIndeksObiektuWpunkcie(int , int);
     using stos_int = std::stack<int>;
     stos_int StosNazwObiektuWpunkcie(int , int);
-    void WypelnijBuforZaznaczeniaWPunkcie(int,int,unsigned int *);
+    unsigned WypelnijBuforZaznaczeniaWPunkcie(int,int,unsigned *);
     
     
 //    int CoZaznaczono(int,unsigned  int *);//zastąpić poniższąfunkcją

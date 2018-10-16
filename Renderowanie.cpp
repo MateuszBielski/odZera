@@ -44,16 +44,17 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
     Zaladuj(std::make_shared<Ostroslup>());
 //    Zaladuj(std::make_shared<TrzyKwadraty>());
     UtworzTyleKostek(30);
-	Zaladuj(std::make_shared<GrupaModeli>());
+	
     WskazModelSwiatla(0);
 	WybierzModelOnumerze(1);
     return 0;
 }
-void Renderowanie::Zaladuj(spModel wskaznikNaModel)
+spModel Renderowanie::Zaladuj(spModel wskaznikNaModel)
 {
 	//jakieś rzeczy, które mają ustawić cechy i parametry rysowanej rzeczy np. nazwy w openGL, może położenie w przestrzeni
     mojeModele.push_back(wskaznikNaModel);
     wskaznikNaModel->JestemZaladowanyPodNumerem(ileZaladowanychModeli++);
+    return wskaznikNaModel;
 }
 void Renderowanie::WskazModelSwiatla(short numerModelu){
 	modelSwiatlaMaNumer = numerModelu;
@@ -73,6 +74,10 @@ void Renderowanie::WybierzModelOnumerze(short tym){
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);
+}
+void Renderowanie::WybierzModelOnumerze(std::stack<int> && stosNazw){
+    WybierzModelOnumerze(static_cast<short int>(stosNazw.top()));
+    //rozpoznać grrupę do której należy obiekt
 }
 
 Renderowanie::spModel Renderowanie::DajWybranyModel()
@@ -126,4 +131,10 @@ void Renderowanie::WybranyModelPrzeniesDoGrupy()
 {
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     mojeModele.at(numerModeluWybranego) = std::make_shared<ModelPusty>();
+    if(!wybranyModel->czyJestemGrupa){
+        std::shared_ptr<GrupaModeli> grupa= std::make_shared<GrupaModeli>();
+        grupa->DodajDoMnie(wybranyModel);
+        Zaladuj(std::static_pointer_cast<Model>(grupa));
+    }
+    
 }
