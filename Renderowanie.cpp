@@ -28,12 +28,11 @@ void Renderowanie::RysujModeleBezNazw()
 
 void Renderowanie::JednorazowoRysujModeleZnazwami()
 {
-    glPushName(321);
-    glPushName(557);//ta nazwa jest podmieniana przez funkcję glLoadName
+    glPushName(891);//liczba dowolna, bo jest podmieniana przez funkcję glLoadName
+    g_print("\n glPushName%d",891);
     for(auto iter : mojeModele){
         iter->RysujZnazwami();
     }
-    glPopName();   
     RysujModeleOdpowiednio = &Renderowanie::RysujModeleBezNazw;
 }
 
@@ -43,18 +42,18 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 //	Zaladuj(std::make_shared<Kostka>());
     Zaladuj(std::make_shared<Ostroslup>());
 //    Zaladuj(std::make_shared<TrzyKwadraty>());
-    UtworzTyleKostek(30);
+    UtworzTyleKostek(8);
 	
     WskazModelSwiatla(0);
 	WybierzModelOnumerze(1);
     return 0;
 }
-spModel Renderowanie::Zaladuj(spModel wskaznikNaModel)
+int Renderowanie::Zaladuj(spModel wskaznikNaModel)
 {
 	//jakieś rzeczy, które mają ustawić cechy i parametry rysowanej rzeczy np. nazwy w openGL, może położenie w przestrzeni
     mojeModele.push_back(wskaznikNaModel);
     wskaznikNaModel->JestemZaladowanyPodNumerem(ileZaladowanychModeli++);
-    return wskaznikNaModel;
+    return ileZaladowanychModeli-1;
 }
 void Renderowanie::WskazModelSwiatla(short numerModelu){
 	modelSwiatlaMaNumer = numerModelu;
@@ -70,7 +69,9 @@ Renderowanie::spModel Renderowanie::DajModelSwiatla()
 }
 void Renderowanie::WybierzModelOnumerze(short tym){
 	if(tym < 0)return;
+    numerPoprzednioWybranego = numerModeluWybranego;
 	numerModeluWybranego = tym;
+    g_print("\nRenderowanie::WybierzModelOnumerze %d",numerModeluWybranego);
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);
@@ -129,12 +130,23 @@ void Renderowanie::UtworzTyleKostek(int ile)
 }
 void Renderowanie::WybranyModelPrzeniesDoGrupy()
 {
+    g_print("\nRenderowanie::WybranyModelPrzeniesDoGrupy poprzedni %d, terazWybrany %d"
+    ,numerPoprzednioWybranego,numerModeluWybranego);
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
+    auto poprzednioWybrany = mojeModele.at(numerPoprzednioWybranego);
     mojeModele.at(numerModeluWybranego) = std::make_shared<ModelPusty>();
-    if(!wybranyModel->czyJestemGrupa){
-        std::shared_ptr<GrupaModeli> grupa= std::make_shared<GrupaModeli>();
-        grupa->DodajDoMnie(wybranyModel);
-        Zaladuj(std::static_pointer_cast<Model>(grupa));
+    std::shared_ptr<GrupaModeli> grupa;
+    if(!poprzednioWybrany->czyJestemGrupa){
+        grupa= std::make_shared<GrupaModeli>();
+        grupa->DodajDoMnie(poprzednioWybrany);
+        mojeModele.at(numerPoprzednioWybranego) = std::make_shared<ModelPusty>();
+        numerPoprzednioWybranego = Zaladuj(std::static_pointer_cast<Model>(grupa));
+//        g_print("\nnowaGrupa z numerem %d",numerPoprzednioWybranego);
+        
+    }else{
+        grupa = std::static_pointer_cast<GrupaModeli>(poprzednioWybrany);
+        g_print("\ndodano do istniejącej grupy %d",numerPoprzednioWybranego);
     }
-    
+    grupa->DodajDoMnie(wybranyModel);
+    numerModeluWybranego = numerPoprzednioWybranego;
 }

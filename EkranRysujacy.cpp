@@ -112,8 +112,8 @@ EkranRysujacy::stos_int EkranRysujacy::StosNazwObiektuWpunkcie(int x, int y)
     glRenderMode(GL_SELECT); //umieść znak komemtarza przed tym poleceniem, żeby zobaczyć co widzi myszka
     RysujScene();//BEZ_SWAPBUFFERS
     unsigned ileTrafien = glRenderMode(GL_RENDER);
-//    g_print("\nWyoborPunktu ileTrafien= %d, zawartosc bufora: \n ", ileTrafien);
-//    for (int j = 0; j < 5 * ileTrafien + 10; j++)g_print(" %d,", buforZaznaczenia[j]);
+    g_print("\nWyoborPunktu ileTrafien= %d, zawartosc bufora: \n ", ileTrafien);
+    for (int j = 0; j < 5 * ileTrafien + 10; j++)g_print(" %d,", buforZaznaczenia[j]);
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
@@ -125,12 +125,6 @@ EkranRysujacy::stos_int EkranRysujacy::CoZaznaczono(int ileTrafien, unsigned int
     stos_int wynik;
     wynik.push(-1);
    
-    /*auto stosNazwLamba = [&](unsigned poczRek,unsigned wysStosu,unsigned *d,stos_int& stosNazw){
-//         g_print("\nstosNazwLambda");
-        for(short i = poczRek+3 ; i < poczRek+3+wysStosu ; i++){
-            stosNazw.push(d[i]);
-//            g_print(" %d",stosNazw.top());
-        };*/
     if (ileTrafien > 0) {
         unsigned poczatekRekordu = 0;
         unsigned wysokoscStosuNazw = dane[poczatekRekordu];
@@ -142,20 +136,24 @@ EkranRysujacy::stos_int EkranRysujacy::CoZaznaczono(int ileTrafien, unsigned int
             stos_int nowyStos;
             indeksNajblizszegoPunktu = nowyStos;
             g_print("\nwypelnijStosNazwami");
-            for(short i = poczatekRekordu+3 ; i < poczatekRekordu+3+wysokoscStosuNazw ; i++){
+            for(short i = poczatekRekordu+2+wysokoscStosuNazw ; i > poczatekRekordu+2 ; i--){
                 indeksNajblizszegoPunktu.push(dane[i]);
                 g_print(" %d",dane[i]);
             }
-            
+            /*for(short i = poczatekRekordu+3 ; i < poczatekRekordu+3+wysokoscStosuNazw ; i++){
+                indeksNajblizszegoPunktu.push(dane[i]);
+                g_print(" %d",dane[i]);
+            }*/
         };
-        wypelnijStosNazwami;
+       
+        wypelnijStosNazwami();
         for (int i = 0; i < ileTrafien; i++) {
             wysokoscStosuNazw = dane[poczatekRekordu];
             dlugoscRekordu = 3 + wysokoscStosuNazw;
             biezacaOdlegloscPunktu = dane[poczatekRekordu+2];
             if(biezacaOdlegloscPunktu < odlegloscNajblizszegoPunktu ){
                 odlegloscNajblizszegoPunktu = biezacaOdlegloscPunktu;
-                wypelnijStosNazwami;
+                wypelnijStosNazwami();
             }
             poczatekRekordu += dlugoscRekordu;
         }

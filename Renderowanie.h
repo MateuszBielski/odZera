@@ -17,7 +17,7 @@ public:
 	void PobierzWskaznikNaMacierzObrotu(float *);
 	void RysujModele();
     using spModel = std::shared_ptr<Model>;
-    spModel Zaladuj(spModel);//wrócić do void
+    int Zaladuj(spModel);
 	void WybierzModelOnumerze(short int);
     void WybierzModelOnumerze(std::stack<int> &&);
     void UstawRysowanieZnazwami();
@@ -42,6 +42,7 @@ private:
 	Model ostroslup;
     short modelSwiatlaMaNumer = 0;
 	short numerModeluWybranego = 1;
+    short numerPoprzednioWybranego = 1;
 	float* przesuniecie = nullptr;
     float* przesunieciePierwotne = nullptr;
 	float* macierzObrotu = nullptr;
