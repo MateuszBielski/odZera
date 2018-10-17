@@ -138,7 +138,7 @@ void Kostka::RysujGeometrieNowe()
 }
 void Model::RysujZnazwami()
 {
-    g_print(" %d",jestemZaladowanyPodNumerem);
+//    g_print(" %d",jestemZaladowanyPodNumerem);
     glLoadName(jestemZaladowanyPodNumerem);
     Rysuj();
 }

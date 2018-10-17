@@ -60,7 +60,6 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
     //podwójne kliknięcie
     if(event->type == GDK_2BUTTON_PRESS && event->button == 1){
         renderowanie->UstawRysowanieZnazwami();
-//        oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
         renderowanie->WybierzModelOnumerze((ekran->StosNazwObiektuWpunkcie(ix,iy)));
         if(event->state & GDK_SHIFT_MASK){
            renderowanie->WybranyModelPrzeniesDoGrupy();

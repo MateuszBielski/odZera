@@ -3,6 +3,9 @@
 GrupaModeli::GrupaModeli()
 {
     czyJestemGrupa = true;
+    /*mojeWspolrzedneImacierzeSterowania->m_Pos[0] = 2.0;
+    mojeWspolrzedneImacierzeSterowania->m_Pos[1] = 2.0;
+    mojeWspolrzedneImacierzeSterowania->m_Pos[2] = 0.0;*/
 }
 
 GrupaModeli::~GrupaModeli()
@@ -31,7 +34,7 @@ void GrupaModeli::RysujZnazwami()
     glMultMatrixf(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0]);
     glLoadName(jestemZaladowanyPodNumerem);
     glPushName(jestemZaladowanyPodNumerem);
-    g_print("\nGrupaModeli::RysujZnazwami glPushName %d",jestemZaladowanyPodNumerem);
+//    g_print("\nGrupaModeli::RysujZnazwami glPushName %d",jestemZaladowanyPodNumerem);
     for(auto& model : mojeModele){
         model->RysujZnazwami();
     }
