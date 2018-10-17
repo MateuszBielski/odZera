@@ -68,7 +68,7 @@ Renderowanie::spModel Renderowanie::DajModelSwiatla()
 	return mojeModele.at(modelSwiatlaMaNumer);
 }
 void Renderowanie::WybierzModelOnumerze(short tym){
-	if(tym < 0)return;
+	if(tym < 0 || tym > ileZaladowanychModeli)return;
     numerPoprzednioWybranego = numerModeluWybranego;
 	numerModeluWybranego = tym;
     g_print("\nRenderowanie::WybierzModelOnumerze %d",numerModeluWybranego);

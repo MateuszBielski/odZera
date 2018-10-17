@@ -26,6 +26,9 @@ void GrupaModeli::Rysuj()
 }
 void GrupaModeli::RysujZnazwami()
 {
+    if(czyPushMatrix)glPushMatrix();
+    glTranslatef(mojeWspolrzedneImacierzeSterowania->m_Pos[0],mojeWspolrzedneImacierzeSterowania->m_Pos[1],mojeWspolrzedneImacierzeSterowania->m_Pos[2]);
+    glMultMatrixf(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0]);
     glLoadName(jestemZaladowanyPodNumerem);
     glPushName(jestemZaladowanyPodNumerem);
     g_print("\nGrupaModeli::RysujZnazwami glPushName %d",jestemZaladowanyPodNumerem);
@@ -33,5 +36,6 @@ void GrupaModeli::RysujZnazwami()
         model->RysujZnazwami();
     }
     glPopName();
+    if(czyPushMatrix)glPopMatrix();
 }
 
