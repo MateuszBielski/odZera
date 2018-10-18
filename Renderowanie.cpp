@@ -42,7 +42,7 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 //	Zaladuj(std::make_shared<Kostka>());
     Zaladuj(std::make_shared<Ostroslup>());
 //    Zaladuj(std::make_shared<TrzyKwadraty>());
-    UtworzTyleKostek(20);
+    UtworzTyleKostek(7);
 	
     WskazModelSwiatla(0);
 	WybierzModelOnumerze(1);
@@ -76,20 +76,26 @@ void Renderowanie::WybierzModelOnumerze(short tym){
     wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);
     wybranyModel->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
+	UtrwalPrzeksztalceniaWybranegoObiektu();
 //	wybranyModel->WlaczJednorazowoWymienneFunkcje(ZESTAW_FUNKCJI);
 }
 void Renderowanie::WybierzModelOnumerze(std::stack<int> && stosNazw){
     WybierzModelOnumerze(static_cast<short int>(stosNazw.top()));
     //rozpoznać grrupę do której należy obiekt
 }
-
+void Renderowanie::UtrwalPrzeksztalceniaWybranegoObiektu()
+{
+	g_print("\nRenderowanie::UtrwalPrzeksztalceniaWybranegoObiektu");
+	glLoadIdentity();
+	mojeModele.at(numerModeluWybranego)->Rysuj();
+}
 Renderowanie::spModel Renderowanie::DajWybranyModel()
 {
 	return mojeModele.at(numerModeluWybranego);
 }
 void Renderowanie::TransformacjaCalegoWidoku()
 {
-    if(przesunieciePierwotne == nullptr || przesuniecie == nullptr || przesuniecie == nullptr){
+    if(przesunieciePierwotne == nullptr || przesuniecie == nullptr){
         g_print("\n nie ustawione wskaźniki na przemieszcznia i obroty całego widoku");
         return;
     }
@@ -132,7 +138,7 @@ void Renderowanie::UtworzTyleKostek(int ile)
 }
 void Renderowanie::WybranyModelPrzeniesDoGrupy()
 {
-//    g_print("\nRenderowanie::WybranyModelPrzeniesDoGrupy poprzedni %d, terazWybrany %d",numerPoprzednioWybranego,numerModeluWybranego);
+    g_print("\nRenderowanie::WybranyModelPrzeniesDoGrupy poprzedni %d, terazWybrany %d",numerPoprzednioWybranego,numerModeluWybranego);
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     auto poprzednioWybrany = mojeModele.at(numerPoprzednioWybranego);
     mojeModele.at(numerModeluWybranego) = std::make_shared<ModelPusty>();
@@ -151,3 +157,4 @@ void Renderowanie::WybranyModelPrzeniesDoGrupy()
     grupa->DodajDoMnie(wybranyModel);
     numerModeluWybranego = numerPoprzednioWybranego;
 }
+

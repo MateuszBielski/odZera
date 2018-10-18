@@ -77,14 +77,20 @@ void Model::WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi){
 }
 void Model::UtrwalMposZaktualnejMacierzy()
 {
-    float tempDest[4], tempM_pos[4];
+    auto pokaz = [](float * v){
+		g_print("\n ");
+		for(int i = 0; i < 4 ; i++)g_print("  %2.3f",v[i]);
+	};
+	float tempDest[4], tempM_pos[4];
     float macierzModelWidok[16];
-    for(int i = 0; i < 3 ; i++)tempM_pos[i] = mojeWspolrzedneImacierzeSterowania->m_Pos[i];
-    tempM_pos[3] = 0;
+    for(int i = 0; i < 4 ; i++)tempM_pos[i] = mojeWspolrzedneImacierzeSterowania->m_Pos[i];
+    tempM_pos[3] = 1;
     glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
     IloczynMacierzyIwektora4f(macierzModelWidok,tempM_pos,tempDest);
     for(int i = 0; i < 3 ; i++)mojeWspolrzedneImacierzeSterowania->m_Pos[i] = tempDest[i];
-//    g_print("\nModel::UtrwalMposZaktualnejMacierzy mój numer %d",jestemZaladowanyPodNumerem);
+    g_print("\nModel::UtrwalMposZaktualnejMacierzy mój numer %d",jestemZaladowanyPodNumerem);
+//	pokaz(tempM_pos);
+//	pokaz(tempDest);
     FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
 }
 

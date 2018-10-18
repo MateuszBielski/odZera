@@ -6,9 +6,6 @@ GrupaModeli::GrupaModeli()
     for(int i= 0 ;i < 3; i++){
         srodekCiezkosci[i] = 0;
     }
-    /*mojeWspolrzedneImacierzeSterowania->m_Pos[0] = 2.0;
-    mojeWspolrzedneImacierzeSterowania->m_Pos[1] = 2.0;
-    mojeWspolrzedneImacierzeSterowania->m_Pos[2] = 0.0;*/
 }
 
 GrupaModeli::~GrupaModeli()

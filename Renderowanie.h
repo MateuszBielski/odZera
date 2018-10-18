@@ -23,6 +23,7 @@ public:
     void UstawRysowanieZnazwami();
 	spModel DajWybranyModel();
     void WybranyModelPrzeniesDoGrupy();
+	void UtrwalPrzeksztalceniaWybranegoObiektu();
 	
     //światło
 	void WskazModelSwiatla(short );
