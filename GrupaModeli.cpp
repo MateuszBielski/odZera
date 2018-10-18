@@ -3,6 +3,9 @@
 GrupaModeli::GrupaModeli()
 {
     czyJestemGrupa = true;
+    for(int i= 0 ;i < 3; i++){
+        srodekCiezkosci[i] = 0;
+    }
     /*mojeWspolrzedneImacierzeSterowania->m_Pos[0] = 2.0;
     mojeWspolrzedneImacierzeSterowania->m_Pos[1] = 2.0;
     mojeWspolrzedneImacierzeSterowania->m_Pos[2] = 0.0;*/
@@ -14,15 +17,20 @@ GrupaModeli::~GrupaModeli()
 void GrupaModeli::DodajDoMnie(spModel model)
 {
 	mojeModele.push_back(model);
-    
-    //tu można modyfikować środek ciężkości dla obracania grupy
+    WyliczSrodekCiezkosci();
+}
+void GrupaModeli::TransformacjePrzedRysowaniem()
+{
+    glTranslatef(mojeWspolrzedneImacierzeSterowania->m_Pos[0],mojeWspolrzedneImacierzeSterowania->m_Pos[1],mojeWspolrzedneImacierzeSterowania->m_Pos[2]);
+    glTranslatef(srodekCiezkosci[0],srodekCiezkosci[1],srodekCiezkosci[2]);
+    glMultMatrixf(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0]);
+    glTranslatef(-srodekCiezkosci[0],-srodekCiezkosci[1],-srodekCiezkosci[2]);
 }
 void GrupaModeli::Rysuj()
 {
     if(czyPushMatrix)glPushMatrix();
-    glTranslatef(mojeWspolrzedneImacierzeSterowania->m_Pos[0],mojeWspolrzedneImacierzeSterowania->m_Pos[1],mojeWspolrzedneImacierzeSterowania->m_Pos[2]);
-    glMultMatrixf(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0]);
-    for(auto& model : mojeModele){
+    TransformacjePrzedRysowaniem();
+   for(auto& model : mojeModele){
         model->Rysuj();
     }
     if(czyPushMatrix)glPopMatrix();
@@ -30,8 +38,7 @@ void GrupaModeli::Rysuj()
 void GrupaModeli::RysujZnazwami()
 {
     if(czyPushMatrix)glPushMatrix();
-    glTranslatef(mojeWspolrzedneImacierzeSterowania->m_Pos[0],mojeWspolrzedneImacierzeSterowania->m_Pos[1],mojeWspolrzedneImacierzeSterowania->m_Pos[2]);
-    glMultMatrixf(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0]);
+    TransformacjePrzedRysowaniem();
     glLoadName(jestemZaladowanyPodNumerem);
     glPushName(jestemZaladowanyPodNumerem);
 //    g_print("\nGrupaModeli::RysujZnazwami glPushName %d",jestemZaladowanyPodNumerem);
@@ -40,5 +47,16 @@ void GrupaModeli::RysujZnazwami()
     }
     glPopName();
     if(czyPushMatrix)glPopMatrix();
+}
+void GrupaModeli::WyliczSrodekCiezkosci()
+{   
+    float ileModeli = 0;
+    for(int j = 0; j < 3 ; j++)srodekCiezkosci[j] = 0;
+    for(auto& model : mojeModele){
+        for(int j = 0; j < 3 ; j++)srodekCiezkosci[j] += model->mojeWspolrzedneImacierzeSterowania->m_Pos[j];
+        ileModeli += 1.0;
+    }
+    for(int j = 0; j < 3 ; j++)srodekCiezkosci[j] /= ileModeli;
+    g_print("\nsrodekCiezkosci: %2.2f, %2.2f, %2.2f",srodekCiezkosci[0],srodekCiezkosci[1],srodekCiezkosci[2]);
 }
 

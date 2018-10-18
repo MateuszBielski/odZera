@@ -1,6 +1,7 @@
 #include <Model.h>
 #include <FunkcjeIstruktury.h>
 
+
 Model::Model()
 {
     mojeWspolrzedneImacierzeSterowania = std::make_shared<WspolrzedneImacierzeSterowania>();
@@ -40,8 +41,8 @@ void Model::RysujOstroslup()
 void Model::Rysuj()
 {
 	if(czyPushMatrix)glPushMatrix();
-    glTranslatef(mojeWspolrzedneImacierzeSterowania->m_Pos[0],mojeWspolrzedneImacierzeSterowania->m_Pos[1],mojeWspolrzedneImacierzeSterowania->m_Pos[2]);
-    glMultMatrixf(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0]);
+    TransformacjePrzedRysowaniem();
+    (this->*FunkcjaWymienna)();
     if(pokazujWartosci){
         float macierzModelWidok[16];
         glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
@@ -50,7 +51,10 @@ void Model::Rysuj()
 	RysujGeometrie();
 	if(czyPushMatrix)glPopMatrix();
 }
-
+void Model::TransformacjePrzedRysowaniem(){
+    glTranslatef(mojeWspolrzedneImacierzeSterowania->m_Pos[0],mojeWspolrzedneImacierzeSterowania->m_Pos[1],mojeWspolrzedneImacierzeSterowania->m_Pos[2]);
+    glMultMatrixf(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0]);
+}
 
 void Model::UstalM_Pos(float* zTablicy)
 {
@@ -59,6 +63,23 @@ void Model::UstalM_Pos(float* zTablicy)
 void Model::UstawPolozenieSrodkaModelu(float* zeWskaznika)
 {
 	for(int i = 0 ; i < 3 ; i++)srodekModelu[i] = zeWskaznika[i];
+}
+void Model::WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi){
+    if(jakieFunkcjeFlagi & UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY){
+//        FunkcjaWymienna = &Model::UtrwalMposZaktualnejMacierzy;
+    }
+}
+void Model::UtrwalMposZaktualnejMacierzy()
+{
+    float tempDest[4], tempM_pos[4];
+    float macierzModelWidok[16];
+    for(int i = 0; i < 3 ; i++)tempM_pos[i] = mojeWspolrzedneImacierzeSterowania->m_Pos[i];
+    tempM_pos[3] = 0;
+    glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
+    IloczynMacierzyIwektora4f(macierzModelWidok,tempM_pos,tempDest);
+    for(int i = 0; i < 3 ; i++)mojeWspolrzedneImacierzeSterowania->m_Pos[i] = tempDest[i];
+//    g_print("\nModel::UtrwalMposZaktualnejMacierzy mój numer %d",jestemZaladowanyPodNumerem);
+    FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
 }
 
 void Ostroslup::RysujGeometrie(){

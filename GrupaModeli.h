@@ -10,9 +10,12 @@ public:
 	void DodajDoMnie(spModel);
     virtual void Rysuj() override;
     virtual void RysujZnazwami() override;
+    virtual void TransformacjePrzedRysowaniem() override;
+    void WyliczSrodekCiezkosci();
 private:
 	using listaModeli = std::list<spModel>;
 	listaModeli mojeModele;
+    float srodekCiezkosci[3];
 };
 
 #endif // GRUPAMODELI_H

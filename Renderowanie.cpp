@@ -52,7 +52,7 @@ int Renderowanie::Zaladuj(spModel wskaznikNaModel)
 {
 	//jakieś rzeczy, które mają ustawić cechy i parametry rysowanej rzeczy np. nazwy w openGL, może położenie w przestrzeni
     mojeModele.push_back(wskaznikNaModel);
-    wskaznikNaModel->JestemZaladowanyPodNumerem(ileZaladowanychModeli++);
+    wskaznikNaModel->PrzydzielenieNumeru(ileZaladowanychModeli++);
     return ileZaladowanychModeli-1;
 }
 void Renderowanie::WskazModelSwiatla(short numerModelu){
@@ -75,6 +75,7 @@ void Renderowanie::WybierzModelOnumerze(short tym){
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);
+    wybranyModel->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
 }
 void Renderowanie::WybierzModelOnumerze(std::stack<int> && stosNazw){
     WybierzModelOnumerze(static_cast<short int>(stosNazw.top()));

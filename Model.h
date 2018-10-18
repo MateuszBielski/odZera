@@ -2,6 +2,8 @@
 #define MODEL_H
 #include <gtkglmm.h>
 #include <WspolrzedneImacierzeSterowania.h>
+#define UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY 1
+
 
 
 class Model{
@@ -12,16 +14,23 @@ public :
 	virtual void Rysuj();
     virtual void RysujZnazwami();
 	virtual void RysujGeometrie(){};
+    virtual void TransformacjePrzedRysowaniem();
     virtual void Wygladzanie(bool){};//do zastanowienia się czy warto przy każdym obiekcie to ustalać
     void UstalM_Pos(float*);
     void UstawPolozenieSrodkaModelu(float* zeWskaznika);
 	void UzywajPushMatrix(bool);//--
     void PokazujWartosci(bool b){pokazujWartosci = b;};
-    void JestemZaladowanyPodNumerem(int n){jestemZaladowanyPodNumerem = n;};
+    void PrzydzielenieNumeru(int n){jestemZaladowanyPodNumerem = n;};
+    void UtrwalMposZaktualnejMacierzy();
+    void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi);
+    
     
     std::shared_ptr<WspolrzedneImacierzeSterowania> mojeWspolrzedneImacierzeSterowania;
     bool czyJestemGrupa = false;
 protected:
+    using Ptr_F_void_void = void(Model::*)();
+    Ptr_F_void_void FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
+    void DomyslnaWymiennaFunkcja(){};
     int jestemZaladowanyPodNumerem = -1;
     bool czyPushMatrix = true;
     bool pokazujWartosci = false;

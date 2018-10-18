@@ -68,7 +68,7 @@ void Quat_to_Phi_a(float * q,float* phi,float* a){
     *phi = 2 * phi_przez_dwa;
     
 }
-void IloczynMacierzyIwektora(float * m, float * v, float * vDest){
+void IloczynMacierzyIwektora4f(float * m, float * v, float * vDest){
     register int i = 0, j;
     
     //macierz zapisana rzędami - jest właściwa dla korekty obrotów
