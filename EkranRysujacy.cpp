@@ -95,7 +95,6 @@ EkranRysujacy::stos_int EkranRysujacy::StosNazwObiektuWpunkcie(int x, int y)
 {
     const int rozmiarBuforaZaznaczenia = 1024;
     unsigned buforZaznaczenia[rozmiarBuforaZaznaczenia];
-//    WypelnijBuforZaznaczeniaWPunkcie(x,y,buforZaznaczenia);
     std::fill_n (buforZaznaczenia,rozmiarBuforaZaznaczenia,0);
     glSelectBuffer(rozmiarBuforaZaznaczenia, buforZaznaczenia);
 
@@ -112,8 +111,8 @@ EkranRysujacy::stos_int EkranRysujacy::StosNazwObiektuWpunkcie(int x, int y)
     glRenderMode(GL_SELECT); //umieść znak komemtarza przed tym poleceniem, żeby zobaczyć co widzi myszka
     RysujScene();//BEZ_SWAPBUFFERS
     unsigned ileTrafien = glRenderMode(GL_RENDER);
-    g_print("\nWyoborPunktu ileTrafien= %d, zawartosc bufora: \n ", ileTrafien);
-    for (int j = 0; j < 5 * ileTrafien + 10; j++)g_print(" %d,", buforZaznaczenia[j]);
+//    g_print("\nWyoborPunktu ileTrafien= %d, zawartosc bufora: \n ", ileTrafien);
+//    for (int j = 0; j < 5 * ileTrafien + 10; j++)g_print(" %d,", buforZaznaczenia[j]);
     glMatrixMode(GL_PROJECTION);
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
@@ -135,10 +134,10 @@ EkranRysujacy::stos_int EkranRysujacy::CoZaznaczono(int ileTrafien, unsigned int
         auto wypelnijStosNazwami = [&](){
             stos_int nowyStos;
             indeksNajblizszegoPunktu = nowyStos;
-            g_print("\nwypelnijStosNazwami");
+//            g_print("\nwypelnijStosNazwami");
             for(short i = poczatekRekordu+2+wysokoscStosuNazw ; i > poczatekRekordu+2 ; i--){
                 indeksNajblizszegoPunktu.push(dane[i]);
-                g_print(" %d",dane[i]);
+//                g_print(" %d",dane[i]);
             }
             /*for(short i = poczatekRekordu+3 ; i < poczatekRekordu+3+wysokoscStosuNazw ; i++){
                 indeksNajblizszegoPunktu.push(dane[i]);

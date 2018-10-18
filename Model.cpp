@@ -66,8 +66,14 @@ void Model::UstawPolozenieSrodkaModelu(float* zeWskaznika)
 }
 void Model::WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi){
     if(jakieFunkcjeFlagi & UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY){
-//        FunkcjaWymienna = &Model::UtrwalMposZaktualnejMacierzy;
+        FunkcjaWymienna = &Model::UtrwalMposZaktualnejMacierzy;
     }
+	if(jakieFunkcjeFlagi & ZESTAW_FUNKCJI){
+		FunkcjeWymienne.push_back(F_pierwsza);
+		FunkcjeWymienne.push_back(F_trzecia);
+		FunkcjeWymienne.push_back(F_druga);
+		FunkcjaWymienna = &Model::WykonajWszystkieFunkcjeZestawu;
+	}
 }
 void Model::UtrwalMposZaktualnejMacierzy()
 {
@@ -82,26 +88,38 @@ void Model::UtrwalMposZaktualnejMacierzy()
     FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
 }
 
-void Ostroslup::RysujGeometrie(){
-    float x=1.0;
-	float y=1.0;
-    
-    glRotatef(90,1,0,0);
-    for(int i =0; i < 3; i++){
-        glColor3f(0.4*i,0.9,0.0);
-        glTranslatef(0,0,0.5);
-        glRotatef(-30,1,0,0);
-        glNormal3f(0,0,1.0);
-        glBegin(GL_TRIANGLES);
-        glVertex3f(-x,-y,0);
-        glVertex3f(x,-y,0);
-        glVertex3f(0,y,0);
-        glEnd();
-        glRotatef(30,1,0,0);
-        glTranslatef(0,0,-0.5);
-        glRotatef(120,0,1,0);
-    }
-    
+void Model::RysujZnazwami()
+{
+//    g_print(" %d",jestemZaladowanyPodNumerem);
+    glLoadName(jestemZaladowanyPodNumerem);
+    Rysuj();
+}
+
+void Model::F_pierwsza()
+{
+	g_print("\nfunkcja pierwsza");
+}
+
+void Model::F_druga()
+{
+	g_print("\nfunkcja druga");
+}
+
+void Model::F_trzecia()
+{	
+	g_print("\nfunkcja trzecia");
+}
+
+void Model::WykonajWszystkieFunkcjeZestawu()
+{
+	for(auto& funkcja : FunkcjeWymienne){
+//z std::function poniższe 3 nie działają:
+//		(this->*funkcja)();
+//		(*funkcja)();
+//		funkcja();
+		(this->*funkcja)();
+	}
+	FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
 }
 void Kostka::RysujGeometrieNowe()
 {
@@ -157,12 +175,6 @@ void Kostka::RysujGeometrieNowe()
     glVertex3f(cX+d,cY-d,cZ+d);//x,0,0
     glEnd();
 }
-void Model::RysujZnazwami()
-{
-//    g_print(" %d",jestemZaladowanyPodNumerem);
-    glLoadName(jestemZaladowanyPodNumerem);
-    Rysuj();
-}
 void Kostka::RysujGeometrie()
 {
     float x=1.0f, y = x, z = x;
@@ -217,7 +229,27 @@ void Kostka::RysujGeometrie()
     glVertex3f(x,0,0);
     glEnd();
 }
-
+void Ostroslup::RysujGeometrie(){
+    float x=1.0;
+	float y=1.0;
+    
+    glRotatef(90,1,0,0);
+    for(int i =0; i < 3; i++){
+        glColor3f(0.4*i,0.9,0.0);
+        glTranslatef(0,0,0.5);
+        glRotatef(-30,1,0,0);
+        glNormal3f(0,0,1.0);
+        glBegin(GL_TRIANGLES);
+        glVertex3f(-x,-y,0);
+        glVertex3f(x,-y,0);
+        glVertex3f(0,y,0);
+        glEnd();
+        glRotatef(30,1,0,0);
+        glTranslatef(0,0,-0.5);
+        glRotatef(120,0,1,0);
+    }
+    
+}
 void TrzyKwadraty::RysujGeometrie()
 {
     glBegin(GL_QUADS);

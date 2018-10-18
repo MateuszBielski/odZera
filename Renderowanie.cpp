@@ -29,7 +29,7 @@ void Renderowanie::RysujModeleBezNazw()
 void Renderowanie::JednorazowoRysujModeleZnazwami()
 {
     glPushName(891);//liczba dowolna, bo jest podmieniana przez funkcję glLoadName
-    g_print("\n glPushName%d",891);
+//    g_print("\n glPushName%d",891);
     for(auto iter : mojeModele){
         iter->RysujZnazwami();
     }
@@ -71,11 +71,12 @@ void Renderowanie::WybierzModelOnumerze(short tym){
 	if(tym < 0 || tym > ileZaladowanychModeli)return;
     numerPoprzednioWybranego = numerModeluWybranego;
 	numerModeluWybranego = tym;
-    g_print("\nRenderowanie::WybierzModelOnumerze %d",numerModeluWybranego);
+//    g_print("\nRenderowanie::WybierzModelOnumerze %d",numerModeluWybranego);
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);
     wybranyModel->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
+//	wybranyModel->WlaczJednorazowoWymienneFunkcje(ZESTAW_FUNKCJI);
 }
 void Renderowanie::WybierzModelOnumerze(std::stack<int> && stosNazw){
     WybierzModelOnumerze(static_cast<short int>(stosNazw.top()));
@@ -131,8 +132,7 @@ void Renderowanie::UtworzTyleKostek(int ile)
 }
 void Renderowanie::WybranyModelPrzeniesDoGrupy()
 {
-    g_print("\nRenderowanie::WybranyModelPrzeniesDoGrupy poprzedni %d, terazWybrany %d"
-    ,numerPoprzednioWybranego,numerModeluWybranego);
+//    g_print("\nRenderowanie::WybranyModelPrzeniesDoGrupy poprzedni %d, terazWybrany %d",numerPoprzednioWybranego,numerModeluWybranego);
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     auto poprzednioWybrany = mojeModele.at(numerPoprzednioWybranego);
     mojeModele.at(numerModeluWybranego) = std::make_shared<ModelPusty>();
@@ -146,7 +146,7 @@ void Renderowanie::WybranyModelPrzeniesDoGrupy()
         
     }else{
         grupa = std::static_pointer_cast<GrupaModeli>(poprzednioWybrany);
-        g_print("\ndodano do istniejącej grupy %d",numerPoprzednioWybranego);
+//        g_print("\ndodano do istniejącej grupy %d",numerPoprzednioWybranego);
     }
     grupa->DodajDoMnie(wybranyModel);
     numerModeluWybranego = numerPoprzednioWybranego;

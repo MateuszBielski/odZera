@@ -57,6 +57,6 @@ void GrupaModeli::WyliczSrodekCiezkosci()
         ileModeli += 1.0;
     }
     for(int j = 0; j < 3 ; j++)srodekCiezkosci[j] /= ileModeli;
-    g_print("\nsrodekCiezkosci: %2.2f, %2.2f, %2.2f",srodekCiezkosci[0],srodekCiezkosci[1],srodekCiezkosci[2]);
+//    g_print("\nsrodekCiezkosci: %2.2f, %2.2f, %2.2f",srodekCiezkosci[0],srodekCiezkosci[1],srodekCiezkosci[2]);
 }
 

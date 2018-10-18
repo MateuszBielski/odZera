@@ -3,6 +3,7 @@
 #include <gtkglmm.h>
 #include <WspolrzedneImacierzeSterowania.h>
 #define UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY 1
+#define ZESTAW_FUNKCJI 2
 
 
 
@@ -31,6 +32,17 @@ protected:
     using Ptr_F_void_void = void(Model::*)();
     Ptr_F_void_void FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
     void DomyslnaWymiennaFunkcja(){};
+	
+	//zestaw różnych funkcji - experymentalnie
+//	using kontenerFunkcji = std::vector<std::function<void(Model&)>>;
+	using kontenerFunkcji = std::vector<Ptr_F_void_void>;
+	kontenerFunkcji FunkcjeWymienne;
+	void F_pierwsza();
+	void F_druga();
+	void F_trzecia();
+	void WykonajWszystkieFunkcjeZestawu();
+//	std::function<int(MyValue&)> fifth = &MyValue::fifth;
+	
     int jestemZaladowanyPodNumerem = -1;
     bool czyPushMatrix = true;
     bool pokazujWartosci = false;
