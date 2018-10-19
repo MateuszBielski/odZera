@@ -27,6 +27,7 @@ void GrupaModeli::Rysuj()
 {
     if(czyPushMatrix)glPushMatrix();
     TransformacjePrzedRysowaniem();
+	(this->*FunkcjaWymienna)();
    for(auto& model : mojeModele){
         model->Rysuj();
     }
@@ -60,6 +61,7 @@ void GrupaModeli::UtrwalPrzeksztalceniaMoichModeli()
 {
     g_print("\nGrupaModeli::UtrwalPrzeksztalceniaModeliWgrupie");
 	glLoadIdentity();
+	this->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
     for(auto& model : mojeModele){
         model->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
     }

@@ -84,11 +84,15 @@ void Model::UtrwalMposZaktualnejMacierzy()
 	};
 	float tempDest[4], tempM_pos[4];
     float macierzModelWidok[16];
-    for(int i = 0; i < 4 ; i++)tempM_pos[i] = srodekModelu[i];
+    for(int i = 0; i < 4 ; i++){
+		tempM_pos[i] = mojeWspolrzedneImacierzeSterowania->m_Pos[i];
+		mojeWspolrzedneImacierzeSterowania->m_Pos[i] = 0;
+	}
     tempM_pos[3] = 1;
     glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
     WyswietlWartosciMacierzy4x4(macierzModelWidok);
     IloczynMacierzyIwektora4f(macierzModelWidok,tempM_pos,tempDest);
+//	IloczynWektoraImacierzy4f(tempM_pos,macierzModelWidok,tempDest);
     for(int i = 0; i < 3 ; i++)srodekModelu[i] = tempDest[i];
     g_print("\nModel::UtrwalMposZaktualnejMacierzy mój numer %d",jestemZaladowanyPodNumerem);
 	pokaz(tempM_pos);
