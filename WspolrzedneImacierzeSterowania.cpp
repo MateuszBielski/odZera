@@ -4,6 +4,10 @@
 
 WspolrzedneImacierzeSterowania::WspolrzedneImacierzeSterowania()
 {
+	UstawWartosciStartowe();
+}
+void WspolrzedneImacierzeSterowania::UstawWartosciStartowe()
+{
 	for(int i = 0; i < 3 ; i++){
         m_Pos[i] = 0.0;
         przesunieciePierwotne[i] = 0.0;
@@ -26,7 +30,6 @@ WspolrzedneImacierzeSterowania::WspolrzedneImacierzeSterowania()
 	macierzObrotu[2][2] = 1.0;
 	macierzObrotu[3][3] = 1.0;
 }
-
 WspolrzedneImacierzeSterowania::~WspolrzedneImacierzeSterowania()
 {
 }
@@ -45,3 +48,4 @@ void WspolrzedneImacierzeSterowania::BiezaceUstawJakoPoprzednie_PozycjaKursoraMy
 {
     for(int i = 0 ; i < 3 ; i++)poprzedniaPozycjaKursoraMyszy3D[i] = biezacaPozycjaKursoraMyszy3D[i];
 }
+

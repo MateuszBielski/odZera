@@ -63,7 +63,7 @@ void GrupaModeli::UtrwalPrzeksztalceniaMoichModeli()
 	glLoadIdentity();
 	this->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
     for(auto& model : mojeModele){
-        model->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
+//        model->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
     }
     Rysuj();
 }

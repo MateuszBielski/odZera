@@ -9,6 +9,7 @@ public:
     void ZmienM_Pos_zgodnieZruchemKursora3D();
     void BiezaceUstawJakoPoprzednie_m_Begin();
     void BiezaceUstawJakoPoprzednie_PozycjaKursoraMyszy3D();
+	void UstawWartosciStartowe();
 	float m_QuatDiff[4];
     float m_Quat[4];
 	
