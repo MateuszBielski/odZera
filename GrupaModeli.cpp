@@ -56,4 +56,13 @@ void GrupaModeli::WyliczSrodekCiezkosci()
     for(int j = 0; j < 3 ; j++)srodekCiezkosci[j] /= ileModeli;
 //    g_print("\nsrodekCiezkosci: %2.2f, %2.2f, %2.2f",srodekCiezkosci[0],srodekCiezkosci[1],srodekCiezkosci[2]);
 }
+void GrupaModeli::UtrwalPrzeksztalceniaMoichModeli()
+{
+    g_print("\nGrupaModeli::UtrwalPrzeksztalceniaModeliWgrupie");
+	glLoadIdentity();
+    for(auto& model : mojeModele){
+        model->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
+    }
+    Rysuj();
+}
 

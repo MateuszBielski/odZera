@@ -1,6 +1,6 @@
 #include "Renderowanie.h"
-#include <GrupaModeli.h>
 #include <random>
+#include <GrupaModeli.h>
 
 Renderowanie::Renderowanie()
 {
@@ -75,8 +75,7 @@ void Renderowanie::WybierzModelOnumerze(short tym){
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);
-    wybranyModel->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
-	UtrwalPrzeksztalceniaWybranegoObiektu();
+    
 //	wybranyModel->WlaczJednorazowoWymienneFunkcje(ZESTAW_FUNKCJI);
 }
 void Renderowanie::WybierzModelOnumerze(std::stack<int> && stosNazw){
@@ -89,6 +88,12 @@ void Renderowanie::UtrwalPrzeksztalceniaWybranegoObiektu()
 	glLoadIdentity();
 	mojeModele.at(numerModeluWybranego)->Rysuj();
 }
+void Renderowanie::UtrwalPrzeksztalceniaModelu(spModel model){
+    g_print("\nRenderowanie::UtrwalPrzeksztalceniaModelu");
+	glLoadIdentity();
+    model->Rysuj();
+}
+
 Renderowanie::spModel Renderowanie::DajWybranyModel()
 {
 	return mojeModele.at(numerModeluWybranego);
@@ -138,7 +143,6 @@ void Renderowanie::UtworzTyleKostek(int ile)
 }
 void Renderowanie::WybranyModelPrzeniesDoGrupy()
 {
-    g_print("\nRenderowanie::WybranyModelPrzeniesDoGrupy poprzedni %d, terazWybrany %d",numerPoprzednioWybranego,numerModeluWybranego);
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     auto poprzednioWybrany = mojeModele.at(numerPoprzednioWybranego);
     mojeModele.at(numerModeluWybranego) = std::make_shared<ModelPusty>();
@@ -154,7 +158,9 @@ void Renderowanie::WybranyModelPrzeniesDoGrupy()
         grupa = std::static_pointer_cast<GrupaModeli>(poprzednioWybrany);
 //        g_print("\ndodano do istniejącej grupy %d",numerPoprzednioWybranego);
     }
+	grupa->UtrwalPrzeksztalceniaMoichModeli();
     grupa->DodajDoMnie(wybranyModel);
+    g_print("\nRenderowanie::WybranyModelPrzeniesDoGrupy przeniesiono %d",numerModeluWybranego);
     numerModeluWybranego = numerPoprzednioWybranego;
 }
 

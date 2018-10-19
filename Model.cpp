@@ -65,13 +65,14 @@ void Model::UstawPolozenieSrodkaModelu(float* zeWskaznika)
 	for(int i = 0 ; i < 3 ; i++)srodekModelu[i] = zeWskaznika[i];
 }
 void Model::WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi){
+    g_print("\nWlaczJednorazowoWymienneFunkcje %d",jestemZaladowanyPodNumerem);
     if(jakieFunkcjeFlagi & UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY){
         FunkcjaWymienna = &Model::UtrwalMposZaktualnejMacierzy;
     }
 	if(jakieFunkcjeFlagi & ZESTAW_FUNKCJI){
-		FunkcjeWymienne.push_back(F_pierwsza);
-		FunkcjeWymienne.push_back(F_trzecia);
-		FunkcjeWymienne.push_back(F_druga);
+		FunkcjeWymienne.push_back(&Model::F_pierwsza);
+		FunkcjeWymienne.push_back(&Model::F_trzecia);
+		FunkcjeWymienne.push_back(&Model::F_druga);
 		FunkcjaWymienna = &Model::WykonajWszystkieFunkcjeZestawu;
 	}
 }
@@ -83,14 +84,15 @@ void Model::UtrwalMposZaktualnejMacierzy()
 	};
 	float tempDest[4], tempM_pos[4];
     float macierzModelWidok[16];
-    for(int i = 0; i < 4 ; i++)tempM_pos[i] = mojeWspolrzedneImacierzeSterowania->m_Pos[i];
+    for(int i = 0; i < 4 ; i++)tempM_pos[i] = srodekModelu[i];
     tempM_pos[3] = 1;
     glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
+    WyswietlWartosciMacierzy4x4(macierzModelWidok);
     IloczynMacierzyIwektora4f(macierzModelWidok,tempM_pos,tempDest);
-    for(int i = 0; i < 3 ; i++)mojeWspolrzedneImacierzeSterowania->m_Pos[i] = tempDest[i];
+    for(int i = 0; i < 3 ; i++)srodekModelu[i] = tempDest[i];
     g_print("\nModel::UtrwalMposZaktualnejMacierzy mój numer %d",jestemZaladowanyPodNumerem);
-//	pokaz(tempM_pos);
-//	pokaz(tempDest);
+	pokaz(tempM_pos);
+	pokaz(tempDest);
     FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
 }
 
@@ -127,7 +129,7 @@ void Model::WykonajWszystkieFunkcjeZestawu()
 	}
 	FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
 }
-void Kostka::RysujGeometrieNowe()
+void Kostka::RysujGeometrie()
 {
     float d = 0.5;//połowa długości boku
     glColor3f(0.6,0.8,0.7);
@@ -181,7 +183,7 @@ void Kostka::RysujGeometrieNowe()
     glVertex3f(cX+d,cY-d,cZ+d);//x,0,0
     glEnd();
 }
-void Kostka::RysujGeometrie()
+void Kostka::RysujGeometrieStare()
 {
     float x=1.0f, y = x, z = x;
     glTranslatef(-0.5,-0.5,0.5);

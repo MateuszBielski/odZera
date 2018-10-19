@@ -12,6 +12,7 @@ public:
     virtual void RysujZnazwami() override;
     virtual void TransformacjePrzedRysowaniem() override;
     void WyliczSrodekCiezkosci();
+    void UtrwalPrzeksztalceniaMoichModeli();
 private:
 	using listaModeli = std::list<spModel>;
 	listaModeli mojeModele;
