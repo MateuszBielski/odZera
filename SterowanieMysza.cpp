@@ -144,6 +144,6 @@ void SterowanieMysza::KorekcjaOsiObrotuWybranegoModelu()
      osWybranyModel[3] = 0;
      
      Quat_to_Phi_a(wybranegoObiektu->m_QuatDiff,&katWybranegoModelu,osWybranyModel);
-     IloczynMacierzyIwektora4f(&calegoWidoku.macierzObrotu[0][0],osWybranyModel,osObroconaWybranegoModelu);
+     IloczynWektoraImacierzy4f(osWybranyModel,&calegoWidoku.macierzObrotu[0][0],osObroconaWybranegoModelu);
      Trackball::axis_to_quat(osObroconaWybranegoModelu,katWybranegoModelu,wybranegoObiektu->m_QuatDiff);
 }
