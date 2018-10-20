@@ -1,0 +1,17 @@
+cd E:/programowanie/GtkWs/odZera
+
+20.10.2018
+Renderowanie.cpp:163
+//	grupa->UtrwalPrzeksztalceniaMoichModeli();
+Kostka::RysujGeometrie() użycie punktów tablicy z punktami p[][] i normalnymi n[][]
+Kostka::UstawPolozenieSrodkaModelu - jest wirtualna i jednocześnie oblicza punkty na podstawie środka modelu
+znikł model światła
+wyrażenie regularne:
+szukam: p(\d)\[(\d)\]
+zamieniam: p[\1][\2]
+rezultat działania jest następujący: p0[0]       ->        p[0][0]
+\d - oznacza jakąkolwiek cyfrę
+\1 - odwołuje się do treści tego co jest w pierwszych nawiasach (...)
+źródło:
+http://home.agh.edu.pl/~mkuta/tk/WyrazeniaRegularne.html
+http://cpp0x.pl/artykuly/?id=47

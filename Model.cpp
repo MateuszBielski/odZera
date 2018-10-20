@@ -136,7 +136,71 @@ void Model::WykonajWszystkieFunkcjeZestawu()
 	}
 	FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
 }
+
+Kostka::Kostka()
+{
+	//miejsce na obliczanie punktów?
+	
+}
+void Kostka::UstawPolozenieSrodkaModelu(float* zeWskaznika)
+{
+	Model::UstawPolozenieSrodkaModelu(zeWskaznika);
+	ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,zeWskaznika);
+}
+void Kostka::ObliczPunktyKorzystajacZdlugosciIsrodka(float dd, float* c)
+{
+	//można dd użyć jako d[3] długość szerokość wysokość oddzielnie
+	float d = dd/2;
+	/*p0[0] = -d; p0[1] = -d; p0[2] =  d;
+	p1[0] =  d; p1[1] = -d; p1[2] =  d;
+	p2[0] =  d; p2[1] = -d; p2[2] = -d;
+	p3[0] = -d; p3[1] = -d; p3[2] = -d;
+	p4[0] = -d; p4[1] =  d; p4[2] =  d;
+	p5[0] =  d; p5[1] =  d; p5[2] =  d;
+	p6[0] =  d; p6[1] =  d; p6[2] = -d;
+	p7[0] = -d; p7[1] =  d; p7[2] = -d;*/
+	p[0][0] = -d; p[0][1] = -d; p[0][2] =  d;
+	p[1][0] =  d; p[1][1] = -d; p[1][2] =  d;
+	p[2][0] =  d; p[2][1] = -d; p[2][2] = -d;
+	p[3][0] = -d; p[3][1] = -d; p[3][2] = -d;
+	p[4][0] = -d; p[4][1] =  d; p[4][2] =  d;
+	p[5][0] =  d; p[5][1] =  d; p[5][2] =  d;
+	p[6][0] =  d; p[6][1] =  d; p[6][2] = -d;
+	p[7][0] = -d; p[7][1] =  d; p[7][2] = -d;
+	//dodanie wektora środka - czyli przesunięcie do punktu c(x,y,z)
+	for(int i = 0; i < 8; i++){
+		for(int j = 0; j < 3; j++)p[i][j]+=c[j];
+	}
+	//przód
+	n[0][0] = 0; n[0][1] = 0; n[0][2] = 1;
+	//tył
+	n[1][0] = 0; n[1][1] = 0; n[1][2] =-1;
+	//prawy
+	n[2][0] = 1; n[2][1] = 0; n[2][2] = 0;
+	//lewy
+	n[3][0] =-1; n[3][1] = 0; n[3][2] = 0;
+	//góra
+	n[4][0] = 0; n[4][1] = 1; n[4][2] = 0;
+	//dół
+	n[5][0] = 0; n[5][1] =-1; n[5][2] = 0;
+}
+
 void Kostka::RysujGeometrie()
+{
+    unsigned short nr[] = {	0,1,5,4,
+							3,7,6,2,
+							2,6,5,1,
+							3,0,4,7,
+							4,5,6,7,
+							0,3,2,1};
+	glBegin(GL_QUADS);
+	for(int s = 0 ; s < 6 ;s++){
+		glNormal3fv(n[s]);
+		for(int w = 0 ; w < 4 ;w++)glVertex3fv(p[nr[s*4 + w]]);
+	}
+    glEnd();
+}
+void Kostka::RysujGeometrieStare2()
 {
     float d = 0.5;//połowa długości boku
     glColor3f(0.6,0.8,0.7);
@@ -190,6 +254,7 @@ void Kostka::RysujGeometrie()
     glVertex3f(cX+d,cY-d,cZ+d);//x,0,0
     glEnd();
 }
+
 void Kostka::RysujGeometrieStare()
 {
     float x=1.0f, y = x, z = x;

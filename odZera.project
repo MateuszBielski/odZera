@@ -32,6 +32,7 @@
       <File Name="EkranRysujacy.cpp"/>
     </VirtualDirectory>
     <File Name="FunkcjeIstruktury.cpp"/>
+    <File Name="notatki.txt"/>
   </VirtualDirectory>
   <VirtualDirectory Name="headers">
     <File Name="Komunikat.h"/>

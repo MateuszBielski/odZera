@@ -18,7 +18,7 @@ public :
     virtual void TransformacjePrzedRysowaniem();
     virtual void Wygladzanie(bool){};//do zastanowienia się czy warto przy każdym obiekcie to ustalać
     void UstalM_Pos(float*);
-    void UstawPolozenieSrodkaModelu(float* zeWskaznika);
+    virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika);
 	void UzywajPushMatrix(bool);//--
     void PokazujWartosci(bool b){pokazujWartosci = b;};
     void PrzydzielenieNumeru(int n){jestemZaladowanyPodNumerem = n;};
@@ -67,11 +67,17 @@ class Ostroslup : public Model{
 };
 class Kostka : public Model{
   public:
-    Kostka(){};
+    Kostka();
     virtual ~Kostka(){};
+	virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika) override;
+	void ObliczPunktyKorzystajacZdlugosciIsrodka(float d, float* c);
     virtual void RysujGeometrie() override;
-//    void RysujGeometrieNieUdane();
     void RysujGeometrieStare();
+	void RysujGeometrieStare2();
+private:
+//float p0[3],p1[3],p2[3],p3[3],p4[3],p5[3],p6[3],p7[3];
+float p[8][3];
+float n[6][3];
 };
 class TrzyKwadraty : public Model{
   public:

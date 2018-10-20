@@ -138,6 +138,7 @@ void Renderowanie::UtworzTyleKostek(int ile)
         for(int j = 0; j < 3 ; j++)losowo[j] = dist(mt);
         std::shared_ptr<Model> kostka = std::make_shared<Kostka>();
         kostka->UstawPolozenieSrodkaModelu(losowo);
+		
 //		kostka->UstalM_Pos(losowo);
 		
         Zaladuj(kostka);
@@ -160,7 +161,7 @@ void Renderowanie::WybranyModelPrzeniesDoGrupy()
         grupa = std::static_pointer_cast<GrupaModeli>(poprzednioWybrany);
 //        g_print("\ndodano do istniejącej grupy %d",numerPoprzednioWybranego);
     }
-	grupa->UtrwalPrzeksztalceniaMoichModeli();
+//	grupa->UtrwalPrzeksztalceniaMoichModeli();
     grupa->DodajDoMnie(wybranyModel);
     g_print("\nRenderowanie::WybranyModelPrzeniesDoGrupy przeniesiono %d",numerModeluWybranego);
     numerModeluWybranego = numerPoprzednioWybranego;
