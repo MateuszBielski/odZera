@@ -15,3 +15,6 @@ rezultat działania jest następujący: p0[0]       ->        p[0][0]
 źródło:
 http://home.agh.edu.pl/~mkuta/tk/WyrazeniaRegularne.html
 http://cpp0x.pl/artykuly/?id=47
+
+22.10.2018
+przeciązony konstruktor Kostka(float * srodekModelu); - model światła(kostka) znów widoczny

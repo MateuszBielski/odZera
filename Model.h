@@ -20,7 +20,7 @@ public :
     void UstalM_Pos(float*);
     virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika);
 	void UzywajPushMatrix(bool);//--
-    void PokazujWartosci(bool b){pokazujWartosci = b;};
+    void PokazujWartosci(bool b){pokazujWartosci = b;};//
     void PrzydzielenieNumeru(int n){jestemZaladowanyPodNumerem = n;};
     void UtrwalMposZaktualnejMacierzy();
     void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi);
@@ -67,7 +67,8 @@ class Ostroslup : public Model{
 };
 class Kostka : public Model{
   public:
-    Kostka();
+    Kostka();//domyślnie ustawia środek modelu 0,0,0 i tak oblicza punkty
+    Kostka(float * srodekModelu);
     virtual ~Kostka(){};
 	virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika) override;
 	void ObliczPunktyKorzystajacZdlugosciIsrodka(float d, float* c);

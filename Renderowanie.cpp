@@ -132,15 +132,10 @@ void Renderowanie::UtworzTyleKostek(int ile)
     std::random_device rd;
     std::mt19937 mt(rd());
     std::uniform_real_distribution<float> dist(przedzial[0],przedzial[1]);
-
 //        std::cout << dist(mt) << "\n";
     for(i ; i < ile ; i++){
         for(int j = 0; j < 3 ; j++)losowo[j] = dist(mt);
-        std::shared_ptr<Model> kostka = std::make_shared<Kostka>();
-        kostka->UstawPolozenieSrodkaModelu(losowo);
-		
-//		kostka->UstalM_Pos(losowo);
-		
+        std::shared_ptr<Model> kostka = std::make_shared<Kostka>(losowo);
         Zaladuj(kostka);
     }
 }

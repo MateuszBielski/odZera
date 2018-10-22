@@ -139,8 +139,12 @@ void Model::WykonajWszystkieFunkcjeZestawu()
 
 Kostka::Kostka()
 {
-	//miejsce na obliczanie punktów?
-	
+   float srodek[] = {0.0f,0.0f,0.0f};
+   UstawPolozenieSrodkaModelu(srodek);
+}
+Kostka::Kostka(float* zeWskaznika)
+{
+   UstawPolozenieSrodkaModelu(zeWskaznika);
 }
 void Kostka::UstawPolozenieSrodkaModelu(float* zeWskaznika)
 {
@@ -151,14 +155,6 @@ void Kostka::ObliczPunktyKorzystajacZdlugosciIsrodka(float dd, float* c)
 {
 	//można dd użyć jako d[3] długość szerokość wysokość oddzielnie
 	float d = dd/2;
-	/*p0[0] = -d; p0[1] = -d; p0[2] =  d;
-	p1[0] =  d; p1[1] = -d; p1[2] =  d;
-	p2[0] =  d; p2[1] = -d; p2[2] = -d;
-	p3[0] = -d; p3[1] = -d; p3[2] = -d;
-	p4[0] = -d; p4[1] =  d; p4[2] =  d;
-	p5[0] =  d; p5[1] =  d; p5[2] =  d;
-	p6[0] =  d; p6[1] =  d; p6[2] = -d;
-	p7[0] = -d; p7[1] =  d; p7[2] = -d;*/
 	p[0][0] = -d; p[0][1] = -d; p[0][2] =  d;
 	p[1][0] =  d; p[1][1] = -d; p[1][2] =  d;
 	p[2][0] =  d; p[2][1] = -d; p[2][2] = -d;
@@ -194,6 +190,7 @@ void Kostka::RysujGeometrie()
 							4,5,6,7,
 							0,3,2,1};
 	glBegin(GL_QUADS);
+        glColor3f(0.6,0.8,0.7);
 	for(int s = 0 ; s < 6 ;s++){
 		glNormal3fv(n[s]);
 		for(int w = 0 ; w < 4 ;w++)glVertex3fv(p[nr[s*4 + w]]);
@@ -309,6 +306,7 @@ void Kostka::RysujGeometrieStare()
     glVertex3f(x,0,0);
     glEnd();
 }
+
 void Ostroslup::RysujGeometrie(){
     float x=1.0;
 	float y=1.0;
