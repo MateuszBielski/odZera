@@ -4,6 +4,7 @@
 #include <WspolrzedneImacierzeSterowania.h>
 #define UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY 1
 #define ZESTAW_FUNKCJI 2
+#define PRZELICZ_PUNKTY 4
 
 
 
@@ -23,8 +24,9 @@ public :
     void PokazujWartosci(bool b){pokazujWartosci = b;};//
     void PrzydzielenieNumeru(int n){jestemZaladowanyPodNumerem = n;};
     void UtrwalMposZaktualnejMacierzy();
+    virtual void PrzeliczPunktyZaktualnejMacierzy(){g_print("\nbazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy");};
     void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi);
-    
+    void UstawPustaDomyslnaFunkcje();
     
     std::shared_ptr<WspolrzedneImacierzeSterowania> mojeWspolrzedneImacierzeSterowania;
     bool czyJestemGrupa = false;
@@ -70,13 +72,13 @@ class Kostka : public Model{
     Kostka();//domyślnie ustawia środek modelu 0,0,0 i tak oblicza punkty
     Kostka(float * srodekModelu);
     virtual ~Kostka(){};
-	virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika) override;
+//	virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika) override;
+    virtual void PrzeliczPunktyZaktualnejMacierzy() override;
 	void ObliczPunktyKorzystajacZdlugosciIsrodka(float d, float* c);
     virtual void RysujGeometrie() override;
     void RysujGeometrieStare();
 	void RysujGeometrieStare2();
 private:
-//float p0[3],p1[3],p2[3],p3[3],p4[3],p5[3],p6[3],p7[3];
 float p[8][3];
 float n[6][3];
 };

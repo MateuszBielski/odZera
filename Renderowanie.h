@@ -24,6 +24,7 @@ public:
 	spModel DajWybranyModel();
     void WybranyModelPrzeniesDoGrupy();
 	void UtrwalPrzeksztalceniaWybranegoObiektu();
+    void UtrwalPunktyWybranegoObiektu();
 	void UtrwalPrzeksztalceniaModelu(spModel);
     
     //światło

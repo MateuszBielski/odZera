@@ -57,7 +57,7 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
         for(int i = 0 ; i < 3 ; i++)pozycja4f[i] = pozycja3f[i];
         ekran->UstawPozycjeZrodlaSwiatla(pozycja4f);
     }
-    //podwójne kliknięcie
+    //podwójne kliknięcie lewy
     if(event->type == GDK_2BUTTON_PRESS && event->button == 1){
         renderowanie->UstawRysowanieZnazwami();
         renderowanie->WybierzModelOnumerze((ekran->StosNazwObiektuWpunkcie(ix,iy)));
@@ -70,6 +70,10 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
         bool czyUaktualnicAdresAktualneSterowanie = (aktualneSterowanie == wybranegoObiektu);
         wybranegoObiektu = renderowanie->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
         if(czyUaktualnicAdresAktualneSterowanie) aktualneSterowanie = wybranegoObiektu;
+    }
+    //podwójne klik prawy
+    if(event->type == GDK_2BUTTON_PRESS && event->button == 2){
+        renderowanie->UtrwalPunktyWybranegoObiektu();
     }
     oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     return true;

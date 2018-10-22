@@ -86,7 +86,17 @@ void Renderowanie::UtrwalPrzeksztalceniaWybranegoObiektu()
 {
 	g_print("\nRenderowanie::UtrwalPrzeksztalceniaWybranegoObiektu");
 	glLoadIdentity();
-	mojeModele.at(numerModeluWybranego)->Rysuj();
+    
+    mojeModele.at(numerModeluWybranego)->Rysuj();
+}
+void Renderowanie::UtrwalPunktyWybranegoObiektu(){
+    g_print("\nRenderowanie::UtrwalPunktyWybranegoObiektu");
+	glLoadIdentity();
+    auto wybrany = mojeModele.at(numerModeluWybranego);
+    wybrany->WlaczJednorazowoWymienneFunkcje(PRZELICZ_PUNKTY);
+	//rysowanie wszystkich obiektów
+	wybrany->Rysuj();
+    wybrany->mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
 }
 void Renderowanie::UtrwalPrzeksztalceniaModelu(spModel model){
     g_print("\nRenderowanie::UtrwalPrzeksztalceniaModelu");

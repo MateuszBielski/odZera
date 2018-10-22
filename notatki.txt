@@ -18,3 +18,7 @@ http://cpp0x.pl/artykuly/?id=47
 
 22.10.2018
 przeciązony konstruktor Kostka(float * srodekModelu); - model światła(kostka) znów widoczny
+sprawdzić: Renderowanie::UtrwalPrzeksztalceniaWybranegoObiektu
+bo zabrakło instrukcji, która ustawia wybraną funkcję.
+normalne działają źle,
+

@@ -66,6 +66,10 @@ void Model::UstawPolozenieSrodkaModelu(float* zeWskaznika)
 {
 	for(int i = 0 ; i < 3 ; i++)srodekModelu[i] = zeWskaznika[i];
 }
+void Model::UstawPustaDomyslnaFunkcje()
+{
+   FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja; 
+}
 void Model::WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi){
     g_print("\nWlaczJednorazowoWymienneFunkcje %d",jestemZaladowanyPodNumerem);
     if(jakieFunkcjeFlagi & UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY){
@@ -77,6 +81,9 @@ void Model::WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi){
 		FunkcjeWymienne.push_back(&Model::F_druga);
 		FunkcjaWymienna = &Model::WykonajWszystkieFunkcjeZestawu;
 	}
+    if(jakieFunkcjeFlagi & PRZELICZ_PUNKTY){
+        FunkcjaWymienna = &Model::PrzeliczPunktyZaktualnejMacierzy;
+    }
 }
 void Model::UtrwalMposZaktualnejMacierzy()
 {
@@ -99,7 +106,7 @@ void Model::UtrwalMposZaktualnejMacierzy()
     g_print("\nModel::UtrwalMposZaktualnejMacierzy mój numer %d",jestemZaladowanyPodNumerem);
 	pokaz(tempM_pos);
 	pokaz(tempDest);
-    FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
+    UstawPustaDomyslnaFunkcje();
 	mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
 }
 
@@ -134,23 +141,26 @@ void Model::WykonajWszystkieFunkcjeZestawu()
 //		funkcja();
 		(this->*funkcja)();
 	}
-	FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
+	UstawPustaDomyslnaFunkcje();
 }
+
 
 Kostka::Kostka()
 {
    float srodek[] = {0.0f,0.0f,0.0f};
    UstawPolozenieSrodkaModelu(srodek);
+   ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,srodek);
 }
 Kostka::Kostka(float* zeWskaznika)
 {
    UstawPolozenieSrodkaModelu(zeWskaznika);
+   ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,zeWskaznika);
 }
-void Kostka::UstawPolozenieSrodkaModelu(float* zeWskaznika)
+/*void Kostka::UstawPolozenieSrodkaModelu(float* zeWskaznika)
 {
 	Model::UstawPolozenieSrodkaModelu(zeWskaznika);
-	ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,zeWskaznika);
-}
+	
+}*/
 void Kostka::ObliczPunktyKorzystajacZdlugosciIsrodka(float dd, float* c)
 {
 	//można dd użyć jako d[3] długość szerokość wysokość oddzielnie
@@ -196,6 +206,42 @@ void Kostka::RysujGeometrie()
 		for(int w = 0 ; w < 4 ;w++)glVertex3fv(p[nr[s*4 + w]]);
 	}
     glEnd();
+}
+void Kostka::PrzeliczPunktyZaktualnejMacierzy()
+{
+    float stare[4],nowe[4],m[16];
+    auto kopiuj3 = [](float* zr,float* cel){
+        for(int j = 0; j < 3 ; j++){
+            cel[j] = zr[j];
+//            g_print("   %2.3f %2.3f",cel[j],zr[j]);
+        }
+    };
+    auto pokazPunkty = [&](){
+        for(int i  = 0; i < 8 ; i++)g_print("\n%d %2.3f, %2.3f, %2.3f",i,p[i][0],p[i][1],p[i][2]);
+    };
+    auto pokazPunkt = [](float * u){
+        g_print("\n   ");
+        for(int i  = 0; i < 4 ; i++)g_print("  %2.3f",u[i]);
+    };
+    stare[3] = 1.0f;
+    glGetFloatv(GL_MODELVIEW_MATRIX,m);
+//    WyswietlWartosciMacierzy4x4(m);
+   for(int i  = 0; i < 8 ; i++){
+        kopiuj3(p[i],stare);
+        IloczynMacierzyIwektora4f(m,stare,nowe);
+        kopiuj3(nowe,p[i]);
+   }
+   for(int i  = 0; i < 6 ; i++){
+        kopiuj3(n[i],stare);
+        pokazPunkt(stare);
+        IloczynMacierzyIwektora4f(m,stare,nowe);
+        kopiuj3(nowe,n[i]);
+        pokazPunkt(nowe);
+   }
+   kopiuj3(srodekModelu,stare);
+    IloczynMacierzyIwektora4f(m,stare,nowe);
+    kopiuj3(nowe,srodekModelu);
+   UstawPustaDomyslnaFunkcje();
 }
 void Kostka::RysujGeometrieStare2()
 {
@@ -306,6 +352,7 @@ void Kostka::RysujGeometrieStare()
     glVertex3f(x,0,0);
     glEnd();
 }
+
 
 void Ostroslup::RysujGeometrie(){
     float x=1.0;
