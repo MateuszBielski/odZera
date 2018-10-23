@@ -87,3 +87,17 @@ void IloczynMacierzyIwektora4f(float * m, float * v, float * vDest){
 	vDest[2] = m[2]*v[0] + m[6]*v[1] + m[10]*v[2] + m[14]*v[3];
 	vDest[3] = m[3]*v[0] + m[7]*v[1] + m[11]*v[2] + m[15]*v[3];
 }
+
+float DlugoscWektora3fv(float* wektor)
+{
+      float dlugosc=0;
+      
+      for (int i=0;i<3;i++){dlugosc+=(wektor[i]*wektor[i]);}
+      return sqrt(dlugosc);
+}
+
+void NormujWektor3fv(float* wektor)
+{
+      float wsp=DlugoscWektora3fv(wektor);
+      for (int i=0;i<3;i++){wektor[i]/=wsp;}
+}

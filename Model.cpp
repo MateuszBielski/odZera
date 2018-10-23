@@ -228,17 +228,21 @@ void Kostka::PrzeliczPunktyZaktualnejMacierzy()
 //    WyswietlWartosciMacierzy4x4(m);
    for(int i  = 0; i < 8 ; i++){
         kopiuj3(p[i],stare);
+//        IloczynWektoraImacierzy4f(stare,m,nowe);
         IloczynMacierzyIwektora4f(m,stare,nowe);
         kopiuj3(nowe,p[i]);
    }
    for(int i  = 0; i < 6 ; i++){
         kopiuj3(n[i],stare);
         pokazPunkt(stare);
+//        IloczynWektoraImacierzy4f(stare,m,nowe);
         IloczynMacierzyIwektora4f(m,stare,nowe);
         kopiuj3(nowe,n[i]);
+        NormujWektor3fv(n[i]);
         pokazPunkt(nowe);
    }
    kopiuj3(srodekModelu,stare);
+//    IloczynWektoraImacierzy4f(stare,m,nowe);
     IloczynMacierzyIwektora4f(m,stare,nowe);
     kopiuj3(nowe,srodekModelu);
    UstawPustaDomyslnaFunkcje();
