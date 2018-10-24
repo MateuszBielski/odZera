@@ -147,14 +147,19 @@ void Model::WykonajWszystkieFunkcjeZestawu()
 
 Kostka::Kostka()
 {
-   float srodek[] = {0.0f,0.0f,0.0f};
-   UstawPolozenieSrodkaModelu(srodek);
-   ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,srodek);
+    ileNormalnych = 6;
+    normalne = &n[0][0];
+    float srodek[] = {0.0f,0.0f,0.0f};
+    UstawPolozenieSrodkaModelu(srodek);
+    ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,srodek);
 }
 Kostka::Kostka(float* zeWskaznika)
 {
-   UstawPolozenieSrodkaModelu(zeWskaznika);
-   ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,zeWskaznika);
+    
+    ileNormalnych = 6;
+    normalne = &n[0][0];
+    UstawPolozenieSrodkaModelu(zeWskaznika);
+    ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,zeWskaznika);
 }
 /*void Kostka::UstawPolozenieSrodkaModelu(float* zeWskaznika)
 {
@@ -201,8 +206,10 @@ void Kostka::RysujGeometrie()
 							0,3,2,1};
 	glBegin(GL_QUADS);
         glColor3f(0.6,0.8,0.7);
+//        g_print("\nKostka::RysujGeometrie:");//--
 	for(int s = 0 ; s < 6 ;s++){
 		glNormal3fv(n[s]);
+//       g_print("\n  %2.3f,  %2.3f,  %2.3f",n[s][0],n[s][1],n[s][2]);//--
 		for(int w = 0 ; w < 4 ;w++)glVertex3fv(p[nr[s*4 + w]]);
 	}
     glEnd();
@@ -234,12 +241,12 @@ void Kostka::PrzeliczPunktyZaktualnejMacierzy()
    }
    for(int i  = 0; i < 6 ; i++){
         kopiuj3(n[i],stare);
-        pokazPunkt(stare);
+//        pokazPunkt(stare);
 //        IloczynWektoraImacierzy4f(stare,m,nowe);
         IloczynMacierzyIwektora4f(m,stare,nowe);
         kopiuj3(nowe,n[i]);
         NormujWektor3fv(n[i]);
-        pokazPunkt(nowe);
+//        pokazPunkt(nowe);
    }
    kopiuj3(srodekModelu,stare);
 //    IloczynWektoraImacierzy4f(stare,m,nowe);
@@ -418,3 +425,33 @@ void TrzyKwadraty::RysujGeometrie()
     glDisableClientState( GL_VERTEX_ARRAY );
     glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);*/
+
+void LinieZnormalnych::RysujDla(std::shared_ptr<Model> model)
+{
+    normalne = model->normalne;
+    ileNormalnych = model->ileNormalnych;
+    mojeWspolrzedneImacierzeSterowania = model->mojeWspolrzedneImacierzeSterowania;
+    //srodek modelu NIE kopiujemy
+}
+
+void LinieZnormalnych::RysujGeometrie()
+{
+    float r[6] = {1.0,0.5,0.2,0.2,0.2,0.2};
+    float g[6] = {0.2,0.2,1.0,0.5,0.2,0.2};
+    float b[6] = {0.2,0.2,0.2,0.2,1.0,0.5};
+    
+    for(int i = 0 ; i < ileNormalnych ; i++){
+//        float* pNormalne = (float*)(normalne[i]);
+        glBegin(GL_LINES);
+        glColor3f(r[i],g[i],b[i]);
+        glVertex3f(0.0,0.0,0.0);
+        glVertex3fv(&normalne[i*3]);
+        glEnd();
+        
+    }
+    /*g_print("\nLinieZnormalnych::RysujGeometrie");
+    for(int i = 0 ; i < ileNormalnych ; i++){
+        float * pN = &normalne[i*3];
+        g_print("\n  %2.3f,  %2.3f,  %2.3f",pN[0],pN[1],pN[2]);
+    }*/
+}

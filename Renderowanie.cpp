@@ -44,6 +44,8 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 //    Zaladuj(std::make_shared<TrzyKwadraty>());
     UtworzTyleKostek(7);
 	
+    linieNormalnych = std::make_shared<LinieZnormalnych>();
+    Zaladuj(linieNormalnych);
     WskazModelSwiatla(0);
 	WybierzModelOnumerze(1);
     return 0;
@@ -75,6 +77,7 @@ void Renderowanie::WybierzModelOnumerze(short tym){
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);
+    linieNormalnych->RysujDla(wybranyModel);
     
 //	wybranyModel->WlaczJednorazowoWymienneFunkcje(ZESTAW_FUNKCJI);
 }

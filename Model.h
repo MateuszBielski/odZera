@@ -30,6 +30,8 @@ public :
     
     std::shared_ptr<WspolrzedneImacierzeSterowania> mojeWspolrzedneImacierzeSterowania;
     bool czyJestemGrupa = false;
+    float * normalne = 0;
+    int ileNormalnych = 0;
 protected:
     using Ptr_F_void_void = void(Model::*)();
     Ptr_F_void_void FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
@@ -46,6 +48,8 @@ protected:
 //	std::function<int(MyValue&)> fifth = &MyValue::fifth;
 	
     int jestemZaladowanyPodNumerem = -1;
+    
+    
     bool czyPushMatrix = true;
     bool pokazujWartosci = false;
 	float* obrotIndywidualny = nullptr;
@@ -54,7 +58,6 @@ protected:
 	float * vertexy = 0;
     int * indeksy = 0;
     float * kolory = 0;
-    float * normalne = 0;
     int ileVertexow = 0;
     int ileIndeksow = 0;
 };
@@ -67,8 +70,10 @@ class Ostroslup : public Model{
     virtual ~Ostroslup(){};
 	virtual void RysujGeometrie()  override;
 };
+class LinieZnormalnych;
 class Kostka : public Model{
-  public:
+  friend class LinieZnormalnych;
+    public:
     Kostka();//domyślnie ustawia środek modelu 0,0,0 i tak oblicza punkty
     Kostka(float * srodekModelu);
     virtual ~Kostka(){};
@@ -81,6 +86,7 @@ class Kostka : public Model{
 private:
 float p[8][3];
 float n[6][3];
+
 };
 class TrzyKwadraty : public Model{
   public:
@@ -88,5 +94,15 @@ class TrzyKwadraty : public Model{
     ~TrzyKwadraty(){};
     virtual void RysujGeometrie() override;
 };
-
+class LinieZnormalnych : public Model{
+public:
+    LinieZnormalnych(){};
+    virtual ~LinieZnormalnych(){};
+    void RysujDla(std::shared_ptr<Model>);
+    virtual void RysujGeometrie() override;
+private:
+    float * normalneModelu;
+    
+};
+using spLinieN = std::shared_ptr<LinieZnormalnych>;
 #endif

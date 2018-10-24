@@ -36,6 +36,8 @@ private:
     vec_spModel mojeModele;
     unsigned ileZaladowanychModeli  = 0;
     
+    spLinieN linieNormalnych;
+    
     void RysujModeleBezNazw();
     void JednorazowoRysujModeleZnazwami();
     using Ptr_F_void_void = void(Renderowanie::*)();
