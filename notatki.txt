@@ -22,3 +22,6 @@ sprawdzić: Renderowanie::UtrwalPrzeksztalceniaWybranegoObiektu
 bo zabrakło instrukcji, która ustawia wybraną funkcję.
 normalne działają źle,
 
+24.10.2018
+Normalne przy utrwalaniu muszą być przemnożone tylko przez macierz obrotu
+aktywuje się funkcja bazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy

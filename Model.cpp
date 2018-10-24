@@ -243,9 +243,9 @@ void Kostka::PrzeliczPunktyZaktualnejMacierzy()
         kopiuj3(n[i],stare);
 //        pokazPunkt(stare);
 //        IloczynWektoraImacierzy4f(stare,m,nowe);
-        IloczynMacierzyIwektora4f(m,stare,nowe);
+        IloczynMacierzyIwektora4f(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0],stare,nowe);
         kopiuj3(nowe,n[i]);
-        NormujWektor3fv(n[i]);
+//        NormujWektor3fv(n[i]);
 //        pokazPunkt(nowe);
    }
    kopiuj3(srodekModelu,stare);
