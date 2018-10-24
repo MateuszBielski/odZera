@@ -66,6 +66,7 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
         }
         if(event->state & GDK_CONTROL_MASK){
 //           renderowanie->UsunZGrupy(numer_lub_stosZnumerami) ;
+            renderowanie->UtrwalPunktyWybranegoObiektu();
         }
         bool czyUaktualnicAdresAktualneSterowanie = (aktualneSterowanie == wybranegoObiektu);
         wybranegoObiektu = renderowanie->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
@@ -73,7 +74,7 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
     }
     //podwójne klik prawy
     if(event->type == GDK_2BUTTON_PRESS && event->button == 2){
-        renderowanie->UtrwalPunktyWybranegoObiektu();
+        
     }
     oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
     return true;
