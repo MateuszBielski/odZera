@@ -24,9 +24,10 @@ public :
     void PokazujWartosci(bool b){pokazujWartosci = b;};//
     void PrzydzielenieNumeru(int n){jestemZaladowanyPodNumerem = n;};
     void UtrwalMposZaktualnejMacierzy();
-    virtual void PrzeliczPunktyZaktualnejMacierzy(){g_print("\nbazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy");};
+    virtual void PrzeliczPunktyZaktualnejMacierzy();
     void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi);
     void UstawPustaDomyslnaFunkcje();
+    float* SrodekModelu(){return srodekModelu;};
     
     std::shared_ptr<WspolrzedneImacierzeSterowania> mojeWspolrzedneImacierzeSterowania;
     bool czyJestemGrupa = false;

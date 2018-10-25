@@ -143,6 +143,11 @@ void Model::WykonajWszystkieFunkcjeZestawu()
 	}
 	UstawPustaDomyslnaFunkcje();
 }
+void Model::PrzeliczPunktyZaktualnejMacierzy()
+{
+	g_print("\nbazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy");
+    UstawPustaDomyslnaFunkcje();
+}
 
 
 Kostka::Kostka()
@@ -439,11 +444,17 @@ void LinieZnormalnych::RysujGeometrie()
     float r[6] = {1.0,0.5,0.2,0.2,0.2,0.2};
     float g[6] = {0.2,0.2,1.0,0.5,0.2,0.2};
     float b[6] = {0.2,0.2,0.2,0.2,1.0,0.5};
-    
+    auto JakaNormalna = [](){
+      float biezacyWektor[3];
+      glGetFloatv(GL_CURRENT_NORMAL,biezacyWektor);
+      g_print("\nbieżące wartości normalnej %2.3f,  %2.3f,  %2.3f,",biezacyWektor[0],biezacyWektor[1],biezacyWektor[2]);
+    };
+//    JakaNormalna();
     for(int i = 0 ; i < ileNormalnych ; i++){
 //        float* pNormalne = (float*)(normalne[i]);
         glBegin(GL_LINES);
         glColor3f(r[i],g[i],b[i]);
+        glNormal3fv(&normalne[i*3]);
         glVertex3f(0.0,0.0,0.0);
         glVertex3fv(&normalne[i*3]);
         glEnd();

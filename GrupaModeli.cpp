@@ -51,7 +51,7 @@ void GrupaModeli::WyliczSrodekCiezkosci()
     float ileModeli = 0;
     for(int j = 0; j < 3 ; j++)srodekCiezkosci[j] = 0;
     for(auto& model : mojeModele){
-        for(int j = 0; j < 3 ; j++)srodekCiezkosci[j] += model->mojeWspolrzedneImacierzeSterowania->m_Pos[j];
+        for(int j = 0; j < 3 ; j++)srodekCiezkosci[j] += model->SrodekModelu()[j];
         ileModeli += 1.0;
     }
     for(int j = 0; j < 3 ; j++)srodekCiezkosci[j] /= ileModeli;
@@ -63,8 +63,12 @@ void GrupaModeli::UtrwalPrzeksztalceniaMoichModeli()
 	glLoadIdentity();
 	this->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
     for(auto& model : mojeModele){
-//        model->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
+        model->WlaczJednorazowoWymienneFunkcje(PRZELICZ_PUNKTY);
     }
     Rysuj();
+    for(auto& model : mojeModele){
+        model->mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
+    }
+    this->mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
 }
 
