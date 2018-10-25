@@ -61,7 +61,7 @@ void GrupaModeli::UtrwalPrzeksztalceniaMoichModeli()
 {
     g_print("\nGrupaModeli::UtrwalPrzeksztalceniaModeliWgrupie");
 	glLoadIdentity();
-	this->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
+//	this->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
     for(auto& model : mojeModele){
         model->WlaczJednorazowoWymienneFunkcje(PRZELICZ_PUNKTY);
     }
@@ -71,4 +71,9 @@ void GrupaModeli::UtrwalPrzeksztalceniaMoichModeli()
     }
     this->mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
 }
-
+void GrupaModeli::WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi)
+{
+	for(auto& model : mojeModele){
+        model->WlaczJednorazowoWymienneFunkcje(jakieFunkcjeFlagi);
+    }
+}

@@ -42,7 +42,7 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 //	Zaladuj(std::make_shared<Kostka>());
     Zaladuj(std::make_shared<Ostroslup>());
 //    Zaladuj(std::make_shared<TrzyKwadraty>());
-    UtworzTyleKostek(7);
+    UtworzTyleKostek(10);
 	
     linieNormalnych = std::make_shared<LinieZnormalnych>();
     Zaladuj(linieNormalnych);

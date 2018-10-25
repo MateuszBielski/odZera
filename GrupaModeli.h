@@ -13,6 +13,7 @@ public:
     virtual void TransformacjePrzedRysowaniem() override;
     void WyliczSrodekCiezkosci();
     void UtrwalPrzeksztalceniaMoichModeli();
+	virtual void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi) override;
 private:
 	using listaModeli = std::list<spModel>;
 	listaModeli mojeModele;

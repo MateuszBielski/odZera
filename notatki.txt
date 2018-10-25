@@ -25,3 +25,7 @@ normalne działają źle,
 24.10.2018
 Normalne przy utrwalaniu muszą być przemnożone tylko przez macierz obrotu
 aktywuje się funkcja bazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy
+
+25.10.2018
+void Model::WlaczJednorazowoWymienneFunkcje - staje się wirtualna,
+by jej wywołanie dla grupy mogło wywołać jej wystąpienie dla wszystkich modeli należących do grupy

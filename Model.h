@@ -25,7 +25,7 @@ public :
     void PrzydzielenieNumeru(int n){jestemZaladowanyPodNumerem = n;};
     void UtrwalMposZaktualnejMacierzy();
     virtual void PrzeliczPunktyZaktualnejMacierzy();
-    void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi);
+    virtual void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi);
     void UstawPustaDomyslnaFunkcje();
     float* SrodekModelu(){return srodekModelu;};
     
