@@ -235,24 +235,38 @@ void Kostka::PrzeliczPunktyZaktualnejMacierzy()
         g_print("\n   ");
         for(int i  = 0; i < 4 ; i++)g_print("  %2.3f",u[i]);
     };
+    auto PunktMiedzyWektorami = [](float * v1, float * v2){
+        float s[3];
+        for(int i  = 0; i < 3 ; i++)s[i] = (v1[i] + v2[i])/2.0;
+        g_print("\n %2.3f, %2.3f, %2.3f",s[0],s[1],s[2]);
+    };
     stare[3] = 1.0f;
     glGetFloatv(GL_MODELVIEW_MATRIX,m);
 //    WyswietlWartosciMacierzy4x4(m);
+    float tylkoObroty[16];
+    auto WyluskajObrotyZmacierzyModelWidok = [&](){
+        for(int k = 0 ; k < 16 ; k++)tylkoObroty[k] = m[k];
+        for(int l = 12 ; l < 15 ; l++)tylkoObroty[l] = 0;
+    };
+//    WyswietlWartosciMacierzy4x4(tylkoObroty);
    for(int i  = 0; i < 8 ; i++){
         kopiuj3(p[i],stare);
 //        IloczynWektoraImacierzy4f(stare,m,nowe);
         IloczynMacierzyIwektora4f(m,stare,nowe);
         kopiuj3(nowe,p[i]);
    }
+    WyluskajObrotyZmacierzyModelWidok();
    for(int i  = 0; i < 6 ; i++){
         kopiuj3(n[i],stare);
 //        pokazPunkt(stare);
-//        IloczynWektoraImacierzy4f(stare,m,nowe);
-        IloczynMacierzyIwektora4f(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0],stare,nowe);
+        IloczynMacierzyIwektora4f(tylkoObroty,stare,nowe);
+//        IloczynMacierzyIwektora4f(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0],stare,nowe);//to nie działa przy utrwalaniu modeli z grupy, bo są wcześniejsze transformacje
         kopiuj3(nowe,n[i]);
-//        NormujWektor3fv(n[i]);
 //        pokazPunkt(nowe);
    }
+//   PunktMiedzyWektorami(n[0],n[1]);
+//   PunktMiedzyWektorami(n[2],n[3]);
+//   PunktMiedzyWektorami(n[4],n[5]);
    kopiuj3(srodekModelu,stare);
 //    IloczynWektoraImacierzy4f(stare,m,nowe);
     IloczynMacierzyIwektora4f(m,stare,nowe);
