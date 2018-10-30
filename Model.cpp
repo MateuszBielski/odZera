@@ -71,19 +71,24 @@ void Model::UstawPustaDomyslnaFunkcje()
    FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja; 
 }
 void Model::WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi){
-    g_print("\nWlaczJednorazowoWymienneFunkcje %d",jestemZaladowanyPodNumerem);
+    
+    std::string jakaFunkcja;
     if(jakieFunkcjeFlagi & UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY){
         FunkcjaWymienna = &Model::UtrwalMposZaktualnejMacierzy;
+        jakaFunkcja = "UtrwalMposZaktualnejMacierzy";
     }
 	if(jakieFunkcjeFlagi & ZESTAW_FUNKCJI){
 		FunkcjeWymienne.push_back(&Model::F_pierwsza);
 		FunkcjeWymienne.push_back(&Model::F_trzecia);
 		FunkcjeWymienne.push_back(&Model::F_druga);
 		FunkcjaWymienna = &Model::WykonajWszystkieFunkcjeZestawu;
+        jakaFunkcja = "WykonajWszystkieFunkcjeZestawu";
 	}
     if(jakieFunkcjeFlagi & PRZELICZ_PUNKTY){
         FunkcjaWymienna = &Model::PrzeliczPunktyZaktualnejMacierzy;
+        jakaFunkcja = "PrzeliczPunktyZaktualnejMacierzy";
     }
+    g_print("\nWlaczJednorazowoWymienneFunkcje %s model %d",jakaFunkcja.c_str(),jestemZaladowanyPodNumerem);
 }
 void Model::UtrwalMposZaktualnejMacierzy()
 {
@@ -148,7 +153,10 @@ void Model::PrzeliczPunktyZaktualnejMacierzy()
 	g_print("\nbazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy");
     UstawPustaDomyslnaFunkcje();
 }
-
+spModel ModelPusty::SprobujPrzywrocic()
+{
+    return *tuJestemPelny;
+}
 
 Kostka::Kostka()
 {
@@ -480,3 +488,4 @@ void LinieZnormalnych::RysujGeometrie()
         g_print("\n  %2.3f,  %2.3f,  %2.3f",pN[0],pN[1],pN[2]);
     }*/
 }
+

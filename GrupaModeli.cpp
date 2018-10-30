@@ -11,10 +11,11 @@ GrupaModeli::GrupaModeli()
 GrupaModeli::~GrupaModeli()
 {
 }
-void GrupaModeli::DodajDoMnie(spModel model)
+itLspModel GrupaModeli::DodajDoMnie(spModel model)
 {
 	mojeModele.push_back(model);
     WyliczSrodekCiezkosci();
+    return mojeModele.rbegin();//ostatni iterator, czyli dotyczący wstawionego obiektu
 }
 void GrupaModeli::TransformacjePrzedRysowaniem()
 {

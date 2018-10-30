@@ -19,7 +19,8 @@ public:
     using spModel = std::shared_ptr<Model>;
     int Zaladuj(spModel);
 	void WybierzModelOnumerze(short int);
-    void WybierzModelOnumerze(std::stack<int> &&);
+    void WybierzModelOnumerze(std::stack<int> &);
+    void WyodrebnijZgrupy(std::stack<int> &);
     void UstawRysowanieZnazwami();
 	spModel DajWybranyModel();
     void WybranyModelPrzeniesDoGrupy();

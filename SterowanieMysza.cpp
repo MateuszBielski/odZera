@@ -59,14 +59,15 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
     }
     //podwójne kliknięcie lewy
     if(event->type == GDK_2BUTTON_PRESS && event->button == 1){
-        renderowanie->UstawRysowanieZnazwami();
-        renderowanie->WybierzModelOnumerze((ekran->StosNazwObiektuWpunkcie(ix,iy)));
+        renderowanie->UstawRysowanieZnazwami();//by zrealizować w funkcji StosNazwObiektuWpunkcie
+        auto stosNazw = ekran->StosNazwObiektuWpunkcie(ix,iy);
+        renderowanie->WybierzModelOnumerze(stosNazw);
         if(event->state & GDK_SHIFT_MASK){
            renderowanie->WybranyModelPrzeniesDoGrupy();
         }
         if(event->state & GDK_CONTROL_MASK){
-//           renderowanie->UsunZGrupy(numer_lub_stosZnumerami) ;
-            renderowanie->UtrwalPunktyWybranegoObiektu();
+           renderowanie->WyodrebnijZgrupy(stosNazw) ;
+//            renderowanie->UtrwalPunktyWybranegoObiektu();
         }
         bool czyUaktualnicAdresAktualneSterowanie = (aktualneSterowanie == wybranegoObiektu);
         wybranegoObiektu = renderowanie->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();

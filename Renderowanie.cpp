@@ -81,9 +81,22 @@ void Renderowanie::WybierzModelOnumerze(short tym){
     
 //	wybranyModel->WlaczJednorazowoWymienneFunkcje(ZESTAW_FUNKCJI);
 }
-void Renderowanie::WybierzModelOnumerze(std::stack<int> && stosNazw){
+void Renderowanie::WybierzModelOnumerze(std::stack<int> & stosNazw){
     WybierzModelOnumerze(static_cast<short int>(stosNazw.top()));
     //rozpoznać grrupę do której należy obiekt
+}
+void Renderowanie::WyodrebnijZgrupy(std::stack<int> & stosNazw){
+//    g_print("\nWyodrebnijZgrupy na stosie jest %d",stosNazw.top());
+    auto nrGrupy = stosNazw.top();
+    stosNazw.next();
+    if(stosNazw.empty())return;
+    auto wybranaGrupa = mojeModele.at(nrGrupy);
+    auto nrObiektuWydzielanego = stosNazw.top();
+    auto& doPrzywrocenia = mojeModele.at(static_cast<short int>(nrObiektuWydzielanego));
+    g_print("\nWyodrebnijZgrupy przed doPrzywrocenia->SprobuPrzywrocic");
+    wybranaGrupa->Us
+//    doPrzywrocenia = doPrzywrocenia->SprobujPrzywrocic();
+    destruktor pustego opisać
 }
 void Renderowanie::UtrwalPrzeksztalceniaWybranegoObiektu()
 {
@@ -154,14 +167,12 @@ void Renderowanie::UtworzTyleKostek(int ile)
 }
 void Renderowanie::WybranyModelPrzeniesDoGrupy()
 {
-    auto wybranyModel = mojeModele.at(numerModeluWybranego);
     auto poprzednioWybrany = mojeModele.at(numerPoprzednioWybranego);
-    mojeModele.at(numerModeluWybranego) = std::make_shared<ModelPusty>();
     std::shared_ptr<GrupaModeli> grupa;
     if(!poprzednioWybrany->czyJestemGrupa){
         grupa= std::make_shared<GrupaModeli>();
-        grupa->DodajDoMnie(poprzednioWybrany);
-        mojeModele.at(numerPoprzednioWybranego) = std::make_shared<ModelPusty>();
+        auto dokadMnieWstawiono = grupa->DodajDoMnie(poprzednioWybrany);
+        mojeModele.at(numerPoprzednioWybranego) = std::make_shared<ModelPusty>(dokadMnieWstawiono);
         numerPoprzednioWybranego = Zaladuj(std::static_pointer_cast<Model>(grupa));
 //        g_print("\nnowaGrupa z numerem %d",numerPoprzednioWybranego);
         
@@ -170,7 +181,10 @@ void Renderowanie::WybranyModelPrzeniesDoGrupy()
 //        g_print("\ndodano do istniejącej grupy %d",numerPoprzednioWybranego);
     }
 	grupa->UtrwalPrzeksztalceniaMoichModeli();
-    grupa->DodajDoMnie(wybranyModel);
+    
+    auto wybranyModel = mojeModele.at(numerModeluWybranego);
+    auto dokadMnieWstawiono = grupa->DodajDoMnie(wybranyModel);
+    mojeModele.at(numerModeluWybranego) = std::make_shared<ModelPusty>(dokadMnieWstawiono);
     g_print("\nRenderowanie::WybranyModelPrzeniesDoGrupy przeniesiono %d",numerModeluWybranego);
     numerModeluWybranego = numerPoprzednioWybranego;
 }

@@ -23,6 +23,7 @@ public :
 	void UzywajPushMatrix(bool);//--
     void PokazujWartosci(bool b){pokazujWartosci = b;};//
     void PrzydzielenieNumeru(int n){jestemZaladowanyPodNumerem = n;};
+    virtual SprobujPrzywrocic(){};
     void UtrwalMposZaktualnejMacierzy();
     virtual void PrzeliczPunktyZaktualnejMacierzy();
     virtual void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi);
@@ -62,8 +63,15 @@ protected:
     int ileVertexow = 0;
     int ileIndeksow = 0;
 };
+using spModel = std::shared_ptr<Model>;
+using itLspModel = std::list<spModel>::iterator;
+
 class ModelPusty : public Model{
-    
+public:
+    ModelPusty(itLspModel dokadWstawiono):tuJestemPelny(dokadWstawiono);
+    virtual spModel SprobujPrzywrocic() override;
+private:
+     itLspModel tuJestemPelny;
 };
 class Ostroslup : public Model{
   public:
