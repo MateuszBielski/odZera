@@ -8,16 +8,18 @@ public:
 	GrupaModeli();
 	~GrupaModeli();
 	itLspModel DodajDoMnie(spModel);
+    spModel WydzielZeMnieKorzystajac(spModel );
     virtual void Rysuj() override;
     virtual void RysujZnazwami() override;
     virtual void TransformacjePrzedRysowaniem() override;
     void WyliczSrodekCiezkosci();
     void UtrwalPrzeksztalceniaMoichModeli();
 	virtual void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi) override;
+    int IleMamModeli();
 private:
 	using listaModeli = std::list<spModel>;
 	listaModeli mojeModele;
     float srodekCiezkosci[3];
 };
-
+using spGrupaModeli = std::shared_ptr<GrupaModeli>;
 #endif // GRUPAMODELI_H

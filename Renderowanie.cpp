@@ -1,6 +1,6 @@
 #include "Renderowanie.h"
 #include <random>
-#include <GrupaModeli.h>
+
 
 Renderowanie::Renderowanie()
 {
@@ -88,15 +88,16 @@ void Renderowanie::WybierzModelOnumerze(std::stack<int> & stosNazw){
 void Renderowanie::WyodrebnijZgrupy(std::stack<int> & stosNazw){
 //    g_print("\nWyodrebnijZgrupy na stosie jest %d",stosNazw.top());
     auto nrGrupy = stosNazw.top();
-    stosNazw.next();
+    stosNazw.pop();
     if(stosNazw.empty())return;
-    auto wybranaGrupa = mojeModele.at(nrGrupy);
+    auto wybranaGrupa = std::static_pointer_cast<GrupaModeli>(mojeModele.at(nrGrupy));
     auto nrObiektuWydzielanego = stosNazw.top();
     auto& doPrzywrocenia = mojeModele.at(static_cast<short int>(nrObiektuWydzielanego));
-    g_print("\nWyodrebnijZgrupy przed doPrzywrocenia->SprobuPrzywrocic");
-    wybranaGrupa->Us
-//    doPrzywrocenia = doPrzywrocenia->SprobujPrzywrocic();
-    destruktor pustego opisać
+//    g_print("\nWyodrebnijZgrupy przed WydzielZeMnieKorzystajac");
+    wybranaGrupa->UtrwalPrzeksztalceniaMoichModeli();
+    doPrzywrocenia = wybranaGrupa->WydzielZeMnieKorzystajac(doPrzywrocenia);
+    WybierzModelOnumerze(nrObiektuWydzielanego);
+    if(!wybranaGrupa->IleMamModeli())pusteGrupy.push(wybranaGrupa);
 }
 void Renderowanie::UtrwalPrzeksztalceniaWybranegoObiektu()
 {
@@ -165,12 +166,21 @@ void Renderowanie::UtworzTyleKostek(int ile)
         Zaladuj(kostka);
     }
 }
+spGrupaModeli Renderowanie::PrzydzielPustaGrupe()
+{
+	if(pusteGrupy.empty())return std::make_shared<GrupaModeli>();
+    else{
+        auto doZwrotu = pusteGrupy.top();
+        pusteGrupy.pop();
+        return doZwrotu;
+    }
+}
 void Renderowanie::WybranyModelPrzeniesDoGrupy()
 {
     auto poprzednioWybrany = mojeModele.at(numerPoprzednioWybranego);
     std::shared_ptr<GrupaModeli> grupa;
     if(!poprzednioWybrany->czyJestemGrupa){
-        grupa= std::make_shared<GrupaModeli>();
+        grupa = PrzydzielPustaGrupe();
         auto dokadMnieWstawiono = grupa->DodajDoMnie(poprzednioWybrany);
         mojeModele.at(numerPoprzednioWybranego) = std::make_shared<ModelPusty>(dokadMnieWstawiono);
         numerPoprzednioWybranego = Zaladuj(std::static_pointer_cast<Model>(grupa));
@@ -188,4 +198,5 @@ void Renderowanie::WybranyModelPrzeniesDoGrupy()
     g_print("\nRenderowanie::WybranyModelPrzeniesDoGrupy przeniesiono %d",numerModeluWybranego);
     numerModeluWybranego = numerPoprzednioWybranego;
 }
+
 

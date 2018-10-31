@@ -153,9 +153,17 @@ void Model::PrzeliczPunktyZaktualnejMacierzy()
 	g_print("\nbazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy");
     UstawPustaDomyslnaFunkcje();
 }
-spModel ModelPusty::SprobujPrzywrocic()
+/*spModel ModelPusty::SprobujPrzywrocic()
 {
     return *tuJestemPelny;
+}*/
+ModelPusty::~ModelPusty()
+{
+//    g_print("\ndestruktor ModelPusty");
+}
+itLspModel ModelPusty::AdresPelnegoObiektu()
+{
+    return tuJestemPelny;
 }
 
 Kostka::Kostka()
@@ -488,4 +496,3 @@ void LinieZnormalnych::RysujGeometrie()
         g_print("\n  %2.3f,  %2.3f,  %2.3f",pN[0],pN[1],pN[2]);
     }*/
 }
-

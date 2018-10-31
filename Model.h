@@ -23,7 +23,7 @@ public :
 	void UzywajPushMatrix(bool);//--
     void PokazujWartosci(bool b){pokazujWartosci = b;};//
     void PrzydzielenieNumeru(int n){jestemZaladowanyPodNumerem = n;};
-    virtual SprobujPrzywrocic(){};
+//    virtual spModel SprobujPrzywrocic(){};
     void UtrwalMposZaktualnejMacierzy();
     virtual void PrzeliczPunktyZaktualnejMacierzy();
     virtual void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi);
@@ -68,8 +68,10 @@ using itLspModel = std::list<spModel>::iterator;
 
 class ModelPusty : public Model{
 public:
-    ModelPusty(itLspModel dokadWstawiono):tuJestemPelny(dokadWstawiono);
-    virtual spModel SprobujPrzywrocic() override;
+    ModelPusty(itLspModel dokadWstawiono):tuJestemPelny(dokadWstawiono){};
+    virtual ~ModelPusty();
+    itLspModel AdresPelnegoObiektu();
+//    virtual spModel SprobujPrzywrocic() override;
 private:
      itLspModel tuJestemPelny;
 };

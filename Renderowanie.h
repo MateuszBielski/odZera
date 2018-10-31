@@ -1,8 +1,9 @@
 #ifndef RENDEROWANIE_H
 #define RENDEROWANIE_H
 #include <Komunikat.h>
-#include <Model.h>
+//#include <Model.h>
 #include <sigc++/sigc++.h>
+#include <GrupaModeli.h>
 #include <Modul.h>
 
 class Renderowanie : public Modul, public sigc::trackable  
@@ -35,6 +36,10 @@ public:
 private:
     using vec_spModel = std::vector<spModel>;
     vec_spModel mojeModele;
+    using stosGrup = std::stack<spGrupaModeli>;
+    stosGrup pusteGrupy;
+    spGrupaModeli PrzydzielPustaGrupe();
+    
     unsigned ileZaladowanychModeli  = 0;
     
     spLinieN linieNormalnych;

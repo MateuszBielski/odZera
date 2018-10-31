@@ -15,7 +15,7 @@ itLspModel GrupaModeli::DodajDoMnie(spModel model)
 {
 	mojeModele.push_back(model);
     WyliczSrodekCiezkosci();
-    return mojeModele.rbegin();//ostatni iterator, czyli dotyczący wstawionego obiektu
+    return --mojeModele.end();//ostatni iterator, czyli dotyczący wstawionego obiektu
 }
 void GrupaModeli::TransformacjePrzedRysowaniem()
 {
@@ -77,4 +77,16 @@ void GrupaModeli::WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi)
 	for(auto& model : mojeModele){
         model->WlaczJednorazowoWymienneFunkcje(jakieFunkcjeFlagi);
     }
+}
+spModel GrupaModeli::WydzielZeMnieKorzystajac(spModel model)
+{
+    std::shared_ptr<ModelPusty> pusty = std::static_pointer_cast<ModelPusty>(model);
+    itLspModel iterator = (pusty->AdresPelnegoObiektu());
+    spModel przwrocony =  *iterator;
+    mojeModele.erase(iterator);
+    return przwrocony;
+}
+int GrupaModeli::IleMamModeli()
+{
+	return mojeModele.size();
 }
