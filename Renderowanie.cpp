@@ -40,7 +40,8 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 {
     Zaladuj(std::make_shared<Kostka>());
 //	Zaladuj(std::make_shared<Kostka>());
-    Zaladuj(std::make_shared<Ostroslup>());
+    Zaladuj(std::make_shared<Czworoscian>());
+//    Zaladuj(std::make_shared<Ostroslup>());
 //    Zaladuj(std::make_shared<TrzyKwadraty>());
     UtworzTyleKostek(10);
 	
@@ -73,7 +74,7 @@ void Renderowanie::WybierzModelOnumerze(short tym){
 	if(tym < 0 || tym > ileZaladowanychModeli)return;
     numerPoprzednioWybranego = numerModeluWybranego;
 	numerModeluWybranego = tym;
-//    g_print("\nRenderowanie::WybierzModelOnumerze %d",numerModeluWybranego);
+    g_print("\nRenderowanie::WybierzModelOnumerze %d",numerModeluWybranego);
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);

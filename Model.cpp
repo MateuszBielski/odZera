@@ -289,117 +289,62 @@ void Kostka::PrzeliczPunktyZaktualnejMacierzy()
     kopiuj3(nowe,srodekModelu);
    UstawPustaDomyslnaFunkcje();
 }
-void Kostka::RysujGeometrieStare2()
-{
-    float d = 0.5;//połowa długości boku
-    glColor3f(0.6,0.8,0.7);
-    float cX=srodekModelu[0], cY=srodekModelu[1], cZ=srodekModelu[2];
-    glBegin(GL_QUADS);
-    //przód
-    glNormal3f(0,0,1.0);
-    glVertex3f(cX-d,cY-d,cZ+d);//0,0,0
-    glVertex3f(cX+d,cY-d,cZ+d);//x,0,0
-    glVertex3f(cX+d,cY+d,cZ+d);//x,y,0
-    glVertex3f(cX-d,cY+d,cZ+d);//0,y,0
-    
-    //tył
-    glNormal3f(0,0,-1.0);//
-    //glColor3f(0.8,0.3,0.0);
-    glVertex3f(cX-d,cY-d,cZ-d);//0,0,-z
-    glVertex3f(cX-d,cY+d,cZ-d);//0,y,-z
-    glVertex3f(cX+d,cY+d,cZ-d);//x,y,-z
-    glVertex3f(cX+d,cY-d,cZ-d);//x,0,-z
-    
-    //prawy
-    glNormal3f(1.0,0,0);
-    //glColor3f(0.2,0.7,0.0);
-    glVertex3f(cX+d,cY-d,cZ-d);//x,0,-z
-    glVertex3f(cX+d,cY+d,cZ-d);//x,y,-z
-    glVertex3f(cX+d,cY+d,cZ+d);//x,y,0
-    glVertex3f(cX+d,cY-d,cZ+d);//x,0,0
-    
-    //lewy
-    glNormal3f(-1.0,0,0);
-    //glColor3f(0.2,0.7,0.0);
-    glVertex3f(cX-d,cY-d,cZ-d);//0,0,-z
-    glVertex3f(cX-d,cY-d,cZ+d);//0,0,0
-    glVertex3f(cX-d,cY+d,cZ+d);//0,y,0
-    glVertex3f(cX-d,cY+d,cZ-d);//0,y,-z
-    
-    //góra
-    glNormal3f(0,1.0,0);
-    //glColor3f(0.2,0.0,0.8);
-    glVertex3f(cX-d,cY+d,cZ+d);//0,y,0
-    glVertex3f(cX+d,cY+d,cZ+d);//x,y,0
-    glVertex3f(cX+d,cY+d,cZ-d);//x,y,-z
-    glVertex3f(cX-d,cY+d,cZ-d);//0,y,-z
-    
-    //dół
-    glNormal3f(0,-1.0,0);
-    //glColor3f(0.2,0.0,0.8);
-    glVertex3f(cX-d,cY-d,cZ+d);//0,0,0
-    glVertex3f(cX-d,cY-d,cZ-d);//0,0,-z
-    glVertex3f(cX+d,cY-d,cZ-d);//x,0,-z
-    glVertex3f(cX+d,cY-d,cZ+d);//x,0,0
-    glEnd();
+Czworoscian::Czworoscian(){
+    ileNormalnych = 4;
+    normalne = &n[0][0];
+    float srodek[] = {0,0,0};
+    ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,srodek);
 }
-
-void Kostka::RysujGeometrieStare()
-{
-    float x=1.0f, y = x, z = x;
-    glTranslatef(-0.5,-0.5,0.5);
-    glBegin(GL_QUADS);
-    //przód
-    glNormal3f(0,0,1.0);
-    glColor3f(0.8,0.8,0.8);
-    glVertex3f(0,0,0);
-    glVertex3f(x,0,0);
-    glVertex3f(x,y,0);
-    glVertex3f(0,y,0);
-    
-    //tył
-    glNormal3f(0,0,-1.0);
-    //glColor3f(0.8,0.3,0.0);
-    glVertex3f(0,0,-z);
-    glVertex3f(0,y,-z);
-    glVertex3f(x,y,-z);
-    glVertex3f(x,0,-z);
-    
-    //prawy
-    glNormal3f(1.0,0,0);
-    //glColor3f(0.2,0.7,0.0);
-    glVertex3f(x,0,-z);
-    glVertex3f(x,y,-z);
-    glVertex3f(x,y,0);
-    glVertex3f(x,0,0);
-    
-    //lewy
-    glNormal3f(-1.0,0,0);
-    //glColor3f(0.2,0.7,0.0);
-    glVertex3f(0,0,-z);
-    glVertex3f(0,0,0);
-    glVertex3f(0,y,0);
-    glVertex3f(0,y,-z);
-    
-    //góra
-    glNormal3f(0,1.0,0);
-    //glColor3f(0.2,0.0,0.8);
-    glVertex3f(0,y,0);
-    glVertex3f(x,y,0);
-    glVertex3f(x,y,-z);
-    glVertex3f(0,y,-z);
-    
-    //dół
-    glNormal3f(0,-1.0,0);
-    //glColor3f(0.2,0.0,0.8);
-    glVertex3f(0,0,0);
-    glVertex3f(0,0,-z);
-    glVertex3f(x,0,-z);
-    glVertex3f(x,0,0);
-    glEnd();
+Czworoscian::Czworoscian(float * srodekModelu){
+    ileNormalnych = 4;
+    normalne = &n[0][0];
+    ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,srodekModelu);
 }
-
-
+void Czworoscian::ObliczPunktyKorzystajacZdlugosciIsrodka(float a, float* c){
+    g_print("\nCzworoscian::ObliczPunkty");
+    float H = a*sqrt(6.0f)/3;
+    float h = a*sqrt(3.0f)/2;
+    //podstawa
+    for(int i = 0 ; i < 3 ; i++)p[i][1] = 0.0;
+    p[0][0] = -a/2; p[1][0] = a/2; p[2][0] = 0.0f;
+    p[0][2] = h/3.0; p[1][2] = h/3.0; p[2][2] = -2*h/3.0;
+    //wierzcholek
+    p[3][0] = 0.0; p[3][1] = H; p[3][2] = 0.0;
+    //przesunąć do środka ciężkości
+    float srodekGeometryczny[3];
+    for(int i = 0 ; i < 3 ; i++)srodekGeometryczny[i] = 0.0f;
+    for(int j = 0 ; j < 4 ; j++){
+        for(int i = 0 ; i < 3 ; i++)srodekGeometryczny[i] += p[j][i];
+    }
+    for(int i = 0 ; i < 3 ; i++)srodekGeometryczny[i] /= 4.0;
+    g_print("\nsrodek czworościanu %2.3f, %2.3f, %2.3f",srodekGeometryczny[0],srodekGeometryczny[1],srodekGeometryczny[2]);
+    for(int i = 0; i < 4; i++)p[i][1] -=srodekGeometryczny[1];
+    //dodać środek modelu************
+    for(int i = 0; i < 4; i++){
+		for(int j = 0; j < 3; j++)p[i][j]+=c[j];
+	}
+    //normalne
+    n[0][0] = 0;n[0][1] = -1;n[0][0] = 0;
+    n[1][0] = 0;n[1][1] = h/3.0;n[1][2] = H;
+    n[2][0] = h;n[2][1] = a*h/(3*H);n[2][2] = -a/2;
+    n[3][0] = -h;n[3][1] = a*h/(3*H);n[3][2] = -a/2;
+    for(int i = 1 ; i < 4 ; i++)NormujWektor3fv(n[i]);
+}
+void Czworoscian::RysujGeometrie(){
+   unsigned short nr[] = {	0,2,1,
+							0,1,3,
+							1,2,3,
+							0,3,2};
+	glBegin(GL_TRIANGLES);
+        glColor3f(0.6,0.7,0.8);
+//        g_print("\nKostka::RysujGeometrie:");//--
+	for(int s = 0 ; s < 4 ;s++){
+		glNormal3fv(n[s]);
+//       g_print("\n  %2.3f,  %2.3f,  %2.3f",n[s][0],n[s][1],n[s][2]);//--
+		for(int w = 0 ; w < 3 ;w++)glVertex3fv(p[nr[s*3 + w]]);
+	}
+    glEnd(); 
+}
 void Ostroslup::RysujGeometrie(){
     float x=1.0;
 	float y=1.0;
@@ -495,4 +440,7 @@ void LinieZnormalnych::RysujGeometrie()
         float * pN = &normalne[i*3];
         g_print("\n  %2.3f,  %2.3f,  %2.3f",pN[0],pN[1],pN[2]);
     }*/
+}
+void WidokCechModelu::RysujGeometrie(){
+    
 }

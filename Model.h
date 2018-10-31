@@ -84,7 +84,7 @@ class Ostroslup : public Model{
 class LinieZnormalnych;
 class Kostka : public Model{
   friend class LinieZnormalnych;
-    public:
+public:
     Kostka();//domyślnie ustawia środek modelu 0,0,0 i tak oblicza punkty
     Kostka(float * srodekModelu);
     virtual ~Kostka(){};
@@ -92,12 +92,21 @@ class Kostka : public Model{
     virtual void PrzeliczPunktyZaktualnejMacierzy() override;
 	void ObliczPunktyKorzystajacZdlugosciIsrodka(float d, float* c);
     virtual void RysujGeometrie() override;
-    void RysujGeometrieStare();
-	void RysujGeometrieStare2();
 private:
 float p[8][3];
 float n[6][3];
 
+};
+class Czworoscian : public Model{
+public:
+    Czworoscian();
+    Czworoscian(float * srodekModelu);
+    virtual ~Czworoscian(){};
+    virtual void RysujGeometrie() override;
+    void ObliczPunktyKorzystajacZdlugosciIsrodka(float d, float* c);
+private:
+    float p[4][3];
+    float n[4][3];    
 };
 class TrzyKwadraty : public Model{
   public:
@@ -114,6 +123,13 @@ public:
 private:
     float * normalneModelu;
     
+};
+class WidokCechModelu : public Model{
+public:
+    WidokCechModelu(){};
+    virtual ~WidokCechModelu(){};
+    void RysujDla(std::shared_ptr<Model>);
+    virtual void RysujGeometrie() override;
 };
 using spLinieN = std::shared_ptr<LinieZnormalnych>;
 #endif
