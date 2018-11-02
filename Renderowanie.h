@@ -43,6 +43,7 @@ private:
     unsigned ileZaladowanychModeli  = 0;
     
     spLinieN linieNormalnych;
+    spWidokCech cechyWybranego;
     
     void RysujModeleBezNazw();
     void JednorazowoRysujModeleZnazwami();

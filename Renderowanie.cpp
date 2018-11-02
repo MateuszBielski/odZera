@@ -46,7 +46,9 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
     UtworzTyleKostek(10);
 	
     linieNormalnych = std::make_shared<LinieZnormalnych>();
+    cechyWybranego = std::make_shared<WidokCechModelu>();
     Zaladuj(linieNormalnych);
+    Zaladuj(cechyWybranego);
     WskazModelSwiatla(0);
 	WybierzModelOnumerze(1);
     return 0;
@@ -79,6 +81,7 @@ void Renderowanie::WybierzModelOnumerze(short tym){
     wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);
     linieNormalnych->RysujDla(wybranyModel);
+    cechyWybranego->RysujDla(wybranyModel);
     
 //	wybranyModel->WlaczJednorazowoWymienneFunkcje(ZESTAW_FUNKCJI);
 }

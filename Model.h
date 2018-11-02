@@ -20,6 +20,7 @@ public :
     virtual void Wygladzanie(bool){};//do zastanowienia się czy warto przy każdym obiekcie to ustalać
     void UstalM_Pos(float*);
     virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika);
+    void SrodekUstawZzewnetrznegoAdresu(float *);
 	void UzywajPushMatrix(bool);//--
     void PokazujWartosci(bool b){pokazujWartosci = b;};//
     void PrzydzielenieNumeru(int n){jestemZaladowanyPodNumerem = n;};
@@ -29,6 +30,7 @@ public :
     virtual void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi);
     void UstawPustaDomyslnaFunkcje();
     float* SrodekModelu(){return srodekModelu;};
+    
     
     std::shared_ptr<WspolrzedneImacierzeSterowania> mojeWspolrzedneImacierzeSterowania;
     bool czyJestemGrupa = false;
@@ -55,7 +57,8 @@ protected:
     bool czyPushMatrix = true;
     bool pokazujWartosci = false;
 	float* obrotIndywidualny = nullptr;
-    float srodekModelu[3];
+    float* srodekModelu;//pierwotnie wskazuje na poniższą tablicę 
+    float srodekModeluTab[3];
     
 	float * vertexy = 0;
     int * indeksy = 0;
@@ -130,6 +133,10 @@ public:
     virtual ~WidokCechModelu(){};
     void RysujDla(std::shared_ptr<Model>);
     virtual void RysujGeometrie() override;
+private:
+    Czworoscian znacznik;
+    float * srodekWskazywanegoModelu;
 };
 using spLinieN = std::shared_ptr<LinieZnormalnych>;
+using spWidokCech = std::shared_ptr<WidokCechModelu>;
 #endif

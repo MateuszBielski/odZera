@@ -5,6 +5,7 @@
 Model::Model()
 {
     mojeWspolrzedneImacierzeSterowania = std::make_shared<WspolrzedneImacierzeSterowania>();
+    srodekModelu = &srodekModeluTab[0];
     for(int i = 0 ; i < 3 ; i++)srodekModelu[i] = 0.0;
 }
 Model::~Model()
@@ -152,6 +153,10 @@ void Model::PrzeliczPunktyZaktualnejMacierzy()
 {
 	g_print("\nbazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy");
     UstawPustaDomyslnaFunkcje();
+}
+void Model::SrodekUstawZzewnetrznegoAdresu(float* adr)
+{
+    srodekModelu = adr;
 }
 /*spModel ModelPusty::SprobujPrzywrocic()
 {
@@ -441,6 +446,10 @@ void LinieZnormalnych::RysujGeometrie()
         g_print("\n  %2.3f,  %2.3f,  %2.3f",pN[0],pN[1],pN[2]);
     }*/
 }
+void WidokCechModelu::RysujDla(std::shared_ptr<Model> wskazywany){
+    for(int i = 0 ; i < 3 ; i++)this->mojeWspolrzedneImacierzeSterowania->m_Pos[i] = wskazywany->SrodekModelu()[i];
+//    wskazywany->SrodekUstawZzewnetrznegoAdresu(this->mojeWspolrzedneImacierzeSterowania->m_Pos);
+}
 void WidokCechModelu::RysujGeometrie(){
-    
+    znacznik.RysujGeometrie();
 }
