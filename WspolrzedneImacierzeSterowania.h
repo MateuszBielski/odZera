@@ -10,6 +10,7 @@ public:
     void BiezaceUstawJakoPoprzednie_m_Begin();
     void BiezaceUstawJakoPoprzednie_PozycjaKursoraMyszy3D();
 	void UstawWartosciStartowe();
+    void MacierzObrotuUstawJednostkowo();
     void SkopiujWartosciZ(std::shared_ptr<WspolrzedneImacierzeSterowania>);
 	float m_QuatDiff[4];
     float m_Quat[4];

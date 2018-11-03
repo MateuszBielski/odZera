@@ -10,35 +10,22 @@ Model::Model()
 }
 Model::~Model()
 {
-	if(vertexy) delete [] vertexy;
+	/*if(vertexy) delete [] vertexy;
     if(indeksy) delete [] indeksy;
     if(kolory) delete [] kolory;
-    if(normalne) delete [] normalne;
+    if(normalne) delete [] normalne;*/
 }
 void Model::UzywajPushMatrix(bool jak)
 {
 	czyPushMatrix = jak;
 }
-void Model::RysujOstroslup()
-{
-	float x=srodekModelu[0] + 1.0;
-	float y=srodekModelu[1] + 1.0;
-    
-    for(int i =0; i < 3; i++){
-    glColor3f(0.4*i,0.3,0.0);
-        glTranslatef(0,0,0.5);
-        glRotatef(-30,1,0,0);
-        glBegin(GL_TRIANGLES);
-        glVertex3f(-x,-y,0);
-        glVertex3f(x,-y,0);
-        glVertex3f(0,y,0);
-        glEnd();
-        glRotatef(30,1,0,0);
-        glTranslatef(0,0,-1);
-        glRotatef(120,0,1,0);
-    }
-    
+void Model::UdostepnijBazieVertexyInormalne(float * v,int ileV,float * n,int ileN){
+    vertexy = v;
+    ileVertexow = ileV;
+    normalne = n;
+    ileNormalnych = ileN;
 }
+
 void Model::Rysuj()
 {
 	if(czyPushMatrix)glPushMatrix();
@@ -89,7 +76,7 @@ void Model::WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi){
         FunkcjaWymienna = &Model::PrzeliczPunktyZaktualnejMacierzy;
         jakaFunkcja = "PrzeliczPunktyZaktualnejMacierzy";
     }
-    g_print("\nWlaczJednorazowoWymienneFunkcje %s model %d",jakaFunkcja.c_str(),jestemZaladowanyPodNumerem);
+//    g_print("\nWlaczJednorazowoWymienneFunkcje %s model %d",jakaFunkcja.c_str(),jestemZaladowanyPodNumerem);
 }
 void Model::UtrwalMposZaktualnejMacierzy()
 {
@@ -154,9 +141,36 @@ void Model::PrzeliczPunktyZaktualnejMacierzy()
 	g_print("\nbazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy");
     UstawPustaDomyslnaFunkcje();
 }
+void Model::MacierzaObrotuPrzeliczPunktyIjaWyzeruj(){
+    g_print("\nModel::MacierzaObrotuPrzeliczPunktyIjaWyzeruj()");
+    for(int i = 0; i < ileVertexow ; i++){
+        IloczynMacierzy4fIwektora3fzTymczasowym(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0],vertexy+3*i);
+    }
+    mojeWspolrzedneImacierzeSterowania->MacierzObrotuUstawJednostkowo();
+}
 void Model::SrodekUstawZzewnetrznegoAdresu(float* adr)
 {
     srodekModelu = adr;
+}
+void Model::RysujOstroslup()
+{
+	float x=srodekModelu[0] + 1.0;
+	float y=srodekModelu[1] + 1.0;
+    
+    for(int i =0; i < 3; i++){
+    glColor3f(0.4*i,0.3,0.0);
+        glTranslatef(0,0,0.5);
+        glRotatef(-30,1,0,0);
+        glBegin(GL_TRIANGLES);
+        glVertex3f(-x,-y,0);
+        glVertex3f(x,-y,0);
+        glVertex3f(0,y,0);
+        glEnd();
+        glRotatef(30,1,0,0);
+        glTranslatef(0,0,-1);
+        glRotatef(120,0,1,0);
+    }
+    
 }
 /*spModel ModelPusty::SprobujPrzywrocic()
 {
@@ -173,17 +187,14 @@ itLspModel ModelPusty::AdresPelnegoObiektu()
 
 Kostka::Kostka()
 {
-    ileNormalnych = 6;
-    normalne = &n[0][0];
+    UdostepnijBazieVertexyInormalne(&p[0][0],8,&n[0][0],6);
     float srodek[] = {0.0f,0.0f,0.0f};
     UstawPolozenieSrodkaModelu(srodek);
     ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,srodek);
 }
 Kostka::Kostka(float* zeWskaznika)
 {
-    
-    ileNormalnych = 6;
-    normalne = &n[0][0];
+    UdostepnijBazieVertexyInormalne(&p[0][0],8,&n[0][0],6);
     UstawPolozenieSrodkaModelu(zeWskaznika);
     ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,zeWskaznika);
 }
@@ -295,15 +306,13 @@ void Kostka::PrzeliczPunktyZaktualnejMacierzy()
    UstawPustaDomyslnaFunkcje();
 }
 Czworoscian::Czworoscian(){
-    ileNormalnych = 4;
-    normalne = &n[0][0];
+    UdostepnijBazieVertexyInormalne(&p[0][0],4,&n[0][0],4);
     float srodek[] = {0,0,0};
-    ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,srodek);
+    ObliczPunktyKorzystajacZdlugosciIsrodka(1.5,srodek);
 }
 Czworoscian::Czworoscian(float * srodekModelu){
-    ileNormalnych = 4;
-    normalne = &n[0][0];
-    ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,srodekModelu);
+    UdostepnijBazieVertexyInormalne(&p[0][0],4,&n[0][0],4);
+    ObliczPunktyKorzystajacZdlugosciIsrodka(1.5,srodekModelu);
 }
 void Czworoscian::ObliczPunktyKorzystajacZdlugosciIsrodka(float a, float* c){
     g_print("\nCzworoscian::ObliczPunkty");
@@ -341,11 +350,9 @@ void Czworoscian::RysujGeometrie(){
 							1,2,3,
 							0,3,2};
 	glBegin(GL_TRIANGLES);
-        glColor3f(0.6,0.7,0.8);
-//        g_print("\nKostka::RysujGeometrie:");//--
+        glColor3f(1.0,1.0,0.0);
 	for(int s = 0 ; s < 4 ;s++){
 		glNormal3fv(n[s]);
-//       g_print("\n  %2.3f,  %2.3f,  %2.3f",n[s][0],n[s][1],n[s][2]);//--
 		for(int w = 0 ; w < 3 ;w++)glVertex3fv(p[nr[s*3 + w]]);
 	}
     glEnd(); 
@@ -447,24 +454,26 @@ void LinieZnormalnych::RysujGeometrie()
     }*/
 }
 WidokCechModelu::WidokCechModelu(){
-    przechowanieSterowania = mojeWspolrzedneImacierzeSterowania;
+//    przechowanieSterowania = mojeWspolrzedneImacierzeSterowania;
 }
 void WidokCechModelu::RysujDla(std::shared_ptr<Model> wsk){
-//    g_print("\nWidokCechModelu::RysujDla początek");
     if(wsk.get() == this)return;
     if(wskazywany != nullptr){
-        g_print("\nSrodek poprzedniego przed zmianą %2.3f,  %2.3f,  %2.3f",wskazywany->SrodekModelu()[0],wskazywany->SrodekModelu()[1],wskazywany->SrodekModelu()[2]);    
+//        wskazywany->MacierzaObrotuPrzeliczPunktyIjaWyzeruj();//nie spełnia oczekiwań
+        glLoadIdentity();
+        wskazywany->WlaczJednorazowoWymienneFunkcje(PRZELICZ_PUNKTY);
+        wskazywany->Rysuj();
+        wskazywany->mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
     for(int i = 0 ; i < 3 ; i++){
             wskazywany->SrodekModelu()[i] += mojeWspolrzedneImacierzeSterowania->m_Pos[i];
             mojeWspolrzedneImacierzeSterowania->m_Pos[i] = 0;
-//            mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
         }
-        g_print("\nSrodek poprzedniego po zmianie %2.3f,  %2.3f,  %2.3f",wskazywany->SrodekModelu()[0],wskazywany->SrodekModelu()[1],wskazywany->SrodekModelu()[2]);    
+//        g_print("\nSrodek poprzedniego po zmianie %2.3f,  %2.3f,  %2.3f",wskazywany->SrodekModelu()[0],wskazywany->SrodekModelu()[1],wskazywany->SrodekModelu()[2]);    
     }
     wskazywany = wsk;
     zastepczaM_Pos = wskazywany->mojeWspolrzedneImacierzeSterowania->m_Pos;
     zastepczaSrodek = wskazywany->SrodekModelu();
-    g_print("\nSrodek wybranego %2.3f,  %2.3f,  %2.3f",wskazywany->SrodekModelu()[0],wskazywany->SrodekModelu()[1],wskazywany->SrodekModelu()[2]);
+//    g_print("\nSrodek wybranego %2.3f,  %2.3f,  %2.3f",wskazywany->SrodekModelu()[0],wskazywany->SrodekModelu()[1],wskazywany->SrodekModelu()[2]);
 }
 void WidokCechModelu::RysujGeometrie(){
     
@@ -474,7 +483,7 @@ void WidokCechModelu::TransformacjePrzedRysowaniem()
 {
     float s[3];
     for(int i = 0 ; i < 3 ; i++){
-        s[i] = zastepczaM_Pos[i]+zastepczaSrodek[i]+mojeWspolrzedneImacierzeSterowania->m_Pos[i];
+        s[i] = zastepczaM_Pos[i]+zastepczaSrodek[i]+mojeWspolrzedneImacierzeSterowania->m_Pos[i];//
     }
     glTranslatef(s[0],s[1],s[2]);
 }

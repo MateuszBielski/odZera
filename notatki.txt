@@ -29,3 +29,7 @@ aktywuje się funkcja bazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy
 25.10.2018
 void Model::WlaczJednorazowoWymienneFunkcje - staje się wirtualna,
 by jej wywołanie dla grupy mogło wywołać jej wystąpienie dla wszystkich modeli należących do grupy
+
+3.11.2018
+należy zaimplementować uniwersalnie funkcję:
+PrzeliczPunktyZaktualnejMacierzy(), która jest teraz tylko dla kostki.

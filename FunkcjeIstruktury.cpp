@@ -87,7 +87,15 @@ void IloczynMacierzyIwektora4f(float * m, float * v, float * vDest){
 	vDest[2] = m[2]*v[0] + m[6]*v[1] + m[10]*v[2] + m[14]*v[3];
 	vDest[3] = m[3]*v[0] + m[7]*v[1] + m[11]*v[2] + m[15]*v[3];
 }
-
+void IloczynMacierzy4fIwektora3fzTymczasowym(float * m, float * v){
+    float vSource[4],vDest[4];
+    for(int i = 0; i < 3 ; i++)vSource[i] = v[i];
+    vSource[3] = 1;
+//    g_print("\nvSource %2.3f  %2.3f  %2.3f",vSource[0],vSource[1],vSource[2]);
+    IloczynMacierzyIwektora4f(m,vSource,vDest);
+    for(int i = 0; i < 3 ; i++)v[i] = vDest[i];
+//    g_print("\nv %2.3f  %2.3f  %2.3f",v[0],v[1],v[2]);
+}
 float DlugoscWektora3fv(float* wektor)
 {
       float dlugosc=0;

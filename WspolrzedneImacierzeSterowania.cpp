@@ -24,7 +24,10 @@ void WspolrzedneImacierzeSterowania::UstawWartosciStartowe()
     m_QuatDiff[1] = 0.0;
     m_QuatDiff[2] = 0.0;
     m_QuatDiff[3] = 1.0;
-	for(int i = 0; i < 4 ; i++)for(int j = 0; j < 4 ; j++)macierzObrotu[i][j] = 0.0;
+	MacierzObrotuUstawJednostkowo();
+}
+void WspolrzedneImacierzeSterowania::MacierzObrotuUstawJednostkowo(){
+    for(int i = 0; i < 4 ; i++)for(int j = 0; j < 4 ; j++)macierzObrotu[i][j] = 0.0;
 	macierzObrotu[0][0] = 1.0;
 	macierzObrotu[1][1] = 1.0;
 	macierzObrotu[2][2] = 1.0;

@@ -12,30 +12,38 @@ class Model{
 public :
     Model();
     virtual ~Model(); 
-    void RysujOstroslup();
+    
 	virtual void Rysuj();
     virtual void RysujZnazwami();
 	virtual void RysujGeometrie(){};
     virtual void TransformacjePrzedRysowaniem();
-    virtual void Wygladzanie(bool){};//do zastanowienia się czy warto przy każdym obiekcie to ustalać
-    void UstalM_Pos(float*);
+    void UstalM_Pos(float*);//użyte dla światła tylko
     virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika);
-    void SrodekUstawZzewnetrznegoAdresu(float *);
-	void UzywajPushMatrix(bool);//--
     void PokazujWartosci(bool b){pokazujWartosci = b;};//
     void PrzydzielenieNumeru(int n){jestemZaladowanyPodNumerem = n;};
-    void UtrwalMposZaktualnejMacierzy();
-    virtual void PrzeliczPunktyZaktualnejMacierzy();
+    virtual void PrzeliczPunktyZaktualnejMacierzy();//używane przy dodawaniu do grupy, brakuje dla innych niż kostka
     virtual void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi);
     void UstawPustaDomyslnaFunkcje();
     float* SrodekModelu(){return srodekModelu;};
     
+    float * vertexy = 0;
+    int ileVertexow = 0;
+    
+    float * normalne = 0;
+    int ileNormalnych = 0; 
     
     std::shared_ptr<WspolrzedneImacierzeSterowania> mojeWspolrzedneImacierzeSterowania;
     bool czyJestemGrupa = false;
-    float * normalne = 0;
-    int ileNormalnych = 0;
+    
+    //nie używane, albo mało
+    virtual void MacierzaObrotuPrzeliczPunktyIjaWyzeruj();//nie spełniła oczekiwań
+    void RysujOstroslup();
+    void SrodekUstawZzewnetrznegoAdresu(float *);
+    virtual void Wygladzanie(bool){};//do zastanowienia się czy warto przy każdym obiekcie to ustalać
+	void UzywajPushMatrix(bool);//--
+    void UtrwalMposZaktualnejMacierzy();
 protected:
+    void UdostepnijBazieVertexyInormalne(float * v,int ileV,float * n,int ileN);
     using Ptr_F_void_void = void(Model::*)();
     Ptr_F_void_void FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
     void DomyslnaWymiennaFunkcja(){};
@@ -52,17 +60,14 @@ protected:
 	
     int jestemZaladowanyPodNumerem = -1;
     
-    
     bool czyPushMatrix = true;
     bool pokazujWartosci = false;
 	float* obrotIndywidualny = nullptr;
     float* srodekModelu;//pierwotnie wskazuje na poniższą tablicę 
     float srodekModeluTab[3];
-    
-	float * vertexy = 0;
-    int * indeksy = 0;
+
     float * kolory = 0;
-    int ileVertexow = 0;
+    int * indeksy = 0;
     int ileIndeksow = 0;
 };
 using spModel = std::shared_ptr<Model>;
@@ -139,7 +144,7 @@ private:
 //    float srodekWskazywanegoModelu[3];
     float * zastepczaM_Pos;
     float * zastepczaSrodek;
-    std::shared_ptr<WspolrzedneImacierzeSterowania> przechowanieSterowania;
+//    std::shared_ptr<WspolrzedneImacierzeSterowania> przechowanieSterowania;
 };
 using spLinieN = std::shared_ptr<LinieZnormalnych>;
 using spWidokCech = std::shared_ptr<WidokCechModelu>;

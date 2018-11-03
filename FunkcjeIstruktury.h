@@ -16,6 +16,7 @@ void TransformujPikselDoPrzestrzeniSceny(int x, int y,float*  pozycjaPunktu3D);
 void Quat_to_Phi_a(float * quat,float* phi,float* a);
 void IloczynWektoraImacierzy4f(float * v, float * m, float * vDest);
 void IloczynMacierzyIwektora4f(float * m, float * v, float * vDest);
+void IloczynMacierzy4fIwektora3fzTymczasowym(float * m, float * v);
 float DlugoscWektora3fv(float* wektor);
 void NormujWektor3fv(float* wektor);
 
