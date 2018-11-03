@@ -13,13 +13,14 @@ public:
     virtual void RysujZnazwami() override;
     virtual void TransformacjePrzedRysowaniem() override;
     void WyliczSrodekCiezkosci();
-    void UtrwalPrzeksztalceniaMoichModeli();
+    void SrodekModeluZmodeliWylicz();
+    virtual void UtrwalPrzeksztalcenia() override;
 	virtual void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi) override;
     int IleMamModeli();
 private:
 	using listaModeli = std::list<spModel>;
 	listaModeli mojeModele;
-    float srodekCiezkosci[3];
+    float srodekCiezkosci[3];//od wprowadzenia przesuwanego środka modelu przestał być używany
 };
 using spGrupaModeli = std::shared_ptr<GrupaModeli>;
 #endif // GRUPAMODELI_H

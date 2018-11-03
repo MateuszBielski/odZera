@@ -98,7 +98,7 @@ void Renderowanie::WyodrebnijZgrupy(std::stack<int> & stosNazw){
     auto nrObiektuWydzielanego = stosNazw.top();
     auto& doPrzywrocenia = mojeModele.at(static_cast<short int>(nrObiektuWydzielanego));
 //    g_print("\nWyodrebnijZgrupy przed WydzielZeMnieKorzystajac");
-    wybranaGrupa->UtrwalPrzeksztalceniaMoichModeli();
+    wybranaGrupa->UtrwalPrzeksztalcenia();
     doPrzywrocenia = wybranaGrupa->WydzielZeMnieKorzystajac(doPrzywrocenia);
     WybierzModelOnumerze(nrObiektuWydzielanego);
     if(!wybranaGrupa->IleMamModeli())pusteGrupy.push(wybranaGrupa);
@@ -194,7 +194,7 @@ void Renderowanie::WybranyModelPrzeniesDoGrupy()
         grupa = std::static_pointer_cast<GrupaModeli>(poprzednioWybrany);
 //        g_print("\ndodano do istniejącej grupy %d",numerPoprzednioWybranego);
     }
-	grupa->UtrwalPrzeksztalceniaMoichModeli();
+	grupa->UtrwalPrzeksztalcenia();
     
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     auto dokadMnieWstawiono = grupa->DodajDoMnie(wybranyModel);

@@ -141,6 +141,12 @@ void Model::PrzeliczPunktyZaktualnejMacierzy()
 	g_print("\nbazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy");
     UstawPustaDomyslnaFunkcje();
 }
+void Model::UtrwalPrzeksztalcenia(){
+    glLoadIdentity();
+    WlaczJednorazowoWymienneFunkcje(PRZELICZ_PUNKTY);
+    Rysuj();
+    mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
+}
 void Model::MacierzaObrotuPrzeliczPunktyIjaWyzeruj(){
     g_print("\nModel::MacierzaObrotuPrzeliczPunktyIjaWyzeruj()");
     for(int i = 0; i < ileVertexow ; i++){
@@ -460,10 +466,7 @@ void WidokCechModelu::RysujDla(std::shared_ptr<Model> wsk){
     if(wsk.get() == this)return;
     if(wskazywany != nullptr){
 //        wskazywany->MacierzaObrotuPrzeliczPunktyIjaWyzeruj();//nie spełnia oczekiwań
-        glLoadIdentity();
-        wskazywany->WlaczJednorazowoWymienneFunkcje(PRZELICZ_PUNKTY);
-        wskazywany->Rysuj();
-        wskazywany->mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
+        wskazywany->UtrwalPrzeksztalcenia();
     for(int i = 0 ; i < 3 ; i++){
             wskazywany->SrodekModelu()[i] += mojeWspolrzedneImacierzeSterowania->m_Pos[i];
             mojeWspolrzedneImacierzeSterowania->m_Pos[i] = 0;
@@ -473,7 +476,7 @@ void WidokCechModelu::RysujDla(std::shared_ptr<Model> wsk){
     wskazywany = wsk;
     zastepczaM_Pos = wskazywany->mojeWspolrzedneImacierzeSterowania->m_Pos;
     zastepczaSrodek = wskazywany->SrodekModelu();
-//    g_print("\nSrodek wybranego %2.3f,  %2.3f,  %2.3f",wskazywany->SrodekModelu()[0],wskazywany->SrodekModelu()[1],wskazywany->SrodekModelu()[2]);
+    g_print("\nSrodek wybranego %2.3f,  %2.3f,  %2.3f",wskazywany->SrodekModelu()[0],wskazywany->SrodekModelu()[1],wskazywany->SrodekModelu()[2]);
 }
 void WidokCechModelu::RysujGeometrie(){
     

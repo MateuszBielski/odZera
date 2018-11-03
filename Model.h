@@ -23,6 +23,7 @@ public :
     void PrzydzielenieNumeru(int n){jestemZaladowanyPodNumerem = n;};
     virtual void PrzeliczPunktyZaktualnejMacierzy();//używane przy dodawaniu do grupy, brakuje dla innych niż kostka
     virtual void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi);
+    virtual void UtrwalPrzeksztalcenia();
     void UstawPustaDomyslnaFunkcje();
     float* SrodekModelu(){return srodekModelu;};
     
