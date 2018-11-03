@@ -67,9 +67,9 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
         }
         if(event->state & GDK_CONTROL_MASK){
            renderowanie->WyodrebnijZgrupy(stosNazw) ;
-//            renderowanie->UtrwalPunktyWybranegoObiektu();
         }
         bool czyUaktualnicAdresAktualneSterowanie = (aktualneSterowanie == wybranegoObiektu);
+//        g_print("\nSterowanieMysza::on_button_press_event uaktualnić sterowanie? %d",czyUaktualnicAdresAktualneSterowanie);
         wybranegoObiektu = renderowanie->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
         if(czyUaktualnicAdresAktualneSterowanie) aktualneSterowanie = wybranegoObiektu;
     }

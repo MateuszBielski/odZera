@@ -24,7 +24,6 @@ public :
 	void UzywajPushMatrix(bool);//--
     void PokazujWartosci(bool b){pokazujWartosci = b;};//
     void PrzydzielenieNumeru(int n){jestemZaladowanyPodNumerem = n;};
-//    virtual spModel SprobujPrzywrocic(){};
     void UtrwalMposZaktualnejMacierzy();
     virtual void PrzeliczPunktyZaktualnejMacierzy();
     virtual void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi);
@@ -129,13 +128,18 @@ private:
 };
 class WidokCechModelu : public Model{
 public:
-    WidokCechModelu(){};
+    WidokCechModelu();
     virtual ~WidokCechModelu(){};
     void RysujDla(std::shared_ptr<Model>);
+    virtual void TransformacjePrzedRysowaniem() override;
     virtual void RysujGeometrie() override;
 private:
     Czworoscian znacznik;
-    float * srodekWskazywanegoModelu;
+    spModel wskazywany = nullptr;
+//    float srodekWskazywanegoModelu[3];
+    float * zastepczaM_Pos;
+    float * zastepczaSrodek;
+    std::shared_ptr<WspolrzedneImacierzeSterowania> przechowanieSterowania;
 };
 using spLinieN = std::shared_ptr<LinieZnormalnych>;
 using spWidokCech = std::shared_ptr<WidokCechModelu>;

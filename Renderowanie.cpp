@@ -38,10 +38,10 @@ void Renderowanie::JednorazowoRysujModeleZnazwami()
 
 int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 {
-    Zaladuj(std::make_shared<Kostka>());
+//    Zaladuj(std::make_shared<Kostka>());
 //	Zaladuj(std::make_shared<Kostka>());
     Zaladuj(std::make_shared<Czworoscian>());
-//    Zaladuj(std::make_shared<Ostroslup>());
+    Zaladuj(std::make_shared<Ostroslup>());
 //    Zaladuj(std::make_shared<TrzyKwadraty>());
     UtworzTyleKostek(10);
 	
@@ -50,7 +50,7 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
     Zaladuj(linieNormalnych);
     Zaladuj(cechyWybranego);
     WskazModelSwiatla(0);
-	WybierzModelOnumerze(1);
+	WybierzModelOnumerze(5);
     return 0;
 }
 int Renderowanie::Zaladuj(spModel wskaznikNaModel)

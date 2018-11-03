@@ -46,6 +46,7 @@ void WspolrzedneImacierzeSterowania::SkopiujWartosciZ(std::shared_ptr<Wspolrzedn
 }
 WspolrzedneImacierzeSterowania::~WspolrzedneImacierzeSterowania()
 {
+    g_print("\ndestruktor WspolrzedneImacierzeSterowania");
 }
 void WspolrzedneImacierzeSterowania::ZmienM_Pos_zgodnieZruchemKursora3D()
 {

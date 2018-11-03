@@ -446,10 +446,35 @@ void LinieZnormalnych::RysujGeometrie()
         g_print("\n  %2.3f,  %2.3f,  %2.3f",pN[0],pN[1],pN[2]);
     }*/
 }
-void WidokCechModelu::RysujDla(std::shared_ptr<Model> wskazywany){
-    for(int i = 0 ; i < 3 ; i++)this->mojeWspolrzedneImacierzeSterowania->m_Pos[i] = wskazywany->SrodekModelu()[i];
-//    wskazywany->SrodekUstawZzewnetrznegoAdresu(this->mojeWspolrzedneImacierzeSterowania->m_Pos);
+WidokCechModelu::WidokCechModelu(){
+    przechowanieSterowania = mojeWspolrzedneImacierzeSterowania;
+}
+void WidokCechModelu::RysujDla(std::shared_ptr<Model> wsk){
+//    g_print("\nWidokCechModelu::RysujDla początek");
+    if(wsk.get() == this)return;
+    if(wskazywany != nullptr){
+        g_print("\nSrodek poprzedniego przed zmianą %2.3f,  %2.3f,  %2.3f",wskazywany->SrodekModelu()[0],wskazywany->SrodekModelu()[1],wskazywany->SrodekModelu()[2]);    
+    for(int i = 0 ; i < 3 ; i++){
+            wskazywany->SrodekModelu()[i] += mojeWspolrzedneImacierzeSterowania->m_Pos[i];
+            mojeWspolrzedneImacierzeSterowania->m_Pos[i] = 0;
+//            mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
+        }
+        g_print("\nSrodek poprzedniego po zmianie %2.3f,  %2.3f,  %2.3f",wskazywany->SrodekModelu()[0],wskazywany->SrodekModelu()[1],wskazywany->SrodekModelu()[2]);    
+    }
+    wskazywany = wsk;
+    zastepczaM_Pos = wskazywany->mojeWspolrzedneImacierzeSterowania->m_Pos;
+    zastepczaSrodek = wskazywany->SrodekModelu();
+    g_print("\nSrodek wybranego %2.3f,  %2.3f,  %2.3f",wskazywany->SrodekModelu()[0],wskazywany->SrodekModelu()[1],wskazywany->SrodekModelu()[2]);
 }
 void WidokCechModelu::RysujGeometrie(){
+    
     znacznik.RysujGeometrie();
+}
+void WidokCechModelu::TransformacjePrzedRysowaniem()
+{
+    float s[3];
+    for(int i = 0 ; i < 3 ; i++){
+        s[i] = zastepczaM_Pos[i]+zastepczaSrodek[i]+mojeWspolrzedneImacierzeSterowania->m_Pos[i];
+    }
+    glTranslatef(s[0],s[1],s[2]);
 }
