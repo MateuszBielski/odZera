@@ -25,10 +25,11 @@ void Model::UdostepnijBazieVertexyInormalne(float * v,int ileV,float * n,int ile
     normalne = n;
     ileNormalnych = ileN;
 }
-
+template<int flagi>
 void Model::Rysuj()
 {
-	if(czyPushMatrix)glPushMatrix();
+	if constexpr(flagi & Z_NAZWAMI_MODELI) glLoadName(jestemZaladowanyPodNumerem);
+    if(czyPushMatrix)glPushMatrix();
     TransformacjePrzedRysowaniem();
     (this->*FunkcjaWymienna)();
     if(pokazujWartosci){
@@ -38,6 +39,13 @@ void Model::Rysuj()
     }
 	RysujGeometrie();
 	if(czyPushMatrix)glPopMatrix();
+}
+void Model::RysujStare();{}
+void Model::RysujZnazwamiStare()
+{
+//    g_print(" %d",jestemZaladowanyPodNumerem);
+    glLoadName(jestemZaladowanyPodNumerem);
+    Rysuj();
 }
 void Model::TransformacjePrzedRysowaniem(){
     glTranslatef(mojeWspolrzedneImacierzeSterowania->m_Pos[0],mojeWspolrzedneImacierzeSterowania->m_Pos[1],mojeWspolrzedneImacierzeSterowania->m_Pos[2]);
@@ -54,6 +62,7 @@ void Model::UstawPolozenieSrodkaModelu(float* zeWskaznika)
 {
 	for(int i = 0 ; i < 3 ; i++)srodekModelu[i] = zeWskaznika[i];
 }
+
 void Model::UstawPustaDomyslnaFunkcje()
 {
    FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja; 
@@ -102,14 +111,6 @@ void Model::UtrwalMposZaktualnejMacierzy()
     UstawPustaDomyslnaFunkcje();
 	mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
 }
-
-void Model::RysujZnazwami()
-{
-//    g_print(" %d",jestemZaladowanyPodNumerem);
-    glLoadName(jestemZaladowanyPodNumerem);
-    Rysuj();
-}
-
 void Model::F_pierwsza()
 {
 	g_print("\nfunkcja pierwsza");

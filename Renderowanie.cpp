@@ -23,7 +23,7 @@ void Renderowanie::UstawRysowanieZnazwami()
 
 void Renderowanie::RysujModeleBezNazw()
 {
-    for(auto iter : mojeModele)iter->Rysuj();
+    for(auto iter : mojeModele)iter->Rysuj<0>();
 }
 
 void Renderowanie::JednorazowoRysujModeleZnazwami()
@@ -31,7 +31,8 @@ void Renderowanie::JednorazowoRysujModeleZnazwami()
     glPushName(891);//liczba dowolna, bo jest podmieniana przez funkcję glLoadName
 //    g_print("\n glPushName%d",891);
     for(auto iter : mojeModele){
-        iter->RysujZnazwami();
+//        iter->RysujZnazwami();
+        iter->Rysuj<Z_NAZWAMI_MODELI>();
     }
     RysujModeleOdpowiednio = &Renderowanie::RysujModeleBezNazw;
 }

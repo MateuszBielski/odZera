@@ -5,6 +5,7 @@
 #define UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY 1
 #define ZESTAW_FUNKCJI 2
 #define PRZELICZ_PUNKTY 4
+#define Z_NAZWAMI_MODELI 1
 
 
 
@@ -13,8 +14,8 @@ public :
     Model();
     virtual ~Model(); 
     
-	virtual void Rysuj();
-    virtual void RysujZnazwami();
+	virtual void RysujStare();
+    virtual void RysujZnazwamiStare();
 	virtual void RysujGeometrie(){};
     virtual void TransformacjePrzedRysowaniem();
     void UstalM_Pos(float*);//użyte dla światła tylko
@@ -35,6 +36,9 @@ public :
     
     std::shared_ptr<WspolrzedneImacierzeSterowania> mojeWspolrzedneImacierzeSterowania;
     bool czyJestemGrupa = false;
+    
+    template<int flagi>
+    virtual void Rysuj();
     
     //nie używane, albo mało
     virtual void MacierzaObrotuPrzeliczPunktyIjaWyzeruj();//nie spełniła oczekiwań
