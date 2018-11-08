@@ -26,9 +26,11 @@ void Model::UdostepnijBazieVertexyInormalne(float * v,int ileV,float * n,int ile
     ileNormalnych = ileN;
 }
 template<int flagi>
-void Model::Rysuj()
+void Model::RysujTemplate()
 {
-	if constexpr(flagi & Z_NAZWAMI_MODELI) glLoadName(jestemZaladowanyPodNumerem);
+	if constexpr(flagi & Z_NAZWAMI_MODELI){
+		glLoadName(jestemZaladowanyPodNumerem);
+	}
     if(czyPushMatrix)glPushMatrix();
     TransformacjePrzedRysowaniem();
     (this->*FunkcjaWymienna)();
@@ -40,12 +42,12 @@ void Model::Rysuj()
 	RysujGeometrie();
 	if(czyPushMatrix)glPopMatrix();
 }
-void Model::RysujStare();{}
-void Model::RysujZnazwamiStare()
+void Model::Rysuj(){
+	RysujTemplate<0>();
+}
+void Model::RysujZnazwami()
 {
-//    g_print(" %d",jestemZaladowanyPodNumerem);
-    glLoadName(jestemZaladowanyPodNumerem);
-    Rysuj();
+	RysujTemplate<Z_NAZWAMI_MODELI>();
 }
 void Model::TransformacjePrzedRysowaniem(){
     glTranslatef(mojeWspolrzedneImacierzeSterowania->m_Pos[0],mojeWspolrzedneImacierzeSterowania->m_Pos[1],mojeWspolrzedneImacierzeSterowania->m_Pos[2]);

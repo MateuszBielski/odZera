@@ -14,8 +14,8 @@ public :
     Model();
     virtual ~Model(); 
     
-	virtual void RysujStare();
-    virtual void RysujZnazwamiStare();
+	virtual void Rysuj();
+    virtual void RysujZnazwami();
 	virtual void RysujGeometrie(){};
     virtual void TransformacjePrzedRysowaniem();
     void UstalM_Pos(float*);//użyte dla światła tylko
@@ -38,15 +38,15 @@ public :
     bool czyJestemGrupa = false;
     
     template<int flagi>
-    virtual void Rysuj();
+    void RysujTemplate();
     
     //nie używane, albo mało
     virtual void MacierzaObrotuPrzeliczPunktyIjaWyzeruj();//nie spełniła oczekiwań
     void RysujOstroslup();
-    void SrodekUstawZzewnetrznegoAdresu(float *);
     virtual void Wygladzanie(bool){};//do zastanowienia się czy warto przy każdym obiekcie to ustalać
 	void UzywajPushMatrix(bool);//--
     void UtrwalMposZaktualnejMacierzy();
+    void SrodekUstawZzewnetrznegoAdresu(float *);
 protected:
     void UdostepnijBazieVertexyInormalne(float * v,int ileV,float * n,int ileN);
     using Ptr_F_void_void = void(Model::*)();
