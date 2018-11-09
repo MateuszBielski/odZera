@@ -193,19 +193,25 @@ itLspModel ModelPusty::AdresPelnegoObiektu()
 {
     return tuJestemPelny;
 }
-
-Kostka::Kostka()
+Kostka::Kostka(float x, float y, float z):nr{0,1,5,4,
+                                        3,7,6,2,
+                                        2,6,5,1,
+                                        3,0,4,7,
+                                        4,5,6,7,
+                                        0,3,2,1}
 {
     UdostepnijBazieVertexyInormalne(&p[0][0],8,&n[0][0],6);
-    float srodek[] = {0.0f,0.0f,0.0f};
-    UstawPolozenieSrodkaModelu(srodek);
-    ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,srodek);
-}
-Kostka::Kostka(float* zeWskaznika)
-{
-    UdostepnijBazieVertexyInormalne(&p[0][0],8,&n[0][0],6);
+    float zeWskaznika[] = {x,y,z};
     UstawPolozenieSrodkaModelu(zeWskaznika);
     ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,zeWskaznika);
+}
+Kostka::Kostka():Kostka(0.0f,0.0f,0.0f)
+{
+    
+}
+Kostka::Kostka(float* zeWskaznika):Kostka(zeWskaznika[0],zeWskaznika[1],zeWskaznika[2])
+{
+    
 }
 /*void Kostka::UstawPolozenieSrodkaModelu(float* zeWskaznika)
 {
@@ -241,8 +247,22 @@ void Kostka::ObliczPunktyKorzystajacZdlugosciIsrodka(float dd, float* c)
 	//dół
 	n[5][0] = 0; n[5][1] =-1; n[5][2] = 0;
 }
-
+template<int flagi>
+void Kostka::RysujGeometrieTemplate()
+{
+    glBegin(GL_QUADS);
+    glColor3f(0.6,0.8,0.7);
+	for(int s = 0 ; s < 6 ;s++){
+		glNormal3fv(n[s]);
+		for(int w = 0 ; w < 4 ;w++)glVertex3fv(p[nr[s*4 + w]]);
+	}
+    glEnd();
+}
 void Kostka::RysujGeometrie()
+{
+    RysujGeometrieTemplate<0>();
+}
+void Kostka::RysujGeometrieStare()
 {
     unsigned short nr[] = {	0,1,5,4,
 							3,7,6,2,
@@ -314,14 +334,21 @@ void Kostka::PrzeliczPunktyZaktualnejMacierzy()
     kopiuj3(nowe,srodekModelu);
    UstawPustaDomyslnaFunkcje();
 }
-Czworoscian::Czworoscian(){
+
+Czworoscian::Czworoscian(float x, float y, float z):nr{0,2,1,
+                                                        0,1,3,
+                                                        1,2,3,
+                                                        0,3,2}
+{
     UdostepnijBazieVertexyInormalne(&p[0][0],4,&n[0][0],4);
-    float srodek[] = {0,0,0};
+    float srodek[] = {x,y,z};
     ObliczPunktyKorzystajacZdlugosciIsrodka(1.5,srodek);
 }
-Czworoscian::Czworoscian(float * srodekModelu){
-    UdostepnijBazieVertexyInormalne(&p[0][0],4,&n[0][0],4);
-    ObliczPunktyKorzystajacZdlugosciIsrodka(1.5,srodekModelu);
+Czworoscian::Czworoscian():Czworoscian(0.0,0.0,0.0)
+{
+}
+Czworoscian::Czworoscian(float * zeWskaznika):Czworoscian(zeWskaznika[0],zeWskaznika[1],zeWskaznika[2])
+{
 }
 void Czworoscian::ObliczPunktyKorzystajacZdlugosciIsrodka(float a, float* c){
     g_print("\nCzworoscian::ObliczPunkty");

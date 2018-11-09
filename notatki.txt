@@ -33,3 +33,9 @@ by jej wywołanie dla grupy mogło wywołać jej wystąpienie dla wszystkich mod
 3.11.2018
 należy zaimplementować uniwersalnie funkcję:
 PrzeliczPunktyZaktualnejMacierzy(), która jest teraz tylko dla kostki.
+
+9.11.2018
+wykonane wcześniej: szablony funkcji użyte dla Rysuj i RysujZnazwami oddzielnie dla Model i GrupaModeli.
+do zrobienia: przeniesienie do Model indeksów wierzchołków według których rysowane są kolejne ściany.
+            i przeniesienie do model szablonu rysujGeometrię
+            Z konstruktorów Kostki i Czworościanu usunąć powtarzający się kod

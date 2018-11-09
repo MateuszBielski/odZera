@@ -39,6 +39,8 @@ public :
     
     template<int flagi>
     void RysujTemplate();
+    template<int flagi>
+    void RysujGeometrieTemplate();
     
     //nie używane, albo mało
     virtual void MacierzaObrotuPrzeliczPunktyIjaWyzeruj();//nie spełniła oczekiwań
@@ -99,26 +101,31 @@ class Kostka : public Model{
 public:
     Kostka();//domyślnie ustawia środek modelu 0,0,0 i tak oblicza punkty
     Kostka(float * srodekModelu);
+    Kostka(float, float, float);
     virtual ~Kostka(){};
 //	virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika) override;
     virtual void PrzeliczPunktyZaktualnejMacierzy() override;
 	void ObliczPunktyKorzystajacZdlugosciIsrodka(float d, float* c);
     virtual void RysujGeometrie() override;
+    void RysujGeometrieStare();//--
 private:
-float p[8][3];
-float n[6][3];
+    float p[8][3];
+    float n[6][3];
+    unsigned short nr[24];
 
 };
 class Czworoscian : public Model{
 public:
     Czworoscian();
+    Czworoscian(float x, float y, float z);
     Czworoscian(float * srodekModelu);
     virtual ~Czworoscian(){};
     virtual void RysujGeometrie() override;
     void ObliczPunktyKorzystajacZdlugosciIsrodka(float d, float* c);
 private:
     float p[4][3];
-    float n[4][3];    
+    float n[4][3];
+    unsigned short nr[12];    
 };
 class TrzyKwadraty : public Model{
   public:

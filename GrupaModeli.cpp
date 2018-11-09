@@ -25,28 +25,29 @@ void GrupaModeli::TransformacjePrzedRysowaniem()
     glMultMatrixf(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0]);
     glTranslatef(-srodekModelu[0],-srodekModelu[1],-srodekModelu[2]);
 }
-void GrupaModeli::Rysuj()
-{
+template<int flagi>
+void GrupaModeli::GrupaRysujTemplate(){
     if(czyPushMatrix)glPushMatrix();
     TransformacjePrzedRysowaniem();
-	(this->*FunkcjaWymienna)();
-   for(auto& model : mojeModele){
-        model->Rysuj();
+    if constexpr (flagi & Z_NAZWAMI_MODELI){
+        glLoadName(jestemZaladowanyPodNumerem);
+        glPushName(jestemZaladowanyPodNumerem);
     }
+    if constexpr (flagi == 0) (this->*FunkcjaWymienna)();
+    for(auto& model : mojeModele){
+        if constexpr (flagi == 0)model->Rysuj();
+        else if constexpr (flagi & Z_NAZWAMI_MODELI)model->RysujZnazwami();
+    }
+    if constexpr (flagi & Z_NAZWAMI_MODELI) glPopName();
     if(czyPushMatrix)glPopMatrix();
+}
+void GrupaModeli::Rysuj()
+{
+    GrupaRysujTemplate<0>();
 }
 void GrupaModeli::RysujZnazwami()
 {
-    if(czyPushMatrix)glPushMatrix();
-    TransformacjePrzedRysowaniem();
-    glLoadName(jestemZaladowanyPodNumerem);
-    glPushName(jestemZaladowanyPodNumerem);
-//    g_print("\nGrupaModeli::RysujZnazwami glPushName %d",jestemZaladowanyPodNumerem);
-    for(auto& model : mojeModele){
-        model->RysujZnazwami();
-    }
-    glPopName();
-    if(czyPushMatrix)glPopMatrix();
+    GrupaRysujTemplate<Z_NAZWAMI_MODELI>();
 }
 void GrupaModeli::WyliczSrodekCiezkosci()
 {   

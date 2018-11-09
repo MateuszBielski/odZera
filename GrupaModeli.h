@@ -17,6 +17,8 @@ public:
     virtual void UtrwalPrzeksztalcenia() override;
 	virtual void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi) override;
     int IleMamModeli();
+    template<int flagi>
+    void GrupaRysujTemplate();
 private:
 	using listaModeli = std::list<spModel>;
 	listaModeli mojeModele;
