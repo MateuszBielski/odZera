@@ -25,6 +25,10 @@ void Model::UdostepnijBazieVertexyInormalne(float * v,int ileV,float * n,int ile
     normalne = n;
     ileNormalnych = ileN;
 }
+void Model::UdostepnijBazieIndeksyWierzcholkow(unsigned short * nr, unsigned short ile){
+	indeksyNaroznikow = nr;
+    ileNaroznikowSciany = ile;
+}
 template<int flagi>
 void Model::RysujTemplate()
 {
@@ -55,7 +59,17 @@ void Model::TransformacjePrzedRysowaniem(){
 	glMultMatrixf(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0]);
 	glTranslatef(-srodekModelu[0],-srodekModelu[1],-srodekModelu[2]);
 }
-
+template<int flagi,int rodzajPrymitywu>
+void Model::RysujGeometrieTemplate()
+{
+	glBegin(rodzajPrymitywu);
+    glColor3f(0.6,0.8,0.7);
+	for(int s = 0 ; s < ileNormalnych ;s++){
+		glNormal3fv(&normalne[s*3]);
+		for(int w = 0 ; w < ileNaroznikowSciany ;w++)glVertex3fv(&vertexy[indeksyNaroznikow[s*ileNaroznikowSciany + w]*3]);
+	}
+    glEnd();
+}
 void Model::UstalM_Pos(float* zTablicy)
 {
 	for(short i= 0 ; i < 3 ; i++)mojeWspolrzedneImacierzeSterowania->m_Pos[i] = zTablicy[i];
@@ -99,13 +113,11 @@ void Model::UtrwalMposZaktualnejMacierzy()
     float macierzModelWidok[16];
     for(int i = 0; i < 3 ; i++){
 		tempM_pos[i] = srodekModelu[i];
-//		mojeWspolrzedneImacierzeSterowania->m_Pos[i] = 0;
 	}
     tempM_pos[3] = 1;
     glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
     WyswietlWartosciMacierzy4x4(macierzModelWidok);
     IloczynMacierzyIwektora4f(macierzModelWidok,tempM_pos,tempDest);
-//	IloczynWektoraImacierzy4f(tempM_pos,macierzModelWidok,tempDest);
     for(int i = 0; i < 3 ; i++)srodekModelu[i] = tempDest[i];
     g_print("\nModel::UtrwalMposZaktualnejMacierzy mój numer %d",jestemZaladowanyPodNumerem);
 	pokaz(tempM_pos);
@@ -181,10 +193,7 @@ void Model::RysujOstroslup()
     }
     
 }
-/*spModel ModelPusty::SprobujPrzywrocic()
-{
-    return *tuJestemPelny;
-}*/
+
 ModelPusty::~ModelPusty()
 {
 //    g_print("\ndestruktor ModelPusty");
@@ -201,6 +210,7 @@ Kostka::Kostka(float x, float y, float z):nr{0,1,5,4,
                                         0,3,2,1}
 {
     UdostepnijBazieVertexyInormalne(&p[0][0],8,&n[0][0],6);
+	UdostepnijBazieIndeksyWierzcholkow(&nr[0],4);
     float zeWskaznika[] = {x,y,z};
     UstawPolozenieSrodkaModelu(zeWskaznika);
     ObliczPunktyKorzystajacZdlugosciIsrodka(1.0,zeWskaznika);
@@ -213,11 +223,6 @@ Kostka::Kostka(float* zeWskaznika):Kostka(zeWskaznika[0],zeWskaznika[1],zeWskazn
 {
     
 }
-/*void Kostka::UstawPolozenieSrodkaModelu(float* zeWskaznika)
-{
-	Model::UstawPolozenieSrodkaModelu(zeWskaznika);
-	
-}*/
 void Kostka::ObliczPunktyKorzystajacZdlugosciIsrodka(float dd, float* c)
 {
 	//można dd użyć jako d[3] długość szerokość wysokość oddzielnie
@@ -247,46 +252,18 @@ void Kostka::ObliczPunktyKorzystajacZdlugosciIsrodka(float dd, float* c)
 	//dół
 	n[5][0] = 0; n[5][1] =-1; n[5][2] = 0;
 }
-template<int flagi>
-void Kostka::RysujGeometrieTemplate()
-{
-    glBegin(GL_QUADS);
-    glColor3f(0.6,0.8,0.7);
-	for(int s = 0 ; s < 6 ;s++){
-		glNormal3fv(n[s]);
-		for(int w = 0 ; w < 4 ;w++)glVertex3fv(p[nr[s*4 + w]]);
-	}
-    glEnd();
-}
+
 void Kostka::RysujGeometrie()
 {
-    RysujGeometrieTemplate<0>();
+    RysujGeometrieTemplate<0,GL_QUADS>();
 }
-void Kostka::RysujGeometrieStare()
-{
-    unsigned short nr[] = {	0,1,5,4,
-							3,7,6,2,
-							2,6,5,1,
-							3,0,4,7,
-							4,5,6,7,
-							0,3,2,1};
-	glBegin(GL_QUADS);
-        glColor3f(0.6,0.8,0.7);
-//        g_print("\nKostka::RysujGeometrie:");//--
-	for(int s = 0 ; s < 6 ;s++){
-		glNormal3fv(n[s]);
-//       g_print("\n  %2.3f,  %2.3f,  %2.3f",n[s][0],n[s][1],n[s][2]);//--
-		for(int w = 0 ; w < 4 ;w++)glVertex3fv(p[nr[s*4 + w]]);
-	}
-    glEnd();
-}
+
 void Kostka::PrzeliczPunktyZaktualnejMacierzy()
 {
     float stare[4],nowe[4],m[16];
     auto kopiuj3 = [](float* zr,float* cel){
         for(int j = 0; j < 3 ; j++){
             cel[j] = zr[j];
-//            g_print("   %2.3f %2.3f",cel[j],zr[j]);
         }
     };
     auto pokazPunkty = [&](){
@@ -321,15 +298,9 @@ void Kostka::PrzeliczPunktyZaktualnejMacierzy()
         kopiuj3(n[i],stare);
 //        pokazPunkt(stare);
         IloczynMacierzyIwektora4f(tylkoObroty,stare,nowe);
-//        IloczynMacierzyIwektora4f(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0],stare,nowe);//to nie działa przy utrwalaniu modeli z grupy, bo są wcześniejsze transformacje
         kopiuj3(nowe,n[i]);
-//        pokazPunkt(nowe);
    }
-//   PunktMiedzyWektorami(n[0],n[1]);
-//   PunktMiedzyWektorami(n[2],n[3]);
-//   PunktMiedzyWektorami(n[4],n[5]);
    kopiuj3(srodekModelu,stare);
-//    IloczynWektoraImacierzy4f(stare,m,nowe);
     IloczynMacierzyIwektora4f(m,stare,nowe);
     kopiuj3(nowe,srodekModelu);
    UstawPustaDomyslnaFunkcje();
@@ -341,6 +312,7 @@ Czworoscian::Czworoscian(float x, float y, float z):nr{0,2,1,
                                                         0,3,2}
 {
     UdostepnijBazieVertexyInormalne(&p[0][0],4,&n[0][0],4);
+	UdostepnijBazieIndeksyWierzcholkow(&nr[0],3);
     float srodek[] = {x,y,z};
     ObliczPunktyKorzystajacZdlugosciIsrodka(1.5,srodek);
 }
@@ -381,17 +353,7 @@ void Czworoscian::ObliczPunktyKorzystajacZdlugosciIsrodka(float a, float* c){
     for(int i = 1 ; i < 4 ; i++)NormujWektor3fv(n[i]);
 }
 void Czworoscian::RysujGeometrie(){
-   unsigned short nr[] = {	0,2,1,
-							0,1,3,
-							1,2,3,
-							0,3,2};
-	glBegin(GL_TRIANGLES);
-        glColor3f(1.0,1.0,0.0);
-	for(int s = 0 ; s < 4 ;s++){
-		glNormal3fv(n[s]);
-		for(int w = 0 ; w < 3 ;w++)glVertex3fv(p[nr[s*3 + w]]);
-	}
-    glEnd(); 
+	RysujGeometrieTemplate<0,GL_TRIANGLES>();
 }
 void Ostroslup::RysujGeometrie(){
     float x=1.0;
@@ -472,9 +434,7 @@ void LinieZnormalnych::RysujGeometrie()
       glGetFloatv(GL_CURRENT_NORMAL,biezacyWektor);
       g_print("\nbieżące wartości normalnej %2.3f,  %2.3f,  %2.3f,",biezacyWektor[0],biezacyWektor[1],biezacyWektor[2]);
     };
-//    JakaNormalna();
     for(int i = 0 ; i < ileNormalnych ; i++){
-//        float* pNormalne = (float*)(normalne[i]);
         glBegin(GL_LINES);
         glColor3f(r[i],g[i],b[i]);
         glNormal3fv(&normalne[i*3]);
@@ -490,12 +450,10 @@ void LinieZnormalnych::RysujGeometrie()
     }*/
 }
 WidokCechModelu::WidokCechModelu(){
-//    przechowanieSterowania = mojeWspolrzedneImacierzeSterowania;
 }
 void WidokCechModelu::RysujDla(std::shared_ptr<Model> wsk){
     if(wsk.get() == this)return;
     if(wskazywany != nullptr){
-//        wskazywany->MacierzaObrotuPrzeliczPunktyIjaWyzeruj();//nie spełnia oczekiwań
         wskazywany->UtrwalPrzeksztalcenia();
     for(int i = 0 ; i < 3 ; i++){
             wskazywany->SrodekModelu()[i] += mojeWspolrzedneImacierzeSterowania->m_Pos[i];

@@ -33,13 +33,16 @@ public :
     
     float * normalne = 0;
     int ileNormalnych = 0; 
+	
+	unsigned short * indeksyNaroznikow = 0;
+    unsigned short ileNaroznikowSciany = 0;
     
     std::shared_ptr<WspolrzedneImacierzeSterowania> mojeWspolrzedneImacierzeSterowania;
     bool czyJestemGrupa = false;
     
     template<int flagi>
     void RysujTemplate();
-    template<int flagi>
+    template<int flagi,int>
     void RysujGeometrieTemplate();
     
     //nie używane, albo mało
@@ -47,10 +50,11 @@ public :
     void RysujOstroslup();
     virtual void Wygladzanie(bool){};//do zastanowienia się czy warto przy każdym obiekcie to ustalać
 	void UzywajPushMatrix(bool);//--
-    void UtrwalMposZaktualnejMacierzy();
+    void UtrwalMposZaktualnejMacierzy();//wcale nie używana
     void SrodekUstawZzewnetrznegoAdresu(float *);
 protected:
     void UdostepnijBazieVertexyInormalne(float * v,int ileV,float * n,int ileN);
+	void UdostepnijBazieIndeksyWierzcholkow(unsigned short *, unsigned short);
     using Ptr_F_void_void = void(Model::*)();
     Ptr_F_void_void FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
     void DomyslnaWymiennaFunkcja(){};
@@ -74,8 +78,7 @@ protected:
     float srodekModeluTab[3];
 
     float * kolory = 0;
-    int * indeksy = 0;
-    int ileIndeksow = 0;
+    
 };
 using spModel = std::shared_ptr<Model>;
 using itLspModel = std::list<spModel>::iterator;
@@ -85,7 +88,6 @@ public:
     ModelPusty(itLspModel dokadWstawiono):tuJestemPelny(dokadWstawiono){};
     virtual ~ModelPusty();
     itLspModel AdresPelnegoObiektu();
-//    virtual spModel SprobujPrzywrocic() override;
 private:
      itLspModel tuJestemPelny;
 };
@@ -103,16 +105,13 @@ public:
     Kostka(float * srodekModelu);
     Kostka(float, float, float);
     virtual ~Kostka(){};
-//	virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika) override;
     virtual void PrzeliczPunktyZaktualnejMacierzy() override;
 	void ObliczPunktyKorzystajacZdlugosciIsrodka(float d, float* c);
     virtual void RysujGeometrie() override;
-    void RysujGeometrieStare();//--
 private:
-    float p[8][3];
+	float p[8][3];
     float n[6][3];
     unsigned short nr[24];
-
 };
 class Czworoscian : public Model{
 public:
@@ -153,10 +152,8 @@ public:
 private:
     Czworoscian znacznik;
     spModel wskazywany = nullptr;
-//    float srodekWskazywanegoModelu[3];
     float * zastepczaM_Pos;
     float * zastepczaSrodek;
-//    std::shared_ptr<WspolrzedneImacierzeSterowania> przechowanieSterowania;
 };
 using spLinieN = std::shared_ptr<LinieZnormalnych>;
 using spWidokCech = std::shared_ptr<WidokCechModelu>;
