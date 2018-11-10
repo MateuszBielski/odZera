@@ -4,7 +4,8 @@
 #include <WspolrzedneImacierzeSterowania.h>
 #define UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY 1
 #define ZESTAW_FUNKCJI 2
-#define PRZELICZ_PUNKTY 4
+#define UTRWAL_PUNKTY_NORMALNE_SRODEK 4
+#define UTRWAL_SRODEK 8
 #define Z_NAZWAMI_MODELI 1
 
 
@@ -23,6 +24,7 @@ public :
     void PokazujWartosci(bool b){pokazujWartosci = b;};//
     void PrzydzielenieNumeru(int n){jestemZaladowanyPodNumerem = n;};
     virtual void PrzeliczPunktyZaktualnejMacierzy();//używane przy dodawaniu do grupy, brakuje dla innych niż kostka
+    void UtrwalSrodekZaktualnejMacierzy();
     virtual void WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi);
     virtual void UtrwalPrzeksztalcenia();
     void UstawPustaDomyslnaFunkcje();

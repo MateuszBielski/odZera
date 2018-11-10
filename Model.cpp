@@ -97,9 +97,13 @@ void Model::WlaczJednorazowoWymienneFunkcje(int jakieFunkcjeFlagi){
 		FunkcjaWymienna = &Model::WykonajWszystkieFunkcjeZestawu;
         jakaFunkcja = "WykonajWszystkieFunkcjeZestawu";
 	}
-    if(jakieFunkcjeFlagi & PRZELICZ_PUNKTY){
+    if(jakieFunkcjeFlagi & UTRWAL_PUNKTY_NORMALNE_SRODEK){
         FunkcjaWymienna = &Model::PrzeliczPunktyZaktualnejMacierzy;
         jakaFunkcja = "PrzeliczPunktyZaktualnejMacierzy";
+    }
+    if(jakieFunkcjeFlagi & UTRWAL_SRODEK){
+        FunkcjaWymienna = &Model::UtrwalSrodekZaktualnejMacierzy;
+        jakaFunkcja = "UtrwalSrodekZaktualnejMacierzy";
     }
 //    g_print("\nWlaczJednorazowoWymienneFunkcje %s model %d",jakaFunkcja.c_str(),jestemZaladowanyPodNumerem);
 }
@@ -154,7 +158,7 @@ void Model::WykonajWszystkieFunkcjeZestawu()
 void Model::PrzeliczPunktyZaktualnejMacierzy()
 {
 //	g_print("\nbazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy");
-    float stare[4],nowe[4],m[16];
+    /*float stare[4],nowe[4],m[16];
     auto kopiuj3 = [](float* zr,float* cel){
         for(int j = 0; j < 3 ; j++){
             cel[j] = zr[j];
@@ -191,12 +195,32 @@ void Model::PrzeliczPunktyZaktualnejMacierzy()
    }
    kopiuj3(srodekModelu,stare);
     IloczynMacierzyIwektora4f(m,stare,nowe);
-    kopiuj3(nowe,srodekModelu);
+    kopiuj3(nowe,srodekModelu);*/
+    float m[16],tylkoObroty[16];
+    glGetFloatv(GL_MODELVIEW_MATRIX,m);
+    auto WyluskajObrotyZmacierzyModelWidok = [&](){
+        for(int k = 0 ; k < 16 ; k++)tylkoObroty[k] = m[k];
+        for(int l = 12 ; l < 15 ; l++)tylkoObroty[l] = 0;
+    };
+    for(int i  = 0; i < ileVertexow ; i++){
+        IloczynMacierzy4fIwektora3fzTymczasowym(m,&vertexy[i*3]);
+    }
+    WyluskajObrotyZmacierzyModelWidok();
+    for(int i  = 0; i < ileNormalnych ; i++){
+        IloczynMacierzy4fIwektora3fzTymczasowym(tylkoObroty,&normalne[i*3]);
+    }
+    IloczynMacierzy4fIwektora3fzTymczasowym(m,srodekModelu);
    UstawPustaDomyslnaFunkcje();
+}
+void Model::UtrwalSrodekZaktualnejMacierzy(){
+    float m[16];
+    glGetFloatv(GL_MODELVIEW_MATRIX,m);
+    IloczynMacierzy4fIwektora3fzTymczasowym(m,srodekModelu);
+    UstawPustaDomyslnaFunkcje();
 }
 void Model::UtrwalPrzeksztalcenia(){
     glLoadIdentity();
-    WlaczJednorazowoWymienneFunkcje(PRZELICZ_PUNKTY);
+    WlaczJednorazowoWymienneFunkcje(UTRWAL_PUNKTY_NORMALNE_SRODEK);
     Rysuj();
     mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
 }

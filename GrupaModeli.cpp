@@ -29,6 +29,7 @@ template<int flagi>
 void GrupaModeli::GrupaRysujTemplate(){
     if(czyPushMatrix)glPushMatrix();
     TransformacjePrzedRysowaniem();
+    (this->*FunkcjaWymienna)();
     if constexpr (flagi & Z_NAZWAMI_MODELI){
         glLoadName(jestemZaladowanyPodNumerem);
         glPushName(jestemZaladowanyPodNumerem);
@@ -73,9 +74,9 @@ void GrupaModeli::UtrwalPrzeksztalcenia()
 {
     g_print("\nGrupaModeli::UtrwalPrzeksztalceniaModeliWgrupie");
 	glLoadIdentity();
-//	this->WlaczJednorazowoWymienneFunkcje(UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY);
+	this->WlaczJednorazowoWymienneFunkcje(UTRWAL_SRODEK);
     for(auto& model : mojeModele){
-        model->WlaczJednorazowoWymienneFunkcje(PRZELICZ_PUNKTY);
+        model->WlaczJednorazowoWymienneFunkcje(UTRWAL_PUNKTY_NORMALNE_SRODEK);
     }
     Rysuj();
     for(auto& model : mojeModele){

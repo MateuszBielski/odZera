@@ -120,7 +120,7 @@ void Renderowanie::UtrwalPunktyWybranegoObiektu(){
     g_print("\nRenderowanie::UtrwalPunktyWybranegoObiektu");
 	glLoadIdentity();
     auto wybrany = mojeModele.at(numerModeluWybranego);
-    wybrany->WlaczJednorazowoWymienneFunkcje(PRZELICZ_PUNKTY);
+    wybrany->WlaczJednorazowoWymienneFunkcje(UTRWAL_PUNKTY_NORMALNE_SRODEK);
 	//rysowanie wszystkich obiektów
 	wybrany->Rysuj();
     wybrany->mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();

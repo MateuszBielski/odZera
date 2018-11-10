@@ -39,3 +39,9 @@ wykonane wcześniej: szablony funkcji użyte dla Rysuj i RysujZnazwami oddzielni
 do zrobienia: przeniesienie do Model indeksów wierzchołków według których rysowane są kolejne ściany.
             i przeniesienie do model szablonu rysujGeometrię
             Z konstruktorów Kostki i Czworościanu usunąć powtarzający się kod
+10.11.2018
+Zrobione wszystko z 9.11,
+Przelicz Punkty użyto funkcję IloczynMacierzy4fIwektora3fzTymczasowym - kod krótszy i bardziej czytelny.
+Zrobić:
+zmienić nazwę PRZELICZ_PUNKTY,
+W GrupaModeli::UtrwalPrzeksztalcenia dodać utrwalanie środka modelu.
