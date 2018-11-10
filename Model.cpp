@@ -153,8 +153,46 @@ void Model::WykonajWszystkieFunkcjeZestawu()
 }
 void Model::PrzeliczPunktyZaktualnejMacierzy()
 {
-	g_print("\nbazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy");
-    UstawPustaDomyslnaFunkcje();
+//	g_print("\nbazowa funkcja Model::PrzeliczPunktyZaktualnejMacierzy");
+    float stare[4],nowe[4],m[16];
+    auto kopiuj3 = [](float* zr,float* cel){
+        for(int j = 0; j < 3 ; j++){
+            cel[j] = zr[j];
+        }
+    };
+    auto pokazPunkt = [](float * u){
+        g_print("\n   ");
+        for(int i  = 0; i < 4 ; i++)g_print("  %2.3f",u[i]);
+    };
+    auto PunktMiedzyWektorami = [](float * v1, float * v2){
+        float s[3];
+        for(int i  = 0; i < 3 ; i++)s[i] = (v1[i] + v2[i])/2.0;
+        g_print("\n %2.3f, %2.3f, %2.3f",s[0],s[1],s[2]);
+    };
+    stare[3] = 1.0f;
+    glGetFloatv(GL_MODELVIEW_MATRIX,m);
+    float tylkoObroty[16];
+    auto WyluskajObrotyZmacierzyModelWidok = [&](){
+        for(int k = 0 ; k < 16 ; k++)tylkoObroty[k] = m[k];
+        for(int l = 12 ; l < 15 ; l++)tylkoObroty[l] = 0;
+    };
+   for(int i  = 0; i < ileVertexow ; i++){
+        kopiuj3(&vertexy[i*3],stare);
+//        IloczynWektoraImacierzy4f(stare,m,nowe);
+        IloczynMacierzyIwektora4f(m,stare,nowe);
+        kopiuj3(nowe,&vertexy[i*3]);
+   }
+    WyluskajObrotyZmacierzyModelWidok();
+   for(int i  = 0; i < ileNormalnych ; i++){
+        kopiuj3(&normalne[i*3],stare);
+//        pokazPunkt(stare);
+        IloczynMacierzyIwektora4f(tylkoObroty,stare,nowe);
+        kopiuj3(nowe,&normalne[i*3]);
+   }
+   kopiuj3(srodekModelu,stare);
+    IloczynMacierzyIwektora4f(m,stare,nowe);
+    kopiuj3(nowe,srodekModelu);
+   UstawPustaDomyslnaFunkcje();
 }
 void Model::UtrwalPrzeksztalcenia(){
     glLoadIdentity();
@@ -264,7 +302,8 @@ void Kostka::RysujGeometrie()
 
 void Kostka::PrzeliczPunktyZaktualnejMacierzy()
 {
-    float stare[4],nowe[4],m[16];
+    Model::PrzeliczPunktyZaktualnejMacierzy();
+    /*float stare[4],nowe[4],m[16];
     auto kopiuj3 = [](float* zr,float* cel){
         for(int j = 0; j < 3 ; j++){
             cel[j] = zr[j];
@@ -307,7 +346,7 @@ void Kostka::PrzeliczPunktyZaktualnejMacierzy()
    kopiuj3(srodekModelu,stare);
     IloczynMacierzyIwektora4f(m,stare,nowe);
     kopiuj3(nowe,srodekModelu);
-   UstawPustaDomyslnaFunkcje();
+   UstawPustaDomyslnaFunkcje();*/
 }
 
 Czworoscian::Czworoscian(float x, float y, float z):nr{0,2,1,
@@ -318,6 +357,7 @@ Czworoscian::Czworoscian(float x, float y, float z):nr{0,2,1,
     UdostepnijBazieVertexyInormalne(&p[0][0],4,&n[0][0],4);
 	UdostepnijBazieIndeksyWierzcholkow(&nr[0],3);
     float srodek[] = {x,y,z};
+    UstawPolozenieSrodkaModelu(srodek);
     ObliczPunktyKorzystajacZdlugosciIsrodka(1.5,srodek);
 }
 Czworoscian::Czworoscian():Czworoscian(0.0,0.0,0.0)
@@ -354,7 +394,7 @@ void Czworoscian::ObliczPunktyKorzystajacZdlugosciIsrodka(float a, float* c){
 		for(int j = 0; j < 3; j++)p[i][j]+=c[j];
 	}
     //normalne
-    n[0][0] = 0;n[0][1] = -1;n[0][0] = 0;
+    n[0][0] = 0;n[0][1] = -1;n[0][2] = 0;
     n[1][0] = 0;n[1][1] = h/3.0;n[1][2] = H;
     n[2][0] = h;n[2][1] = a*h/(3*H);n[2][2] = -a/2;
     n[3][0] = -h;n[3][1] = a*h/(3*H);n[3][2] = -a/2;

@@ -39,12 +39,12 @@ void Renderowanie::JednorazowoRysujModeleZnazwami()
 int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 {
 //    Zaladuj(std::make_shared<Kostka>());
-//	Zaladuj(std::make_shared<Kostka>());
+	Zaladuj(std::make_shared<Kostka>());
     Zaladuj(std::make_shared<Czworoscian>());
     Zaladuj(std::make_shared<Ostroslup>());
 //    Zaladuj(std::make_shared<TrzyKwadraty>());
-    UtworzTyleKostek(50);
-    UtworzTyleModeli<Czworoscian>(50);
+    UtworzTyleKostek(10);
+    UtworzTyleModeli<Czworoscian>(5);
 	
     linieNormalnych = std::make_shared<LinieZnormalnych>();
     cechyWybranego = std::make_shared<WidokCechModelu>();
@@ -84,6 +84,11 @@ void Renderowanie::WybierzModelOnumerze(short tym){
     linieNormalnych->RysujDla(wybranyModel);
     cechyWybranego->RysujDla(wybranyModel);
     
+    float * n = wybranyModel->normalne;
+//    g_print("\nnormalne Wybranego");
+//    for(int i = 0; i < wybranyModel->ileNormalnych ; i++){
+//        g_print("\n%2.3f  %2.3f  %2.3f",n[3*i+0],n[3*i+1],n[3*i+2]);
+//    }
 //	wybranyModel->WlaczJednorazowoWymienneFunkcje(ZESTAW_FUNKCJI);
 }
 void Renderowanie::WybierzModelOnumerze(std::stack<int> & stosNazw){
