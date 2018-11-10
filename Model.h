@@ -77,7 +77,7 @@ protected:
     float* srodekModelu;//pierwotnie wskazuje na poniższą tablicę 
     float srodekModeluTab[3];
 
-    float * kolory = 0;
+    float kolor[3];
     
 };
 using spModel = std::shared_ptr<Model>;
@@ -103,6 +103,7 @@ class Kostka : public Model{
 public:
     Kostka();//domyślnie ustawia środek modelu 0,0,0 i tak oblicza punkty
     Kostka(float * srodekModelu);
+    Kostka(float * srodekModelu,float * kolor);
     Kostka(float, float, float);
     virtual ~Kostka(){};
     virtual void PrzeliczPunktyZaktualnejMacierzy() override;
@@ -118,6 +119,7 @@ public:
     Czworoscian();
     Czworoscian(float x, float y, float z);
     Czworoscian(float * srodekModelu);
+    Czworoscian(float * srodekModelu,float * kolor);
     virtual ~Czworoscian(){};
     virtual void RysujGeometrie() override;
     void ObliczPunktyKorzystajacZdlugosciIsrodka(float d, float* c);

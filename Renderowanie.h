@@ -51,6 +51,8 @@ private:
     Ptr_F_void_void RysujModeleOdpowiednio = &Renderowanie::RysujModeleBezNazw;
     
     void UtworzTyleKostek(int);
+    template<class T>
+    void UtworzTyleModeli(int);
 	Model ostroslup;
     short modelSwiatlaMaNumer = 0;
 	short numerModeluWybranego = 1;

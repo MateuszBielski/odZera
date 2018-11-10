@@ -2,7 +2,7 @@
 #include <FunkcjeIstruktury.h>
 
 
-Model::Model()
+Model::Model():kolor{0.6,0.8,0.7}
 {
     mojeWspolrzedneImacierzeSterowania = std::make_shared<WspolrzedneImacierzeSterowania>();
     srodekModelu = &srodekModeluTab[0];
@@ -63,7 +63,7 @@ template<int flagi,int rodzajPrymitywu>
 void Model::RysujGeometrieTemplate()
 {
 	glBegin(rodzajPrymitywu);
-    glColor3f(0.6,0.8,0.7);
+    glColor3fv(kolor);
 	for(int s = 0 ; s < ileNormalnych ;s++){
 		glNormal3fv(&normalne[s*3]);
 		for(int w = 0 ; w < ileNaroznikowSciany ;w++)glVertex3fv(&vertexy[indeksyNaroznikow[s*ileNaroznikowSciany + w]*3]);
@@ -223,6 +223,10 @@ Kostka::Kostka(float* zeWskaznika):Kostka(zeWskaznika[0],zeWskaznika[1],zeWskazn
 {
     
 }
+Kostka::Kostka(float * srodek,float * kol):Kostka(srodek)
+{
+    for(int i = 0 ; i < 3 ; i++)kolor[i] = kol[i];
+}
 void Kostka::ObliczPunktyKorzystajacZdlugosciIsrodka(float dd, float* c)
 {
 	//można dd użyć jako d[3] długość szerokość wysokość oddzielnie
@@ -322,8 +326,12 @@ Czworoscian::Czworoscian():Czworoscian(0.0,0.0,0.0)
 Czworoscian::Czworoscian(float * zeWskaznika):Czworoscian(zeWskaznika[0],zeWskaznika[1],zeWskaznika[2])
 {
 }
+Czworoscian::Czworoscian(float * srodek,float * kol):Czworoscian(srodek)
+{
+    for(int i = 0 ; i < 3 ; i++)kolor[i] = kol[i];
+}
 void Czworoscian::ObliczPunktyKorzystajacZdlugosciIsrodka(float a, float* c){
-    g_print("\nCzworoscian::ObliczPunkty");
+//    g_print("\nCzworoscian::ObliczPunkty");
     float H = a*sqrt(6.0f)/3;
     float h = a*sqrt(3.0f)/2;
     //podstawa
@@ -339,7 +347,7 @@ void Czworoscian::ObliczPunktyKorzystajacZdlugosciIsrodka(float a, float* c){
         for(int i = 0 ; i < 3 ; i++)srodekGeometryczny[i] += p[j][i];
     }
     for(int i = 0 ; i < 3 ; i++)srodekGeometryczny[i] /= 4.0;
-    g_print("\nsrodek czworościanu %2.3f, %2.3f, %2.3f",srodekGeometryczny[0],srodekGeometryczny[1],srodekGeometryczny[2]);
+//    g_print("\nsrodek czworościanu %2.3f, %2.3f, %2.3f",srodekGeometryczny[0],srodekGeometryczny[1],srodekGeometryczny[2]);
     for(int i = 0; i < 4; i++)p[i][1] -=srodekGeometryczny[1];
     //dodać środek modelu************
     for(int i = 0; i < 4; i++){
@@ -468,7 +476,7 @@ void WidokCechModelu::RysujDla(std::shared_ptr<Model> wsk){
 }
 void WidokCechModelu::RysujGeometrie(){
     
-    znacznik.RysujGeometrie();
+    znacznik.RysujGeometrieTemplate<0,GL_LINES>();
 }
 void WidokCechModelu::TransformacjePrzedRysowaniem()
 {

@@ -43,7 +43,8 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
     Zaladuj(std::make_shared<Czworoscian>());
     Zaladuj(std::make_shared<Ostroslup>());
 //    Zaladuj(std::make_shared<TrzyKwadraty>());
-    UtworzTyleKostek(10);
+    UtworzTyleKostek(50);
+    UtworzTyleModeli<Czworoscian>(50);
 	
     linieNormalnych = std::make_shared<LinieZnormalnych>();
     cechyWybranego = std::make_shared<WidokCechModelu>();
@@ -154,8 +155,13 @@ void Renderowanie::PobierzWskaznikNaMacierzObrotu(float* adres)
 }
 void Renderowanie::UtworzTyleKostek(int ile)
 {
+    UtworzTyleModeli<Kostka>(ile);
+}
+template<class T>
+void Renderowanie::UtworzTyleModeli(int ile)
+{
     int i = 0;
-    float losowo[3];
+    float losowo[3],losowoKolor[3];
     float przedzial[2];
     przedzial[0] = -5;
     przedzial[1] = 5;
@@ -163,11 +169,15 @@ void Renderowanie::UtworzTyleKostek(int ile)
     std::random_device rd;
     std::mt19937 mt(rd());
     std::uniform_real_distribution<float> dist(przedzial[0],przedzial[1]);
+    std::uniform_real_distribution<float> distKolor(0.0f,1.0f);
 //        std::cout << dist(mt) << "\n";
     for(i ; i < ile ; i++){
-        for(int j = 0; j < 3 ; j++)losowo[j] = dist(mt);
-        std::shared_ptr<Model> kostka = std::make_shared<Kostka>(losowo);
-        Zaladuj(kostka);
+        for(int j = 0; j < 3 ; j++){
+            losowo[j] = dist(mt);
+            losowoKolor[j] = distKolor(mt);
+        }
+//        std::shared_ptr<Model> kostka = std::make_shared<Kostka>(losowo);
+        Zaladuj(std::make_shared<T>(losowo,losowoKolor));
     }
 }
 spGrupaModeli Renderowanie::PrzydzielPustaGrupe()
