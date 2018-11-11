@@ -31,7 +31,7 @@ protected:
     virtual void UstawienieSceny();
     virtual void RysujScene();
     virtual void OswietlenieUstaw();
-	using spRenderowanie = std::shared_ptr<Renderowanie>;
+	using spRenderowanie = std::shared_ptr<Renderowanie1>;
 	spRenderowanie renderowanie;
 	int szerokosc,wysokosc;
     float planBliski, planDaleki;

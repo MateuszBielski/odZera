@@ -45,3 +45,18 @@ Przelicz Punkty użyto funkcję IloczynMacierzy4fIwektora3fzTymczasowym - kod kr
 Zrobić:
 zmienić nazwę PRZELICZ_PUNKTY,
 W GrupaModeli::UtrwalPrzeksztalcenia dodać utrwalanie środka modelu.
+
+11.11.2018
+Wykonano z 10.11 wszytstko.
+Klasa przesuwanie widoku jest prawdopodobnie niepotrzebna. Wyłączono ładowanie tego modułu.
+Koncepcja zmiany nazwy:
+SterowanieMyszą zmienić na: MyszWidokRuchModeli., lub zamiast tego:
+Renderowanie zmienić nazwę na ZarządzanieObiektami (lub podbnie),
+i używać jako interfejs dla klas: ZarządzanieModelami i ZarządzaniePunktami, 
+których nazwy metod są używane w SterowanieMyszą, 
+zmiany przy podziale:
+Moduly: załaduj - są dwa dodatkowe w tym niestandardowy konstruktor
+SterowanieMysza.h renederowanie zmiana typu na Renderowanie1
+EkranGL.* jak wyżej
+SterowanieMysza.cpp - zostawiono zapas.
+Dla bezpieczeństwa w funkcji wyszukującej moduły zrobić wyjątek, lub ostrzeżenie, że nie znaleziono modułu.

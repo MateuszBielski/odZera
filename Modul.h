@@ -15,7 +15,7 @@ public:
     ~Modul();
     std::string Nazwa(){return nazwa;};
     void JestemDodanyDo(MapaStringModul* );
-    virtual int PolaczZkimPotrzebujeNaPoczatek(){};
+    virtual int PolaczZkimPotrzebujeNaPoczatek();
     virtual void UstawIzainstalujPrzyciskW(VBox&){};
     void ZablokujPolaczenia();
     void OdblokujPolaczenia();

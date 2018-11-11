@@ -2,43 +2,20 @@
 #include <random>
 
 
-Renderowanie::Renderowanie()
+ZarzadzanieObiektami::ZarzadzanieObiektami()
 {
-	nazwa = "renderowanie";
-    Komunikat("Renderowanie");
+	nazwa = "zarzadznieObiektami";
+    Komunikat("zarzadznieObiektami");
 }
 
-Renderowanie::~Renderowanie()
+ZarzadzanieObiektami::~ZarzadzanieObiektami()
 {
-    Komunikat("~Renderowanie");
+    Komunikat("~zarzadznieObiektami");
 }
-void Renderowanie::RysujModele()
+int ZarzadzanieObiektami::PolaczZkimPotrzebujeNaPoczatek()
 {
-    (this->*RysujModeleOdpowiednio)();
-}
-void Renderowanie::UstawRysowanieZnazwami()
-{
-    RysujModeleOdpowiednio = &Renderowanie::JednorazowoRysujModeleZnazwami;
-}
-
-void Renderowanie::RysujModeleBezNazw()
-{
-    for(auto iter : mojeModele)iter->Rysuj();
-}
-
-void Renderowanie::JednorazowoRysujModeleZnazwami()
-{
-    glPushName(891);//liczba dowolna, bo jest podmieniana przez funkcję glLoadName
-//    g_print("\n glPushName%d",891);
-    for(auto iter : mojeModele){
-        iter->RysujZnazwami();
-    }
-    RysujModeleOdpowiednio = &Renderowanie::RysujModeleBezNazw;
-}
-
-int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
-{
-//    Zaladuj(std::make_shared<Kostka>());
+    g_print("\nZarzadzanieObiektami::PolaczZkimPotrzebujeNaPoczatek");
+    //    Zaladuj(std::make_shared<Kostka>());
 	Zaladuj(std::make_shared<Kostka>());
     Zaladuj(std::make_shared<Czworoscian>());
     Zaladuj(std::make_shared<Ostroslup>());
@@ -54,30 +31,27 @@ int Renderowanie::PolaczZkimPotrzebujeNaPoczatek()
 	WybierzModelOnumerze(5);
     return 0;
 }
-int Renderowanie::Zaladuj(spModel wskaznikNaModel)
+int ZarzadzanieObiektami::Zaladuj(spModel wskaznikNaModel)
 {
 	//jakieś rzeczy, które mają ustawić cechy i parametry rysowanej rzeczy np. nazwy w openGL, może położenie w przestrzeni
     mojeModele.push_back(wskaznikNaModel);
     wskaznikNaModel->PrzydzielenieNumeru(ileZaladowanychModeli++);
     return ileZaladowanychModeli-1;
 }
-void Renderowanie::WskazModelSwiatla(short numerModelu){
+void ZarzadzanieObiektami::WskazModelSwiatla(short numerModelu){
 	modelSwiatlaMaNumer = numerModelu;
 	mojeModele.at(modelSwiatlaMaNumer)->UzywajPushMatrix(true);
 }
-void Renderowanie::UstawPolozenieSwiatla(float* zeWskaznika)
-{
-    mojeModele.at(modelSwiatlaMaNumer)->UstalM_Pos(zeWskaznika);
-}
-spModel Renderowanie::DajModelSwiatla()
+
+spModel ZarzadzanieObiektami::DajModelSwiatla()
 {
 	return mojeModele.at(modelSwiatlaMaNumer);
 }
-void Renderowanie::WybierzModelOnumerze(short tym){
+void ZarzadzanieObiektami::WybierzModelOnumerze(short tym){
 	if(tym < 0 || tym > ileZaladowanychModeli)return;
     numerPoprzednioWybranego = numerModeluWybranego;
 	numerModeluWybranego = tym;
-    g_print("\nRenderowanie::WybierzModelOnumerze %d",numerModeluWybranego);
+    g_print("\nZarzadzanieObiektami::WybierzModelOnumerze %d",numerModeluWybranego);
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);
@@ -91,11 +65,11 @@ void Renderowanie::WybierzModelOnumerze(short tym){
 //    }
 //	wybranyModel->WlaczJednorazowoWymienneFunkcje(ZESTAW_FUNKCJI);
 }
-void Renderowanie::WybierzModelOnumerze(std::stack<int> & stosNazw){
+void ZarzadzanieObiektami::WybierzModelOnumerze(std::stack<int> & stosNazw){
     WybierzModelOnumerze(static_cast<short int>(stosNazw.top()));
     //rozpoznać grrupę do której należy obiekt
 }
-void Renderowanie::WyodrebnijZgrupy(std::stack<int> & stosNazw){
+void ZarzadzanieObiektami::WyodrebnijZgrupy(std::stack<int> & stosNazw){
 //    g_print("\nWyodrebnijZgrupy na stosie jest %d",stosNazw.top());
     auto nrGrupy = stosNazw.top();
     stosNazw.pop();
@@ -109,61 +83,22 @@ void Renderowanie::WyodrebnijZgrupy(std::stack<int> & stosNazw){
     WybierzModelOnumerze(nrObiektuWydzielanego);
     if(!wybranaGrupa->IleMamModeli())pusteGrupy.push(wybranaGrupa);
 }
-void Renderowanie::UtrwalPrzeksztalceniaWybranegoObiektu()
-{
-	g_print("\nRenderowanie::UtrwalPrzeksztalceniaWybranegoObiektu");
-	glLoadIdentity();
-    
-    mojeModele.at(numerModeluWybranego)->Rysuj();
-}
-void Renderowanie::UtrwalPunktyWybranegoObiektu(){
-    g_print("\nRenderowanie::UtrwalPunktyWybranegoObiektu");
-	glLoadIdentity();
-    auto wybrany = mojeModele.at(numerModeluWybranego);
-    wybrany->WlaczJednorazowoWymienneFunkcje(UTRWAL_PUNKTY_NORMALNE_SRODEK);
-	//rysowanie wszystkich obiektów
-	wybrany->Rysuj();
-    wybrany->mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
-}
-void Renderowanie::UtrwalPrzeksztalceniaModelu(spModel model){
-    g_print("\nRenderowanie::UtrwalPrzeksztalceniaModelu");
-	glLoadIdentity();
-    model->Rysuj();
-}
 
-spModel Renderowanie::DajWybranyModel()
+spModel ZarzadzanieObiektami::DajWybranyModel()
 {
-	return mojeModele.at(numerModeluWybranego);
-}
-void Renderowanie::TransformacjaCalegoWidoku()
-{
-    if(przesunieciePierwotne == nullptr || przesuniecie == nullptr){
-        g_print("\n nie ustawione wskaźniki na przemieszcznia i obroty całego widoku");
-        return;
+	try{
+        return mojeModele.at(numerModeluWybranego);
+    }catch(std::exception& e){
+        g_print("\nBrak Wybranego Modelu ");
+        return std::make_shared<ModelPusty>();
     }
-    glTranslatef(przesunieciePierwotne[0],przesunieciePierwotne[1],przesunieciePierwotne[2]);
-    glMultMatrixf(macierzObrotu);
-	glTranslatef(przesuniecie[0], przesuniecie[1], przesuniecie[2]);
 }
-void Renderowanie::PobierzWskaznikNaWektorPrzesunieciaPierwotnego(float* adres)
-{
-	przesunieciePierwotne = adres;
-}
-void Renderowanie::PobierzWskaznikNaWektorPrzesuniecia(float* adres)
-{
-	przesuniecie = adres;
-}
-
-void Renderowanie::PobierzWskaznikNaMacierzObrotu(float* adres)
-{
-	macierzObrotu = adres;
-}
-void Renderowanie::UtworzTyleKostek(int ile)
+void ZarzadzanieObiektami::UtworzTyleKostek(int ile)
 {
     UtworzTyleModeli<Kostka>(ile);
 }
 template<class T>
-void Renderowanie::UtworzTyleModeli(int ile)
+void ZarzadzanieObiektami::UtworzTyleModeli(int ile)
 {
     int i = 0;
     float losowo[3],losowoKolor[3];
@@ -185,7 +120,7 @@ void Renderowanie::UtworzTyleModeli(int ile)
         Zaladuj(std::make_shared<T>(losowo,losowoKolor));
     }
 }
-spGrupaModeli Renderowanie::PrzydzielPustaGrupe()
+spGrupaModeli ZarzadzanieObiektami::PrzydzielPustaGrupe()
 {
 	if(pusteGrupy.empty())return std::make_shared<GrupaModeli>();
     else{
@@ -194,7 +129,7 @@ spGrupaModeli Renderowanie::PrzydzielPustaGrupe()
         return doZwrotu;
     }
 }
-void Renderowanie::WybranyModelPrzeniesDoGrupy()
+void ZarzadzanieObiektami::WybranyModelPrzeniesDoGrupy()
 {
     auto poprzednioWybrany = mojeModele.at(numerPoprzednioWybranego);
     std::shared_ptr<GrupaModeli> grupa;
@@ -214,7 +149,7 @@ void Renderowanie::WybranyModelPrzeniesDoGrupy()
     auto wybranyModel = mojeModele.at(numerModeluWybranego);
     auto dokadMnieWstawiono = grupa->DodajDoMnie(wybranyModel);
     mojeModele.at(numerModeluWybranego) = std::make_shared<ModelPusty>(dokadMnieWstawiono);
-    g_print("\nRenderowanie::WybranyModelPrzeniesDoGrupy przeniesiono %d",numerModeluWybranego);
+    g_print("\nZarzadzanieObiektami::WybranyModelPrzeniesDoGrupy przeniesiono %d",numerModeluWybranego);
     numerModeluWybranego = numerPoprzednioWybranego;
 }
 

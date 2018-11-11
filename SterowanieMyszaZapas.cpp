@@ -29,15 +29,11 @@ int SterowanieMysza::PodlaczanieSygnalow(Gtk::Widget& okno)
 
 void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
 	ekran = Ptr_WyszukajWModulach<EkranRysujacy>("ekranGL");
-	renderowanie =  Ptr_WyszukajWModulach<Renderowanie1>("renderowanie");
+	renderowanie =  Ptr_WyszukajWModulach<Renderowanie>("renderowanie");
     renderowanie->PobierzWskaznikNaWektorPrzesunieciaPierwotnego(&calegoWidoku.przesunieciePierwotne[0]);
 	renderowanie->PobierzWskaznikNaWektorPrzesuniecia(&calegoWidoku.m_Pos[0]);
 	renderowanie->PobierzWskaznikNaMacierzObrotu(&calegoWidoku.macierzObrotu[0][0]);
-    
-    zarzadzanieObiektami = Ptr_WyszukajWModulach<ZarzadzanieObiektami>("zarzadznieObiektami");
-	
-    wybranegoObiektu = zarzadzanieObiektami->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
-    
+	wybranegoObiektu = renderowanie->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
 }
 bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 {
@@ -65,16 +61,16 @@ bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
     if(event->type == GDK_2BUTTON_PRESS && event->button == 1){
         renderowanie->UstawRysowanieZnazwami();//by zrealizować w funkcji StosNazwObiektuWpunkcie
         auto stosNazw = ekran->StosNazwObiektuWpunkcie(ix,iy);
-        zarzadzanieObiektami->WybierzModelOnumerze(stosNazw);
+        renderowanie->WybierzModelOnumerze(stosNazw);
         if(event->state & GDK_SHIFT_MASK){
-           zarzadzanieObiektami->WybranyModelPrzeniesDoGrupy();
+           renderowanie->WybranyModelPrzeniesDoGrupy();
         }
         if(event->state & GDK_CONTROL_MASK){
-           zarzadzanieObiektami->WyodrebnijZgrupy(stosNazw) ;
+           renderowanie->WyodrebnijZgrupy(stosNazw) ;
         }
         bool czyUaktualnicAdresAktualneSterowanie = (aktualneSterowanie == wybranegoObiektu);
 //        g_print("\nSterowanieMysza::on_button_press_event uaktualnić sterowanie? %d",czyUaktualnicAdresAktualneSterowanie);
-        wybranegoObiektu = zarzadzanieObiektami->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
+        wybranegoObiektu = renderowanie->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
         if(czyUaktualnicAdresAktualneSterowanie) aktualneSterowanie = wybranegoObiektu;
     }
     //podwójne klik prawy

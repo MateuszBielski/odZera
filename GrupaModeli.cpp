@@ -94,9 +94,9 @@ spModel GrupaModeli::WydzielZeMnieKorzystajac(spModel model)
 {
     std::shared_ptr<ModelPusty> pusty = std::static_pointer_cast<ModelPusty>(model);
     itLspModel iterator = (pusty->AdresPelnegoObiektu());
-    spModel przwrocony =  *iterator;
+    spModel przywrocony =  *iterator;
     mojeModele.erase(iterator);
-    return przwrocony;
+    return przywrocony;
 }
 int GrupaModeli::IleMamModeli()
 {

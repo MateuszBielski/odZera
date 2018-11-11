@@ -24,8 +24,11 @@ private:
 
     using spEkranRysujacy = std::shared_ptr<EkranRysujacy>;
     spEkranRysujacy ekran;
-	using spRenderowanie = std::shared_ptr<Renderowanie>;
+//	using spRenderowanie = std::shared_ptr<Renderowanie>;
+    using spRenderowanie = std::shared_ptr<Renderowanie1>;
 	spRenderowanie renderowanie;
+    using spZarzadzanie = std::shared_ptr<ZarzadzanieObiektami>;
+    spZarzadzanie zarzadzanieObiektami;
     
 };
 

@@ -17,6 +17,7 @@ int main(int argc, char **argv)
     auto moduly = std::make_unique<Moduly>();
     moduly->DolaczDo(okno);
     moduly->WszystkieDodaj();//tutaj definiujemy, które klasy będą używane jako moduły
+//    moduly->WszystkieNazwyWyswietl();
     moduly->WszystkiePolaczJakPotrzebuja();
     app.run(*okno);
     

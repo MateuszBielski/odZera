@@ -63,11 +63,12 @@
   </VirtualDirectory>
   <VirtualDirectory Name="Renderowanie">
     <File Name="Renderowanie.h"/>
-    <File Name="Renderowanie.cpp"/>
     <File Name="Model.cpp"/>
     <File Name="Model.h"/>
     <File Name="GrupaModeli.h"/>
     <File Name="GrupaModeli.cpp"/>
+    <File Name="Renderowanie1.cpp"/>
+    <File Name="ZarzadzanieObiektami.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Moduly">
     <File Name="Moduly.cpp"/>

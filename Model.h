@@ -88,6 +88,7 @@ using itLspModel = std::list<spModel>::iterator;
 class ModelPusty : public Model{
 public:
     ModelPusty(itLspModel dokadWstawiono):tuJestemPelny(dokadWstawiono){};
+    ModelPusty(){};
     virtual ~ModelPusty();
     itLspModel AdresPelnegoObiektu();
 private:

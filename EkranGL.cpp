@@ -102,5 +102,5 @@ int EkranGL::PolaczZkimPotrzebujeNaPoczatek()
     return 2;
 }
 void EkranGL::WyszukujeIustawiamWskaznikiDoInnychModulow(){
-    renderowanie = Ptr_WyszukajWModulach<Renderowanie>("renderowanie");
+    renderowanie = Ptr_WyszukajWModulach<Renderowanie1>("renderowanie");
 }

@@ -8,6 +8,10 @@ Modul::~Modul()
 {
 //	Komunikat("Moduł destruktor");
 }
+int Modul::PolaczZkimPotrzebujeNaPoczatek()
+{
+    g_print("\n%s PolaczZkimPotrzebujeNaPoczatek BAZA",nazwa.c_str());
+}
 void Modul::JestemDodanyDo(MapaStringModul* mapa)
 {
 	mapaZmodulami = mapa;

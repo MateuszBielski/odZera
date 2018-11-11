@@ -29,10 +29,14 @@ int Moduly::WszystkieDodaj()
 	//może lista inicjalizacyjna ? --{OknoGL,EkranRysujacy...}
     DodajModul(UtworzModulTypu<OknoGL>());
     DodajModul(UtworzModulTypu<EkranRysujacy>());
+//    DodajModul(UtworzModulTypu<Renderowanie>());//zamiana na Renderowanie1 i ZarzadanieObiektami
+    auto zarzadzanieObiektami = std::make_shared<ZarzadzanieObiektami>();
+    auto renderowanie = std::make_shared<Renderowanie1>(*zarzadzanieObiektami);
+    DodajModul(zarzadzanieObiektami);//std::static_pointer_cast<>()
+    DodajModul(renderowanie);
     DodajModul(UtworzModulTypu<SterowanieMysza>());
-    DodajModul(UtworzModulTypu<Renderowanie>());
     DodajModul(UtworzModulTypu<PrzekierowanieSygnalow>());//faktycznie ustawia przycisk zmień tryb sterowania i obsługuje to przełączenie
-    DodajModul(UtworzModulTypu<PrzesuwanieWidoku>());
+//    DodajModul(UtworzModulTypu<PrzesuwanieWidoku>());
     return ileModulowDodano;//do uzupełnienia
 }
 int Moduly::WszystkiePolaczJakPotrzebuja()
@@ -43,7 +47,9 @@ int Moduly::WszystkiePolaczJakPotrzebuja()
     modulyMoje["przekierowanieSygnalow"]->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
     for(auto& m : modulyMoje){
         ilePolaczen += m.second->PolaczZkimPotrzebujeNaPoczatek();
+//        std::cout << m.first << " ma wartosc: " << m.second->Nazwa() <<  std::endl;
     }
+//    Komunikat("koniec Moduly::WszystkiePolaczJakPotrzebuja");
     return ilePolaczen;
 }
 template <typename T>
@@ -51,6 +57,11 @@ spModul Moduly::UtworzModulTypu()
 {
 	return std::make_shared<T>();
 }
+/*template <typename T>
+spModul Moduly::UtworzModulTypu()
+{
+	return std::make_shared<T>();
+}*/
 int Moduly::WszystkieNazwyWyswietl()
 {
     int ile = modulyMoje.size();
