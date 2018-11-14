@@ -30,6 +30,8 @@
     <VirtualDirectory Name="Ekran">
       <File Name="EkranGL.cpp"/>
       <File Name="EkranRysujacy.cpp"/>
+      <File Name="Renderowanie.h"/>
+      <File Name="Renderowanie1.cpp"/>
     </VirtualDirectory>
     <File Name="FunkcjeIstruktury.cpp"/>
     <File Name="notatki.txt"/>
@@ -61,14 +63,19 @@
     <File Name="WspolrzedneImacierzeSterowania.h"/>
     <File Name="WspolrzedneImacierzeSterowania.cpp"/>
   </VirtualDirectory>
-  <VirtualDirectory Name="Renderowanie">
-    <File Name="Renderowanie.h"/>
+  <VirtualDirectory Name="Modele">
     <File Name="Model.cpp"/>
     <File Name="Model.h"/>
     <File Name="GrupaModeli.h"/>
     <File Name="GrupaModeli.cpp"/>
-    <File Name="Renderowanie1.cpp"/>
     <File Name="ZarzadzanieObiektami.cpp"/>
+    <File Name="ZarzadzanieObiektami.h"/>
+    <File Name="Kostka.h"/>
+    <File Name="Kostka.cpp"/>
+    <File Name="Czworoscian.h"/>
+    <File Name="Czworoscian.cpp"/>
+    <File Name="ModelPusty.h"/>
+    <File Name="ModelPusty.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Moduly">
     <File Name="Moduly.cpp"/>
@@ -166,4 +173,14 @@
       </Completion>
     </Configuration>
   </Settings>
+  <VirtualDirectory Name="GeometriaPomocnicza">
+    <File Name="LinieZnormalnych.h"/>
+    <File Name="LinieZnormalnych.cpp"/>
+    <File Name="WidokCechModelu.h"/>
+    <File Name="WidokCechModelu.cpp"/>
+    <File Name="StareRysowanie.h"/>
+    <File Name="StareRysowanie.cpp"/>
+    <File Name="ModyfikacjaPunktow.h"/>
+    <File Name="ModyfikacjaPunktow.cpp"/>
+  </VirtualDirectory>
 </CodeLite_Project>

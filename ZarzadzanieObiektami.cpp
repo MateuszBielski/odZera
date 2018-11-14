@@ -1,5 +1,8 @@
-#include "Renderowanie.h"
 #include <random>
+#include "ZarzadzanieObiektami.h"
+#include "Kostka.h"
+#include "StareRysowanie.h"
+
 
 
 ZarzadzanieObiektami::ZarzadzanieObiektami()

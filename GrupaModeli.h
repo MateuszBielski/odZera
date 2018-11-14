@@ -1,6 +1,6 @@
 #ifndef GRUPAMODELI_H
 #define GRUPAMODELI_H
-#include <Model.h>
+#include <ModelPusty.h>
 
 class GrupaModeli : public Model
 {
