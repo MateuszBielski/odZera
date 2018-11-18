@@ -2,6 +2,7 @@
 #define MODEL_H
 #include <gtkglmm.h>
 #include <WspolrzedneImacierzeSterowania.h>
+#include <FunkcjeIstruktury.h>
 #define UTRWAL_MPOS_Z_AKTUALNEJ_MACIERZY 1
 #define ZESTAW_FUNKCJI 2
 #define UTRWAL_PUNKTY_NORMALNE_SRODEK 4
@@ -86,5 +87,5 @@ using spModel = std::shared_ptr<Model>;
 using itLspModel = std::list<spModel>::iterator;
 
 
-
+#include "ModelTemplate.cpp"
 #endif

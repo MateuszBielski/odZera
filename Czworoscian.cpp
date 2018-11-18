@@ -1,5 +1,5 @@
 #include "Czworoscian.h"
-#include <FunkcjeIstruktury.h>
+//#include <FunkcjeIstruktury.h>
 
 Czworoscian::Czworoscian(float x, float y, float z):nr{0,2,1,
                                                         0,1,3,

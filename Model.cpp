@@ -1,5 +1,5 @@
 #include <Model.h>
-#include <FunkcjeIstruktury.h>
+//#include <FunkcjeIstruktury.h>
 
 
 Model::Model():kolor{0.6,0.8,0.7}
@@ -29,7 +29,7 @@ void Model::UdostepnijBazieIndeksyWierzcholkow(unsigned short * nr, unsigned sho
 	indeksyNaroznikow = nr;
     ileNaroznikowSciany = ile;
 }
-template<int flagi>
+/*template<int flagi>
 void Model::RysujTemplate()
 {
 	if constexpr(flagi & Z_NAZWAMI_MODELI){
@@ -45,7 +45,7 @@ void Model::RysujTemplate()
     }
 	RysujGeometrie();
 	if(czyPushMatrix)glPopMatrix();
-}
+}*/
 void Model::Rysuj(){
 	RysujTemplate<0>();
 }
@@ -59,7 +59,7 @@ void Model::TransformacjePrzedRysowaniem(){
 	glMultMatrixf(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0]);
 	glTranslatef(-srodekModelu[0],-srodekModelu[1],-srodekModelu[2]);
 }
-template<int flagi,int rodzajPrymitywu>
+/*template<int flagi,int rodzajPrymitywu>
 void Model::RysujGeometrieTemplate()
 {
 	glBegin(rodzajPrymitywu);
@@ -69,7 +69,7 @@ void Model::RysujGeometrieTemplate()
 		for(int w = 0 ; w < ileNaroznikowSciany ;w++)glVertex3fv(&vertexy[indeksyNaroznikow[s*ileNaroznikowSciany + w]*3]);
 	}
     glEnd();
-}
+}*/
 void Model::UstalM_Pos(float* zTablicy)
 {
 	for(short i= 0 ; i < 3 ; i++)mojeWspolrzedneImacierzeSterowania->m_Pos[i] = zTablicy[i];

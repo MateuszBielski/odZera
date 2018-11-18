@@ -7,7 +7,7 @@
 #include <SterowanieMysza.h>
 #include <Renderowanie.h>
 #include <PrzekierowanieSygnalow.h>
-#include <PrzesuwanieWidoku.h>
+//#include <PrzesuwanieWidoku.h>
 using spModul = std::shared_ptr<Modul>;
 using MapaStringModul = std::map<std::string,spModul>;
 

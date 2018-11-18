@@ -29,7 +29,7 @@ bool EkranGL::KonfiguracjaGL()
 }
 void EkranGL::Inicjuj()
 {
-	this->set_size_request(600,600);
+	this->set_size_request(800,600);
 	if(!KonfiguracjaGL()) return;
     set_gl_capability(glconfig);
     add_events(Gdk::BUTTON1_MOTION_MASK|Gdk::BUTTON_PRESS_MASK); 
