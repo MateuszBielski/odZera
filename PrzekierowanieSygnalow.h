@@ -9,11 +9,9 @@ public:
 	~PrzekierowanieSygnalow();
 	virtual int PolaczZkimPotrzebujeNaPoczatek();
     virtual void UstawIzainstalujPrzyciskW(VBox&);
-    void PrzelaczSterowanie();
-    void UstawSterowanie(short);
-private:
-    spConnection connZmianaTrybu;
-    bool czyWybranyObiekt;
+    
+
+    
 
 };
 

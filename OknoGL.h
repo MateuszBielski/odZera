@@ -19,7 +19,7 @@ public:
 	virtual bool on_my_delete_event(GdkEventAny* any_event);
 	void Pokaz();
 	void Ukryj();
-	virtual int PolaczZkimPotrzebujeNaPoczatek(){};
+	virtual int PolaczZkimPotrzebujeNaPoczatek();
     VBox& refVBox(){return vBox;};
 private:
 	using pfVoid = void (OknoGL::*)();

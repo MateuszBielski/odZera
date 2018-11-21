@@ -13,6 +13,10 @@ OknoGL::~OknoGL()
 {
     Komunikat("~OknoGL");
 }
+int OknoGL::PolaczZkimPotrzebujeNaPoczatek()
+{
+	UstawIzainstalujPrzyciskW(oknoPodstawowe->refVBox());
+}
 
 void OknoGL::Inicjuj()
 {

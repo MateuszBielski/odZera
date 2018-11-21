@@ -63,7 +63,7 @@ void OknoProba2::PokazLiczenie()
 void OknoProba2::Wypisz_AxB_nadPrzyciskami(int h, int w)
 {
 	Glib::ustring wymiary;
-	char c[10];
+	char c[24];
 	
 	/*
 	itoa(v,c,10);

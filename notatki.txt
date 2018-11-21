@@ -60,3 +60,11 @@ SterowanieMysza.h renederowanie zmiana typu na Renderowanie1
 EkranGL.* jak wyżej
 SterowanieMysza.cpp - zostawiono zapas.
 Dla bezpieczeństwa w funkcji wyszukującej moduły zrobić wyjątek, lub ostrzeżenie, że nie znaleziono modułu.
+
+14.11.2018
+model reprezentujący światło jest podatny na błędy przy transformacjach
+21.11.2018
+Moduly::WszystkiePolaczJakPotrzebuja: usunięto 
+modulyMoje["oknoGL"]->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
+modulyMoje["przekierowanieSygnalow"]->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
+przenosząc te polecenia do wykonania wewnątrz modułów, bo każdy ma dostęp do okna głównego.

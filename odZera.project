@@ -58,10 +58,10 @@
     <File Name="trackball.h"/>
     <File Name="PrzekierowanieSygnalow.h"/>
     <File Name="PrzekierowanieSygnalow.cpp"/>
-    <File Name="PrzesuwanieWidoku.h"/>
-    <File Name="PrzesuwanieWidoku.cpp"/>
     <File Name="WspolrzedneImacierzeSterowania.h"/>
     <File Name="WspolrzedneImacierzeSterowania.cpp"/>
+    <File Name="ZmienTrybSterowania.cpp"/>
+    <File Name="ZmienTrybSterowania.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Modele">
     <File Name="Model.cpp"/>
@@ -112,7 +112,6 @@
       <Linker Options="$(shell pkg-config --libs gtkglextmm-1.2);-lpthread" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
-      <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
@@ -152,7 +151,6 @@
       <Linker Options="" Required="yes"/>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
-      <BuildSystem Name="Default"/>
       <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
