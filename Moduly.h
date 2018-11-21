@@ -7,6 +7,7 @@
 #include <SterowanieMysza.h>
 #include <Renderowanie.h>
 #include <ZmienTrybSterowania.h>
+#include <Sterowanie/SterowanieModyfikujPunkty.h>
 
 using spModul = std::shared_ptr<Modul>;
 using MapaStringModul = std::map<std::string,spModul>;

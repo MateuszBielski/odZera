@@ -14,6 +14,10 @@ void Model::RysujTemplate()
         glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
         WyswietlWartosciMacierzy4x4(macierzModelWidok);
     }
+    if constexpr(flagi & Z_WIDOCZNYMI_PUNKTAMI){
+        RysujPunktyZnazwami();
+        g_print("\nZ_WIDOCZNYMI_PUNKTAMI");
+    }
 	RysujGeometrie();
 	if(czyPushMatrix)glPopMatrix();
 }

@@ -8,6 +8,7 @@
 #define UTRWAL_PUNKTY_NORMALNE_SRODEK 4
 #define UTRWAL_SRODEK 8
 #define Z_NAZWAMI_MODELI 1
+#define Z_WIDOCZNYMI_PUNKTAMI 2
 
 
 
@@ -18,7 +19,9 @@ public :
     
 	virtual void Rysuj();
     virtual void RysujZnazwami();
+    virtual void RysujZWidocznymiPunktami();
 	virtual void RysujGeometrie(){};
+    virtual void RysujPunktyZnazwami();
     virtual void TransformacjePrzedRysowaniem();
     void UstalM_Pos(float*);//użyte dla światła tylko
     virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika);

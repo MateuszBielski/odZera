@@ -62,6 +62,7 @@
     <File Name="WspolrzedneImacierzeSterowania.cpp"/>
     <File Name="ZmienTrybSterowania.cpp"/>
     <File Name="ZmienTrybSterowania.h"/>
+    <File Name="Sterowanie/SterowanieModyfikujPunkty.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="Modele">
     <File Name="Model.cpp"/>

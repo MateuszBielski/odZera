@@ -35,6 +35,7 @@ int Moduly::WszystkieDodaj()
     DodajModul(renderowanie);
     DodajModul(UtworzModulTypu<SterowanieMysza>());
     DodajModul(UtworzModulTypu<ZmienTrybSterowania>());
+    DodajModul(UtworzModulTypu<SterowanieModyfikujPunkty>());
     return ileModulowDodano;//do uzupełnienia
 }
 int Moduly::WszystkiePolaczJakPotrzebuja()
@@ -44,7 +45,7 @@ int Moduly::WszystkiePolaczJakPotrzebuja()
         ilePolaczen += m.second->PolaczZkimPotrzebujeNaPoczatek();
 //        std::cout << m.first << " ma wartosc: " << m.second->Nazwa() <<  std::endl;
     }
-    Komunikat("koniec Moduly::WszystkiePolaczJakPotrzebuja");
+//    Komunikat("koniec Moduly::WszystkiePolaczJakPotrzebuja");
     return ilePolaczen;
 }
 template <typename T>

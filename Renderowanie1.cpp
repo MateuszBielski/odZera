@@ -22,12 +22,19 @@ void Renderowanie1::UstawRysowanieZnazwami()
 {
     RysujModeleOdpowiednio = &Renderowanie1::JednorazowoRysujModeleZnazwami;
 }
+void Renderowanie1::UstawRysowanieZwidocznymiPunktami(bool tak)
+{
+    RysujModeleOdpowiednio = tak ? (&Renderowanie1::RysujZwidocznymiPunktami) : (&Renderowanie1::RysujModeleBezNazw);
+}
 
 void Renderowanie1::RysujModeleBezNazw()
 {
     for(auto iter : mojeModele)iter->Rysuj();
 }
-
+void Renderowanie1::RysujZwidocznymiPunktami()
+{
+    for(auto iter : mojeModele)iter->RysujZWidocznymiPunktami();
+}
 void Renderowanie1::JednorazowoRysujModeleZnazwami()
 {
     glPushName(891);//liczba dowolna, bo jest podmieniana przez funkcję glLoadName

@@ -67,4 +67,4 @@ model reprezentujący światło jest podatny na błędy przy transformacjach
 Moduly::WszystkiePolaczJakPotrzebuja: usunięto 
 modulyMoje["oknoGL"]->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
 modulyMoje["przekierowanieSygnalow"]->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
-przenosząc te polecenia do wykonania wewnątrz modułów, bo każdy ma dostęp do okna głównego.
+przenosząc te polecenia do wykonania wewnątrz modułów, bo każdy ma dostęp do okna głównego. To działa więc nie cofamy

@@ -29,23 +29,7 @@ void Model::UdostepnijBazieIndeksyWierzcholkow(unsigned short * nr, unsigned sho
 	indeksyNaroznikow = nr;
     ileNaroznikowSciany = ile;
 }
-/*template<int flagi>
-void Model::RysujTemplate()
-{
-	if constexpr(flagi & Z_NAZWAMI_MODELI){
-		glLoadName(jestemZaladowanyPodNumerem);
-	}
-    if(czyPushMatrix)glPushMatrix();
-    TransformacjePrzedRysowaniem();
-    (this->*FunkcjaWymienna)();
-    if(pokazujWartosci){
-        float macierzModelWidok[16];
-        glGetFloatv(GL_MODELVIEW_MATRIX,macierzModelWidok);
-        WyswietlWartosciMacierzy4x4(macierzModelWidok);
-    }
-	RysujGeometrie();
-	if(czyPushMatrix)glPopMatrix();
-}*/
+
 void Model::Rysuj(){
 	RysujTemplate<0>();
 }
@@ -53,23 +37,27 @@ void Model::RysujZnazwami()
 {
 	RysujTemplate<Z_NAZWAMI_MODELI>();
 }
+void Model::RysujZWidocznymiPunktami()
+{
+    RysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
+}
+void Model::RysujPunktyZnazwami()
+{
+    glColor3f(1.0,0.0,0.0);
+    glBegin(GL_POINTS);
+	for(int ve = 0 ; ve < ileVertexow ;ve++){
+//		glNormal3fv(&normalne[s*3]);
+		glVertex3fv(&vertexy[ve*3]);
+	}
+    glEnd();
+}
 void Model::TransformacjePrzedRysowaniem(){
     glTranslatef(mojeWspolrzedneImacierzeSterowania->m_Pos[0],mojeWspolrzedneImacierzeSterowania->m_Pos[1],mojeWspolrzedneImacierzeSterowania->m_Pos[2]);
     glTranslatef(srodekModelu[0],srodekModelu[1],srodekModelu[2]);
 	glMultMatrixf(&mojeWspolrzedneImacierzeSterowania->macierzObrotu[0][0]);
 	glTranslatef(-srodekModelu[0],-srodekModelu[1],-srodekModelu[2]);
 }
-/*template<int flagi,int rodzajPrymitywu>
-void Model::RysujGeometrieTemplate()
-{
-	glBegin(rodzajPrymitywu);
-    glColor3fv(kolor);
-	for(int s = 0 ; s < ileNormalnych ;s++){
-		glNormal3fv(&normalne[s*3]);
-		for(int w = 0 ; w < ileNaroznikowSciany ;w++)glVertex3fv(&vertexy[indeksyNaroznikow[s*ileNaroznikowSciany + w]*3]);
-	}
-    glEnd();
-}*/
+
 void Model::UstalM_Pos(float* zTablicy)
 {
 	for(short i= 0 ; i < 3 ; i++)mojeWspolrzedneImacierzeSterowania->m_Pos[i] = zTablicy[i];
