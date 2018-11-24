@@ -24,6 +24,7 @@ void EkranRysujacy::UstawienieSceny()
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glEnable(GL_BLEND);
+    glEnable(GL_POINT_SMOOTH);
     
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();

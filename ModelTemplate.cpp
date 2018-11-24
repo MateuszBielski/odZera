@@ -16,7 +16,7 @@ void Model::RysujTemplate()
     }
     if constexpr(flagi & Z_WIDOCZNYMI_PUNKTAMI){
         RysujPunktyZnazwami();
-        g_print("\nZ_WIDOCZNYMI_PUNKTAMI");
+//        g_print("\nZ_WIDOCZNYMI_PUNKTAMI");
     }
 	RysujGeometrie();
 	if(czyPushMatrix)glPopMatrix();

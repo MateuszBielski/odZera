@@ -35,8 +35,8 @@ void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
 	renderowanie->PobierzWskaznikNaMacierzObrotu(&calegoWidoku.macierzObrotu[0][0]);
     
     zarzadzanieObiektami = Ptr_WyszukajWModulach<ZarzadzanieObiektami>("zarzadznieObiektami");
-	
-    wybranegoObiektu = zarzadzanieObiektami->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
+	//poniższe może powodować przypisanie adresu współrzędnchImacierzy modelu, który nie isnieje
+//    wybranegoObiektu = zarzadzanieObiektami->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
     
 }
 bool SterowanieMysza::on_button_press_event(GdkEventButton* event)

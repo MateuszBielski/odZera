@@ -4,6 +4,7 @@ Sterowanie::Sterowanie()
 {
 	nazwa = "sterowanie";
 	Steruj(CALYM_WIDOKIEM);
+    wybranegoObiektu = &calegoWidoku;
 }
 
 Sterowanie::~Sterowanie()

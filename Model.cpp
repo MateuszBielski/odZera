@@ -44,6 +44,7 @@ void Model::RysujZWidocznymiPunktami()
 void Model::RysujPunktyZnazwami()
 {
     glColor3f(1.0,0.0,0.0);
+    glPointSize(7.0);
     glBegin(GL_POINTS);
 	for(int ve = 0 ; ve < ileVertexow ;ve++){
 //		glNormal3fv(&normalne[s*3]);

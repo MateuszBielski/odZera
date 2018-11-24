@@ -68,3 +68,11 @@ Moduly::WszystkiePolaczJakPotrzebuja: usunięto
 modulyMoje["oknoGL"]->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
 modulyMoje["przekierowanieSygnalow"]->UstawIzainstalujPrzyciskW(oknoGlowne->refVBox());
 przenosząc te polecenia do wykonania wewnątrz modułów, bo każdy ma dostęp do okna głównego. To działa więc nie cofamy
+
+24.11.2018
+wciśnięcie modyfikuj punkty:
+wyswietla wszystkie narożniki np. na czerwono - to juz jest.
+kliknięcie na punkt i przesuwanie (np środkowym) powinno przesuwać wybrany punkt
+Sterowanie widokiem i wybranym jest nadal zachowane.
+Wykonanie: do aktualnego sterowania przypisać wskaźnik dodany na macierzeIwskaźniki punktu
+a wcześniej odnaleźć który punkt wybrano.

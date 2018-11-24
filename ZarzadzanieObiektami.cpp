@@ -92,8 +92,9 @@ spModel ZarzadzanieObiektami::DajWybranyModel()
 	try{
         return mojeModele.at(numerModeluWybranego);
     }catch(std::exception& e){
+        if(!mojeModele.size())g_print("\nnie ma załadowanych modeli");
         g_print("\nBrak Wybranego Modelu ");
-        return std::make_shared<ModelPusty>();
+        return nullptr;
     }
 }
 void ZarzadzanieObiektami::UtworzTyleKostek(int ile)

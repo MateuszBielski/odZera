@@ -24,7 +24,9 @@ void Renderowanie1::UstawRysowanieZnazwami()
 }
 void Renderowanie1::UstawRysowanieZwidocznymiPunktami(bool tak)
 {
+    g_print("\nUstawRysowanieZwidocznymiPunktami %d",tak);
     RysujModeleOdpowiednio = tak ? (&Renderowanie1::RysujZwidocznymiPunktami) : (&Renderowanie1::RysujModeleBezNazw);
+    RysujModele();
 }
 
 void Renderowanie1::RysujModeleBezNazw()
