@@ -16,8 +16,6 @@ int SterowanieModyfikujPunkty::PolaczZkimPotrzebujeNaPoczatek()
 	UstawIzainstalujPrzyciskW(oknoPodstawowe->refVBox());
     connModyfikujPunkty = UtrwalPolaczenie(bObslugaTegoModulu.signal_clicked().connect(sigc::mem_fun(*this,&SterowanieModyfikujPunkty::PrzelaczSterowanie)));
      DodajDoListyWskaznikPolaczenia(connModyfikujPunkty);
-     
-	 
 }
 void SterowanieModyfikujPunkty::UstawIzainstalujPrzyciskW(VBox& vbox)
 {

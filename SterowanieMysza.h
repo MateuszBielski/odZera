@@ -13,14 +13,18 @@ public:
 	~SterowanieMysza();
     virtual int PodlaczanieSygnalow(Gtk::Widget& okno);
     virtual void WyszukujeIustawiamWskaznikiDoInnychModulow() override;
+    void UstawZestawObslugi(int);
     
     
 private:
     bool on_button_press_event(GdkEventButton* event);
-    bool on_button_press_eventNowe(GdkEventButton* event);
     bool on_motion_notify_event(GdkEventMotion* event);
-    bool on_motion_notify_eventNowe(GdkEventMotion* event);    
     bool on_my_scroll_event(GdkEventScroll* scroll_event);
+    void (SterowanieMysza::*NaPrzyciskMyszaZmienne)(GdkEventButton* event);
+    void (SterowanieMysza::*NaRuchMyszaZmienne)(GdkEventMotion* event);
+    void NaPrzyciskMysza1(GdkEventButton* event);
+    void NaRuchMysza1(GdkEventMotion* event);
+//    using Ptr_F_void_void = void(Renderowanie1::*)();
     void PobierzWspolrzedne_ix_iy(gdouble, gdouble);
     void PobierzWspolrzedneWruchu_ix_iy_x_y(gdouble, gdouble);
     void OdczytajWymiaryOkna();
