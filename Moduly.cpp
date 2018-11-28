@@ -33,9 +33,12 @@ int Moduly::WszystkieDodaj()
     auto renderowanie = std::make_shared<Renderowanie1>(*zarzadzanieObiektami);
     DodajModul(zarzadzanieObiektami);
     DodajModul(renderowanie);
-    DodajModul(UtworzModulTypu<SterowanieMysza>());
+    DodajModul(UtworzModulTypu<SterowanieMyszaVar_1>());//SterowanieMysza
     DodajModul(UtworzModulTypu<ZmienTrybSterowania>());
-    DodajModul(UtworzModulTypu<SterowanieModyfikujPunkty>());
+    auto sterowanieMysza_2 = std::make_shared<SterowanieMyszaVar_1>();
+    auto sterModPunkty = std::make_shared<SterowanieModyfikujPunkty>(sterowanieMysza_2);
+    DodajModul(sterowanieMysza_2);
+    
     return ileModulowDodano;//do uzupełnienia
 }
 int Moduly::WszystkiePolaczJakPotrzebuja()

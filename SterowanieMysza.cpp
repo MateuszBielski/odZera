@@ -7,7 +7,7 @@ SterowanieMysza::SterowanieMysza()
 {
 	Komunikat("SterowanieMysza");
 	calegoWidoku.przesunieciePierwotne[2] = -15.0;
-    UstawZestawObslugi(1);
+//    UstawZestawObslugi(1);
 }
 
 SterowanieMysza::~SterowanieMysza()
@@ -40,7 +40,7 @@ void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
 //    wybranegoObiektu = zarzadzanieObiektami->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
     
 }
-void SterowanieMysza::UstawZestawObslugi(int ktory)
+/*void SterowanieMysza::UstawZestawObslugi(int ktory)
 {
     switch(ktory){
         case 1:
@@ -48,46 +48,13 @@ void SterowanieMysza::UstawZestawObslugi(int ktory)
         NaRuchMyszaZmienne = &SterowanieMysza::NaRuchMysza1;
         break;
     }
-}
-void SterowanieMysza::NaPrzyciskMysza1(GdkEventButton* event)
-{
-   if (event->button == 2){
-       float temp;
-       glReadPixels( ix, iy, 1, 1,GL_DEPTH_COMPONENT, GL_FLOAT, &temp );
-       if(temp < 1.0)aktualneSterowanie->wspolrzednaZpodKursorem = temp;
-        TransformujPikselDoPrzestrzeniSceny(ix,iy,aktualneSterowanie->wspolrzednaZpodKursorem,aktualneSterowanie->poprzedniaPozycjaKursoraMyszy3D);
-    }
-    //prawy przycisk
-    if (event->button == 3)
-    {
-        SwiatloPozycjaOdczytaj();
-    }
-    //podwójne kliknięcie lewy
-    if(event->button == 1 && event->type == GDK_2BUTTON_PRESS)  
-    {
-        auto klawiszFunkcyjny = event->state;
-        WybieranieModelu(klawiszFunkcyjny);
-    }
-    //podwójne klik prawy
-    if(event->button == 2 && event->type == GDK_2BUTTON_PRESS)  
-    {       
-    }
-}
-void SterowanieMysza::NaRuchMysza1(GdkEventMotion* event){
-    if (event->state & GDK_BUTTON1_MASK) {
-        ObracajAktualneSterowanie();
-    }
-    if (event->state & GDK_BUTTON2_MASK){
-        PrzesuwajAktualnieSterowane();
-    }
-    if (event->state & GDK_BUTTON3_MASK){
-        SwiatloPozycjaZmien();
-    }
-}
+}*/
+
+
 bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 {
     PobierzWspolrzedne_ix_iy(event->x,event->y);
-    (this->*NaPrzyciskMyszaZmienne)(event);
+    V_NaPrzyciskMyszaZmienne(event);
     OdswiezWidok();
     return true;
 }
@@ -99,7 +66,7 @@ bool SterowanieMysza::on_motion_notify_event(GdkEventMotion* event)
     aktualneSterowanie->m_DX = x - aktualneSterowanie->m_BeginX;
     aktualneSterowanie->m_DY = y - aktualneSterowanie->m_BeginY;
     if(aktualneSterowanie->m_DX == 0 && aktualneSterowanie->m_DY == 0)return true;
-    (this->*NaRuchMyszaZmienne)(event);
+    V_NaRuchMyszaZmienne(event);
     aktualneSterowanie->m_BeginX = x;
     aktualneSterowanie->m_BeginY = y;
     aktualneSterowanie->BiezaceUstawJakoPoprzednie_PozycjaKursoraMyszy3D();
@@ -211,4 +178,40 @@ void SterowanieMysza::PrzesuwajAktualnieSterowane(){
 void SterowanieMysza::OdswiezWidok()
 {
     oknoSterowane->get_window()->invalidate_rect(oknoSterowane->get_allocation(), false);
+}
+
+void SterowanieMyszaVar_1::V_NaPrzyciskMyszaZmienne(GdkEventButton* event){
+     if (event->button == 2){
+       float temp;
+       glReadPixels( ix, iy, 1, 1,GL_DEPTH_COMPONENT, GL_FLOAT, &temp );
+       if(temp < 1.0)aktualneSterowanie->wspolrzednaZpodKursorem = temp;
+        TransformujPikselDoPrzestrzeniSceny(ix,iy,aktualneSterowanie->wspolrzednaZpodKursorem,aktualneSterowanie->poprzedniaPozycjaKursoraMyszy3D);
+    }
+    //prawy przycisk
+    if (event->button == 3)
+    {
+        SwiatloPozycjaOdczytaj();
+    }
+    //podwójne kliknięcie lewy
+    if(event->button == 1 && event->type == GDK_2BUTTON_PRESS)  
+    {
+        auto klawiszFunkcyjny = event->state;
+        WybieranieModelu(klawiszFunkcyjny);
+    }
+    //podwójne klik prawy
+    if(event->button == 2 && event->type == GDK_2BUTTON_PRESS)  
+    {       
+    }
+}
+
+void SterowanieMyszaVar_1::V_NaRuchMyszaZmienne(GdkEventMotion* event){
+     if (event->state & GDK_BUTTON1_MASK) {
+        ObracajAktualneSterowanie();
+    }
+    if (event->state & GDK_BUTTON2_MASK){
+        PrzesuwajAktualnieSterowane();
+    }
+    if (event->state & GDK_BUTTON3_MASK){
+        SwiatloPozycjaZmien();
+    }
 }
