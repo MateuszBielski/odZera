@@ -28,27 +28,6 @@ int SterowanieMysza::PodlaczanieSygnalow(Gtk::Widget& okno)
    return 3;
 }
 
-void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
-	ekran = Ptr_WyszukajWModulach<EkranRysujacy>("ekranGL");
-	renderowanie =  Ptr_WyszukajWModulach<Renderowanie1>("renderowanie");
-    renderowanie->PobierzWskaznikNaWektorPrzesunieciaPierwotnego(&calegoWidoku.przesunieciePierwotne[0]);
-	renderowanie->PobierzWskaznikNaWektorPrzesuniecia(&calegoWidoku.m_Pos[0]);
-	renderowanie->PobierzWskaznikNaMacierzObrotu(&calegoWidoku.macierzObrotu[0][0]);
-    
-    zarzadzanieObiektami = Ptr_WyszukajWModulach<ZarzadzanieObiektami>("zarzadznieObiektami");
-	//poniższe może powodować przypisanie adresu współrzędnchImacierzy modelu, który nie isnieje
-//    wybranegoObiektu = zarzadzanieObiektami->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
-    
-}
-/*void SterowanieMysza::UstawZestawObslugi(int ktory)
-{
-    switch(ktory){
-        case 1:
-        NaPrzyciskMyszaZmienne = &SterowanieMysza::NaPrzyciskMysza1;
-        NaRuchMyszaZmienne = &SterowanieMysza::NaRuchMysza1;
-        break;
-    }
-}*/
 
 
 bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
@@ -203,7 +182,18 @@ void SterowanieMyszaVar_1::V_NaPrzyciskMyszaZmienne(GdkEventButton* event){
     {       
     }
 }
-
+void SterowanieMyszaVar_1::WyszukujeIustawiamWskaznikiDoInnychModulow(){
+	ekran = Ptr_WyszukajWModulach<EkranRysujacy>("ekranGL");
+	renderowanie =  Ptr_WyszukajWModulach<Renderowanie1>("renderowanie");
+    renderowanie->PobierzWskaznikNaWektorPrzesunieciaPierwotnego(&calegoWidoku.przesunieciePierwotne[0]);
+	renderowanie->PobierzWskaznikNaWektorPrzesuniecia(&calegoWidoku.m_Pos[0]);
+	renderowanie->PobierzWskaznikNaMacierzObrotu(&calegoWidoku.macierzObrotu[0][0]);
+    
+    zarzadzanieObiektami = Ptr_WyszukajWModulach<ZarzadzanieObiektami>("zarzadznieObiektami");
+	//poniższe może powodować przypisanie adresu współrzędnchImacierzy modelu, który nie isnieje
+//    wybranegoObiektu = zarzadzanieObiektami->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
+    
+}
 void SterowanieMyszaVar_1::V_NaRuchMyszaZmienne(GdkEventMotion* event){
      if (event->state & GDK_BUTTON1_MASK) {
         ObracajAktualneSterowanie();
@@ -214,4 +204,17 @@ void SterowanieMyszaVar_1::V_NaRuchMyszaZmienne(GdkEventMotion* event){
     if (event->state & GDK_BUTTON3_MASK){
         SwiatloPozycjaZmien();
     }
+}
+SterowanieMyszaVar_1::SterowanieMyszaVar_1()
+{
+	//tutaj nie zmieniamy nazwy, gdyż posługujemy się oryginalną nazwą "sterowanie", która umożliwa odszukanie tego modułu z innych, wcześnijszych miejsc
+}
+void SterowanieMyszaVar_2::WyszukujeIustawiamWskaznikiDoInnychModulow()
+{
+    
+}
+SterowanieMyszaVar_2::SterowanieMyszaVar_2()
+{
+	nazwa = "sterowanieVar_2";
+	zablokujPolaczeniaPrzyStarcie = true;
 }

@@ -13,7 +13,7 @@ class Sterowanie : public Modul
 {
 public:
 	Sterowanie();
-	~Sterowanie();
+	virtual ~Sterowanie();
 	virtual int PodlaczanieSygnalow(Gtk::Widget& okno) = 0;
     virtual int PolaczZkimPotrzebujeNaPoczatek();
 	void Steruj(int czym);

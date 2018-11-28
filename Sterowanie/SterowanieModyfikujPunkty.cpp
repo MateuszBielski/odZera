@@ -38,9 +38,9 @@ void SterowanieModyfikujPunkty::PrzelaczSterowanie()
     //może konstruktor zrobić inicjowany nowym sterowaniem Var2, i stosować referencję.
 }
 void  SterowanieModyfikujPunkty::WlaczMojeSterowanie(){
-    dotychczasoweSterowanie = Ptr_WyszukajWModulach<SterowanieMysza>("SterowanieMysza");
+    dotychczasoweSterowanie = Ptr_WyszukajWModulach<SterowanieMysza>("sterowanie");
     dotychczasoweSterowanie->ZablokujPolaczenia();
-    mojeSterowanie.KopiujZinnegoModulu(*dotychczasoweSterowanie);
+    mojeSterowanie.KopiujPotrzebneWartosci(*dotychczasoweSterowanie);
     mojeSterowanie.OdblokujPolaczenia();
 }
 void  SterowanieModyfikujPunkty::PrzywrocPoprzednieSterowanie(){
