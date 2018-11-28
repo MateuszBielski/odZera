@@ -40,16 +40,6 @@ void SterowanieMysza::WyszukujeIustawiamWskaznikiDoInnychModulow(){
 //    wybranegoObiektu = zarzadzanieObiektami->DajWybranyModel()->mojeWspolrzedneImacierzeSterowania.get();
     
 }
-/*void SterowanieMysza::UstawZestawObslugi(int ktory)
-{
-    switch(ktory){
-        case 1:
-        NaPrzyciskMyszaZmienne = &SterowanieMysza::NaPrzyciskMysza1;
-        NaRuchMyszaZmienne = &SterowanieMysza::NaRuchMysza1;
-        break;
-    }
-}*/
-
 
 bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 {
@@ -214,4 +204,13 @@ void SterowanieMyszaVar_1::V_NaRuchMyszaZmienne(GdkEventMotion* event){
     if (event->state & GDK_BUTTON3_MASK){
         SwiatloPozycjaZmien();
     }
+}
+SterowanieMyszaVar_1::SterowanieMyszaVar_1()
+{
+	//tutaj nie zmieniamy nazwy, gdyż posługujemy się oryginalną nazwą "sterowanie", która umożliwa odszukanie tego modułu z innych, wcześnijszych miejsc
+}
+SterowanieMyszaVar_2::SterowanieMyszaVar_2()
+{
+	nazwa = "sterowanieVar_2";
+	zablokujPolaczeniaPrzyStarcie = true;
 }

@@ -10,16 +10,16 @@ class SterowanieMysza : public Sterowanie
 {
 public:
 	SterowanieMysza();
-	~SterowanieMysza();
+	virtual ~SterowanieMysza();
     virtual int PodlaczanieSygnalow(Gtk::Widget& okno);
     virtual void WyszukujeIustawiamWskaznikiDoInnychModulow() override;
+    void KopiujPotrzebneWartosci(SterowanieMysza &){};
     
 protected:
     bool on_button_press_event(GdkEventButton* event);
     bool on_motion_notify_event(GdkEventMotion* event);
     bool on_my_scroll_event(GdkEventScroll* scroll_event);
     
-    void KopiujPotrzebneWartosci(SterowanieMysza &){};
     virtual void V_NaPrzyciskMyszaZmienne(GdkEventButton* event) = 0;
     virtual void V_NaRuchMyszaZmienne(GdkEventMotion* event) = 0;
     
@@ -46,7 +46,7 @@ protected:
 class SterowanieMyszaVar_1 : public SterowanieMysza
 {
 public:
-    SterowanieMyszaVar_1(){};
+    SterowanieMyszaVar_1();
     ~SterowanieMyszaVar_1(){};
 private:
     virtual void V_NaPrzyciskMyszaZmienne(GdkEventButton* event) override;
@@ -57,7 +57,7 @@ class SterowanieMyszaVar_2 : public SterowanieMysza
 {
 public:
     SterowanieMyszaVar_2();
-    ~SterowanieMyszaVar_2();
+    ~SterowanieMyszaVar_2(){};
 private:
     virtual void V_NaPrzyciskMyszaZmienne(GdkEventButton* event) override {};
     virtual void V_NaRuchMyszaZmienne(GdkEventMotion* event) override {};
