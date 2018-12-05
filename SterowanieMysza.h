@@ -12,7 +12,7 @@ public:
 	SterowanieMysza();
 	virtual ~SterowanieMysza();
     virtual int PodlaczanieSygnalow(Gtk::Widget& okno);
-    void KopiujPotrzebneWartosci(SterowanieMysza &){};
+    void PrzejmijSterowanieOd(SterowanieMysza &);
     
 protected:
     bool on_button_press_event(GdkEventButton* event);

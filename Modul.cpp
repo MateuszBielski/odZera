@@ -52,7 +52,7 @@ void Modul::ZablokujPolaczenia()
         if(!polaczenie->blocked())polaczenie->block();
         ile++;
     }
-    g_print("\nzablokowano %d połączeń w %s",ile,Nazwa().c_str());
+    //g_print("\nzablokowano %d połączeń w %s",ile,Nazwa().c_str());
 }
 void Modul::OdblokujPolaczenia()
 {
@@ -66,7 +66,7 @@ void Modul::OdblokujPolaczenia()
         if(polaczenie->blocked())polaczenie->unblock();
         ile++;
     }
-    g_print("\nodblokowano %d połączeń w %s",ile,Nazwa().c_str());
+    //g_print("\nodblokowano %d połączeń w %s",ile,Nazwa().c_str());
 }
 Modul::spConnection Modul::UtrwalPolaczenie(sigc::connection&& polaczenie)
 {

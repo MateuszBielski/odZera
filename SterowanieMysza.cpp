@@ -28,7 +28,11 @@ int SterowanieMysza::PodlaczanieSygnalow(Gtk::Widget& okno)
    return 3;
 }
 
-
+void SterowanieMysza::PrzejmijSterowanieOd(SterowanieMysza & dotychczasowe){
+    dotychczasowe.ZablokujPolaczenia();
+    KopiujParametrySterowania(dotychczasowe);
+    OdblokujPolaczenia();
+}
 
 bool SterowanieMysza::on_button_press_event(GdkEventButton* event)
 {
