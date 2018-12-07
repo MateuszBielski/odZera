@@ -11,7 +11,7 @@ public:
     spModel WydzielZeMnieKorzystajac(spModel );
     virtual void Rysuj() override;
     virtual void RysujZnazwami() override;
-    virtual void RysujPunktyZnazwami() override;
+    virtual void RysujZWidocznymiPunktami() override;
     virtual void TransformacjePrzedRysowaniem() override;
     void WyliczSrodekCiezkosci();
     void SrodekModeluZmodeliWylicz();

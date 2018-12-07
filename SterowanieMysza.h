@@ -60,8 +60,8 @@ public:
     ~SterowanieMyszaVar_2(){};
     virtual void WyszukujeIustawiamWskaznikiDoInnychModulow() override;
 private:
-    virtual void V_NaPrzyciskMyszaZmienne(GdkEventButton* event) override {};
-    virtual void V_NaRuchMyszaZmienne(GdkEventMotion* event) override {};
+    virtual void V_NaPrzyciskMyszaZmienne(GdkEventButton* event) override ;
+    virtual void V_NaRuchMyszaZmienne(GdkEventMotion* event) override ;
     
 };
 #endif // STEROWANIEMYSZA_H

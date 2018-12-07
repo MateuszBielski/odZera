@@ -39,13 +39,8 @@ void SterowanieModyfikujPunkty::PrzelaczSterowanie()
 }
 void  SterowanieModyfikujPunkty::WlaczMojeSterowanie(){
     dotychczasoweSterowanie = Ptr_WyszukajWModulach<SterowanieMysza>("sterowanie");
-   /* dotychczasoweSterowanie->ZablokujPolaczenia();
-    mojeSterowanie.KopiujPotrzebneWartosci(*dotychczasoweSterowanie);
-    mojeSterowanie.OdblokujPolaczenia();*/
     mojeSterowanie.PrzejmijSterowanieOd(*dotychczasoweSterowanie);
 }
 void  SterowanieModyfikujPunkty::PrzywrocPoprzednieSterowanie(){
-    /*mojeSterowanie.ZablokujPolaczenia();
-    dotychczasoweSterowanie->OdblokujPolaczenia();*/
     dotychczasoweSterowanie->PrzejmijSterowanieOd(mojeSterowanie);
 }

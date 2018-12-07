@@ -84,13 +84,6 @@ void EkranRysujacy::UstawPozycjeZrodlaSwiatla(float * wedlugParametrow){
     memcpy(pozycjaZrodlaSwiatla,wedlugParametrow,4*sizeof(float));
     renderowanie->UstawPolozenieSwiatla(wedlugParametrow);
 }
-/*int EkranRysujacy::WyznaczIndeksObiektuWpunkcie(int x, int y)
-{
-	const int rozmiarBuforaZaznaczenia = 1024;
-    unsigned buforZaznaczenia[rozmiarBuforaZaznaczenia];
-    unsigned ileTrafien = WypelnijBuforZaznaczeniaWPunkcie(x,y,buforZaznaczenia);
-    return CoZaznaczono(ileTrafien,buforZaznaczenia).top();
-}*/
 EkranRysujacy::stos_int EkranRysujacy::StosNazwObiektuWpunkcie(int x, int y)
 {
     const int rozmiarBuforaZaznaczenia = 1024;
@@ -139,10 +132,6 @@ EkranRysujacy::stos_int EkranRysujacy::CoZaznaczono(int ileTrafien, unsigned int
                 indeksNajblizszegoPunktu.push(dane[i]);
 //                g_print(" %d",dane[i]);
             }
-            /*for(short i = poczatekRekordu+3 ; i < poczatekRekordu+3+wysokoscStosuNazw ; i++){
-                indeksNajblizszegoPunktu.push(dane[i]);
-                g_print(" %d",dane[i]);
-            }*/
         };
        
         wypelnijStosNazwami();
@@ -163,59 +152,3 @@ EkranRysujacy::stos_int EkranRysujacy::CoZaznaczono(int ileTrafien, unsigned int
 	return wynik;
 }
 
-/*unsigned EkranRysujacy::WypelnijBuforZaznaczeniaWPunkcie(int x, int y, unsigned * buforZaznaczenia)
-{
-    std::fill_n (buforZaznaczenia,rozmiarBuforaZaznaczenia,0);
-    glSelectBuffer(rozmiarBuforaZaznaczenia, buforZaznaczenia);
-
-    glMatrixMode(GL_PROJECTION);
-    glPushMatrix();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
-    glLoadIdentity();
-    int viewport[4];
-    glGetIntegerv(GL_VIEWPORT, viewport);
-    gluPickMatrix(x, wysokosc - y, 8, 8, viewport);
-    float aspect = static_cast<float>(szerokosc) / static_cast<float>(wysokosc);
-    glFrustum(-aspect, aspect, -1.0, 1.0, planBliski, planDaleki);
-    glMatrixMode(GL_MODELVIEW);
-    glRenderMode(GL_SELECT); //umieść znak komemtarza przed tym poleceniem, żeby zobaczyć co widzi myszka
-    RysujScene();//BEZ_SWAPBUFFERS
-    unsigned ileTrafien = glRenderMode(GL_RENDER);
-//    g_print("\nWyoborPunktu ileTrafien= %d, zawartosc bufora: \n ", ileTrafien);
-//    for (int j = 0; j < 5 * ileTrafien + 10; j++)g_print(" %d,", buforZaznaczenia[j]);
-    glMatrixMode(GL_PROJECTION);
-    glPopMatrix();
-    glMatrixMode(GL_MODELVIEW);
-    return ileTrafien;
-}
-int EkranRysujacy::CoZaznaczono(int ileTrafien,unsigned int * dane)
-{
-    int wynik = -1;
-    if (ileTrafien > 0) {
-        unsigned poczatekRekordu = 0;
-        unsigned wysokoscStosuNazw = dane[poczatekRekordu];
-        unsigned dlugoscRekordu = 3 + wysokoscStosuNazw;
-        unsigned indeksNajblizszegoPunktu = dane[poczatekRekordu+2+wysokoscStosuNazw];
-        unsigned odlegloscNajblizszegoPunktu = dane[poczatekRekordu+2];
-        unsigned biezacaOdlegloscPunktu = odlegloscNajblizszegoPunktu;
-        int biezacyIndeks = 0;
-        for (int i = 0; i < ileTrafien; i++) {
-            wysokoscStosuNazw = dane[poczatekRekordu];
-            dlugoscRekordu = 3 + wysokoscStosuNazw;
-//			g_print("\nindeks najblizszego punktu %d",indeksNajblizszegoPunktu);
-            biezacaOdlegloscPunktu = dane[poczatekRekordu+2];
-//			g_print(" bieżąca odległość punktu %d",biezacaOdlegloscPunktu);
-            if(biezacaOdlegloscPunktu < odlegloscNajblizszegoPunktu ){
-                odlegloscNajblizszegoPunktu = biezacaOdlegloscPunktu;
-                indeksNajblizszegoPunktu = dane[poczatekRekordu+2+wysokoscStosuNazw];
-            }
-//			g_print("\nkoniec pętli\nindeks najblizszego punktu %d odleglosc najblizszego %d",indeksNajblizszegoPunktu, odlegloscNajblizszegoPunktu);
-            poczatekRekordu += dlugoscRekordu;
-//			g_print(" bieżąca odległość punktu %d\n",biezacaOdlegloscPunktu);
-        }
-        wynik=indeksNajblizszegoPunktu;
-
-    }
-//    g_print("  indeks najbliższegoPunktu %d",wynik);
-	return wynik;
-}*/

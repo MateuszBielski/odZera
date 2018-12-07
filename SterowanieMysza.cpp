@@ -222,3 +222,9 @@ SterowanieMyszaVar_2::SterowanieMyszaVar_2()
 	nazwa = "sterowanieVar_2";
 	zablokujPolaczeniaPrzyStarcie = true;
 }
+void SterowanieMyszaVar_2::V_NaPrzyciskMyszaZmienne(GdkEventButton* event){
+    
+}
+void SterowanieMyszaVar_2::V_NaRuchMyszaZmienne(GdkEventMotion* event){
+    
+}

@@ -36,12 +36,7 @@ void GrupaModeli::GrupaRysujTemplate(){
     }
     if constexpr (flagi == 0) (this->*FunkcjaWymienna)();
     for(auto& model : mojeModele){
-        /*
-        if constexpr (flagi == 0)model->Rysuj();
-        else if constexpr (flagi & Z_NAZWAMI_MODELI)model->RysujZnazwami();
-        else if constexpr (flagi & Z_WIDOCZNYMI_PUNKTAMI)model->RysujZWidocznymiPunktami();
-         */
-         model->RysujTemplate<flagi>();
+        model->RysujTemplate<flagi>();
     }
     if constexpr (flagi & Z_NAZWAMI_MODELI) glPopName();
     if(czyPushMatrix)glPopMatrix();
@@ -54,7 +49,7 @@ void GrupaModeli::RysujZnazwami()
 {
     GrupaRysujTemplate<Z_NAZWAMI_MODELI>();
 }
-void GrupaModeli::RysujPunktyZnazwami()
+void GrupaModeli::RysujZWidocznymiPunktami()
 {
     GrupaRysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
 }
