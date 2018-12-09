@@ -30,7 +30,8 @@ int SterowanieMysza::PodlaczanieSygnalow(Gtk::Widget& okno)
 
 void SterowanieMysza::PrzejmijSterowanieOd(SterowanieMysza & dotychczasowe){
     dotychczasowe.ZablokujPolaczenia();
-    KopiujParametrySterowania(dotychczasowe);
+//    KopiujParametrySterowania(dotychczasowe);
+    aktualneSterowanie = dotychczasowe.aktualneSterowanie;
     OdblokujPolaczenia();
 }
 
@@ -223,8 +224,22 @@ SterowanieMyszaVar_2::SterowanieMyszaVar_2()
 	zablokujPolaczeniaPrzyStarcie = true;
 }
 void SterowanieMyszaVar_2::V_NaPrzyciskMyszaZmienne(GdkEventButton* event){
-    
+    if (event->button == 1){
+       WybieraniePunktu();
+        float temp;
+       glReadPixels( ix, iy, 1, 1,GL_DEPTH_COMPONENT, GL_FLOAT, &temp );
+       if(temp < 1.0)aktualneSterowanie->wspolrzednaZpodKursorem = temp;
+        TransformujPikselDoPrzestrzeniSceny(ix,iy,aktualneSterowanie->wspolrzednaZpodKursorem,aktualneSterowanie->poprzedniaPozycjaKursoraMyszy3D);
+    }
 }
 void SterowanieMyszaVar_2::V_NaRuchMyszaZmienne(GdkEventMotion* event){
-    
+     if (event->state & GDK_BUTTON1_MASK){
+        //PrzesuwajAktualnieSterowane(); - to było w var_1
+    }
+}
+void SterowanieMyszaVar_2::WybieraniePunktu(){
+    renderowanie->UstawRysowanieTylkoPunktowZnazwami();//++
+    auto stosNazw = ekran->StosNazwObiektuWpunkcie(ix,iy);
+    zarzadzanieObiektami->WskazDoEdycjiPunktOnumerze(stosNazw);//+
+    aktualneSterowanie = zarzadzanieObiektami->DajwskaznikDoEdytowanegoPunktu();//+
 }

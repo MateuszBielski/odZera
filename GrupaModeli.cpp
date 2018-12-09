@@ -53,6 +53,10 @@ void GrupaModeli::RysujZWidocznymiPunktami()
 {
     GrupaRysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
 }
+void void GrupaModeli::RysujPunktyZnazwami()
+{
+    
+}
 void GrupaModeli::WyliczSrodekCiezkosci()
 {   
     float ileModeli = 0;

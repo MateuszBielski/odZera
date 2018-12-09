@@ -62,6 +62,7 @@ public:
 private:
     virtual void V_NaPrzyciskMyszaZmienne(GdkEventButton* event) override ;
     virtual void V_NaRuchMyszaZmienne(GdkEventMotion* event) override ;
+    void WybieraniePunktu();
     
 };
 #endif // STEROWANIEMYSZA_H

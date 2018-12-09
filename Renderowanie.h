@@ -18,6 +18,7 @@ public:
 	void RysujModele();
     void UstawRysowanieZnazwami();
     void UstawRysowanieZwidocznymiPunktami(bool tak);
+    void UstawRysowanieTylkoPunktowZnazwami();
 	void UtrwalPrzeksztalceniaWybranegoObiektu();
     void UtrwalPunktyWybranegoObiektu();
 	void UtrwalPrzeksztalceniaModelu(spModel);

@@ -22,6 +22,9 @@ void Renderowanie1::UstawRysowanieZnazwami()
 {
     RysujModeleOdpowiednio = &Renderowanie1::JednorazowoRysujModeleZnazwami;
 }
+void Renderowanie1::UstawRysowanieTylkoPunktowZnazwami(){
+    RysujModeleOdpowiednio = &Renderowanie1::JednorazowoRysujTylkoPunktyZnazwami;
+}
 void Renderowanie1::UstawRysowanieZwidocznymiPunktami(bool tak)
 {
     g_print("\nUstawRysowanieZwidocznymiPunktami %d",tak);
@@ -45,7 +48,13 @@ void Renderowanie1::JednorazowoRysujModeleZnazwami()
     }
     RysujModeleOdpowiednio = &Renderowanie1::RysujModeleBezNazw;
 }
-
+void Renderowanie1::JednorazowoRysujTylkoPunktyZnazwami()
+{
+    for(auto iter : mojeModele){
+        iter->RysujPunktyZnazwami();
+    }
+    RysujModeleOdpowiednio = &Renderowanie1::RysujModeleBezNazw;
+}
 int Renderowanie1::PolaczZkimPotrzebujeNaPoczatek()
 {
 //    zarzadzanie = Ref_WyszukajWModulach<ZarzadzanieObiektami>("zarzadznieObiektami");

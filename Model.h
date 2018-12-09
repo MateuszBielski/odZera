@@ -21,6 +21,7 @@ public :
     virtual void RysujZnazwami();
     virtual void RysujZWidocznymiPunktami();
 	virtual void RysujGeometrie(){};
+    virtual void RysujWidocznePunkty();
     virtual void RysujPunktyZnazwami();
     virtual void TransformacjePrzedRysowaniem();
     void UstalM_Pos(float*);//użyte dla światła tylko

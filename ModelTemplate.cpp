@@ -15,7 +15,7 @@ void Model::RysujTemplate()
         WyswietlWartosciMacierzy4x4(macierzModelWidok);
     }
     if constexpr(flagi & Z_WIDOCZNYMI_PUNKTAMI){
-        RysujPunktyZnazwami();
+        RysujWidocznePunkty();
 //        g_print("\nZ_WIDOCZNYMI_PUNKTAMI");
     }
 	RysujGeometrie();

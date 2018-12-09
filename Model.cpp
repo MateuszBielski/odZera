@@ -41,7 +41,7 @@ void Model::RysujZWidocznymiPunktami()
 {
     RysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
 }
-void Model::RysujPunktyZnazwami()
+void Model::RysujWidocznePunkty()
 {
     glColor3f(1.0,0.0,0.0);
     glPointSize(7.0);
@@ -50,7 +50,17 @@ void Model::RysujPunktyZnazwami()
 //		glNormal3fv(&normalne[s*3]);
 		glVertex3fv(&vertexy[ve*3]);
 	}
-    glEnd();
+    glEnd(); 
+}
+void Model::RysujPunktyZnazwami()
+{
+    glPointSize(7.0);
+    glBegin(GL_POINTS);
+	for(int ve = 0 ; ve < ileVertexow ;ve++){
+        glLoadName(std::dynamic_cast<GLuint>(&vertexy[ve*3]));//adres traktowany jako liczba
+		glVertex3fv(&vertexy[ve*3]);
+	}
+    glEnd(); 
 }
 void Model::TransformacjePrzedRysowaniem(){
     glTranslatef(mojeWspolrzedneImacierzeSterowania->m_Pos[0],mojeWspolrzedneImacierzeSterowania->m_Pos[1],mojeWspolrzedneImacierzeSterowania->m_Pos[2]);
