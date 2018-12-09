@@ -36,10 +36,21 @@ void GrupaModeli::GrupaRysujTemplate(){
     }
     if constexpr (flagi == 0) (this->*FunkcjaWymienna)();
     for(auto& model : mojeModele){
-        model->RysujTemplate<flagi>();
+        /*
+        if constexpr (flagi == 0)model->Rysuj();
+        else if constexpr (flagi & Z_NAZWAMI_MODELI)model->RysujZnazwami();
+        else if constexpr (flagi & Z_WIDOCZNYMI_PUNKTAMI)model->RysujZWidocznymiPunktami();
+         */
+         //tak było wcześniej a teraz:
+        //model->RysujTemplate<flagi>(); nie działa dodawanie grupy do grupy, 
+        model->Rysuj(flagi);
     }
     if constexpr (flagi & Z_NAZWAMI_MODELI) glPopName();
     if(czyPushMatrix)glPopMatrix();
+}
+void GrupaModeli::Rysuj(int flagi)
+{
+    GrupaRysujTemplate<flagi>();
 }
 void GrupaModeli::Rysuj()
 {
@@ -52,6 +63,10 @@ void GrupaModeli::RysujZnazwami()
 void GrupaModeli::RysujZWidocznymiPunktami()
 {
     GrupaRysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
+}
+void GrupaModeli::RysujPunktyZnazwami()
+{
+    
 }
 void GrupaModeli::WyliczSrodekCiezkosci()
 {   
@@ -81,7 +96,8 @@ void GrupaModeli::UtrwalPrzeksztalcenia()
     for(auto& model : mojeModele){
         model->WlaczJednorazowoWymienneFunkcje(UTRWAL_PUNKTY_NORMALNE_SRODEK);
     }
-    Rysuj();
+    //Rysuj();
+    Rysuj(0);
     for(auto& model : mojeModele){
         model->mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
     }

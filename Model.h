@@ -18,10 +18,12 @@ public :
     virtual ~Model(); 
     
 	virtual void Rysuj();
+    virtual void Rysuj(int );
     virtual void RysujZnazwami();
     virtual void RysujZWidocznymiPunktami();
 	virtual void RysujGeometrie(){};
     virtual void RysujPunktyZnazwami();
+    virtual void RysujWidocznePunkty();
     virtual void TransformacjePrzedRysowaniem();
     void UstalM_Pos(float*);//użyte dla światła tylko
     virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika);
