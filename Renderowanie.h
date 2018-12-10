@@ -28,6 +28,7 @@ private:
     void RysujModeleBezNazw();
     void RysujZwidocznymiPunktami();
     void JednorazowoRysujModeleZnazwami();
+    void JednorazowoRysujTylkoPunktyZnazwami();
     using Ptr_F_void_void = void(Renderowanie1::*)();
     Ptr_F_void_void RysujModeleOdpowiednio = &Renderowanie1::RysujModeleBezNazw;
     

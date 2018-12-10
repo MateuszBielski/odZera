@@ -216,7 +216,8 @@ SterowanieMyszaVar_1::SterowanieMyszaVar_1()
 }
 void SterowanieMyszaVar_2::WyszukujeIustawiamWskaznikiDoInnychModulow()
 {
-    
+    ekran = Ptr_WyszukajWModulach<EkranRysujacy>("ekranGL");
+    renderowanie =  Ptr_WyszukajWModulach<Renderowanie1>("renderowanie");
 }
 SterowanieMyszaVar_2::SterowanieMyszaVar_2()
 {
@@ -240,6 +241,6 @@ void SterowanieMyszaVar_2::V_NaRuchMyszaZmienne(GdkEventMotion* event){
 void SterowanieMyszaVar_2::WybieraniePunktu(){
     renderowanie->UstawRysowanieTylkoPunktowZnazwami();//++
     auto stosNazw = ekran->StosNazwObiektuWpunkcie(ix,iy);
-    zarzadzanieObiektami->WskazDoEdycjiPunktOnumerze(stosNazw);//+
-    aktualneSterowanie = zarzadzanieObiektami->DajwskaznikDoEdytowanegoPunktu();//+
+//    zarzadzanieObiektami->WskazDoEdycjiPunktOnumerze(stosNazw);//+
+//    aktualneSterowanie = zarzadzanieObiektami->DajwskaznikDoEdytowanegoPunktu();//+
 }

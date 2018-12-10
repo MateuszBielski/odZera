@@ -9,20 +9,20 @@
 #define UTRWAL_SRODEK 8
 #define Z_NAZWAMI_MODELI 1
 #define Z_WIDOCZNYMI_PUNKTAMI 2
+#define TYLKO_PUNKTY_Z_NAZWAMI 3
+//using f_constexpr = constexpr int (*)();
 
-
+//constexpr int f_Z_NAZWAMI_MODELI(){return Z_NAZWAMI_MODELI;}
 
 class Model{
 public :
     Model();
     virtual ~Model(); 
     
-	virtual void Rysuj();
-    virtual void RysujZnazwami();
-    virtual void RysujZWidocznymiPunktami();
+    virtual void Rysuj(int);
 	virtual void RysujGeometrie(){};
     virtual void RysujWidocznePunkty();
-    virtual void RysujPunktyZnazwami();
+    virtual void RysujTylkoPunktyZnazwami();
     virtual void TransformacjePrzedRysowaniem();
     void UstalM_Pos(float*);//użyte dla światła tylko
     virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika);

@@ -9,9 +9,8 @@ public:
 	~GrupaModeli();
 	itLspModel DodajDoMnie(spModel);
     spModel WydzielZeMnieKorzystajac(spModel );
-    virtual void Rysuj() override;
-    virtual void RysujZnazwami() override;
-    virtual void RysujZWidocznymiPunktami() override;
+    virtual void Rysuj(int ) override;
+    virtual void RysujTylkoPunktyZnazwami() override;
     virtual void TransformacjePrzedRysowaniem() override;
     void WyliczSrodekCiezkosci();
     void SrodekModeluZmodeliWylicz();

@@ -29,17 +29,22 @@ void Model::UdostepnijBazieIndeksyWierzcholkow(unsigned short * nr, unsigned sho
 	indeksyNaroznikow = nr;
     ileNaroznikowSciany = ile;
 }
-
-void Model::Rysuj(){
-	RysujTemplate<0>();
-}
-void Model::RysujZnazwami()
+void Model::Rysuj(int flagi)
 {
-	RysujTemplate<Z_NAZWAMI_MODELI>();
-}
-void Model::RysujZWidocznymiPunktami()
-{
-    RysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
+    switch(flagi){
+        case 0:
+        RysujTemplate<0>();
+        break;
+        case Z_NAZWAMI_MODELI:
+        RysujTemplate<Z_NAZWAMI_MODELI>();
+        break;
+        case Z_WIDOCZNYMI_PUNKTAMI:
+        RysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
+        break;
+        case TYLKO_PUNKTY_Z_NAZWAMI:
+        RysujTylkoPunktyZnazwami();
+        break;
+    }
 }
 void Model::RysujWidocznePunkty()
 {
@@ -52,15 +57,30 @@ void Model::RysujWidocznePunkty()
 	}
     glEnd(); 
 }
-void Model::RysujPunktyZnazwami()
+/*void Model::RysujWidocznePunkty()
 {
     glPointSize(7.0);
     glBegin(GL_POINTS);
 	for(int ve = 0 ; ve < ileVertexow ;ve++){
-        glLoadName(std::dynamic_cast<GLuint>(&vertexy[ve*3]));//adres traktowany jako liczba
+//        glLoadName(std::dynamic_cast<GLuint>(&vertexy[ve*3]));//adres traktowany jako liczba
 		glVertex3fv(&vertexy[ve*3]);
 	}
     glEnd(); 
+//<<<<<<< HEAD
+}*/
+void Model::RysujTylkoPunktyZnazwami()
+{
+    TransformacjePrzedRysowaniem();
+    glPointSize(7.0);
+    glBegin(GL_POINTS);
+	for(int ve = 0 ; ve < ileVertexow ;ve++){
+//        auto adresJakoNazwa = std::dynamic_cast<GLuint>(&vertexy[ve*3])
+        glLoadName((GLuint)(&vertexy[ve*3]));//adres traktowany jako liczba
+		glVertex3fv(&vertexy[ve*3]);
+	}
+    glEnd(); 
+//=======
+//>>>>>>> 9gru
 }
 void Model::TransformacjePrzedRysowaniem(){
     glTranslatef(mojeWspolrzedneImacierzeSterowania->m_Pos[0],mojeWspolrzedneImacierzeSterowania->m_Pos[1],mojeWspolrzedneImacierzeSterowania->m_Pos[2]);
@@ -182,7 +202,8 @@ void Model::UtrwalSrodekZaktualnejMacierzy(){
 void Model::UtrwalPrzeksztalcenia(){
     glLoadIdentity();
     WlaczJednorazowoWymienneFunkcje(UTRWAL_PUNKTY_NORMALNE_SRODEK);
-    Rysuj();
+    //Rysuj();
+    Rysuj(0);
     mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
 }
 void Model::MacierzaObrotuPrzeliczPunktyIjaWyzeruj(){

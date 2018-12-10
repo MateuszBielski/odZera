@@ -33,25 +33,25 @@ void Renderowanie1::UstawRysowanieZwidocznymiPunktami(bool tak)
 
 void Renderowanie1::RysujModeleBezNazw()
 {
-    for(auto iter : mojeModele)iter->Rysuj();
+    for(auto iter : mojeModele)iter->Rysuj(0);//Rysuj()
 }
 void Renderowanie1::RysujZwidocznymiPunktami()
 {
-    for(auto iter : mojeModele)iter->RysujZWidocznymiPunktami();
+    for(auto iter : mojeModele)iter->Rysuj(Z_WIDOCZNYMI_PUNKTAMI);//RysujZWidocznymiPunktami()
 }
 void Renderowanie1::JednorazowoRysujModeleZnazwami()
 {
     glPushName(891);//liczba dowolna, bo jest podmieniana przez funkcję glLoadName
 //    g_print("\n glPushName%d",891);
     for(auto iter : mojeModele){
-        iter->RysujZnazwami();
+        iter->Rysuj(Z_NAZWAMI_MODELI);//RysujZnazwami()
     }
     RysujModeleOdpowiednio = &Renderowanie1::RysujModeleBezNazw;
 }
 void Renderowanie1::JednorazowoRysujTylkoPunktyZnazwami()
 {
     for(auto iter : mojeModele){
-        iter->RysujPunktyZnazwami();
+        iter->Rysuj(TYLKO_PUNKTY_Z_NAZWAMI);//RysujPunktyZnazwami();
     }
     RysujModeleOdpowiednio = &Renderowanie1::RysujModeleBezNazw;
 }
@@ -70,7 +70,7 @@ void Renderowanie1::UtrwalPrzeksztalceniaWybranegoObiektu()
 	g_print("\nRenderowanie1::UtrwalPrzeksztalceniaWybranegoObiektu");
 	glLoadIdentity();
     
-    mojeModele.at(numerModeluWybranego)->Rysuj();
+    mojeModele.at(numerModeluWybranego)->Rysuj(0);//Rysuj()
 }
 void Renderowanie1::UtrwalPunktyWybranegoObiektu(){
     g_print("\nRenderowanie1::UtrwalPunktyWybranegoObiektu");
@@ -78,13 +78,13 @@ void Renderowanie1::UtrwalPunktyWybranegoObiektu(){
     auto wybrany = mojeModele.at(numerModeluWybranego);
     wybrany->WlaczJednorazowoWymienneFunkcje(UTRWAL_PUNKTY_NORMALNE_SRODEK);
 	//rysowanie wszystkich obiektów
-	wybrany->Rysuj();
+	wybrany->Rysuj(0);//Rysuj()
     wybrany->mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
 }
 void Renderowanie1::UtrwalPrzeksztalceniaModelu(spModel model){
     g_print("\nRenderowanie1::UtrwalPrzeksztalceniaModelu");
 	glLoadIdentity();
-    model->Rysuj();
+    model->Rysuj(0);//Rysuj()
 }
 
 void Renderowanie1::TransformacjaCalegoWidoku()

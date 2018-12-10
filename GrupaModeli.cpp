@@ -36,26 +36,37 @@ void GrupaModeli::GrupaRysujTemplate(){
     }
     if constexpr (flagi == 0) (this->*FunkcjaWymienna)();
     for(auto& model : mojeModele){
-        model->RysujTemplate<flagi>();
+        /*
+        if constexpr (flagi == 0)model->Rysuj();
+        else if constexpr (flagi & Z_NAZWAMI_MODELI)model->RysujZnazwami();
+        else if constexpr (flagi & Z_WIDOCZNYMI_PUNKTAMI)model->RysujZWidocznymiPunktami();
+         */
+         //powyższe zostało przeniesione do instrukcji switch case w virtual Rysuj()
+        model->Rysuj(flagi);
     }
     if constexpr (flagi & Z_NAZWAMI_MODELI) glPopName();
     if(czyPushMatrix)glPopMatrix();
 }
-void GrupaModeli::Rysuj()
+void GrupaModeli::Rysuj(int flagi)
 {
-    GrupaRysujTemplate<0>();
+    switch(flagi){
+        case 0:
+        GrupaRysujTemplate<0>();
+        break;
+        case Z_NAZWAMI_MODELI:
+        GrupaRysujTemplate<Z_NAZWAMI_MODELI>();
+        break;
+        case Z_WIDOCZNYMI_PUNKTAMI:
+        GrupaRysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
+        break;
+        case TYLKO_PUNKTY_Z_NAZWAMI:
+        GrupaRysujTemplate<TYLKO_PUNKTY_Z_NAZWAMI>();
+        break;
+    }
 }
-void GrupaModeli::RysujZnazwami()
+void GrupaModeli::RysujTylkoPunktyZnazwami()
 {
-    GrupaRysujTemplate<Z_NAZWAMI_MODELI>();
-}
-void GrupaModeli::RysujZWidocznymiPunktami()
-{
-    GrupaRysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
-}
-void void GrupaModeli::RysujPunktyZnazwami()
-{
-    
+   g_print("\nGrupaModeli::RysujTylkoPunktyZnazwami - nie powinno wystąpić");
 }
 void GrupaModeli::WyliczSrodekCiezkosci()
 {   
@@ -85,7 +96,8 @@ void GrupaModeli::UtrwalPrzeksztalcenia()
     for(auto& model : mojeModele){
         model->WlaczJednorazowoWymienneFunkcje(UTRWAL_PUNKTY_NORMALNE_SRODEK);
     }
-    Rysuj();
+    //Rysuj();
+    Rysuj(0);
     for(auto& model : mojeModele){
         model->mojeWspolrzedneImacierzeSterowania->UstawWartosciStartowe();
     }
