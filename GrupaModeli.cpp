@@ -41,8 +41,7 @@ void GrupaModeli::GrupaRysujTemplate(){
         else if constexpr (flagi & Z_NAZWAMI_MODELI)model->RysujZnazwami();
         else if constexpr (flagi & Z_WIDOCZNYMI_PUNKTAMI)model->RysujZWidocznymiPunktami();
          */
-         //tak było wcześniej a teraz:
-        //model->RysujTemplate<flagi>(); nie działa dodawanie grupy do grupy, 
+         //powyższe zostało przeniesione do instrukcji switch case w virtual Rysuj()
         model->Rysuj(flagi);
     }
     if constexpr (flagi & Z_NAZWAMI_MODELI) glPopName();
@@ -50,19 +49,17 @@ void GrupaModeli::GrupaRysujTemplate(){
 }
 void GrupaModeli::Rysuj(int flagi)
 {
-    GrupaRysujTemplate<flagi>();
-}
-void GrupaModeli::Rysuj()
-{
-    GrupaRysujTemplate<0>();
-}
-void GrupaModeli::RysujZnazwami()
-{
-    GrupaRysujTemplate<Z_NAZWAMI_MODELI>();
-}
-void GrupaModeli::RysujZWidocznymiPunktami()
-{
-    GrupaRysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
+    switch(flagi){
+        case 0:
+        GrupaRysujTemplate<0>();
+        break;
+        case Z_NAZWAMI_MODELI:
+        GrupaRysujTemplate<Z_NAZWAMI_MODELI>();
+        break;
+        case Z_WIDOCZNYMI_PUNKTAMI:
+        GrupaRysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
+        break;
+    }
 }
 void GrupaModeli::RysujPunktyZnazwami()
 {

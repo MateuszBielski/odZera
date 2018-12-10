@@ -29,21 +29,19 @@ void Model::UdostepnijBazieIndeksyWierzcholkow(unsigned short * nr, unsigned sho
 	indeksyNaroznikow = nr;
     ileNaroznikowSciany = ile;
 }
-void Model::Rysuj(int fl)
+void Model::Rysuj(int flagi)
 {
-    constexpr int flagi = fl;
-    RysujTemplate<flagi>();
-}
-void Model::Rysuj(){
-	RysujTemplate<0>();
-}
-void Model::RysujZnazwami()
-{
-	RysujTemplate<Z_NAZWAMI_MODELI>();
-}
-void Model::RysujZWidocznymiPunktami()
-{
-    RysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
+    switch(flagi){
+        case 0:
+        RysujTemplate<0>();
+        break;
+        case Z_NAZWAMI_MODELI:
+        RysujTemplate<Z_NAZWAMI_MODELI>();
+        break;
+        case Z_WIDOCZNYMI_PUNKTAMI:
+        RysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
+        break;
+    }
 }
 void Model::RysujWidocznePunkty()
 {

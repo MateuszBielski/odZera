@@ -9,18 +9,16 @@
 #define UTRWAL_SRODEK 8
 #define Z_NAZWAMI_MODELI 1
 #define Z_WIDOCZNYMI_PUNKTAMI 2
+//using f_constexpr = constexpr int (*)();
 
-
+//constexpr int f_Z_NAZWAMI_MODELI(){return Z_NAZWAMI_MODELI;}
 
 class Model{
 public :
     Model();
     virtual ~Model(); 
     
-	virtual void Rysuj();
-    virtual void Rysuj(int );
-    virtual void RysujZnazwami();
-    virtual void RysujZWidocznymiPunktami();
+    virtual void Rysuj(int);
 	virtual void RysujGeometrie(){};
     virtual void RysujPunktyZnazwami();
     virtual void RysujWidocznePunkty();
