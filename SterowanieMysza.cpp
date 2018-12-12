@@ -32,6 +32,8 @@ void SterowanieMysza::PrzejmijSterowanieOd(SterowanieMysza & dotychczasowe){
     dotychczasowe.ZablokujPolaczenia();
 //    KopiujParametrySterowania(dotychczasowe);
 //    aktualneSterowanie = dotychczasowe.aktualneSterowanie;
+    calegoWidoku.SkopiujWartosciZ(dotychczasowe.calegoWidoku);
+    renderowanie->PobierzWskaznikNaWektorPrzesunieciaPierwotnego(&calegoWidoku.przesunieciePierwotne[0]);
     OdblokujPolaczenia();
 }
 

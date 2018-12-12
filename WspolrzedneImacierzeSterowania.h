@@ -12,6 +12,7 @@ public:
 	void UstawWartosciStartowe();
     void MacierzObrotuUstawJednostkowo();
     void SkopiujWartosciZ(std::shared_ptr<WspolrzedneImacierzeSterowania>);
+    void SkopiujWartosciZ(WspolrzedneImacierzeSterowania& );
 	float m_QuatDiff[4];
     float m_Quat[4];
 	

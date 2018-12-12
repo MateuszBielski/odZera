@@ -47,6 +47,20 @@ void WspolrzedneImacierzeSterowania::SkopiujWartosciZ(std::shared_ptr<Wspolrzedn
     }
     for(int i = 0; i < 4 ; i++)for(int j = 0; j < 4 ; j++)macierzObrotu[i][j] = spW->macierzObrotu[i][j];
 }
+void WspolrzedneImacierzeSterowania::SkopiujWartosciZ(WspolrzedneImacierzeSterowania& rhs)
+{
+    for(int i = 0; i < 3 ; i++){
+        m_Pos[i] = rhs.m_Pos[i];
+        przesunieciePierwotne[i] = rhs.przesunieciePierwotne[i];
+        biezacaPozycjaKursoraMyszy3D[i] = rhs.biezacaPozycjaKursoraMyszy3D[i];
+        poprzedniaPozycjaKursoraMyszy3D[i] = rhs.poprzedniaPozycjaKursoraMyszy3D[i];
+    }
+    for(int i = 0; i < 4 ; i++){
+        m_Quat[i] = rhs.m_Quat[i];
+        m_QuatDiff[i] = rhs.m_QuatDiff[i];
+    }
+    for(int i = 0; i < 4 ; i++)for(int j = 0; j < 4 ; j++)macierzObrotu[i][j] = rhs.macierzObrotu[i][j];
+}
 WspolrzedneImacierzeSterowania::~WspolrzedneImacierzeSterowania()
 {
     g_print("\ndestruktor WspolrzedneImacierzeSterowania");
