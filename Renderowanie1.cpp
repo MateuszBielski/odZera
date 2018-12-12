@@ -37,22 +37,24 @@ void Renderowanie1::RysujModeleBezNazw()
 }
 void Renderowanie1::RysujZwidocznymiPunktami()
 {
-    for(auto iter : mojeModele)iter->Rysuj(Z_WIDOCZNYMI_PUNKTAMI);//RysujZWidocznymiPunktami()
+    for(auto iter : mojeModele)iter->Rysuj(Z_WIDOCZNYMI_PUNKTAMI);//Z_WIDOCZNYMI_PUNKTAMI TYLKO_PUNKTY_Z_NAZWAMI
 }
 void Renderowanie1::JednorazowoRysujModeleZnazwami()
 {
     glPushName(891);//liczba dowolna, bo jest podmieniana przez funkcję glLoadName
 //    g_print("\n glPushName%d",891);
     for(auto iter : mojeModele){
-        iter->Rysuj(Z_NAZWAMI_MODELI);//RysujZnazwami()
+        iter->Rysuj(Z_NAZWAMI_MODELI);//
     }
     RysujModeleOdpowiednio = &Renderowanie1::RysujModeleBezNazw;
 }
 void Renderowanie1::JednorazowoRysujTylkoPunktyZnazwami()
 {
+    glPushName(23);
     for(auto iter : mojeModele){
         iter->Rysuj(TYLKO_PUNKTY_Z_NAZWAMI);//RysujPunktyZnazwami();
     }
+    glPopName();
     RysujModeleOdpowiednio = &Renderowanie1::RysujModeleBezNazw;
 }
 int Renderowanie1::PolaczZkimPotrzebujeNaPoczatek()

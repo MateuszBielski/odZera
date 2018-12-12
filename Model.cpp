@@ -57,28 +57,21 @@ void Model::RysujWidocznePunkty()
 	}
     glEnd(); 
 }
-/*void Model::RysujWidocznePunkty()
-{
-    glPointSize(7.0);
-    glBegin(GL_POINTS);
-	for(int ve = 0 ; ve < ileVertexow ;ve++){
-//        glLoadName(std::dynamic_cast<GLuint>(&vertexy[ve*3]));//adres traktowany jako liczba
-		glVertex3fv(&vertexy[ve*3]);
-	}
-    glEnd(); 
-//<<<<<<< HEAD
-}*/
+
 void Model::RysujTylkoPunktyZnazwami()
 {
     TransformacjePrzedRysowaniem();
     glPointSize(7.0);
-    glBegin(GL_POINTS);
+    
 	for(int ve = 0 ; ve < ileVertexow ;ve++){
 //        auto adresJakoNazwa = std::dynamic_cast<GLuint>(&vertexy[ve*3])
-        glLoadName((GLuint)(&vertexy[ve*3]));//adres traktowany jako liczba
+        auto nazwa = (GLuint)(&vertexy[ve*3]);
+        glLoadName(nazwa);//adres traktowany jako liczba
+        glBegin(GL_POINTS);
 		glVertex3fv(&vertexy[ve*3]);
+        glEnd();
 	}
-    glEnd(); 
+    
 //=======
 //>>>>>>> 9gru
 }

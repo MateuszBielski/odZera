@@ -5,6 +5,7 @@
 #include <Modul.h>
 #include <WidokCechModelu.h>
 #include <LinieZnormalnych.h>
+#include <ModyfikacjaPunktow.h>
 
 using vec_spModel = std::vector<spModel>;
 class ZarzadzanieObiektami : public Modul{
@@ -15,34 +16,36 @@ public:
     const vec_spModel& MojeModeleRef(){return mojeModele;};
     const short& NumerModeluWybranegoRef(){return numerModeluWybranego;};
     const short& ModelSwiatlaMaNumer(){return modelSwiatlaMaNumer;};
-    int Zaladuj(spModel);//z
-	void WybierzModelOnumerze(short int);//z
-    void WybierzModelOnumerze(std::stack<int> &);//z
-    void WyodrebnijZgrupy(std::stack<int> &);//z
-    spModel DajWybranyModel();//z
-    void WybranyModelPrzeniesDoGrupy();//z
+    int Zaladuj(spModel);
+	void WybierzModelOnumerze(short int);
+    void WybierzModelOnumerze(std::stack<int> &);
+    void WyodrebnijZgrupy(std::stack<int> &);
+    spModel DajWybranyModel();
+    void WybranyModelPrzeniesDoGrupy();
+//    void EdycjaPunktuOnumerze(std::stack<int> &,int jakEdytowac);
     //światło
-	void WskazModelSwiatla(short );//z
-    spModel DajModelSwiatla();//z
+	void WskazModelSwiatla(short );
+    spModel DajModelSwiatla();
 protected:
 //    using vec_spModel = std::vector<spModel>;
-    vec_spModel mojeModele;//z
+    vec_spModel mojeModele;
     using stosGrup = std::stack<spGrupaModeli>;
-    stosGrup pusteGrupy;//z
-    spGrupaModeli PrzydzielPustaGrupe();//z
+    stosGrup pusteGrupy;
+    spGrupaModeli PrzydzielPustaGrupe();
 
-    void UtworzTyleKostek(int);//z
+    void UtworzTyleKostek(int);
     template<class T>
-    void UtworzTyleModeli(int);//z
+    void UtworzTyleModeli(int);
     
-    unsigned ileZaladowanychModeli  = 0;//z
+    unsigned ileZaladowanychModeli  = 0;
     
-    spLinieN linieNormalnych;//z
-    spWidokCech cechyWybranego;//z
+    spLinieN linieNormalnych;
+    spWidokCech cechyWybranego;
     
-    short modelSwiatlaMaNumer = 0;//z
-	short numerModeluWybranego = 1;//z
-    short numerPoprzednioWybranego = 1;//z
+    
+    short modelSwiatlaMaNumer = 0;
+	short numerModeluWybranego = 1;
+    short numerPoprzednioWybranego = 1;
 };
 
 #endif // ZARZADZANIEOBIEKTAMI_H

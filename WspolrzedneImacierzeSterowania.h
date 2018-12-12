@@ -6,7 +6,7 @@ class WspolrzedneImacierzeSterowania
 public:
 	WspolrzedneImacierzeSterowania();
 	~WspolrzedneImacierzeSterowania();
-    void ZmienM_Pos_zgodnieZruchemKursora3D();
+    virtual void ZmienM_Pos_zgodnieZruchemKursora3D();
     void BiezaceUstawJakoPoprzednie_m_Begin();
     void BiezaceUstawJakoPoprzednie_PozycjaKursoraMyszy3D();
 	void UstawWartosciStartowe();

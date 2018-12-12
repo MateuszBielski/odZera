@@ -31,7 +31,7 @@ int SterowanieMysza::PodlaczanieSygnalow(Gtk::Widget& okno)
 void SterowanieMysza::PrzejmijSterowanieOd(SterowanieMysza & dotychczasowe){
     dotychczasowe.ZablokujPolaczenia();
 //    KopiujParametrySterowania(dotychczasowe);
-    aktualneSterowanie = dotychczasowe.aktualneSterowanie;
+//    aktualneSterowanie = dotychczasowe.aktualneSterowanie;
     OdblokujPolaczenia();
 }
 
@@ -218,10 +218,12 @@ void SterowanieMyszaVar_2::WyszukujeIustawiamWskaznikiDoInnychModulow()
 {
     ekran = Ptr_WyszukajWModulach<EkranRysujacy>("ekranGL");
     renderowanie =  Ptr_WyszukajWModulach<Renderowanie1>("renderowanie");
+    zarzadzanieObiektami = Ptr_WyszukajWModulach<ZarzadzanieObiektami>("zarzadznieObiektami");
 }
 SterowanieMyszaVar_2::SterowanieMyszaVar_2()
 {
 	nazwa = "sterowanieVar_2";
+    aktualneSterowanie = &modyfikacjaPunktow;
 	zablokujPolaczeniaPrzyStarcie = true;
 }
 void SterowanieMyszaVar_2::V_NaPrzyciskMyszaZmienne(GdkEventButton* event){
@@ -235,12 +237,13 @@ void SterowanieMyszaVar_2::V_NaPrzyciskMyszaZmienne(GdkEventButton* event){
 }
 void SterowanieMyszaVar_2::V_NaRuchMyszaZmienne(GdkEventMotion* event){
      if (event->state & GDK_BUTTON1_MASK){
-        //PrzesuwajAktualnieSterowane(); - to było w var_1
+        PrzesuwajAktualnieSterowane();
     }
 }
 void SterowanieMyszaVar_2::WybieraniePunktu(){
-    renderowanie->UstawRysowanieTylkoPunktowZnazwami();//++
-    auto stosNazw = ekran->StosNazwObiektuWpunkcie(ix,iy);
-//    zarzadzanieObiektami->WskazDoEdycjiPunktOnumerze(stosNazw);//+
-//    aktualneSterowanie = zarzadzanieObiektami->DajwskaznikDoEdytowanegoPunktu();//+
+    renderowanie->UstawRysowanieTylkoPunktowZnazwami();
+    auto idPunktu = ekran->StosNazwObiektuWpunkcie(ix,iy).top();
+    if(idPunktu == -1)return;
+    modyfikacjaPunktow.WyczyscIwstawJedenPunkt((float*)(idPunktu));
+    
 }

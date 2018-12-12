@@ -97,12 +97,27 @@ EkranRysujacy::stos_int EkranRysujacy::StosNazwObiektuWpunkcie(int x, int y)
     glLoadIdentity();
     int viewport[4];
     glGetIntegerv(GL_VIEWPORT, viewport);
-    gluPickMatrix(x, wysokosc - y, 8, 8, viewport);
+    gluPickMatrix(x, wysokosc - y, 8,8, viewport);
     float aspect = static_cast<float>(szerokosc) / static_cast<float>(wysokosc);
     glFrustum(-aspect, aspect, -1.0, 1.0, planBliski, planDaleki);
     glMatrixMode(GL_MODELVIEW);
     glRenderMode(GL_SELECT); //umieść znak komemtarza przed tym poleceniem, żeby zobaczyć co widzi myszka
     RysujScene();//BEZ_SWAPBUFFERS
+    //=======
+   /* auto gldrawable = get_gl_drawable();
+    stos_int wynikFalse;
+    if (!gldrawable->gl_begin(get_gl_context()))
+      return wynikFalse;
+
+	RysujScene();
+    
+	if (gldrawable->is_double_buffered())
+      gldrawable->swap_buffers();
+    else
+      glFlush();
+
+	gldrawable->gl_end();*/
+    //=======
     unsigned ileTrafien = glRenderMode(GL_RENDER);
 //    g_print("\nWyoborPunktu ileTrafien= %d, zawartosc bufora: \n ", ileTrafien);
 //    for (int j = 0; j < 5 * ileTrafien + 10; j++)g_print(" %d,", buforZaznaczenia[j]);

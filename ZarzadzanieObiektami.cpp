@@ -97,6 +97,25 @@ spModel ZarzadzanieObiektami::DajWybranyModel()
         return nullptr;
     }
 }
+/*void ZarzadzanieObiektami::EdycjaPunktuOnumerze(std::stack<int> & stosNazw,int sposobEdycji)
+{
+    if(stosNazw.top() == -1)return;
+    unsigned nrPunktu = stosNazw.top();
+    float * adrPunktu = (float *)nrPunktu;
+    g_print("\nWskazDoEdycjiPunktOnumerze %d jego współrz: %2.3f %2.3f %2.3f"
+    ,nrPunktu,adrPunktu[0],adrPunktu[1],adrPunktu[2]);
+    switch(sposobEdycji){
+        case WSKAZ_NOWY:
+        modyfikacjaPunktow.WstawDoWyczyszczonegoJedenPunkt(adrPunktu);
+        break;
+        case DODAJ_KOLEJNY:
+        modyfikacjaPunktow.DodajPunkt(adrPunktu);
+        break;
+        case USUN_Z_EDYTOWANYCH:
+        modyfikacjaPunktow.UsunPunkt(adrPunktu);
+        break;
+    }
+}*/
 void ZarzadzanieObiektami::UtworzTyleKostek(int ile)
 {
     UtworzTyleModeli<Kostka>(ile);

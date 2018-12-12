@@ -5,6 +5,7 @@
 #include <Sterowanie.h>
 #include <EkranRysujacy.h>
 #include <FunkcjeIstruktury.h>
+#include <ModyfikacjaPunktow.h>
 
 class SterowanieMysza : public Sterowanie
 {
@@ -60,6 +61,8 @@ public:
     ~SterowanieMyszaVar_2(){};
     virtual void WyszukujeIustawiamWskaznikiDoInnychModulow() override;
 private:
+    ModyfikacjaPunktow modyfikacjaPunktow;
+    
     virtual void V_NaPrzyciskMyszaZmienne(GdkEventButton* event) override ;
     virtual void V_NaRuchMyszaZmienne(GdkEventMotion* event) override ;
     void WybieraniePunktu();

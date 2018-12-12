@@ -32,10 +32,6 @@ void SterowanieModyfikujPunkty::PrzelaczSterowanie()
 	auto& oknoSterowane = Ref_WyszukajWModulach<EkranGL>("ekranGL");
     sterujPunktami ? WlaczMojeSterowanie() : PrzywrocPoprzednieSterowanie();
     oknoSterowane.get_window()->invalidate_rect(oknoSterowane.get_allocation(), false);
-    //zawiesić połączenia dotychczasowego sterowania a włączyć uruchomić dla nowego
-    //nowe sterowanie czyli Var2 - załadować w modułach, ale na początku wyłączyć jego połączenia
-    //dodać pole dotychczasowe sterowanie
-    //może konstruktor zrobić inicjowany nowym sterowaniem Var2, i stosować referencję.
 }
 void  SterowanieModyfikujPunkty::WlaczMojeSterowanie(){
     dotychczasoweSterowanie = Ptr_WyszukajWModulach<SterowanieMysza>("sterowanie");
