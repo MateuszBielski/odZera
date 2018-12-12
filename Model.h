@@ -24,6 +24,8 @@ public :
     virtual void RysujWidocznePunkty();
     virtual void RysujTylkoPunktyZnazwami();
     virtual void TransformacjePrzedRysowaniem();
+    using Ptr_F_void_void = void(Model::*)();
+    Ptr_F_void_void RysujGeometrieOdpowiednio;
     void UstalM_Pos(float*);//użyte dla światła tylko
     virtual void UstawPolozenieSrodkaModelu(float* zeWskaznika);
     void PokazujWartosci(bool b){pokazujWartosci = b;};//
@@ -62,7 +64,7 @@ public :
 protected:
     void UdostepnijBazieVertexyInormalne(float * v,int ileV,float * n,int ileN);
 	void UdostepnijBazieIndeksyWierzcholkow(unsigned short *, unsigned short);
-    using Ptr_F_void_void = void(Model::*)();
+    
     Ptr_F_void_void FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
     void DomyslnaWymiennaFunkcja(){};
 	

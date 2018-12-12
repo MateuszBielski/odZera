@@ -18,7 +18,7 @@ void Model::RysujTemplate()
         RysujWidocznePunkty();
 //        g_print("\nZ_WIDOCZNYMI_PUNKTAMI");
     }
-	RysujGeometrie();
+    (this->*RysujGeometrieOdpowiednio)();//będzie wskazywać: RysujGeometrie(); lub rysuj tylko punkty
 	if(czyPushMatrix)glPopMatrix();
 }
 

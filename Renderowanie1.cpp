@@ -55,7 +55,7 @@ void Renderowanie1::JednorazowoRysujTylkoPunktyZnazwami()
         iter->Rysuj(TYLKO_PUNKTY_Z_NAZWAMI);//RysujPunktyZnazwami();
     }
     glPopName();
-    RysujModeleOdpowiednio = &Renderowanie1::RysujModeleBezNazw;
+    RysujModeleOdpowiednio = &Renderowanie1::RysujZwidocznymiPunktami;
 }
 int Renderowanie1::PolaczZkimPotrzebujeNaPoczatek()
 {

@@ -244,7 +244,12 @@ void SterowanieMyszaVar_2::V_NaRuchMyszaZmienne(GdkEventMotion* event){
 }
 void SterowanieMyszaVar_2::WybieraniePunktu(){
     renderowanie->UstawRysowanieTylkoPunktowZnazwami();
-    auto idPunktu = ekran->StosNazwObiektuWpunkcie(ix,iy).top();
+    auto stosNazw = ekran->StosNazwObiektuWpunkcie(ix,iy);
+    int idPunktu; 
+    while(!stosNazw.empty()){
+        idPunktu = stosNazw.top();
+        stosNazw.pop();
+    }
     if(idPunktu == -1)return;
     modyfikacjaPunktow.WyczyscIwstawJedenPunkt((float*)(idPunktu));
     

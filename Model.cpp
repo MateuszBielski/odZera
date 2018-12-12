@@ -31,6 +31,7 @@ void Model::UdostepnijBazieIndeksyWierzcholkow(unsigned short * nr, unsigned sho
 }
 void Model::Rysuj(int flagi)
 {
+    RysujGeometrieOdpowiednio = &Model::RysujGeometrie;
     switch(flagi){
         case 0:
         RysujTemplate<0>();
@@ -40,9 +41,13 @@ void Model::Rysuj(int flagi)
         break;
         case Z_WIDOCZNYMI_PUNKTAMI:
         RysujTemplate<Z_WIDOCZNYMI_PUNKTAMI>();
+//        RysujTylkoPunktyZnazwami();
         break;
         case TYLKO_PUNKTY_Z_NAZWAMI:
-        RysujTylkoPunktyZnazwami();
+//        RysujTemplate<TYLKO_PUNKTY_Z_NAZWAMI>();
+//        RysujTylkoPunktyZnazwami();
+        RysujGeometrieOdpowiednio = &Model::RysujTylkoPunktyZnazwami;
+        RysujTemplate<0>();
         break;
     }
 }
@@ -60,20 +65,16 @@ void Model::RysujWidocznePunkty()
 
 void Model::RysujTylkoPunktyZnazwami()
 {
-    TransformacjePrzedRysowaniem();
+//    TransformacjePrzedRysowaniem();
     glPointSize(7.0);
     
 	for(int ve = 0 ; ve < ileVertexow ;ve++){
-//        auto adresJakoNazwa = std::dynamic_cast<GLuint>(&vertexy[ve*3])
         auto nazwa = (GLuint)(&vertexy[ve*3]);
         glLoadName(nazwa);//adres traktowany jako liczba
         glBegin(GL_POINTS);
 		glVertex3fv(&vertexy[ve*3]);
         glEnd();
 	}
-    
-//=======
-//>>>>>>> 9gru
 }
 void Model::TransformacjePrzedRysowaniem(){
     glTranslatef(mojeWspolrzedneImacierzeSterowania->m_Pos[0],mojeWspolrzedneImacierzeSterowania->m_Pos[1],mojeWspolrzedneImacierzeSterowania->m_Pos[2]);
