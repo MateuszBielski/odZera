@@ -230,7 +230,7 @@ SterowanieMyszaVar_2::SterowanieMyszaVar_2()
 }
 void SterowanieMyszaVar_2::V_NaPrzyciskMyszaZmienne(GdkEventButton* event){
     if (event->button == 1){
-       WybieraniePunktu();
+       WybieraniePunktu(event->state);
         float temp;
        glReadPixels( ix, iy, 1, 1,GL_DEPTH_COMPONENT, GL_FLOAT, &temp );
        if(temp < 1.0)aktualneSterowanie->wspolrzednaZpodKursorem = temp;
@@ -242,7 +242,7 @@ void SterowanieMyszaVar_2::V_NaRuchMyszaZmienne(GdkEventMotion* event){
         PrzesuwajAktualnieSterowane();
     }
 }
-void SterowanieMyszaVar_2::WybieraniePunktu(){
+void SterowanieMyszaVar_2::WybieraniePunktu(unsigned int& klawiszFunkcyjny){
     renderowanie->UstawRysowanieTylkoPunktowZnazwami();
     auto stosNazw = ekran->StosNazwObiektuWpunkcie(ix,iy);
     int idPunktu; 
@@ -251,6 +251,9 @@ void SterowanieMyszaVar_2::WybieraniePunktu(){
         stosNazw.pop();
     }
     if(idPunktu == -1)return;
+    if(klawiszFunkcyjny & GDK_SHIFT_MASK)modyfikacjaPunktow.DodajPunkt((float*)(idPunktu));
+    else if(klawiszFunkcyjny & GDK_CONTROL_MASK)modyfikacjaPunktow.UsunPunkt((float*)(idPunktu));
+    else
     modyfikacjaPunktow.WyczyscIwstawJedenPunkt((float*)(idPunktu));
     
 }
