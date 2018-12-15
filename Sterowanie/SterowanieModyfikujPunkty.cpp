@@ -35,6 +35,7 @@ void SterowanieModyfikujPunkty::PrzelaczSterowanie()
 }
 void  SterowanieModyfikujPunkty::WlaczMojeSterowanie(){
     dotychczasoweSterowanie = Ptr_WyszukajWModulach<SterowanieMysza>("sterowanie");
+    Ptr_WyszukajWModulach<ZarzadzanieObiektami>("zarzadznieObiektami")->DajWybranyModel()->UtrwalPrzeksztalcenia();
     mojeSterowanie.PrzejmijSterowanieOd(*dotychczasoweSterowanie);
 }
 void  SterowanieModyfikujPunkty::PrzywrocPoprzednieSterowanie(){

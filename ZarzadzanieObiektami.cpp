@@ -59,18 +59,12 @@ void ZarzadzanieObiektami::WybierzModelOnumerze(short tym){
     wybranyModel->UzywajPushMatrix(true);
     wybranyModel->PokazujWartosci(false);
     linieNormalnych->RysujDla(wybranyModel);
-    cechyWybranego->RysujDla(wybranyModel);
+    cechyWybranego->RysujDla(wybranyModel);//tu następuje też utrwalenie poprzednio wskazywanego modelu
     
     float * n = wybranyModel->normalne;
-//    g_print("\nnormalne Wybranego");
-//    for(int i = 0; i < wybranyModel->ileNormalnych ; i++){
-//        g_print("\n%2.3f  %2.3f  %2.3f",n[3*i+0],n[3*i+1],n[3*i+2]);
-//    }
-//	wybranyModel->WlaczJednorazowoWymienneFunkcje(ZESTAW_FUNKCJI);
 }
 void ZarzadzanieObiektami::WybierzModelOnumerze(std::stack<int> & stosNazw){
     WybierzModelOnumerze(static_cast<short int>(stosNazw.top()));
-    //rozpoznać grrupę do której należy obiekt
 }
 void ZarzadzanieObiektami::WyodrebnijZgrupy(std::stack<int> & stosNazw){
 //    g_print("\nWyodrebnijZgrupy na stosie jest %d",stosNazw.top());
