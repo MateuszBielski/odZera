@@ -1,4 +1,5 @@
 #include <Model.h>
+#include <cstdint>
 //#include <FunkcjeIstruktury.h>
 
 
@@ -69,7 +70,7 @@ void Model::RysujTylkoPunktyZnazwami()
     glPointSize(7.0);
     
 	for(int ve = 0 ; ve < ileVertexow ;ve++){
-        auto nazwa = (GLuint)(&vertexy[ve*3]);
+        auto nazwa =(uintptr_t)(&vertexy[ve*3]);//zwykłe typy całkowite nie chcą się kompilować w systemie 64
         glLoadName(nazwa);//adres traktowany jako liczba
         glBegin(GL_POINTS);
 		glVertex3fv(&vertexy[ve*3]);
