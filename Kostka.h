@@ -17,7 +17,7 @@ public:
 private:
 	float p[8][3];
     float n[6][3];
-    unsigned short nr[24];
+    static unsigned short nr[];
 };
 
 #endif // KOSTKA_H

@@ -30,6 +30,12 @@ void Model::UdostepnijBazieIndeksyWierzcholkow(unsigned short * nr, unsigned sho
 	indeksyNaroznikow = nr;
     ileNaroznikowSciany = ile;
 }
+void Model::UstalSasiednieWierzcholkiDlaLiczeniaNormalnych()
+{
+    //każda ściana po kolei
+    //dla wierzchołka ściany przjmujemy jako sąsiadów wierzchołek poprzedni i następny wg tablicy indeksów, czyli indeksy narożników
+    
+}
 void Model::Rysuj(int flagi)
 {
     RysujGeometrieOdpowiednio = &Model::RysujGeometrie;
@@ -234,6 +240,7 @@ void Model::RysujOstroslup()
 }
 
 
+
 //poniższe to pozostałość po użyciu tablicy wierzchołków w starszym innym projekcie
 	/*glEnableClientState( GL_VERTEX_ARRAY );
     glVertexPointer( 3, GL_FLOAT, 0, vertexy );
@@ -247,6 +254,3 @@ void Model::RysujOstroslup()
     glDisableClientState( GL_VERTEX_ARRAY );
     glDisableClientState(GL_COLOR_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);*/
-
-
-

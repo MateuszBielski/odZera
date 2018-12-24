@@ -1,11 +1,11 @@
 #include "Kostka.h"
-
-Kostka::Kostka(float x, float y, float z):nr{0,1,5,4,
-                                        3,7,6,2,
-                                        2,6,5,1,
-                                        3,0,4,7,
-                                        4,5,6,7,
-                                        0,3,2,1}
+unsigned short Kostka::nr[] = {0,1,5,4,
+                            3,7,6,2,
+                            2,6,5,1,
+                            3,0,4,7,
+                            4,5,6,7,
+                            0,3,2,1};
+Kostka::Kostka(float x, float y, float z)
 {
     UdostepnijBazieVertexyInormalne(&p[0][0],8,&n[0][0],6);
 	UdostepnijBazieIndeksyWierzcholkow(&nr[0],4);

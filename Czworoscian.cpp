@@ -1,10 +1,10 @@
 #include "Czworoscian.h"
 //#include <FunkcjeIstruktury.h>
-
-Czworoscian::Czworoscian(float x, float y, float z):nr{0,2,1,
-                                                        0,1,3,
-                                                        1,2,3,
-                                                        0,3,2}
+unsigned short Czworoscian::nr[] = {0,2,1,
+                                    0,1,3,
+                                    1,2,3,
+                                    0,3,2};
+Czworoscian::Czworoscian(float x, float y, float z)
 {
     UdostepnijBazieVertexyInormalne(&p[0][0],4,&n[0][0],4);
 	UdostepnijBazieIndeksyWierzcholkow(&nr[0],3);

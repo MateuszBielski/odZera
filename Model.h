@@ -64,6 +64,7 @@ public :
 protected:
     void UdostepnijBazieVertexyInormalne(float * v,int ileV,float * n,int ileN);
 	void UdostepnijBazieIndeksyWierzcholkow(unsigned short *, unsigned short);
+    void UstalSasiednieWierzcholkiDlaLiczeniaNormalnych();
     
     Ptr_F_void_void FunkcjaWymienna = &Model::DomyslnaWymiennaFunkcja;
     void DomyslnaWymiennaFunkcja(){};
