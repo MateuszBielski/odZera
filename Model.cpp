@@ -26,8 +26,8 @@ void Model::UdostepnijBazieVertexyInormalne(float * v,int ileV,float * n,int ile
     normalne = n;
     ileNormalnych = ileN;
 }
-void Model::UdostepnijBazieIndeksyWierzcholkow(unsigned short * nr, unsigned short ile){
-	indeksyNaroznikow = nr;
+void Model::UdostepnijBazieIndeksyWierzcholkow(unsigned short * indeksNaroznika, unsigned short ile){
+	indeksyNaroznikow = indeksNaroznika;
     ileNaroznikowSciany = ile;
 }
 void Model::UstalSasiednieWierzcholkiDlaLiczeniaNormalnych()

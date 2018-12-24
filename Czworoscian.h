@@ -14,7 +14,7 @@ public:
 private:
     float p[4][3];
     float n[4][3];
-    static unsigned short nr[];    
+    static unsigned short indeksNaroznika[];    
 };
 
 #endif // CZWOROSCIAN_H
